@@ -8,6 +8,7 @@
 
 namespace Sdk\Discussion;
 
+use Sdk\ApiClient\CDSApiClient;
 use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
@@ -36,11 +37,11 @@ class DiscussionPoint
     {
         //$optionalsNamespaces = array('xmlns:cdis="http://www.cdiscount.com"', 'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"');
         $optionalsNamespaces = array(
-        		'xmlns:cdis="http://www.cdiscount.com"', 
+        		'xmlns:cdis="http://www.cdiscount.com"',
         		'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"',
         		'xmlns:i="http://www.w3.org/2001/XMLSchema-instance"',
         );
-        
+
         $getOrderClaimList = new GetOrderClaimList();
         $claimFilterSoap = new ClaimFilterSoap($optionalsNamespaces);
 
@@ -159,9 +160,9 @@ class DiscussionPoint
      */
     private function _sendRequest($method, $data)
     {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
+        $headerRequestURL = CDSApiClient::getInstance()->getMethodUrl();
 
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
+        $apiURL = CDSApiClient::getInstance()->getApiUrl();
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
         $response = $request->call();

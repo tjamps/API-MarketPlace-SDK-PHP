@@ -8,6 +8,7 @@
 
 namespace Sdk\Auth;
 
+use Sdk\ApiClient\CDSApiClient;
 use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiRequest;
 use Zend\Db\Sql\Ddl\Column\Datetime;
@@ -45,6 +46,11 @@ class Token
 
     #region Constructor
 
+    private $tokenUrls = [
+        'prod' => 'https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc',
+        'preprod' => 'https://sts.preprod-cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc',
+    ];
+
     /**
      * Token constructor.
      */
@@ -60,11 +66,13 @@ class Token
 
     /**
      * Return a unique instance of the token class, initiate it if needed
+     * @param string $username
+     * @param string $password
+     * @param bool $prod
      * @return Token
      */
     public static function getInstance()
     {
-
         if (is_null(self::$_instance)) {
             self::$_instance = new Token();
         }
@@ -77,11 +85,8 @@ class Token
 
     private function _generateNewToken()
     {
-        $username = ConfigFileLoader::getInstance()->getConfAttribute('username');
-        $password = ConfigFileLoader::getInstance()->getConfAttribute('password');
-        $urlToken = ConfigFileLoader::getInstance()->getConfAttribute('urltoken');
-
-        $request = new CDSApiRequest($username, $password, $urlToken);
+        $client = CDSApiClient::getInstance();
+        $request = new CDSApiRequest($client->getUsername(), $client->getPassword(), $client->getTokenUrl());
 
         libxml_use_internal_errors(true);
         $xmlResult = simplexml_load_string($request->execute());

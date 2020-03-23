@@ -9,6 +9,7 @@
 namespace Sdk\Relays;
 
 
+use Sdk\ApiClient\CDSApiClient;
 use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
@@ -47,9 +48,9 @@ class RelaysPoint
      */
     private function _sendRequest($method, $data)
     {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
+        $headerRequestURL = CDSApiClient::getInstance()->getMethodUrl();
 
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
+        $apiURL = CDSApiClient::getInstance()->getApiUrl();
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
 

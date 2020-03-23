@@ -9,6 +9,7 @@
 namespace Sdk\Order;
 
 
+use Sdk\ApiClient\CDSApiClient;
 use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
@@ -153,7 +154,7 @@ class OrderPoint
 
         return new ManageParcelResponse($response);
     }
-    
+
     /*
      * @param $createRefundVoucherRequest \Sdk\Order\Refund\CreateRefundVoucherRequest
      * @return $createRefundVoucherResponse
@@ -164,16 +165,16 @@ class OrderPoint
         $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
         $header = new HeaderMessage();
         $body = new Body();
-        
+
         $createRefundVoucher = new CreateRefundVoucherSoap();
-        
+
         $headerXML = $header->generateHeader();
         $requestXML = $createRefundVoucher->generateCreateRefundVoucherRequestRequestXml($createRefundVoucherRequest);
-        
+
         $createRefundVoucherXML = $createRefundVoucher->generateEnclosingBalise($headerXML . $requestXML);
-        
+
         $bodyXML = $body->generateXML($createRefundVoucherXML);
-        
+
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('CreateRefundVoucher', $envelopeXML);
@@ -183,9 +184,9 @@ class OrderPoint
 
     private function _sendRequest($method, $data)
     {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
+        $headerRequestURL = CDSApiClient::getInstance()->getMethodUrl();
 
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
+        $apiURL = CDSApiClient::getInstance()->getApiUrl();
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
         return $request->call();

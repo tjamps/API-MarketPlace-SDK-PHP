@@ -29,6 +29,28 @@ class CDSApiClient
      * @var SellerPoint
      */
     private $_sellerPoint = null;
+    private $username;
+    private $password;
+    /**
+     * @var bool
+     */
+    private $prod;
+
+    private $tokenUrls = [
+        'prod' => 'https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc',
+        'preprod' => 'https://sts.preprod-cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc',
+    ];
+
+    private $methodUrls = [
+        'prod' => 'http://www.cdiscount.com/IMarketplaceAPIService/',
+        'preprod' => 'http://www.cdiscount.com/IMarketplaceAPIService/',
+    ];
+
+    private $apiUrls = [
+        'prod' => 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc',
+        'preprod' => 'https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc',
+    ];
+
 
     /**
      * @return SellerPoint
@@ -153,8 +175,31 @@ class CDSApiClient
         return $this->_mailPoint;
     }
 
+    public function __construct($username, $password, $prod = false)
+    {
+        $this->username = $username;
+        $this->password = $password;
+        $this->prod = $prod;
+    }
+
+
+    private static $instance;
+
+    public static function getInstance($username = '', $password = '', $prod = false)
+    {
+        if (self::$instance === null) {
+            self::$instance = new CDSApiClient($username, $password, $prod);
+        }
+
+        return self::$instance;
+    }
+
+
     /**
      * Create and check the token
+     * @param $username
+     * @param $password
+     * @return string
      */
     public function init()
     {
@@ -168,5 +213,44 @@ class CDSApiClient
     public function isTokenValid()
     {
         return Token::getInstance()->isTokenValid();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isProd()
+    {
+        return $this->prod;
+    }
+
+    public function getTokenUrl()
+    {
+        return $this->isProd() ? $this->tokenUrls['prod'] : $this->tokenUrls['preprod'];
+    }
+
+    public function getMethodUrl()
+    {
+        return $this->isProd() ? $this->methodUrls['prod'] : $this->methodUrls['preprod'];
+    }
+
+    public function getApiUrl()
+    {
+        return $this->isProd() ? $this->apiUrls['prod'] : $this->apiUrls['preprod'];
     }
 }
