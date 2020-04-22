@@ -1,11 +1,11 @@
 <?php
 
-/* 
+/*
  * Created by El Ibaoui Otmane (SQLI)
  * Date : 08/05/2017
  * Time : 12:14
  */
-namespace Sdk\Soap\Fulfillment;
+namespace Sdk\Soap\Fulfilment;
 
 use Sdk\Soap\BaliseTool;
 
@@ -79,7 +79,7 @@ class CreateExternalOrderSoap extends BaliseTool
      * @var string
      */
     private $_shippingAddressTag = 'cdis2:ShippingAddress';
-    
+
     /*
      * @var string
      */
@@ -130,7 +130,7 @@ class CreateExternalOrderSoap extends BaliseTool
      */
     private $_productReferenceTag = 'cdis2:ProductReference';
 
-    
+
     /*
      * @var string
      */
@@ -147,7 +147,7 @@ class CreateExternalOrderSoap extends BaliseTool
     */
     private $_xmlns_array  = 'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"';
     private $_xmlns_cdis2  ='xmlns:cdis2="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Order"';
-    
+
     /**
      * CreateExternalOrder constructor.
      * @param $xmlns
@@ -174,7 +174,7 @@ class CreateExternalOrderSoap extends BaliseTool
          * Balise Open order
          */
         $xml .= $this->_xmlUtil->generateOpenBalise($this->_orderTag);
-       
+
             //Balise Comments
             $xml .= $this->_xmlUtil->generateBalise($this->_commentsTag, $request->getExternalOrder()->getComments());
             //Balise Corporation
@@ -235,7 +235,7 @@ class CreateExternalOrderSoap extends BaliseTool
                         //Balise Close ExternalOrderLine
                         $xml .= $this->_xmlUtil->generateCloseBalise($this->_externalOrderLineTag);
                 }
-                
+
             //Balise Close OrderLineList
             $xml .= $this->_xmlUtil->generateCloseBalise($this->_orderLineListTag);
             //balise  ShippingMode
@@ -245,7 +245,7 @@ class CreateExternalOrderSoap extends BaliseTool
 
         //Balise Close Request
         $xml .= $this->_xmlUtil->generateCloseBalise($this->_requestTag);
-        
+
         $this->_xmlUtil->setGlobalPrefix('');
         return $xml;
 

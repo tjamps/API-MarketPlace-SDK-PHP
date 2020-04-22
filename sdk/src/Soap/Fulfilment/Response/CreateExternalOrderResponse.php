@@ -5,7 +5,7 @@
  * Date : 08/05/2017
  * Time : 17:46
  */
-namespace Sdk\Soap\Fulfillment\Response;
+namespace Sdk\Soap\Fulfilment\Response;
 
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Fulfilment\ProductStockList;
