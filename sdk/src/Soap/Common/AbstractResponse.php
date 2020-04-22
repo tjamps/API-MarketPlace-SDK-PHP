@@ -119,6 +119,7 @@ abstract class AbstractResponse
     /**
      * @param $xml
      * @param $key
+     * @throws InvalidDataResponseException
      */
     protected function checkResponseDataValidity($xml, $key)
     {
@@ -129,6 +130,7 @@ abstract class AbstractResponse
 
     /**
      * @param array $xml
+     * @throws ResponseErrorException
      */
     protected function checkErrors($xml)
     {
@@ -157,7 +159,7 @@ abstract class AbstractResponse
         }
 
         if ($this->hasError) {
-            throw new ResponseErrorException();
+            throw new ResponseErrorException($this->getErrorMessage());
         }
     }
 }

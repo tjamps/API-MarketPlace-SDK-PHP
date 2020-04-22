@@ -79,7 +79,7 @@ class FulfilmentPoint
 
     /*
     * @param $orderStatusRequest \Sdk\Fulfilment\OrderStatusRequest
-    * @return $getExternalOrderStatusResponse
+    * @return GetExternalOrderStatusResponse
     */
     public function GetExternalOrderStatus($orderStatusRequest)
     {
