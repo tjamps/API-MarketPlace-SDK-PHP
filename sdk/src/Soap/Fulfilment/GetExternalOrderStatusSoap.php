@@ -6,7 +6,7 @@
  * Time: 11:11
  */
 
-namespace Sdk\Soap\Fulfillment;
+namespace Sdk\Soap\Fulfilment;
 
 use Sdk\Soap\BaliseTool;
 
@@ -70,9 +70,9 @@ class GetExternalOrderStatusSoap extends BaliseTool
 
         //Closed tag Request
         $xml .= $this->_xmlUtil->generateCloseBalise($this->_requestTag);
-        
+
         $this->_xmlUtil->setGlobalPrefix('');
-        
+
         return $xml;
 
     }
