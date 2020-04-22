@@ -6,23 +6,23 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use Sdk\Fulfilment\SubmitFulfilmentSupplyOrderResult;
 
-class SubmitFulfilmentSupplyOrderResponse extends iResponse
+class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
 {
-    
+
     /**
      * @var array
      */
     private $_dataResponse = null;
-    
+
     /*
      * @var SubmitFulfilmentSupplyOrderResult
      */
     private $_submitFulfilmentSupplyOrderResult= null;
-    
+
     /*
      * @return \Sdk\Fulfilment\SubmitFulfilmentSupplyOrderResult
      */
@@ -38,33 +38,33 @@ class SubmitFulfilmentSupplyOrderResponse extends iResponse
     {
         $this->_submitFulfilmentSupplyOrderResult=$submitFulfilmentSupplyOrderResult;
     }
-    
+
     /*
      * SubmitFulfilmentSupplyOrderResponse constructor
-     * @param $response 
+     * @param $response
      */
     public function __construct($response)
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->_errorList = array();
-        
+        $this->errorList = array();
+
         if(isset($this->_dataResponse['s:Body']['SubmitFulfilmentSupplyOrderResponse']['SubmitFulfilmentSupplyOrderResult']))
         {
-            $this->_operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['SubmitFulfilmentSupplyOrderResponse']['SubmitFulfilmentSupplyOrderResult']);
-            if ($this->_operationSuccess)
+            $this->operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['SubmitFulfilmentSupplyOrderResponse']['SubmitFulfilmentSupplyOrderResult']);
+            if ($this->operationSuccess)
              {
                  $this->_setGlobalInformations();
                  $this->generateDepositIdResult();
              }
-        }  
+        }
 
 		if(isset($this->_dataResponse['s:Body']['s:Fault']['faultstring']))
 		{
 			$this->generateFaultResult();
-		}	   
+		}
     }
-    
+
     /**
      * Set the token ID and the seller login from the response
      */
@@ -73,11 +73,11 @@ class SubmitFulfilmentSupplyOrderResponse extends iResponse
         if(isset($this->_dataResponse['s:Body']['SubmitFulfilmentSupplyOrderResponse']['SubmitFulfilmentSupplyOrderResult']))
         {
             $objInfoResult = $this->_dataResponse['s:Body']['SubmitFulfilmentSupplyOrderResponse']['SubmitFulfilmentSupplyOrderResult'];
-            $this->_tokenID = $objInfoResult['TokenId'];
-            $this->_sellerLogin = $objInfoResult['SellerLogin'];
+            $this->tokenID = $objInfoResult['TokenId'];
+            $this->sellerLogin = $objInfoResult['SellerLogin'];
         }
     }
-    
+
 	/**
      * Get Deposit id
      */
@@ -87,15 +87,15 @@ class SubmitFulfilmentSupplyOrderResponse extends iResponse
        {
             $submitFulfilmentSupplyOrderResultXml = $this->_dataResponse['s:Body']['SubmitFulfilmentSupplyOrderResponse']['SubmitFulfilmentSupplyOrderResult'];
        }
-         
+
             $this->_submitFulfilmentSupplyOrderResult = new SubmitFulfilmentSupplyOrderResult();
              //errorMessage and errorList
             if (isset($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) && strlen($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentSupplyOrderResultXml['ErrorMessage']))
             {
                 $this->_submitFulfilmentSupplyOrderResult->setErrorMessage($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
                 $this->_submitFulfilmentSupplyOrderResult->addErrorToList($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
-                array_push($this->_errorList, $submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
-            }           
+                array_push($this->errorList, $submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
+            }
             //operation success
             if (isset($submitFulfilmentSupplyOrderResultXml['OperationSuccess']['_']) && $submitFulfilmentSupplyOrderResultXml['OperationSuccess']['_'] == 'true')
             {
@@ -103,11 +103,11 @@ class SubmitFulfilmentSupplyOrderResponse extends iResponse
             }
             //deposit id
             if (isset($submitFulfilmentSupplyOrderResultXml['DepositId']))
-            {        
+            {
                 $this->_submitFulfilmentSupplyOrderResult->setDepositId($submitFulfilmentSupplyOrderResultXml['DepositId']);
-            }                             
+            }
     }
-	
+
 	 /**
      * Get error list
      */
@@ -116,16 +116,16 @@ class SubmitFulfilmentSupplyOrderResponse extends iResponse
        if(isset($this->_dataResponse['s:Body']['s:Fault']['faultstring']['_']))
        {
             $submitFulfilmentSupplyOrderResultXml = $this->_dataResponse['s:Body']['s:Fault']['faultstring']['_'];
-       
+
             $this->_submitFulfilmentSupplyOrderResult = new SubmitFulfilmentSupplyOrderResult();
-             //errorMessage and errorList            
+             //errorMessage and errorList
 			$this->_submitFulfilmentSupplyOrderResult->setErrorMessage($submitFulfilmentSupplyOrderResultXml);
 			$this->_submitFulfilmentSupplyOrderResult->addErrorToList($submitFulfilmentSupplyOrderResultXml);
-			array_push($this->_errorList, $submitFulfilmentSupplyOrderResultXml);
-                      
+			array_push($this->errorList, $submitFulfilmentSupplyOrderResultXml);
+
             //operation success
             $this->_submitFulfilmentSupplyOrderResult->setOperationSuccess(false);
-				
+
         }
     }
 }

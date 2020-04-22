@@ -1,18 +1,18 @@
 <?php
 
-/* 
+/*
  * Created by El Ibaoui Otmane (SQLI)
  * Date : 08/05/2017
  * Time : 17:46
  */
 namespace Sdk\Soap\Fulfillment\Response;
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Fulfilment\ProductStockList;
 use \Sdk\Fulfilment\ProductStockListMessage;
 use \Sdk\Soap\Common\SoapTools;
 
-class CreateExternalOrderResponse extends iResponse
+class CreateExternalOrderResponse extends AbstractResponse
 {
     /**
      * @var array
@@ -21,7 +21,7 @@ class CreateExternalOrderResponse extends iResponse
 
     /*
      * CreateExternalOrderResponse constructor
-     * @param $response 
+     * @param $response
      */
     public function __construct($response)
     {
@@ -30,7 +30,7 @@ class CreateExternalOrderResponse extends iResponse
         // Check For Operation Success
         if ($this->isOperationSuccess($this->_dataResponse['s:Body']['CreateExternalOrderResponse']['CreateExternalOrderResult']))
         {
-            $this->_operationSuccess=true;
+            $this->operationSuccess=true;
             $this->_setGlobalInformations();
         }
     }
@@ -40,8 +40,8 @@ class CreateExternalOrderResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['CreateExternalOrderResponse']['CreateExternalOrderResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -55,8 +55,8 @@ class CreateExternalOrderResponse extends iResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;

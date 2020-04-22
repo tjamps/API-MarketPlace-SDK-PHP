@@ -10,10 +10,10 @@ namespace Sdk\Soap\Product\Response;
 
 
 use Sdk\Product\ProductIdentity;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 
-class GetProductListByIdentifierResponse extends iResponse
+class GetProductListByIdentifierResponse extends AbstractResponse
 {
     /**
      * @var array|null
@@ -53,8 +53,8 @@ class GetProductListByIdentifierResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetProductListByIdentifierResponse']['GetProductListByIdentifierResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -68,8 +68,8 @@ class GetProductListByIdentifierResponse extends iResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;
@@ -80,49 +80,49 @@ class GetProductListByIdentifierResponse extends iResponse
      */
     private function _getProductList()
     {
-        foreach ($this->_dataResponse['s:Body']['GetProductListByIdentifierResponse']['GetProductListByIdentifierResult']['a:ProductListByIdentifier']['a:ProductByIdentifier'] as $productXML) {                 
-           
-            $product = new ProductIdentity($productXML['a:Ean']);                
+        foreach ($this->_dataResponse['s:Body']['GetProductListByIdentifierResponse']['GetProductListByIdentifierResult']['a:ProductListByIdentifier']['a:ProductByIdentifier'] as $productXML) {
+
+            $product = new ProductIdentity($productXML['a:Ean']);
             if($productXML['a:HasError'] == 'true')
             {
-                if (isset($productXML['a:HasError']) && !SoapTools::isSoapValueNull($productXML['a:HasError'])) 
+                if (isset($productXML['a:HasError']) && !SoapTools::isSoapValueNull($productXML['a:HasError']))
                 {
-                    $product->setHasError($productXML['a:HasError']);  
+                    $product->setHasError($productXML['a:HasError']);
                 }
 
-                if (isset($productXML['a:ErrorMessage']) && !SoapTools::isSoapValueNull($productXML['a:ErrorMessage'])) 
+                if (isset($productXML['a:ErrorMessage']) && !SoapTools::isSoapValueNull($productXML['a:ErrorMessage']))
                 {
                     $product->setErrorMessage($productXML['a:ErrorMessage']);
-                } 
+                }
             }
             else
             {
-                if (isset($productXML['a:BrandName']) && !SoapTools::isSoapValueNull($productXML['a:BrandName'])) 
+                if (isset($productXML['a:BrandName']) && !SoapTools::isSoapValueNull($productXML['a:BrandName']))
                 {
-                    $product->setBrandName($productXML['a:BrandName']);  
+                    $product->setBrandName($productXML['a:BrandName']);
                 }
 
-                if (isset($productXML['a:CategoryCode']) && !SoapTools::isSoapValueNull($productXML['a:CategoryCode'])) 
+                if (isset($productXML['a:CategoryCode']) && !SoapTools::isSoapValueNull($productXML['a:CategoryCode']))
                 {
                     $product->setCategoryCode($productXML['a:CategoryCode']);
                 }
 
-                if (isset($productXML['a:Name']) && !SoapTools::isSoapValueNull($productXML['a:Name'])) 
+                if (isset($productXML['a:Name']) && !SoapTools::isSoapValueNull($productXML['a:Name']))
                 {
                     $product->setName($productXML['a:Name']);
                 }
 
-                if (isset($productXML['a:FatherProductId']) && !SoapTools::isSoapValueNull($productXML['a:FatherProductId'])) 
+                if (isset($productXML['a:FatherProductId']) && !SoapTools::isSoapValueNull($productXML['a:FatherProductId']))
                 {
-                    $product->setFatherProductId($productXML['a:FatherProductId']); 
+                    $product->setFatherProductId($productXML['a:FatherProductId']);
                 }
 
-                if (isset($productXML['a:ImageUrl']) && !SoapTools::isSoapValueNull($productXML['a:ImageUrl'])) 
+                if (isset($productXML['a:ImageUrl']) && !SoapTools::isSoapValueNull($productXML['a:ImageUrl']))
                 {
                     $product->setImageURL($productXML['a:ImageUrl']);
                 }
 
-                if (isset($productXML['a:ProductType']) && !SoapTools::isSoapValueNull($productXML['a:ProductType'])) 
+                if (isset($productXML['a:ProductType']) && !SoapTools::isSoapValueNull($productXML['a:ProductType']))
                 {
                     $product->setProductType($productXML['a:ProductType']);
                 }

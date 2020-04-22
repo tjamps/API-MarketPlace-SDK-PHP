@@ -4,11 +4,11 @@ namespace Sdk\Soap\Fulfilment\Response;
 
 use InvalidArgumentException;
 use Sdk\Fulfilment\ProductStock;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 use Zend\Config\Reader\Xml;
 
-class GetProductStockListResponse extends iResponse
+class GetProductStockListResponse extends AbstractResponse
 {
     /**
      * @var array
@@ -34,7 +34,7 @@ class GetProductStockListResponse extends iResponse
     {
         $reader = new Xml();
         $this->dataResponse = $reader->fromString($response);
-        $this->_errorList = array();
+        $this->errorList = array();
 
         if (!isset($this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'])) {
             throw new InvalidArgumentException(
@@ -207,8 +207,8 @@ class GetProductStockListResponse extends iResponse
     private function setGlobalInformations()
     {
         $objInfoResult = $this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
         $this->status = $objInfoResult['a:Status'];
         $this->totalProductCount = $objInfoResult['a:TotalProductCount'];
     }
@@ -224,8 +224,8 @@ class GetProductStockListResponse extends iResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
 
             return true;
         }

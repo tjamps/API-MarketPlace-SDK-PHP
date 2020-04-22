@@ -8,10 +8,10 @@
 namespace Sdk\Soap\Order\Response;
 
 use Sdk\Delivey\Carrier;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 
-class GetGlobalConfigurationResponse extends iResponse
+class GetGlobalConfigurationResponse extends AbstractResponse
 {
 
     /**
@@ -63,8 +63,8 @@ class GetGlobalConfigurationResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetGlobalConfigurationResponse']['GetGlobalConfigurationResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -74,13 +74,13 @@ class GetGlobalConfigurationResponse extends iResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetGlobalConfigurationResponse']['GetGlobalConfigurationResult']['ErrorMessage'];
-        $this->_errorList = array();
+        $this->errorList = array();
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
-            array_push($this->_errorList, $this->_errorMessage);
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
+            array_push($this->errorList, $this->errorMessage);
             return true;
         }
         return false;

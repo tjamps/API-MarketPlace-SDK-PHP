@@ -9,10 +9,10 @@
 namespace Sdk\Soap\Product\Response;
 
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 
-class SubmitProductPackageResponse extends iResponse
+class SubmitProductPackageResponse extends AbstractResponse
 {
     /**
      * @var array
@@ -88,8 +88,8 @@ class SubmitProductPackageResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['SubmitProductPackageResponse']['SubmitProductPackageResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -99,13 +99,13 @@ class SubmitProductPackageResponse extends iResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['SubmitProductPackageResponse']['SubmitProductPackageResult']['ErrorMessage'];
-        $this->_errorList = array();
+        $this->errorList = array();
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
-            array_push($this->_errorList, $this->_errorMessage);
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
+            array_push($this->errorList, $this->errorMessage);
             return true;
         }
         return false;

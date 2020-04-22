@@ -22,10 +22,10 @@ use Sdk\Parcel\ParcelList;
 use Sdk\Parcel\Tracking;
 use Sdk\Parcel\TrackingList;
 use Sdk\Seller\Address;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 
-class GetOrderListResponse extends iResponse
+class GetOrderListResponse extends AbstractResponse
 {
     /**
      * @var array
@@ -73,8 +73,8 @@ class GetOrderListResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -83,7 +83,7 @@ class GetOrderListResponse extends iResponse
     private function _setOrderList()
     {
         $objOrderResult = $this->_dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult']['OrderList'];
-        
+
         $arrays = false;
         if (isset($objOrderResult['Order'])) {
             $orderResults = $objOrderResult['Order'];
@@ -153,12 +153,12 @@ class GetOrderListResponse extends iResponse
 
                     $parcelList = $this->_getParcelList($order['ParcelList']);
                     $orderObj->setParcelList($parcelList);
-                    
+
                     if (isset($order['VoucherList']) && !SoapTools::isSoapValueNull($order['VoucherList'])) {
                         $voucherList = $this->_getVoucherList($order['VoucherList']);
                         $orderObj->setVoucherList($voucherList);
                     }
-                    
+
                     $orderObj->setShippedTotalAmount(floatval($order['ShippedTotalAmount']));
 
                     $orderObj->setShippedTotalShippingCharges(floatval($order['ShippedTotalShippingCharges']));
@@ -316,7 +316,7 @@ class GetOrderListResponse extends iResponse
             $orderLine->setSkuParent($orderLineListOBJ['SkuParent']);
             $orderLine->setUnitAdditionalShippingCharges(floatval($orderLineListOBJ['UnitAdditionalShippingCharges']));
             $orderLine->setUnitShippingCharges(floatval($orderLineListOBJ['UnitShippingCharges']));
-            
+
             if (isset ($orderLineListOBJ['RefundShippingCharges']) && $orderLineListOBJ['RefundShippingCharges']== 'true') {
                 $orderLine->setRefundShippingCharges(true);
             }
@@ -338,8 +338,8 @@ class GetOrderListResponse extends iResponse
             $parcelObj->setExternalCarrierTrackingUrl($parcel['ExternalCarrierTrackingUrl']);
             if ($parcel['IsCustomerReturn'] == 'true') {
                 $parcelObj->setCustomerReturn(true);
-            } 
-            $parcelObj->setParcelStatus($parcel['ParcelStatus']);           
+            }
+            $parcelObj->setParcelStatus($parcel['ParcelStatus']);
             $parcelObj->setRealCarrierCode($parcel['RealCarrierCode']);
 
             foreach ($parcel['ParcelItemList'] as $parcelItem) {
@@ -350,9 +350,9 @@ class GetOrderListResponse extends iResponse
 
                 $parcelObj->getParcelItemList()->addParcelItem($parcelItemObj);
             }
-            
+
             $trackingList = new TrackingList();
-            
+
             if( isset($parcel['TrackingList']) && !SoapTools::isSoapValueNull($parcel['TrackingList']) ){
                /*
                 * @var \Sdk\Parcel\Tracking $tracking
@@ -376,15 +376,15 @@ class GetOrderListResponse extends iResponse
                     }
                     $trackingList->addTrackingToLit($trackingObj);
                 }
-                $parcelObj->setTrackingList($trackingList); 
+                $parcelObj->setTrackingList($trackingList);
             }
-            
+
             $parcelListObj->addParcel($parcelObj);
         }
 
         return $parcelListObj;
     }
-    
+
     /*
      * @param \Sdk\Order\VoucherList
      * create vouhcer list object
@@ -392,7 +392,7 @@ class GetOrderListResponse extends iResponse
     private function _getVoucherList($voucherList)
     {
         $voucherListObj = new \Sdk\Order\VoucherList();
-        
+
         /*
          * \Sdk\Order\Voucher
          */
@@ -400,16 +400,16 @@ class GetOrderListResponse extends iResponse
             $voucherObj = new \Sdk\Order\Voucher();
 
             if (isset($voucher['CreateDate']) && !SoapTools::isSoapValueNull($voucher['CreateDate'])) {
-               $voucherObj->setCreateDate($voucher['CreateDate']); 
+               $voucherObj->setCreateDate($voucher['CreateDate']);
             }
-            
+
             if (isset($voucher['Source']) && !SoapTools::isSoapValueNull($voucher['Source'])) {
                 $voucherObj->setSource($voucher['Source']);
             }
-            
+
             $refundInfomation = new \Sdk\Order\Refund\RefundInformation();
             if (isset($voucher['RefundInformation']) && !SoapTools::isSoapValueNull($voucher['RefundInformation'])) {
-                
+
                 if (isset($voucher['RefundInformation']['Amount']) && !SoapTools::isSoapValueNull($voucher['RefundInformation']['Amount'])) {
                     $refundInfomation->setAmount($voucher['RefundInformation']['Amount']);
                 }
@@ -419,10 +419,10 @@ class GetOrderListResponse extends iResponse
             }
 
             $voucherObj->setRefundInformation($refundInfomation);
-            
+
             $voucherListObj->addVoucherToList($voucherObj);
         }
-        
+
         return $voucherListObj;
     }
 }

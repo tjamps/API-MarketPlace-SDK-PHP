@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Created by EQUIPE-SQLI
  * Date : 15/05/2017
  * Time : 08:46
@@ -7,15 +7,15 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use \Sdk\Fulfilment\FulfilmentActivationReportListResult;
 use \Sdk\Fulfilment\FulfilmentActivationReport;
 use \Sdk\Fulfilment\FulfilmentActivationReportDetails;
 
-class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
+class GetFulfilmentActivationReportRequestXmlResponse extends AbstractResponse
 {
-    
+
      /**
      * @var array
      */
@@ -25,7 +25,7 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
      * @var fulfilmentActivationReportListResult
      */
     private $_fulfilmentActivationReportListResult = null;
-    
+
     /*
      * @return fulfilmentActivationReportListResult
      */
@@ -41,37 +41,37 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
     {
         $this->_fulfilmentActivationReportListResult=$fulfilmentActivationReportListResult;
     }
-    
+
     /*
      * SubmitFulfilmentSupplyOrderResponse constructor
-     * @param $response 
+     * @param $response
      */
     public function __construct($response)
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->_errorList = array();
-       
+        $this->errorList = array();
+
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']))
         {
-            $this->_operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']);
-            if ($this->_operationSuccess)
+            $this->operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']);
+            if ($this->operationSuccess)
             {
                 $this->_setGlobalInformations();
                 $this->generateResult();
             }
          }
      }
-    
+
     /**
      * Set the token ID and the seller login from the response
      */
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -79,15 +79,15 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
      */
     private function generateResult()
     {
-        
+
         $fulfilmentActivationReportListResult = $this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult'];
 
         $this->_fulfilmentActivationReportListResult = new FulfilmentActivationReportListResult();
-        
+
         if(isset($fulfilmentActivationReportListResult['FulfilmentActivationReportList']['FulfilmentActivationReport']))
         {
             $fulfilmentActivationReports = $fulfilmentActivationReportListResult['FulfilmentActivationReportList']['FulfilmentActivationReport'];
-            
+
             if(isset($fulfilmentActivationReports['DepositId']))
             {
                 $fulfilmentActivationReports = array($fulfilmentActivationReports);
@@ -95,8 +95,8 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
         }
 
         if(isset($fulfilmentActivationReports))
-        { 
-            
+        {
+
             foreach ($fulfilmentActivationReports as $fulfilmentActivationReportItem)
             {
                 $fulfilmentActivationReport = new FulfilmentActivationReport();
@@ -140,11 +140,11 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
                 {
                     $fulfilmentActivationReport->setNumberOfActivatedProducts($fulfilmentActivationReportItem['NumberOfActivatedProducts']);
                 }
-                
+
                 if(isset($fulfilmentActivationReportItem['DetailsList']['FulfilmentActivationReportDetails']) && !SoapTools::isSoapValueNull($fulfilmentActivationReportItem['DetailsList']['FulfilmentActivationReportDetails']))
                 {
                     $FulfilmentActivationReportDetailsList = $fulfilmentActivationReportItem['DetailsList']['FulfilmentActivationReportDetails'];
-                    
+
                     if(isset($FulfilmentActivationReportDetailsList['ProductEan']))
                     {
                         $FulfilmentActivationReportDetailsList = array($FulfilmentActivationReportDetailsList);
@@ -156,7 +156,7 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
                     foreach ($FulfilmentActivationReportDetailsList as $FulfilmentActivationReportDetailsItem)
                     {
                         $fulfilmentActivationReportDetails = new FulfilmentActivationReportDetails();
-                    
+
                         if(isset($FulfilmentActivationReportDetailsItem['Action']) && !SoapTools::isSoapValueNull($FulfilmentActivationReportDetailsItem['Action']))
                         {
                             $fulfilmentActivationReportDetails->setAction($FulfilmentActivationReportDetailsItem['Action']);
@@ -186,7 +186,7 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
                         {
                             $fulfilmentActivationReportDetails->setSKU($FulfilmentActivationReportDetailsItem['SKU']);
                         }
-                        
+
                         if(isset($FulfilmentActivationReportDetailsItem['SellerProductReference']) && !SoapTools::isSoapValueNull($FulfilmentActivationReportDetailsItem['SellerProductReference']))
                         {
                             $fulfilmentActivationReportDetails->setSellerProductReference($FulfilmentActivationReportDetailsItem['SellerProductReference']);
@@ -210,11 +210,11 @@ class GetFulfilmentActivationReportRequestXmlResponse extends iResponse
                         $fulfilmentActivationReport->addFulfilmentActivationReportDetails($fulfilmentActivationReportDetails);
                     }
                 }
-                
-                $this->_fulfilmentActivationReportListResult->addFulfilmentActivationReport($fulfilmentActivationReport); 
-                
+
+                $this->_fulfilmentActivationReportListResult->addFulfilmentActivationReport($fulfilmentActivationReport);
+
             }
-            
+
         }
     }
 }

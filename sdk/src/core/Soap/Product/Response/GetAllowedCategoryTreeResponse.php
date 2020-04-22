@@ -10,7 +10,7 @@ namespace Sdk\Soap\Product\Response;
 
 
 use Sdk\Product\CategoryTree;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 use SimpleXMLElement;
 
@@ -44,8 +44,8 @@ class GetAllowedCategoryTreeResponse extends GetGenericCategoryTreeResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetAllowedCategoryTreeResponse']['GetAllowedCategoryTreeResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -59,8 +59,8 @@ class GetAllowedCategoryTreeResponse extends GetGenericCategoryTreeResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;

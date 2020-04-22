@@ -11,10 +11,10 @@ namespace Sdk\Soap\Discussion\Response;
 
 use Sdk\Discussion\Message;
 use Sdk\Discussion\OrderClaim;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 
-class GetOrderClaimListResponse extends iResponse
+class GetOrderClaimListResponse extends AbstractResponse
 {
 
     /**
@@ -66,8 +66,8 @@ class GetOrderClaimListResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**

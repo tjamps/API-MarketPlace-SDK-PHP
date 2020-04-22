@@ -35,8 +35,8 @@ class GetAllAllowedCategoryTreeResponse extends GetGenericCategoryTreeResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetAllAllowedCategoryTreeResponse']['GetAllAllowedCategoryTreeResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -50,8 +50,8 @@ class GetAllAllowedCategoryTreeResponse extends GetGenericCategoryTreeResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;

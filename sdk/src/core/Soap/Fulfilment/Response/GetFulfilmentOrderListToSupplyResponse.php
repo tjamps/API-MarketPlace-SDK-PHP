@@ -4,15 +4,15 @@
  * Date: 17/10/2016
  * Time: 13:27
  */
- 
+
 namespace Sdk\Soap\Fulfilment\Response;
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Fulfilment\FulfilmentOrderListToSupplyResult;
 use \Sdk\Fulfilment\FulfilmentOrderLine;
 use \Sdk\Soap\Common\SoapTools;
 
-class GetFulfilmentOrderListToSupplyResponse extends iResponse
+class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
 {
     /**
      * @var array
@@ -21,7 +21,7 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
 
    // @var FulfilmentOrderListToSupplyResult
     private $_fulfilmentOrderListToSupplyResult;
-  
+
     /*
     * @return \Sdk\Fulfilment\FulfilmentOrderListToSupplyResult
     */
@@ -32,33 +32,33 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
 
     /*
      * GetFulfilmentOrderListToSupplyResponse constructor
-     * @param $response 
+     * @param $response
      */
     public function __construct($response)
     {
        $reader = new \Zend\Config\Reader\Xml();
        $this->_dataResponse = $reader->fromString($response);
-       $this->_errorList = array();
+       $this->errorList = array();
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult']))
         {
             // Check For error message
-            $this->_operationSuccess =  $this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult']);
-            if ($this->_operationSuccess)
+            $this->operationSuccess =  $this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult']);
+            if ($this->operationSuccess)
             {
                 $this->_setGlobalInformations();
                 $this->getFulfilmentOrderList();
             }
         }
     }
-    
+
     /**
      * Set Token ID and Seller Login from XML response
      */
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -72,8 +72,8 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;
@@ -82,11 +82,11 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
      /*
      * Fill the array _fulfilmentOrderLineList from XML response
      */
-     
+
     private function getFulfilmentOrderList()
     {
         $GetFulfilmentOrderListToSupplyResult = $this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult'];
-        
+
         $this->_fulfilmentOrderListToSupplyResult = new FulfilmentOrderListToSupplyResult();
 
 	     //errorMessage and errorList
@@ -94,9 +94,9 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
         {
             $this->_fulfilmentOrderListToSupplyResult->setErrorMessage($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
             $this->_fulfilmentOrderListToSupplyResult->addErrorToList($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
-            array_push($this->_errorList, $GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
-        }   
-                
+            array_push($this->errorList, $GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
+        }
+
         //operation success
         if (isset($GetFulfilmentOrderListToSupplyResult['OperationSuccess']['_']) && $GetFulfilmentOrderListToSupplyResult['OperationSuccess']['_'] == 'true')
         {
@@ -106,7 +106,7 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
         if(isset($GetFulfilmentOrderListToSupplyResult['OrderLineList']['FulfilmentOrderLine']))
         {
             $orderLines = $GetFulfilmentOrderListToSupplyResult['OrderLineList']['FulfilmentOrderLine'];
-            
+
             if(isset($orderLines['OrderReference']))
             {
                 $orderLines = array($orderLines);
@@ -119,8 +119,8 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
             /*
             * NB : Do not add sellerLogin and token id in the class parcelActionResult
             * Reason why it already exists in the class manageParcelResult
-            */   
-                
+            */
+
                 $fulfilmentOrderLine = new FulfilmentOrderLine();
 
                 //errorMessage and errorList
@@ -128,77 +128,77 @@ class GetFulfilmentOrderListToSupplyResponse extends iResponse
                 {
                     $fulfilmentOrderLine->setErrorMessage($orderLine['ErrorMessage']['_']);
                     $fulfilmentOrderLine->addErrorToList($orderLine['ErrorMessage']['_']);
-					array_push($this->_errorList, $orderLine['ErrorMessage']['_']);
+					array_push($this->errorList, $orderLine['ErrorMessage']['_']);
                 }
 				//operation success
 				if (isset($orderLine['OperationSuccess']['_']) && $orderLine['OperationSuccess']['_'] == 'true')
 				{
 					$fulfilmentOrderLine->setOperationSuccess(true);
 				}
-				
+
                 //Seller Product Reference
                 if (isset($orderLine['SellerProductReference']) && !SoapTools::isSoapValueNull($orderLine['SellerProductReference']))
                 {
                     $fulfilmentOrderLine->setSellerProductReference($orderLine['SellerProductReference']);
-                } 
+                }
 
                 //Quantity
                 if (isset($orderLine['Quantity']) && !SoapTools::isSoapValueNull($orderLine['Quantity']))
                 {
                     $fulfilmentOrderLine->setQuantity($orderLine['Quantity']);
-                } 
+                }
 
                 //Product Name
                 if (isset($orderLine['ProductName']) && !SoapTools::isSoapValueNull($orderLine['ProductName']))
                 {
                     $fulfilmentOrderLine->setProductName($orderLine['ProductName']);
-                } 
-                    
+                }
+
                 //Product Ean
                 if (isset($orderLine['ProductEan']) && !SoapTools::isSoapValueNull($orderLine['ProductEan']))
                 {
                     $fulfilmentOrderLine->setProductEan($orderLine['ProductEan']);
-                }         
-                    
+                }
+
                 //Order Reference
                 if (isset($orderLine['OrderReference']) && !SoapTools::isSoapValueNull($orderLine['OrderReference']))
                 {
                     $fulfilmentOrderLine->setOrderReference($orderLine['OrderReference']);
-                } 
+                }
 
                 //Order Date
                 if (isset($orderLine['OrderDate']) && !SoapTools::isSoapValueNull($orderLine['OrderDate']))
                 {
                     $fulfilmentOrderLine->setOrderDate($orderLine['OrderDate']);
-                }  
+                }
 
                 //Latest Warehouse Delivery Date
                 if (isset($orderLine['LatestWarehouseDeliveryDate']) && !SoapTools::isSoapValueNull($orderLine['LatestWarehouseDeliveryDate']))
                 {
                     $fulfilmentOrderLine->setLatestWarehouseDeliveryDate($orderLine['LatestWarehouseDeliveryDate']);
-                } 
+                }
 
-                //Expected Customer Delivery Min 
+                //Expected Customer Delivery Min
                 if (isset($orderLine['ExpectedCustomerDeliveryMin']) && !SoapTools::isSoapValueNull($orderLine['ExpectedCustomerDeliveryMin']))
                 {
                     $fulfilmentOrderLine->setExpectedCustomerDeliveryMin($orderLine['ExpectedCustomerDeliveryMin']);
-                } 
+                }
 
                 //Expected Customer Delivery Max
                 if (isset($orderLine['ExpectedCustomerDeliveryMax']) && !SoapTools::isSoapValueNull($orderLine['ExpectedCustomerDeliveryMax']))
                 {
                     $fulfilmentOrderLine->setExpectedCustomerDeliveryMax($orderLine['ExpectedCustomerDeliveryMax']);
-                } 
+                }
 
                 //Warehouse
                 if (isset($orderLine['Warehouse']) && !SoapTools::isSoapValueNull($orderLine['Warehouse']))
                 {
                     $fulfilmentOrderLine->setWarehouse($orderLine['Warehouse']);
-                } 
-                
+                }
+
                 $this->_fulfilmentOrderListToSupplyResult->addFulfilmentOrderLine($fulfilmentOrderLine);
             }
         }
     }
-   
+
  }

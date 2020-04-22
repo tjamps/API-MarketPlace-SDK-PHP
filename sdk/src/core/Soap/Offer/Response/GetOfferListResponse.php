@@ -26,7 +26,7 @@ class GetOfferListResponse extends GetOfferListGenericResponse
             $this->_setGlobalInformations();
 
             /** Parse offer list */
-            if (isset($this->_dataResponse['s:Body']['GetOfferListResponse']['GetOfferListResult']['OfferList']) 
+            if (isset($this->_dataResponse['s:Body']['GetOfferListResponse']['GetOfferListResult']['OfferList'])
                 && isset($this->_dataResponse['s:Body']['GetOfferListResponse']['GetOfferListResult']['OfferList']['Offer'])) {
                 $this->_setOfferListFromXML($this->_dataResponse['s:Body']['GetOfferListResponse']['GetOfferListResult']['OfferList']);
             }
@@ -39,8 +39,8 @@ class GetOfferListResponse extends GetOfferListGenericResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetOfferListResponse']['GetOfferListResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -54,8 +54,8 @@ class GetOfferListResponse extends GetOfferListGenericResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;

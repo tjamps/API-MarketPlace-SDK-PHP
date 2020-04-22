@@ -63,8 +63,8 @@ class GetOfferListPaginatedResponse extends GetOfferListGenericResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetOfferListPaginatedResponse']['GetOfferListPaginatedResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
         $this->_currentPageNumber = $objInfoResult['CurrentPageNumber'];
         $this->_numberOfPages = $objInfoResult['NumberOfPages'];
     }
@@ -80,8 +80,8 @@ class GetOfferListPaginatedResponse extends GetOfferListGenericResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;
