@@ -44,10 +44,9 @@ abstract class AbstractResponse
     public function getErrorMessage()
     {
         $message = $this->errorMessage;
+
         if (!empty($this->errorList)) {
-            foreach ($this->errorList as $error) {
-                $message .= (PHP_EOL . $error);
-            }
+            $message = sprintf('%s - %s', $message, implode(' - ', $this->errorList));
         }
 
         return $message;
