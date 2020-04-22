@@ -1,2 +1,0 @@
-Version number : 1.1.8
-Version date   : 18042018
