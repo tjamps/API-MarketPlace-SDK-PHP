@@ -1,88 +1,216 @@
 <?php
 
-/* 
- * Created by Cdiscount
- * Date : 26/04/2017
- * Time : 17:46
- */
 namespace Sdk\Soap\Fulfilment\Response;
 
+use InvalidArgumentException;
+use Sdk\Fulfilment\ProductStock;
 use Sdk\Soap\Common\iResponse;
-use \Sdk\Fulfilment\ProductStock;
-use \Sdk\Fulfilment\ProductStockListMessage;
-use \Sdk\Soap\Common\SoapTools;
+use Sdk\Soap\Common\SoapTools;
+use Zend\Config\Reader\Xml;
 
 class GetProductStockListResponse extends iResponse
 {
     /**
      * @var array
      */
-    private $_dataResponse = null;
+    private $dataResponse = null;
 
     /**
      * @var array
      */
-    private $_barCodeList = null;
+    private $barCodeList = null;
 
     /**
      * @var string
      */
-    private $_status = null;
+    private $status = null;
+
+    /**
+     * @var string
+     */
+    private $totalProductCount = null;
+
+    public function __construct($response)
+    {
+        $reader = new Xml();
+        $this->dataResponse = $reader->fromString($response);
+        $this->_errorList = array();
+
+        if (!isset($this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'])) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Cannot get GetProductStockListResponse from server response, server responded with: "%s"',
+                    $this->dataResponse
+                )
+            );
+        }
+
+        // Check For error message
+        if ($this->isOperationSuccess(
+                $this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult']
+            )
+            && !$this->hasErrorMessage()
+        ) {
+            $this->setGlobalInformations();
+            $this->barCodeList = array();
+            $this->generateProductStockList();
+        }
+    }
 
     /**
      * @return string
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
-
-    /**
-     * @var string
-     */
-    private $_totalProductCount = null;
 
     /**
      * @return string
      */
     public function getTotalProductCount()
     {
-        return $this->_totalProductCount;
+        return $this->totalProductCount;
+    }
+
+    public function generateProductStockList()
+    {
+        $getProductStockListResult = $this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'];
+
+        $productStock = [];
+        if (isset($getProductStockListResult['a:ProductStockList']['a:productStock'])) {
+            $productStock = $getProductStockListResult['a:ProductStockList']['a:productStock'];
+
+            if (isset($productStock['a:Ean'])) {
+                $productStock = [$productStock];
+            }
+        }
+
+        foreach ($productStock as $productStockXml) {
+            $productStock = new ProductStock();
+
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:AverageWeeklySales',
+                'setAverageWeeklySales'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:BlockedStock', 'setBlockedStock');
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:CurrentWeeklySales',
+                'setCurrentWeeklySales'
+            );
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:DamagedReturns',
+                'setDamagedReturns'
+            );
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:DeliveryDisputes',
+                'setDeliveryDisputes'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:Ean', 'setEan');
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:FodStock', 'setFodStock');
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:ForecastingStockShortage',
+                'setForecastingStockShortage'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:FrontStock', 'setFrontStock');
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:IncomingShipment',
+                'setIncomingShipment'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:Libelle', 'setLibelle');
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:LogisticFees', 'setLogisticFees');
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:OngoingRecoveries',
+                'setOngoingRecoveries'
+            );
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:OrderInProgress',
+                'setOrderInProgress'
+            );
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:OverheadOutsizeFees',
+                'setOverheadOutsizeFees'
+            );
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:ProductConditionId',
+                'setProductConditionId'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:ProductState', 'setProductState');
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:SellerReference',
+                'setSellerReference'
+            );
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:ShippableStock',
+                'setShippableStock'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:Sku', 'setSku');
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:StockCategory',
+                'setStockCategories'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:StockFees', 'setStockFees');
+            $this->setProductStockProperty(
+                $productStockXml,
+                $productStock,
+                'a:StockInWarehouse',
+                'setStockInWarehouse'
+            );
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:Warehouse', 'setWarehouse');
+            $this->setProductStockProperty($productStockXml, $productStock, 'a:WarehouseCode', 'setWarehouseCode');
+
+
+            $this->setProductStockBooleanProperty($productStockXml, $productStock, 'a:IsReferenced', 'setIsReferenced');
+
+            $this->barCodeList[] = $productStock;
+        }
+
     }
 
     /**
-     * GetProductStockListResponse constructor
-     * @param $response 
+     * @return array
      */
-    public function __construct($response)
+    public function getProductStockList()
     {
-        $reader = new \Zend\Config\Reader\Xml();
-        $this->_dataResponse = $reader->fromString($response);
-        $this->_errorList = array();
-
-        // Check For error message
-        if ($this->isOperationSuccess($this->_dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult']) && !$this->_hasErrorMessage())
-        {
-            $this->_setGlobalInformations();
-
-            /**
-             * Product List
-             */
-            $this->_barCodeList = array();
-            $this->generateProductStockList();
-        }
+        return $this->barCodeList;
     }
 
     /**
      * Set Token ID and Seller Login from XML response
      */
-    private function _setGlobalInformations()
+    private function setGlobalInformations()
     {
-        $objInfoResult = $this->_dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'];
+        $objInfoResult = $this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'];
         $this->_tokenID = $objInfoResult['TokenId'];
         $this->_sellerLogin = $objInfoResult['SellerLogin'];
-        $this->_status = $objInfoResult['a:Status'];
-        $this->_totalProductCount = $objInfoResult['a:TotalProductCount'];
+        $this->status = $objInfoResult['a:Status'];
+        $this->totalProductCount = $objInfoResult['a:TotalProductCount'];
     }
 
     /**
@@ -90,121 +218,44 @@ class GetProductStockListResponse extends iResponse
      *
      * @return bool
      */
-    private function _hasErrorMessage()
+    private function hasErrorMessage()
     {
-        $objError = $this->_dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult']['ErrorMessage'];
+        $objError = $this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult']['ErrorMessage'];
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
             $this->_hasError = true;
             $this->_errorMessage = $objError['_'];
+
             return true;
         }
+
         return false;
     }
 
-    /*
-     * Fill the array ProductStockList from XML response
+    /**
+     * @param array $productStockXml
+     * @param ProductStock $productStock
+     * @param string $property
+     * @param string $method
      */
-    public function generateProductStockList()
+    private function setProductStockProperty($productStockXml, ProductStock $productStock, $property, $method)
     {
-        $getProductStockListResult = $this->_dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'];
-        
-	    /**
-         * \sdk\src\core\Fulfilment\ProductStock
-         */	
-         if(isset($getProductStockListResult['a:ProductStockList']['a:ProductStock']))
-         {
-             $ProductStock = $getProductStockListResult['a:ProductStockList']['a:ProductStock'];
-
-             if(isset($ProductStock['a:Ean']))
-             {
-                $ProductStock = array($ProductStock);
-             }
-         }
-         // Vérifier l'existence de $ProductStock, si on ne rentre pas dans le isset précédent ca pète
-        /**
-         * \sdk\src\core\Fulfilment\ProductStock
-         */	
-		if(!empty($ProductStock)) 
-		{
-			foreach ($ProductStock as $productStockXml)
-			{
-			 /*
-			  * NB : Do not add sellerLogin and token id in the class GetProductStockListResult
-			  */   
-				$productStock = new ProductStock();
-
-				//Blocked Stock
-				if (isset($productStockXml['a:BlockedStock']) && !SoapTools::isSoapValueNull($productStockXml['a:BlockedStock']))
-				{				
-					$productStock->setBlockedStock($productStockXml['a:BlockedStock']);
-				}
-
-				//Ean
-				if (isset($productStockXml['a:Ean']) && !SoapTools::isSoapValueNull($productStockXml['a:Ean']))
-				{
-					$productStock->setEan($productStockXml['a:Ean']);
-				}
-
-				//Fod Stock
-				if (isset($productStockXml['a:FodStock']) && !SoapTools::isSoapValueNull($productStockXml['a:FodStock']))
-				{
-					$productStock->setFodStock($productStockXml['a:FodStock']);
-				} 
-
-				//Front Stock
-				if (isset($productStockXml['a:FrontStock']) && !SoapTools::isSoapValueNull($productStockXml['a:FrontStock']))
-				{
-					$productStock->setFrontStock($productStockXml['a:FrontStock']);
-				} 
-
-				//Is Referenced
-				if (isset($productStockXml['a:IsReferenced']) && !SoapTools::isSoapValueNull($productStockXml['a:IsReferenced']) && $productStockXml['a:IsReferenced'] == 'true')
-				{
-					$productStock->setIsReferenced(true);
-				} 
-
-				//Libelle
-				if (isset($productStockXml['a:Libelle']) && !SoapTools::isSoapValueNull($productStockXml['a:Libelle']))
-				{
-					$productStock->setLibelle($productStockXml['a:Libelle']);
-				} 
-
-				//SellerReference
-				if (isset($productStockXml['a:SellerReference']) && !SoapTools::isSoapValueNull($productStockXml['a:SellerReference']))
-				{
-					$productStock->setSellerReference($productStockXml['a:SellerReference']);
-				}
-
-				//Sku
-				if (isset($productStockXml['a:Sku']) && !SoapTools::isSoapValueNull($productStockXml['a:Sku']))
-				{
-					$productStock->setSku($productStockXml['a:Sku']);
-				} 
-
-				//Stock In Warehouse
-				if (isset($productStockXml['a:StockInWarehouse']) && !SoapTools::isSoapValueNull($productStockXml['a:StockInWarehouse']))
-				{
-					$productStock->setStockInWarehouse($productStockXml['a:StockInWarehouse']);
-				} 
-
-				//Warehouse
-				if (isset($productStockXml['a:Warehouse']) && !SoapTools::isSoapValueNull($productStockXml['a:Warehouse']))
-				{
-					$productStock->setWarehouse($productStockXml['a:Warehouse']);
-				} 
-				array_push($this->_barCodeList, $productStock);
-			}
-		}		
-        
+        if (isset($productStockXml[$property]) && !SoapTools::isSoapValueNull($productStockXml[$property])) {
+            $productStock->{$method}($productStockXml[$property]);
+        }
     }
 
     /**
-     * @return array 
+     * @param array $productStockXml
+     * @param ProductStock $productStock
+     * @param string $property
+     * @param string $method
      */
-    public function getProductStockList()
+    private function setProductStockBooleanProperty($productStockXml, ProductStock $productStock, $property, $method)
     {
-        return $this->_barCodeList;
+        if (isset($productStockXml[$property]) && !SoapTools::isSoapValueNull($productStockXml[$property])) {
+            $productStock->{$method}($productStockXml[$property] === 'true');
+        }
     }
- }
+}
