@@ -11,9 +11,9 @@ namespace Sdk\Soap\Offer\Response;
 
 use Sdk\Offer\OfferReportLog;
 use Sdk\Offer\OfferReportPropertyLog;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 
-class GetOfferPackageSubmissionResultResponse extends iResponse
+class GetOfferPackageSubmissionResultResponse extends AbstractResponse
 {
 
     /**
@@ -105,8 +105,8 @@ class GetOfferPackageSubmissionResultResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetOfferPackageSubmissionResultResponse']['GetOfferPackageSubmissionResultResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
         $this->_packageId = $objInfoResult['PackageId'];
         $this->_packageIntegrationStatus = $objInfoResult['PackageIntegrationStatus'];
     }
@@ -118,13 +118,13 @@ class GetOfferPackageSubmissionResultResponse extends iResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetOfferPackageSubmissionResultResponse']['GetOfferPackageSubmissionResultResult']['ErrorMessage'];
-        $this->_errorList = array();
+        $this->errorList = array();
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
-            array_push($this->_errorList, $this->_errorMessage);
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
+            array_push($this->errorList, $this->errorMessage);
             return true;
         }
         return false;

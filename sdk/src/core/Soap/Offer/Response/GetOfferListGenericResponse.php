@@ -14,9 +14,9 @@ use Sdk\Delivey\ShippingInformation;
 use Sdk\Offer\Offer;
 use Sdk\Offer\OfferBenchMark;
 use Sdk\Offer\OfferPool;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 
-class GetOfferListGenericResponse extends iResponse
+class GetOfferListGenericResponse extends AbstractResponse
 {
     /**
      * @var array

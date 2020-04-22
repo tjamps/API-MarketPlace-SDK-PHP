@@ -11,10 +11,10 @@ namespace Sdk\Soap\Product\Response;
 
 use Sdk\Product\Product;
 use Sdk\Product\ProductMatching;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 
-class GetProductPackageProductMatchingFileDataResponse extends iResponse
+class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
 {
     /**
      * @var array|bool|null
@@ -81,8 +81,8 @@ class GetProductPackageProductMatchingFileDataResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetProductPackageProductMatchingFileDataResponse']['GetProductPackageProductMatchingFileDataResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
         $this->_packageId = intval($objInfoResult['PackageId']);
     }
     /**
@@ -96,8 +96,8 @@ class GetProductPackageProductMatchingFileDataResponse extends iResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;

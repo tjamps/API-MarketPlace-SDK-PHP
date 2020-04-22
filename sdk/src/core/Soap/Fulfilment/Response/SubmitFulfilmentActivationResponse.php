@@ -6,20 +6,20 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use Sdk\Fulfilment\SubmitFulfilmentActivationResult;
 
-class SubmitFulfilmentActivationResponse extends iResponse
+class SubmitFulfilmentActivationResponse extends AbstractResponse
 {
     /**
      * @var array
      */
     private $_dataResponse = null;
-    
-    
+
+
     private $_submitFulfilmentActivationResult= null;
-    
+
     public function getSubmitFulfilmentActivationResult()
     {
         return $this->_submitFulfilmentActivationResult;
@@ -32,51 +32,51 @@ class SubmitFulfilmentActivationResponse extends iResponse
     {
         $this->_submitFulfilmentActivationResult=$submitFulfilmentActivationResult;
     }
-    
+
     /*
      * SubmitFulfilmentSupplyOrderResponse constructor
-     * @param $response 
+     * @param $response
      */
     public function __construct($response)
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->_errorList = array();
-        
+        $this->errorList = array();
+
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult']))
         {
-             $this->_operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult']);
-             if ($this->_operationSuccess)
+             $this->operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult']);
+             if ($this->operationSuccess)
               {
                 $this->_setGlobalInformations();
                 $this->generateDepositIdResult();
               }
-        }    
+        }
     }
-    
+
     /**
      * Set the token ID and the seller login from the response
      */
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
-    
+
     public function generateDepositIdResult()
-    { 
+    {
         $submitFulfilmentActivationResultXml = $this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult'];
-    
+
         $this->_submitFulfilmentActivationResult = new SubmitFulfilmentActivationResult();
 
         if (isset($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) && strlen($submitFulfilmentActivationResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentActivationResultXml['ErrorMessage']))
         {
             $this->_submitFulfilmentActivationResult->setErrorMessage($submitFulfilmentActivationResultXml['ErrorMessage']['_']);
             $this->_submitFulfilmentActivationResult->addErrorToList($submitFulfilmentActivationResultXml['ErrorMessage']['_']);
-            array_push($this->_errorList, $submitFulfilmentActivationResultXml['ErrorMessage']['_']);
-        }           
+            array_push($this->errorList, $submitFulfilmentActivationResultXml['ErrorMessage']['_']);
+        }
         //operation success
         if (isset($submitFulfilmentActivationResultXml['OperationSuccess']['_']) && $submitFulfilmentActivationResultXml['OperationSuccess']['_'] == 'true')
         {
@@ -85,9 +85,9 @@ class SubmitFulfilmentActivationResponse extends iResponse
 
         //deposit id
         if (isset($submitFulfilmentActivationResultXml['DepositId']) && !SoapTools::isSoapValueNull($submitFulfilmentActivationResultXml['DepositId']))
-        {        
-            $this->_submitFulfilmentActivationResult->setDepositId($submitFulfilmentActivationResultXml['DepositId']);  
-        }                             
+        {
+            $this->_submitFulfilmentActivationResult->setDepositId($submitFulfilmentActivationResultXml['DepositId']);
+        }
     }
 
 }

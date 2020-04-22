@@ -13,10 +13,10 @@ use Sdk\Delivey\DeliveryModeInformation;
 use Sdk\Offer\OfferPool;
 use Sdk\Seller\Seller;
 use Sdk\Seller\Address;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
 
-class GetSellerInformationResponse extends iResponse
+class GetSellerInformationResponse extends AbstractResponse
 {
     /**
      * @var Seller
@@ -139,8 +139,8 @@ class GetSellerInformationResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetSellerInformationResponse']['GetSellerInformationResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -186,8 +186,8 @@ class GetSellerInformationResponse extends iResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;

@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Created by Zakaria Boukrhis
  * Date : 19/01/2017
  * Time : 15:46
@@ -8,20 +8,20 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 
 use Sdk\Fulfilment\FulfilmentSupplyOrderResult;
 use Sdk\Fulfilment\SupplyOrderList;
 use Sdk\Fulfilment\SupplyOrder;
 
-class GetFulfilmentSupplyOrderResponse extends iResponse
+class GetFulfilmentSupplyOrderResponse extends AbstractResponse
 {
     /**
      * @var array
      */
     private $_dataResponse = null;
-    
+
     /*
      * @var FulfilmentSupplyOrderResult
      */
@@ -37,43 +37,43 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
 
     /*
      * GetFulfilmentSupplyOrderResponse constructor
-     * @param $response 
+     * @param $response
      */
     public function __construct($response)
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->_errorList = array();
+        $this->errorList = array();
 
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentSupplyOrderResponse']['GetFulfilmentSupplyOrderResult']))
         {
             // Check For error message
-            $this->_operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentSupplyOrderResponse']['GetFulfilmentSupplyOrderResult']);
-            if ($this->_operationSuccess)
+            $this->operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentSupplyOrderResponse']['GetFulfilmentSupplyOrderResult']);
+            if ($this->operationSuccess)
             {
                 $this->_setGlobalInformations();
                 $this->generateFulfilementSupplyOrderList();
             }
-        }    
+        }
     }
-    
+
     /**
      * Set the token ID and the seller login from the response
      */
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetFulfilmentSupplyOrderResponse']['GetFulfilmentSupplyOrderResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
-    
+
     /*
      * Fill the array _supplyOrderList from XML response
      */
     private function generateFulfilementSupplyOrderList()
     {
         $fulfilmentSupplyOrderResult = $this->_dataResponse['s:Body']['GetFulfilmentSupplyOrderResponse']['GetFulfilmentSupplyOrderResult'];
-        
+
         $this->_fulfilmentSupplyOrderResult = new FulfilmentSupplyOrderResult();
 
          //errorMessage and errorList
@@ -81,8 +81,8 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
         {
             $this->_fulfilmentSupplyOrderResult->setErrorMessage($fulfilmentSupplyOrderResult['ErrorMessage']['_']);
             $this->_fulfilmentSupplyOrderResult->addErrorToList($fulfilmentSupplyOrderResult['ErrorMessage']['_']);
-            array_push($this->_errorList, $fulfilmentSupplyOrderResult['ErrorMessage']['_']);
-        }           
+            array_push($this->errorList, $fulfilmentSupplyOrderResult['ErrorMessage']['_']);
+        }
         //operation success
         if (isset($fulfilmentSupplyOrderResult['OperationSuccess']['_']) && $fulfilmentSupplyOrderResult['OperationSuccess']['_'] == 'true')
         {
@@ -98,17 +98,17 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
         {
             $this->_fulfilmentSupplyOrderResult->setNumberOfPages($fulfilmentSupplyOrderResult['NumberOfPages']);
         }
-        
+
         if(isset($fulfilmentSupplyOrderResult['SupplyOrderLineList']['SupplyOrderLine']))
         {
             $fulfilmentSupplyOrders = $fulfilmentSupplyOrderResult['SupplyOrderLineList']['SupplyOrderLine'];
-            
+
             if(isset($fulfilmentSupplyOrders['SupplyOrderNumber']))
             {
                 $fulfilmentSupplyOrders = array($fulfilmentSupplyOrders);
             }
         }
-        
+
         if(isset($fulfilmentSupplyOrders))
         {
             foreach ($fulfilmentSupplyOrders as $fulfilmentSupplyOrder)
@@ -140,7 +140,7 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
                     if(isset($fulfilmentSupplyOrder['OrderReferenceList']['a:string']))
                     {
                         $orderReferences = $fulfilmentSupplyOrder['OrderReferenceList']['a:string'];
-                        
+
                         if (sizeof($orderReferences) == 1)
                         {
                             $orderReferences = array($orderReferences);
@@ -160,7 +160,7 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
                 {
                     $supplyOrderResult->setSellerProductReference($fulfilmentSupplyOrder['SellerProductReference']);
                 }
-                
+
                 // SellerSupplyOrderNumber
                 if (isset($fulfilmentSupplyOrder['SellerSupplyOrderNumber']) && !SoapTools::isSoapValueNull($fulfilmentSupplyOrder['SellerSupplyOrderNumber']))
                 {
@@ -171,11 +171,11 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
                 if (isset($fulfilmentSupplyOrder['Status']) && !SoapTools::isSoapValueNull($fulfilmentSupplyOrder['Status']))
                 {
                     $supplyOrderResult->setStatus($fulfilmentSupplyOrder['Status']);
-                }  
+                }
 
                 // SupplyOrderNumber
                 if (isset($fulfilmentSupplyOrder['SupplyOrderNumber']) && !SoapTools::isSoapValueNull($fulfilmentSupplyOrder['SupplyOrderNumber']))
-                {                                                                   
+                {
                     $supplyOrderResult->setSupplyOrderNumber($fulfilmentSupplyOrder['SupplyOrderNumber']);
                 }
 
@@ -183,7 +183,7 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
                 if (isset($fulfilmentSupplyOrder['UndeliveredQuantity']))
                 {
                     $supplyOrderResult->setUndeliveredQuantity($fulfilmentSupplyOrder['UndeliveredQuantity']);
-                } 
+                }
 
                 // Warehouse
                 if (isset($fulfilmentSupplyOrder['Warehouse']) && !SoapTools::isSoapValueNull($fulfilmentSupplyOrder['Warehouse']))
@@ -195,9 +195,9 @@ class GetFulfilmentSupplyOrderResponse extends iResponse
                 if (isset($fulfilmentSupplyOrder['WarehouseReceptionMinDate']) && !SoapTools::isSoapValueNull($fulfilmentSupplyOrder['WarehouseReceptionMinDate']))
                 {
                     $supplyOrderResult->setWarehouseReceptionMinDate($fulfilmentSupplyOrder['WarehouseReceptionMinDate']);
-                } 
+                }
 
-                $this->_fulfilmentSupplyOrderResult->addSupplyOrderToList($supplyOrderResult); 
+                $this->_fulfilmentSupplyOrderResult->addSupplyOrderToList($supplyOrderResult);
             }
         }
     }

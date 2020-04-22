@@ -3,9 +3,12 @@
     "description": "PHP SDK for the Cdiscount Marketplace API",
     "type": "project",
     "autoload": {
-        "files": ["sdk/autoload.php"]
+        "psr-4": {
+            "Sdk\\": "sdk/src/core/"
+        }
     },
     "require": {
+        "ext-curl": "*",
         "zendframework/zend-authentication": "^2.5",
         "zendframework/zend-db": "^2.8",
         "zendframework/zend-soap": "^2.6",
@@ -13,5 +16,8 @@
         "zendframework/zend-log": "^2.9",
         "zendframework/zend-config": "^2.6"
     },
-    "license": "GPL-3.0"
+    "license": "GPL-3.0",
+    "require-dev": {
+        "phpunit/phpunit": "^9.1"
+    }
 }

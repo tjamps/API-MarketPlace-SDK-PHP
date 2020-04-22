@@ -9,9 +9,9 @@
 namespace Sdk\Soap\Mail\Response;
 
 
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 
-class GenerateDiscussionMailGuidResponse extends iResponse
+class GenerateDiscussionMailGuidResponse extends AbstractResponse
 {
     /**
      * @var array|null
@@ -60,8 +60,8 @@ class GenerateDiscussionMailGuidResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GenerateDiscussionMailGuidResponse']['GenerateDiscussionMailGuidResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
     /**
@@ -71,13 +71,13 @@ class GenerateDiscussionMailGuidResponse extends iResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GenerateDiscussionMailGuidResponse']['GenerateDiscussionMailGuidResult']['ErrorMessage'];
-        $this->_errorList = array();
+        $this->errorList = array();
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
-            array_push($this->_errorList, $this->_errorMessage);
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
+            array_push($this->errorList, $this->errorMessage);
             return true;
         }
         return false;

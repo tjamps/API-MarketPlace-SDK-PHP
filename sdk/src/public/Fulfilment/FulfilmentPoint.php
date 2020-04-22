@@ -8,7 +8,6 @@ namespace Sdk\Fulfilment;
 
 
 use Sdk\ApiClient\CDSApiClient;
-use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
@@ -16,31 +15,32 @@ use Sdk\Soap\Fulfillment\CreateExternalOrderSoap;
 use Sdk\Soap\Fulfillment\GetExternalOrderStatusSoap;
 use Sdk\Soap\Fulfillment\Response\CreateExternalOrderResponse;
 use Sdk\Soap\Fulfillment\Response\GetExternalOrderStatusResponse;
+use Sdk\Soap\Fulfilment\GetFulfilmentActivationReportListSoap;
+use Sdk\Soap\Fulfilment\GetFulfilmentDeliveryDocumentSoap;
 use Sdk\Soap\Fulfilment\GetFulfilmentOrderListToSupplySoap;
 use Sdk\Soap\Fulfilment\GetFulfilmentSupplyOrderReportListSoap;
 use Sdk\Soap\Fulfilment\GetFulfilmentSupplyOrderSoap;
 use Sdk\Soap\Fulfilment\GetProductStockListSoap;
 use Sdk\Soap\Fulfilment\Response\FulfilmentSupplyOrderReportListResponse;
+use Sdk\Soap\Fulfilment\Response\GetFulfilmentActivationReportRequestXmlResponse;
+use Sdk\Soap\Fulfilment\Response\GetFulfilmentDeliveryDocumentResponse;
 use Sdk\Soap\Fulfilment\Response\GetFulfilmentOrderListToSupplyResponse;
 use Sdk\Soap\Fulfilment\Response\GetFulfilmentSupplyOrderResponse;
 use Sdk\Soap\Fulfilment\Response\GetProductStockListResponse;
+use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentActivationResponse;
 use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentOnDemandSupplyOrderResponse;
 use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentSupplyOrderResponse;
-use Sdk\Soap\Fulfilment\SubmitFulfilmentOnDemandSupplyOrderSoap;
-use Sdk\Soap\Fulfilment\SubmitFulfilmentSupplyOrderSoap;
-use Sdk\Soap\HeaderMessage\HeaderMessage;
-use Sdk\Soap\Fulfilment\SubmitOfferStateActionSoap;
 use Sdk\Soap\Fulfilment\Response\SubmitOfferStateActionResponse;
 use Sdk\Soap\Fulfilment\SubmitFulfilmentActivationSoap;
-use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentActivationResponse;
-use Sdk\Soap\Fulfilment\GetFulfilmentDeliveryDocumentSoap;
-use Sdk\Soap\Fulfilment\Response\GetFulfilmentDeliveryDocumentResponse;
-use Sdk\Soap\Fulfilment\GetFulfilmentActivationReportListSoap;
-use Sdk\Soap\Fulfilment\Response\GetFulfilmentActivationReportRequestXmlResponse;
+use Sdk\Soap\Fulfilment\SubmitFulfilmentOnDemandSupplyOrderSoap;
+use Sdk\Soap\Fulfilment\SubmitFulfilmentSupplyOrderSoap;
+use Sdk\Soap\Fulfilment\SubmitOfferStateActionSoap;
+use Sdk\Soap\HeaderMessage\HeaderMessage;
 
 /*
  * Fulfilment point
  */
+
 class FulfilmentPoint
 {
     public function __construct()
@@ -60,9 +60,13 @@ class FulfilmentPoint
         $submitOfferStateAction = new SubmitOfferStateActionSoap();
 
         $headerXml = $header->generateHeader();
-        $offerStateActionRequestXml = $submitOfferStateAction->generateofferStateActionRequestXml($offerStateActionRequest);
+        $offerStateActionRequestXml = $submitOfferStateAction->generateofferStateActionRequestXml(
+            $offerStateActionRequest
+        );
 
-        $submitOfferStateActionXml = $submitOfferStateAction->generateEnclosingBalise($headerXml . $offerStateActionRequestXml);
+        $submitOfferStateActionXml = $submitOfferStateAction->generateEnclosingBalise(
+            $headerXml.$offerStateActionRequestXml
+        );
 
         $bodyXml = $body->generateXML($submitOfferStateActionXml);
 
@@ -70,9 +74,7 @@ class FulfilmentPoint
 
         $response = $this->_sendRequest('SubmitOfferStateAction', $envelopeXml);
 
-        $submitOfferStateActionResponse = new SubmitOfferStateActionResponse($response);
-
-        return $submitOfferStateActionResponse;
+        return new SubmitOfferStateActionResponse($response);
     }
 
     /*
@@ -88,12 +90,14 @@ class FulfilmentPoint
         $getExternalOrderStatus = new GetExternalOrderStatusSoap();
         $headerXml = $header->generateHeader();
         $orderStatusRequestXml = $getExternalOrderStatus->generateOrderStatusRequestXml($orderStatusRequest);
-        $getExternalOrderStatusXml = $getExternalOrderStatus->generateEnclosingBalise($headerXml . $orderStatusRequestXml);
+        $getExternalOrderStatusXml = $getExternalOrderStatus->generateEnclosingBalise(
+            $headerXml.$orderStatusRequestXml
+        );
         $bodyXml = $body->generateXML($getExternalOrderStatusXml);
         $envelopeXml = $envelope->generateXML($bodyXml);
         $response = $this->_sendRequest('GetExternalOrderStatus', $envelopeXml);
-        $getExternalOrderStatusResponse = new GetExternalOrderStatusResponse($response);
-        return $getExternalOrderStatusResponse;
+
+        return new GetExternalOrderStatusResponse($response);
     }
 
     /*
@@ -108,13 +112,17 @@ class FulfilmentPoint
         $body = new Body();
         $createExternalOrderSoap = new CreateExternalOrderSoap();
         $headerXml = $header->generateHeader();
-        $orderIntegrationRequestXml = $createExternalOrderSoap->generateFulfillmentProductRequestXml($orderIntegrationRequest);
-        $createExternalOrderXml = $createExternalOrderSoap->generateEnclosingBalise($headerXml . $orderIntegrationRequestXml);
+        $orderIntegrationRequestXml = $createExternalOrderSoap->generateFulfillmentProductRequestXml(
+            $orderIntegrationRequest
+        );
+        $createExternalOrderXml = $createExternalOrderSoap->generateEnclosingBalise(
+            $headerXml.$orderIntegrationRequestXml
+        );
         $bodyXml = $body->generateXML($createExternalOrderXml);
         $envelopeXml = $envelope->generateXML($bodyXml);
         $response = $this->_sendRequest('CreateExternalOrder', $envelopeXml);
-        $createExternalOrderResponse = new CreateExternalOrderResponse($response);
-        return $createExternalOrderResponse;
+
+        return new CreateExternalOrderResponse($response);
     }
 
     /*
@@ -131,8 +139,12 @@ class FulfilmentPoint
         $getFulfilmentOrderListToSupply = new GetFulfilmentOrderListToSupplySoap();
 
         $headerXml = $header->generateHeader();
-        $fulfilmentOnDemandOrderLineRequestXml = $getFulfilmentOrderListToSupply->generateFulfilmentOnDemandOrderLineRequestXml($fulfilmentOnDemandOrderLineRequest);
-        $getFulfilmentOrderListToSupplyXml = $getFulfilmentOrderListToSupply->generateEnclosingBalise($headerXml . $fulfilmentOnDemandOrderLineRequestXml);
+        $fulfilmentOnDemandOrderLineRequestXml = $getFulfilmentOrderListToSupply->generateFulfilmentOnDemandOrderLineRequestXml(
+            $fulfilmentOnDemandOrderLineRequest
+        );
+        $getFulfilmentOrderListToSupplyXml = $getFulfilmentOrderListToSupply->generateEnclosingBalise(
+            $headerXml.$fulfilmentOnDemandOrderLineRequestXml
+        );
 
         $bodyXml = $body->generateXML($getFulfilmentOrderListToSupplyXml);
 
@@ -140,8 +152,7 @@ class FulfilmentPoint
 
         $response = $this->_sendRequest('GetFulfilmentOrderListToSupply', $envelopeXml);
 
-        $getFulfilmentOrderListToSupplyResponse = new GetFulfilmentOrderListToSupplyResponse($response);
-        return $getFulfilmentOrderListToSupplyResponse;
+        return new GetFulfilmentOrderListToSupplyResponse($response);
     }
 
     /*
@@ -158,17 +169,20 @@ class FulfilmentPoint
         $getFulfilmentSupplyOrder = new GetFulfilmentSupplyOrderSoap();
 
         $headerXml = $header->generateHeader();
-        $getFulfilmentSupplyOrderRequestXml = $getFulfilmentSupplyOrder->generateGetFulfilmentSupplyOrderRequestXml($supplyOrderRequest);
+        $getFulfilmentSupplyOrderRequestXml = $getFulfilmentSupplyOrder->generateGetFulfilmentSupplyOrderRequestXml(
+            $supplyOrderRequest
+        );
 
-        $getFulfilmentSupplyOrderXml = $getFulfilmentSupplyOrder->generateEnclosingBalise($headerXml . $getFulfilmentSupplyOrderRequestXml);
+        $getFulfilmentSupplyOrderXml = $getFulfilmentSupplyOrder->generateEnclosingBalise(
+            $headerXml.$getFulfilmentSupplyOrderRequestXml
+        );
         $bodyXml = $body->generateXML($getFulfilmentSupplyOrderXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
 
         $response = $this->_sendRequest('GetFulfilmentSupplyOrder', $envelopeXml);
 
-        $getFulfilmentSupplyOrderResponse = new GetFulfilmentSupplyOrderResponse($response);
-        return $getFulfilmentSupplyOrderResponse;
+        return new GetFulfilmentSupplyOrderResponse($response);
     }
 
     /*
@@ -185,9 +199,13 @@ class FulfilmentPoint
         $fulfilmentSupplyReportList = new GetFulfilmentSupplyOrderReportListSoap();
 
         $headerXml = $header->generateHeader();
-        $supplyOrderReportRequestXml = $fulfilmentSupplyReportList->generateSupplyOrderReportRequestXml($supplyOrderReportRequest);
+        $supplyOrderReportRequestXml = $fulfilmentSupplyReportList->generateSupplyOrderReportRequestXml(
+            $supplyOrderReportRequest
+        );
 
-        $fulfilmentSupplyReportListXml = $fulfilmentSupplyReportList->generateEnclosingBalise($headerXml . $supplyOrderReportRequestXml);
+        $fulfilmentSupplyReportListXml = $fulfilmentSupplyReportList->generateEnclosingBalise(
+            $headerXml.$supplyOrderReportRequestXml
+        );
 
         $bodyXml = $body->generateXML($fulfilmentSupplyReportListXml);
 
@@ -195,9 +213,7 @@ class FulfilmentPoint
 
         $response = $this->_sendRequest('GetFulfilmentSupplyOrderReportList', $envelopeXml);
 
-        $fulfilmentSupplyOrderReportListResponse = new FulfilmentSupplyOrderReportListResponse($response);
-
-        return $fulfilmentSupplyOrderReportListResponse;
+        return new FulfilmentSupplyOrderReportListResponse($response);
     }
 
     /*
@@ -212,13 +228,17 @@ class FulfilmentPoint
         $body = new Body();
         $getProductStockList = new GetProductStockListSoap();
         $headerXml = $header->generateHeader();
-        $fulfilmentProductRequestXml = $getProductStockList->generateFulfilmentProductRequestXml($fulfilmentProductRequest);
-        $getProductStockListXml = $getProductStockList->generateEnclosingBalise($headerXml . $fulfilmentProductRequestXml);
+        $fulfilmentProductRequestXml = $getProductStockList->generateFulfilmentProductRequestXml(
+            $fulfilmentProductRequest
+        );
+        $getProductStockListXml = $getProductStockList->generateEnclosingBalise(
+            $headerXml.$fulfilmentProductRequestXml
+        );
         $bodyXml = $body->generateXML($getProductStockListXml);
         $envelopeXml = $envelope->generateXML($bodyXml);
         $response = $this->_sendRequest('GetProductStockList', $envelopeXml);
-        $getProductStockListResponse = new GetProductStockListResponse($response);
-        return $getProductStockListResponse;
+
+        return new GetProductStockListResponse($response);
     }
 
     /*
@@ -234,9 +254,13 @@ class FulfilmentPoint
         $submitFulfilmentSupplyOrder = new SubmitFulfilmentSupplyOrderSoap();
 
         $headerXml = $header->generateHeader();
-        $fulfilmentSupplyOrderRequestXml = $submitFulfilmentSupplyOrder->generateFulfilmentSupplyOrderRequestXml($fulfilmentSupplyOrderRequest);
+        $fulfilmentSupplyOrderRequestXml = $submitFulfilmentSupplyOrder->generateFulfilmentSupplyOrderRequestXml(
+            $fulfilmentSupplyOrderRequest
+        );
 
-        $submitFulfilmentSupplyOrderXml = $submitFulfilmentSupplyOrder->generateEnclosingBalise($headerXml . $fulfilmentSupplyOrderRequestXml);
+        $submitFulfilmentSupplyOrderXml = $submitFulfilmentSupplyOrder->generateEnclosingBalise(
+            $headerXml.$fulfilmentSupplyOrderRequestXml
+        );
 
         $bodyXml = $body->generateXML($submitFulfilmentSupplyOrderXml);
 
@@ -244,9 +268,7 @@ class FulfilmentPoint
 
         $response = $this->_sendRequest('SubmitFulfilmentSupplyOrder', $envelopeXml);
 
-        $submitFulfilmentSupplyOrderResponse = new SubmitFulfilmentSupplyOrderResponse($response);
-
-        return $submitFulfilmentSupplyOrderResponse;
+        return new SubmitFulfilmentSupplyOrderResponse($response);
     }
 
     /*
@@ -262,8 +284,12 @@ class FulfilmentPoint
         $submitFulfilmentOnDemandSupplyOrder = new SubmitFulfilmentOnDemandSupplyOrderSoap();
 
         $headerXml = $header->generateHeader();
-        $fulfilmentOnDemandSupplyOrderRequestXml = $submitFulfilmentOnDemandSupplyOrder->generateFulfilmentOnDemandSupplyOrderRequestXml($fulfilmentOnDemandSupplyOrderRequest);
-        $submitFulfilmentOnDemandSupplyOrderXml = $submitFulfilmentOnDemandSupplyOrder->generateEnclosingBalise($headerXml . $fulfilmentOnDemandSupplyOrderRequestXml);
+        $fulfilmentOnDemandSupplyOrderRequestXml = $submitFulfilmentOnDemandSupplyOrder->generateFulfilmentOnDemandSupplyOrderRequestXml(
+            $fulfilmentOnDemandSupplyOrderRequest
+        );
+        $submitFulfilmentOnDemandSupplyOrderXml = $submitFulfilmentOnDemandSupplyOrder->generateEnclosingBalise(
+            $headerXml.$fulfilmentOnDemandSupplyOrderRequestXml
+        );
 
         $bodyXml = $body->generateXML($submitFulfilmentOnDemandSupplyOrderXml);
 
@@ -271,8 +297,7 @@ class FulfilmentPoint
 
         $response = $this->_sendRequest('SubmitFulfilmentOnDemandSupplyOrder', $envelopeXml);
 
-        $submitFulfilmentOnDemandSupplyOrderResponse = new SubmitFulfilmentOnDemandSupplyOrderResponse($response);
-        return $submitFulfilmentOnDemandSupplyOrderResponse;
+        return new SubmitFulfilmentOnDemandSupplyOrderResponse($response);
     }
 
     /*
@@ -283,24 +308,31 @@ class FulfilmentPoint
     {
         $envelope = new Envelope();
         $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
-        $envelope->addNameSpace(' xmlns:cdis1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"');
-        $envelope->addNameSpace(' xmlns:cdis2="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Fulfilment"');
+        $envelope->addNameSpace(
+            ' xmlns:cdis1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"'
+        );
+        $envelope->addNameSpace(
+            ' xmlns:cdis2="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Fulfilment"'
+        );
         $header = new HeaderMessage();
         $body = new Body();
         $submitFulfilmentActivationSoap = new SubmitFulfilmentActivationSoap();
 
         $headerXml = $header->generateHeader();
-        $submitFulfilmentActivationquestXml = $submitFulfilmentActivationSoap->generateFulfilmentActivationRequestXml($request);
+        $submitFulfilmentActivationquestXml = $submitFulfilmentActivationSoap->generateFulfilmentActivationRequestXml(
+            $request
+        );
 
-        $getFulfilmentActivationXml = $submitFulfilmentActivationSoap->generateEnclosingBalise($headerXml . $submitFulfilmentActivationquestXml);
+        $getFulfilmentActivationXml = $submitFulfilmentActivationSoap->generateEnclosingBalise(
+            $headerXml.$submitFulfilmentActivationquestXml
+        );
         $bodyXml = $body->generateXML($getFulfilmentActivationXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
 
         $response = $this->_sendRequest('SubmitFulfilmentActivation', $envelopeXml);
 
-        $submitFulfilmentActivationResponse = new SubmitFulfilmentActivationResponse($response);
-        return $submitFulfilmentActivationResponse;
+        return new SubmitFulfilmentActivationResponse($response);
     }
 
     /*
@@ -316,9 +348,13 @@ class FulfilmentPoint
         $getFulfilmentDeliveryDocument = new GetFulfilmentDeliveryDocumentSoap();
 
         $headerXml = $header->generateHeader();
-        $getFulfilmentDeliveryDocumentRequestXml = $getFulfilmentDeliveryDocument->generateFulfilmentDeliveryDocumentRequestXml($fulfilmentDeliveryRequest);
+        $getFulfilmentDeliveryDocumentRequestXml = $getFulfilmentDeliveryDocument->generateFulfilmentDeliveryDocumentRequestXml(
+            $fulfilmentDeliveryRequest
+        );
 
-        $getFulfilmentDeliveryDocumentXml = $getFulfilmentDeliveryDocument->generateEnclosingBalise($headerXml . $getFulfilmentDeliveryDocumentRequestXml);
+        $getFulfilmentDeliveryDocumentXml = $getFulfilmentDeliveryDocument->generateEnclosingBalise(
+            $headerXml.$getFulfilmentDeliveryDocumentRequestXml
+        );
 
         $bodyXml = $body->generateXML($getFulfilmentDeliveryDocumentXml);
 
@@ -326,9 +362,7 @@ class FulfilmentPoint
 
         $response = $this->_sendRequest('GetFulfilmentDeliveryDocument', $envelopeXml);
 
-        $getFulfilmentDeliveryDocumentResponse = new GetFulfilmentDeliveryDocumentResponse($response);
-
-        return $getFulfilmentDeliveryDocumentResponse;
+        return new GetFulfilmentDeliveryDocumentResponse($response);
     }
 
     /*
@@ -345,9 +379,13 @@ class FulfilmentPoint
 
         $headerXml = $header->generateHeader();
 
-        $FulfilmentActivationReportRequestXml = $FulfilmentActivationReportList->generateFulfilmentActivationReportRequestXml($FulfilmentActivationReportRequest);
+        $FulfilmentActivationReportRequestXml = $FulfilmentActivationReportList->generateFulfilmentActivationReportRequestXml(
+            $FulfilmentActivationReportRequest
+        );
 
-        $FulfilmentActivationReportXml = $FulfilmentActivationReportList->generateEnclosingBalise($headerXml . $FulfilmentActivationReportRequestXml);
+        $FulfilmentActivationReportXml = $FulfilmentActivationReportList->generateEnclosingBalise(
+            $headerXml.$FulfilmentActivationReportRequestXml
+        );
 
         $bodyXml = $body->generateXML($FulfilmentActivationReportXml);
 
@@ -355,9 +393,7 @@ class FulfilmentPoint
 
         $response = $this->_sendRequest('GetFulfilmentActivationReportList', $envelopeXml);
 
-        $FulfilmentActivationReportRequestXmlResponse = new GetFulfilmentActivationReportRequestXmlResponse($response);
-
-        return $FulfilmentActivationReportRequestXmlResponse;
+        return new GetFulfilmentActivationReportRequestXmlResponse($response);
     }
 
     /*
@@ -373,8 +409,6 @@ class FulfilmentPoint
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
 
-        $response = $request->call();
-
-        return $response;
+        return $request->call();
     }
 }

@@ -9,20 +9,24 @@
 namespace Sdk\HttpTools;
 
 
+use Zend\Http\Client;
+use Zend\Http\Client\Adapter\Curl;
+use Zend\Http\Request;
+
 class CDSApiSoapRequest
 {
     /**
-     * @var \Zend\Http\Client\Adapter\Curl
+     * @var Curl
      */
     private $_adapter = null;
 
     /**
-     * @var \Zend\Http\Client
+     * @var Client
      */
     private $_client = null;
 
     /**
-     * @var \Zend\Http\Request
+     * @var Request
      */
     private $_request = null;
 
@@ -42,7 +46,7 @@ class CDSApiSoapRequest
     public function __construct($method, $headerMethodURL, $apiURL, $data)
     {
 
-        $this->_client = new \Zend\Http\Client($apiURL);
+        $this->_client = new Client($apiURL);
         $this->_client->setMethod('post');
         $this->_client->setRawBody($data);
         $this->_client->setHeaders(array(
@@ -50,7 +54,7 @@ class CDSApiSoapRequest
             'SOAPAction: http://www.cdiscount.com/IMarketplaceAPIService/' . $method . '',
         ));
 
-        $this->_adapter = new \Zend\Http\Client\Adapter\Curl();
+        $this->_adapter = new Curl();
         $this->_setAdapaterOptions($data, $apiURL);
         $this->_client->setAdapter($this->_adapter);
     }

@@ -10,9 +10,9 @@ namespace Sdk\Soap\Product\Response;
 
 
 use Sdk\Product\CategoryTree;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 
-class GetGenericCategoryTreeResponse extends iResponse
+class GetGenericCategoryTreeResponse extends AbstractResponse
 {
     /**
      * @var array

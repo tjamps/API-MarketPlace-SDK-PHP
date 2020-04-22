@@ -10,9 +10,9 @@ namespace Sdk\Soap\Product\Response;
 
 
 use Sdk\Product\Product;
-use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\AbstractResponse;
 
-class GetProductListResponse extends iResponse
+class GetProductListResponse extends AbstractResponse
 {
     /**
      * @var array|bool|null
@@ -57,8 +57,8 @@ class GetProductListResponse extends iResponse
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult'];
-        $this->_tokenID = $objInfoResult['TokenId'];
-        $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
     /**
      * Check if the XML response has an error message
@@ -71,8 +71,8 @@ class GetProductListResponse extends iResponse
 
         if (isset($objError['_']) && strlen($objError['_']) > 0) {
 
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
             return true;
         }
         return false;
