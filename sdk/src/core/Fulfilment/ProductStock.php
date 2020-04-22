@@ -13,17 +13,140 @@ namespace Sdk\Fulfilment;
  */
 class ProductStock
 {
-    /**
-     * @var int
-     */
-    private $_blockedStock = null;
 
     /**
-     * @return int
+     * @var string
+     */
+    private $averageWeeklySales = null;
+
+    /**
+     * @var string
+     */
+    private $blockedStock = null;
+
+    /**
+     * @var string
+     */
+    private $currentWeeklySales = null;
+
+    /**
+     * @var string
+     */
+    private $damagedReturns = null;
+
+    /**
+     * @var string
+     */
+    private $deliveryDisputes = null;
+
+    /**
+     * @var string
+     */
+    private $ean = null;
+
+    /**
+     * @var string
+     */
+    private $fodStock = null;
+
+    /**
+     * @var string
+     */
+    private $forecastingStockShortage = null;
+
+    /**
+     * @var string
+     */
+    private $frontStock = null;
+
+    /**
+     * @var string
+     */
+    private $incomingShipment = null;
+
+    /**
+     * @var bool
+     */
+    private $isReferenced = null;
+
+    /**
+     * @var string
+     */
+    private $libelle = null;
+
+    /**
+     * @var string
+     */
+    private $logisticFees = null;
+
+    /**
+     * @var string
+     */
+    private $ongoingRecoveries = null;
+    /**
+     * @var string
+     */
+    private $orderInProgress = null;
+
+    /**
+     * @var string
+     */
+    private $overheadOutsizeFees = null;
+
+    /**
+     * @var string
+     */
+    private $productConditionId = null;
+
+    /**
+     * @var string
+     */
+    private $productState = null;
+
+    /**
+     * @var string
+     */
+    private $sellerReference = null;
+
+    /**
+     * @var string
+     */
+    private $shippableStock = null;
+
+    /**
+     * @var string
+     */
+    private $sku = null;
+
+    /**
+     * @var string
+     */
+    private $stockCategories = null;
+    /**
+     * @var string
+     */
+    private $stockFees = null;
+    /**
+     * @var string
+     */
+    private $stockInWarehouse = null;
+
+    /**
+     * @var string
+     */
+    private $warehouse = null;
+
+    /**
+     * @var string
+     */
+    private $warehouseCode = null;
+
+    /**
+     * @return string
      */
     public function getBlockedStock()
     {
-        return $this->_blockedStock;
+        return $this->blockedStock;
     }
 
     /**
@@ -31,20 +154,15 @@ class ProductStock
      */
     public function setBlockedStock($blockedStock)
     {
-        $this->_blockedStock = $blockedStock;
+        $this->blockedStock = $blockedStock;
     }
-
-    /**
-     * @var string
-     */
-    private $_ean = null;
 
     /**
      * @return string
      */
     public function getEan()
     {
-        return $this->_ean;
+        return $this->ean;
     }
 
     /**
@@ -52,20 +170,15 @@ class ProductStock
      */
     public function setEan($ean)
     {
-        $this->_ean = $ean;
+        $this->ean = $ean;
     }
 
-      /**
-     * @var int
-     */
-    private $_fodStock = null;
-
     /**
-     * @return int
+     * @return string
      */
     public function getFodStock()
     {
-        return $this->_fodStock;
+        return $this->fodStock;
     }
 
     /**
@@ -73,20 +186,15 @@ class ProductStock
      */
     public function setFodStock($fodStock)
     {
-        $this->_fodStock = $fodStock;
+        $this->fodStock = $fodStock;
     }
 
     /**
-     * @var int
-     */
-    private $_frontStock = null;
-
-    /**
-     * @return int
+     * @return string
      */
     public function getFrontStock()
     {
-        return $this->_frontStock;
+        return $this->frontStock;
     }
 
     /**
@@ -94,20 +202,15 @@ class ProductStock
      */
     public function setFrontStock($frontStock)
     {
-        $this->_frontStock = $frontStock;
+        $this->frontStock = $frontStock;
     }
-
-    /**
-     * @var bool
-     */
-    private $_isReferenced = null;
 
     /**
      * @return bool
      */
     public function getIsReferenced()
     {
-        return $this->_isReferenced;
+        return $this->isReferenced;
     }
 
     /**
@@ -115,20 +218,15 @@ class ProductStock
      */
     public function setIsReferenced($isReferenced)
     {
-        $this->_isReferenced = $isReferenced;
+        $this->isReferenced = $isReferenced;
     }
-
-     /**
-     * @var string
-     */
-    private $_libelle = null;
 
     /**
      * @return string
      */
     public function getLibelle()
     {
-        return $this->_libelle;
+        return $this->libelle;
     }
 
     /**
@@ -136,20 +234,15 @@ class ProductStock
      */
     public function setLibelle($libelle)
     {
-        $this->_libelle = $libelle;
+        $this->libelle = $libelle;
     }
-
-     /**
-     * @var string
-     */
-    private $_sellerReference = null;
 
     /**
      * @return string
      */
     public function getSellerReference()
     {
-        return $this->_sellerReference;
+        return $this->sellerReference;
     }
 
     /**
@@ -157,20 +250,15 @@ class ProductStock
      */
     public function setSellerReference($sellerReference)
     {
-        $this->_sellerReference = $sellerReference;
+        $this->sellerReference = $sellerReference;
     }
-
-     /**
-     * @var string
-     */
-    private $_sku = null;
 
     /**
      * @return string
      */
     public function getSku()
     {
-        return $this->_sku;
+        return $this->sku;
     }
 
     /**
@@ -178,20 +266,15 @@ class ProductStock
      */
     public function setSku($sku)
     {
-        $this->_sku = $sku;
+        $this->sku = $sku;
     }
 
-     /**
-     * @var int
-     */
-    private $_stockInWarehouse = null;
-
     /**
-     * @return int
+     * @return string
      */
     public function getStockInWarehouse()
     {
-        return $this->_stockInWarehouse;
+        return $this->stockInWarehouse;
     }
 
     /**
@@ -199,20 +282,15 @@ class ProductStock
      */
     public function setStockInWarehouse($stockInWarehouse)
     {
-        $this->_stockInWarehouse = $stockInWarehouse;
+        $this->stockInWarehouse = $stockInWarehouse;
     }
-
-    /**
-     * @var string
-     */
-    private $_warehouse = null;
 
     /**
      * @return string
      */
     public function getWarehouse()
     {
-        return $this->_warehouse;
+        return $this->warehouse;
     }
 
     /**
@@ -220,6 +298,264 @@ class ProductStock
      */
     public function setWarehouse($warehouse)
     {
-        $this->_warehouse = $warehouse;
+        $this->warehouse = $warehouse;
     }
-}    
+
+    /**
+     * @return string
+     */
+    public function getWarehouseCode()
+    {
+        return $this->warehouseCode;
+    }
+
+    /**
+     * @param string $warehouseCode
+     */
+    public function setWarehouseCode($warehouseCode)
+    {
+        $this->warehouseCode = $warehouseCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAverageWeeklySales()
+    {
+        return $this->averageWeeklySales;
+    }
+
+    /**
+     * @param string $averageWeeklySales
+     */
+    public function setAverageWeeklySales($averageWeeklySales)
+    {
+        $this->averageWeeklySales = $averageWeeklySales;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentWeeklySales()
+    {
+        return $this->currentWeeklySales;
+    }
+
+    /**
+     * @param string $currentWeeklySales
+     */
+    public function setCurrentWeeklySales($currentWeeklySales)
+    {
+        $this->currentWeeklySales = $currentWeeklySales;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDamagedReturns()
+    {
+        return $this->damagedReturns;
+    }
+
+    /**
+     * @param string $damagedReturns
+     */
+    public function setDamagedReturns($damagedReturns)
+    {
+        $this->damagedReturns = $damagedReturns;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeliveryDisputes()
+    {
+        return $this->deliveryDisputes;
+    }
+
+    /**
+     * @param string $deliveryDisputes
+     */
+    public function setDeliveryDisputes($deliveryDisputes)
+    {
+        $this->deliveryDisputes = $deliveryDisputes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getForecastingStockShortage()
+    {
+        return $this->forecastingStockShortage;
+    }
+
+    /**
+     * @param string $forecastingStockShortage
+     */
+    public function setForecastingStockShortage($forecastingStockShortage)
+    {
+        $this->forecastingStockShortage = $forecastingStockShortage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIncomingShipment()
+    {
+        return $this->incomingShipment;
+    }
+
+    /**
+     * @param string $incomingShipment
+     */
+    public function setIncomingShipment($incomingShipment)
+    {
+        $this->incomingShipment = $incomingShipment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogisticFees()
+    {
+        return $this->logisticFees;
+    }
+
+    /**
+     * @param string $logisticFees
+     */
+    public function setLogisticFees($logisticFees)
+    {
+        $this->logisticFees = $logisticFees;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOngoingRecoveries()
+    {
+        return $this->ongoingRecoveries;
+    }
+
+    /**
+     * @param string $ongoingRecoveries
+     */
+    public function setOngoingRecoveries($ongoingRecoveries)
+    {
+        $this->ongoingRecoveries = $ongoingRecoveries;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderInProgress()
+    {
+        return $this->orderInProgress;
+    }
+
+    /**
+     * @param string $orderInProgress
+     */
+    public function setOrderInProgress($orderInProgress)
+    {
+        $this->orderInProgress = $orderInProgress;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOverheadOutsizeFees()
+    {
+        return $this->overheadOutsizeFees;
+    }
+
+    /**
+     * @param string $overheadOutsizeFees
+     */
+    public function setOverheadOutsizeFees($overheadOutsizeFees)
+    {
+        $this->overheadOutsizeFees = $overheadOutsizeFees;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductConditionId()
+    {
+        return $this->productConditionId;
+    }
+
+    /**
+     * @param string $productConditionId
+     */
+    public function setProductConditionId($productConditionId)
+    {
+        $this->productConditionId = $productConditionId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductState()
+    {
+        return $this->productState;
+    }
+
+    /**
+     * @param string $productState
+     */
+    public function setProductState($productState)
+    {
+        $this->productState = $productState;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippableStock()
+    {
+        return $this->shippableStock;
+    }
+
+    /**
+     * @param string $shippableStock
+     */
+    public function setShippableStock($shippableStock)
+    {
+        $this->shippableStock = $shippableStock;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStockCategories()
+    {
+        return $this->stockCategories;
+    }
+
+    /**
+     * @param string $stockCategories
+     */
+    public function setStockCategories($stockCategories)
+    {
+        $this->stockCategories = $stockCategories;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStockFees()
+    {
+        return $this->stockFees;
+    }
+
+    /**
+     * @param string $stockFees
+     */
+    public function setStockFees($stockFees)
+    {
+        $this->stockFees = $stockFees;
+    }
+
+
+}
