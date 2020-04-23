@@ -77,116 +77,116 @@ class GetProductStockListResponse extends AbstractResponse
     {
         $getProductStockListResult = $this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'];
 
-        $productStock = [];
-        if (isset($getProductStockListResult['a:ProductStockList']['a:productStock'])) {
-            $productStock = $getProductStockListResult['a:ProductStockList']['a:productStock'];
+        $data = [];
+        if (isset($getProductStockListResult['a:ProductStockList']['a:ProductStock'])) {
+            $data = $getProductStockListResult['a:ProductStockList']['a:ProductStock'];
 
-            if (isset($productStock['a:Ean'])) {
-                $productStock = [$productStock];
+            if (isset($data['a:Ean'])) {
+                $data = [$data];
             }
         }
 
-        foreach ($productStock as $productStockXml) {
+        foreach ($data as $xml) {
             $productStock = new ProductStock();
 
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:AverageWeeklySales',
                 'setAverageWeeklySales'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:BlockedStock', 'setBlockedStock');
+            $this->setProductStockProperty($xml, $productStock, 'a:BlockedStock', 'setBlockedStock');
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:CurrentWeeklySales',
                 'setCurrentWeeklySales'
             );
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:DamagedReturns',
                 'setDamagedReturns'
             );
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:DeliveryDisputes',
                 'setDeliveryDisputes'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:Ean', 'setEan');
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:FodStock', 'setFodStock');
+            $this->setProductStockProperty($xml, $productStock, 'a:Ean', 'setEan');
+            $this->setProductStockProperty($xml, $productStock, 'a:FodStock', 'setFodStock');
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:ForecastingStockShortage',
                 'setForecastingStockShortage'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:FrontStock', 'setFrontStock');
+            $this->setProductStockProperty($xml, $productStock, 'a:FrontStock', 'setFrontStock');
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:IncomingShipment',
                 'setIncomingShipment'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:Libelle', 'setLibelle');
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:LogisticFees', 'setLogisticFees');
+            $this->setProductStockProperty($xml, $productStock, 'a:Libelle', 'setLibelle');
+            $this->setProductStockProperty($xml, $productStock, 'a:LogisticFees', 'setLogisticFees');
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:OngoingRecoveries',
                 'setOngoingRecoveries'
             );
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:OrderInProgress',
                 'setOrderInProgress'
             );
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:OverheadOutsizeFees',
                 'setOverheadOutsizeFees'
             );
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:ProductConditionId',
                 'setProductConditionId'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:ProductState', 'setProductState');
+            $this->setProductStockProperty($xml, $productStock, 'a:ProductState', 'setProductState');
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:SellerReference',
                 'setSellerReference'
             );
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:ShippableStock',
                 'setShippableStock'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:Sku', 'setSku');
+            $this->setProductStockProperty($xml, $productStock, 'a:Sku', 'setSku');
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:StockCategory',
                 'setStockCategories'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:StockFees', 'setStockFees');
+            $this->setProductStockProperty($xml, $productStock, 'a:StockFees', 'setStockFees');
             $this->setProductStockProperty(
-                $productStockXml,
+                $xml,
                 $productStock,
                 'a:StockInWarehouse',
                 'setStockInWarehouse'
             );
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:Warehouse', 'setWarehouse');
-            $this->setProductStockProperty($productStockXml, $productStock, 'a:WarehouseCode', 'setWarehouseCode');
+            $this->setProductStockProperty($xml, $productStock, 'a:Warehouse', 'setWarehouse');
+            $this->setProductStockProperty($xml, $productStock, 'a:WarehouseCode', 'setWarehouseCode');
 
 
-            $this->setProductStockBooleanProperty($productStockXml, $productStock, 'a:IsReferenced', 'setIsReferenced');
+            $this->setProductStockBooleanProperty($xml, $productStock, 'a:IsReferenced', 'setIsReferenced');
 
             $this->barCodeList[] = $productStock;
         }
@@ -234,28 +234,28 @@ class GetProductStockListResponse extends AbstractResponse
     }
 
     /**
-     * @param array $productStockXml
+     * @param array $xml
      * @param ProductStock $productStock
      * @param string $property
      * @param string $method
      */
-    private function setProductStockProperty($productStockXml, ProductStock $productStock, $property, $method)
+    private function setProductStockProperty($xml, ProductStock $productStock, $property, $method)
     {
-        if (isset($productStockXml[$property]) && !SoapTools::isSoapValueNull($productStockXml[$property])) {
-            $productStock->{$method}($productStockXml[$property]);
+        if (isset($xml[$property]) && !SoapTools::isSoapValueNull($xml[$property])) {
+            $productStock->{$method}($xml[$property]);
         }
     }
 
     /**
-     * @param array $productStockXml
+     * @param array $xml
      * @param ProductStock $productStock
      * @param string $property
      * @param string $method
      */
-    private function setProductStockBooleanProperty($productStockXml, ProductStock $productStock, $property, $method)
+    private function setProductStockBooleanProperty($xml, ProductStock $productStock, $property, $method)
     {
-        if (isset($productStockXml[$property]) && !SoapTools::isSoapValueNull($productStockXml[$property])) {
-            $productStock->{$method}($productStockXml[$property] === 'true');
+        if (isset($xml[$property]) && !SoapTools::isSoapValueNull($xml[$property])) {
+            $productStock->{$method}($xml[$property] === 'true');
         }
     }
 }
