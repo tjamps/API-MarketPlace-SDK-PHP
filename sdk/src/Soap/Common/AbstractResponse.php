@@ -145,12 +145,48 @@ abstract class AbstractResponse
             $this->hasError = true;
         }
 
+        /**
+         * Errors can be returned in the following two formats:
+         * "ErrorList" => array:1 [
+         *   "Error" => array:2 [
+         *       0 => array:2 [
+         *           "ErrorType" => "OrderLineError"
+         *           "Message" => "Ligne rejetée car commande rejetée"
+         *       ]
+         *       1 => array:2 [
+         *           "ErrorType" => "OrderLineError"
+         *           "Message" => "La commande est non éligible au mode de livraison choisi. Contacter le support pour plus de détails"
+         *       ]
+         *   ]
+         * ]
+         *
+         * and:
+         *
+         * "ErrorList" => array:1 [
+         *     "Error" => array:2 [
+         *        "ErrorType" => "OrderLineError"
+         *        "Message" => "Email_KO"
+         *    ]
+         * ]
+         *
+         * Since we need to handle both formats, we "normalize" errors array by checking if the index "0"
+         * exists in the array ; if not, then we are in the second format, which we turn into an array.
+         */
+
         if (isset($xml['ErrorList']['Error']) && is_array($xml['ErrorList']['Error'])) {
+            if (!array_key_exists(0, $xml['ErrorList']['Error'])) {
+                $xml['ErrorList']['Error'] = [$xml['ErrorList']['Error']];
+            }
+
             foreach ($xml['ErrorList']['Error'] as $error) {
                 $this->errorList[] = isset($error['Message']) ? $error['Message'] : 'Unknown error';
             }
             $this->hasError = true;
         } elseif (isset($xml['a:ErrorList']['a:Error']) && is_array($xml['a:ErrorList']['a:Error'])) {
+            if (!array_key_exists(0, $xml['a:ErrorList']['a:Error'])) {
+                $xml['a:ErrorList']['a:Error'] = [$xml['a:ErrorList']['a:Error']];
+            }
+
             foreach ($xml['a:ErrorList']['a:Error'] as $error) {
                 $this->errorList[] = isset($error['a:Message']) ? $error['a:Message'] : 'Unknown error';
             }
