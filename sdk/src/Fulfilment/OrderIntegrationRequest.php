@@ -7,10 +7,12 @@
 
 namespace Sdk\Fulfilment;
 
+use JsonSerializable;
+
 /**
  * Order Integration Request
  */
-class OrderIntegrationRequest
+class OrderIntegrationRequest implements JsonSerializable
 {
     /**
      * @var ExternalOrder
@@ -26,10 +28,17 @@ class OrderIntegrationRequest
     }
 
     /**
-     * @param ExternalOrder $externalOrder 
+     * @param ExternalOrder $externalOrder
      */
     public function setExternalOrder($externalOrder)
     {
         $this->_externalOrder = $externalOrder;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'externalOrder' => $this->_externalOrder,
+        ];
     }
 }
