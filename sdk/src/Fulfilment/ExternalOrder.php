@@ -7,10 +7,12 @@
 
 namespace Sdk\Fulfilment;
 
+use JsonSerializable;
+
 /**
  * External Order
  */
-class ExternalOrder
+class ExternalOrder implements JsonSerializable
 {
 
     /**
@@ -48,7 +50,7 @@ class ExternalOrder
     }
 
     /**
-     * @param array ExternalOrderLine 
+     * @param array ExternalOrderLine
      */
     public function setExternalOrderLine($externalOrderLine)
     {
@@ -71,7 +73,7 @@ class ExternalOrder
      * @var Int
      */
     private $_customerOrderNumber = null;
-    
+
     /*
      * @return Int
      */
@@ -79,20 +81,20 @@ class ExternalOrder
     {
         return $this->_customerOrderNumber;
     }
-    
+
     /*
      * @param $customerOrderNumber
      */
     public function setCustomerOrderNumber($customerOrderNumber)
     {
         $this->_customerOrderNumber = $customerOrderNumber;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_corporation = null;
-    
+
     /*
      * @return String
      */
@@ -100,20 +102,20 @@ class ExternalOrder
     {
         return $this->_corporation;
     }
-    
+
     /*
      * @param $corporation
      */
     public function setCorporation($corporation)
     {
         $this->_corporation = $corporation;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_comments = null;
-    
+
     /*
      * @return String
      */
@@ -121,41 +123,41 @@ class ExternalOrder
     {
         return $this->_comments;
     }
-    
+
     /*
      * @param $comments
      */
     public function setComments($comments)
     {
         $this->_comments = $comments;
-    }    
+    }
 
     /*
-     * @var string 
+     * @var string
      */
     private $_orderDate = null;
-    
+
     /*
-     * @return string 
+     * @return string
      */
     public function getOrderDate()
     {
         return $this->_orderDate;
     }
-    
+
     /*
      * @param $orderDate
      */
     public function setOrderDate($orderDate)
     {
         $this->_orderDate = $orderDate;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_shippingMode = null;
-    
+
     /*
      * @return String
      */
@@ -163,20 +165,20 @@ class ExternalOrder
     {
         return $this->_shippingMode;
     }
-    
+
     /*
      * @param $shippingMode
      */
     public function setShippingMode($shippingMode)
     {
         $this->_shippingMode = $shippingMode;
-    }    
+    }
 
     /*
      * @var Long
      */
     private $_sellerId = null;
-    
+
     /*
      * @return String
      */
@@ -184,20 +186,20 @@ class ExternalOrder
     {
         return $this->_sellerId;
     }
-    
+
     /*
      * @param $sellerId
      */
     public function setSellerId($sellerId)
     {
         $this->_sellerId = $sellerId;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_shippingCode = null;
-    
+
     /*
      * @return String
      */
@@ -205,20 +207,20 @@ class ExternalOrder
     {
         return $this->_shippingCode;
     }
-    
+
     /*
      * @param $shippingCode
      */
     public function setShippingCode($shippingCode)
     {
         $this->_shippingCode = $shippingCode;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_siteConfigurationId = null;
-    
+
     /*
      * @return String
      */
@@ -226,20 +228,20 @@ class ExternalOrder
     {
         return $this->_siteConfigurationId;
     }
-    
+
     /*
      * @param $siteConfigurationId
      */
     public function setSiteConfigurationId($siteConfigurationId)
     {
         $this->_siteConfigurationId = $siteConfigurationId;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_sellerEmail = null;
-    
+
     /*
      * @return String
      */
@@ -247,20 +249,20 @@ class ExternalOrder
     {
         return $this->_sellerEmail;
     }
-    
+
     /*
      * @param $sellerEmail
      */
     public function setSellerEmail($sellerEmail)
     {
         $this->_sellerEmail = $sellerEmail;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_siteId = null;
-    
+
     /*
      * @return String
      */
@@ -268,12 +270,32 @@ class ExternalOrder
     {
         return $this->_siteId;
     }
-    
+
     /*
      * @param $siteId
      */
     public function setSiteId($siteId)
     {
         $this->_siteId = $siteId;
-    }    
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'comments' => $this->_comments,
+            'corporation' => $this->_corporation,
+            'customerOrderNumber' => $this->_customerOrderNumber,
+            'externalCustomer' => $this->_externalCustomer,
+            'externalOrderLine' => $this->_externalOrderLine,
+            'orderDate' => $this->_orderDate,
+            'sellerEmail' => $this->_sellerEmail,
+            'sellerId' => $this->_sellerId,
+            'shippingCode' => $this->_shippingCode,
+            'shippingMode' => $this->_shippingMode,
+            'siteConfigurationId' => $this->_siteConfigurationId,
+            'siteId' => $this->_siteId,
+        ];
+    }
+
+
 }

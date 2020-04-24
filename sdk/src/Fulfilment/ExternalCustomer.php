@@ -7,17 +7,19 @@
 
 namespace Sdk\Fulfilment;
 
+use JsonSerializable;
+
 /**
  * ExternalCustomer
  */
-class ExternalCustomer
+class ExternalCustomer implements JsonSerializable
 {
 
     /*
      * @var String
      */
     private $_civility = null;
-    
+
     /*
      * @return string
      */
@@ -25,20 +27,20 @@ class ExternalCustomer
     {
         return $this->_civility;
     }
-    
+
     /*
      * @param $civility
      */
     public function setCivility($civility)
     {
         $this->_civility = $civility;
-    }   
-    
+    }
+
     /*
      * @var String
      */
     private $_customerFirstName = null;
-    
+
     /*
      * @return string
      */
@@ -46,20 +48,20 @@ class ExternalCustomer
     {
         return $this->_customerFirstName;
     }
-    
+
     /*
      * @param $customerFirstName
      */
     public function setCustomerFirstName($customerFirstName)
     {
         $this->_customerFirstName = $customerFirstName;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_customerLastName = null;
-    
+
     /*
      * @return String
      */
@@ -67,20 +69,20 @@ class ExternalCustomer
     {
         return $this->_customerLastName;
     }
-    
+
     /*
      * @param $customerLastName
      */
     public function setCustomerLastName($customerLastName)
     {
         $this->_customerLastName = $customerLastName;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_customerEmailAddress = null;
-    
+
     /*
      * @return String
      */
@@ -88,20 +90,20 @@ class ExternalCustomer
     {
         return $this->_customerEmailAddress;
     }
-    
+
     /*
      * @param $customerEmailAddress
      */
     public function setCustomerEmailAddress($customerEmailAddress)
     {
         $this->_customerEmailAddress = $customerEmailAddress;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_shippingAddress = null;
-    
+
     /*
      * @return String
      */
@@ -109,20 +111,20 @@ class ExternalCustomer
     {
         return $this->_shippingAddress;
     }
-    
+
     /*
      * @param $shippingAddress
      */
     public function setShippingAddress($shippingAddress)
     {
         $this->_shippingAddress = $shippingAddress;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_additionalShippingAddress = null;
-    
+
     /*
      * @return String
      */
@@ -130,20 +132,20 @@ class ExternalCustomer
     {
         return $this->_additionalShippingAddress;
     }
-    
+
     /*
      * @param $additionalShippingAddress
      */
     public function setAdditionalShippingAddress($additionalShippingAddress)
     {
         $this->_additionalShippingAddress = $additionalShippingAddress;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_locality = null;
-    
+
     /*
      * @return String
      */
@@ -151,20 +153,20 @@ class ExternalCustomer
     {
         return $this->_locality;
     }
-    
+
     /*
      * @param $locality
      */
     public function setLocality($locality)
     {
         $this->_locality = $locality;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_shippingAddressTitle = null;
-    
+
     /*
      * @return String
      */
@@ -172,20 +174,20 @@ class ExternalCustomer
     {
         return $this->_shippingAddressTitle;
     }
-    
+
     /*
      * @param $shippingAddressTitle
      */
     public function setShippingAddressTitle($shippingAddressTitle)
     {
         $this->_shippingAddressTitle = $shippingAddressTitle;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_shippingPostalCode = null;
-    
+
     /*
      * @return String
      */
@@ -193,20 +195,20 @@ class ExternalCustomer
     {
         return $this->_shippingPostalCode;
     }
-    
+
     /*
      * @param $shippingPostalCode
      */
     public function setShippingPostalCode($shippingPostalCode)
     {
         $this->_shippingPostalCode = $shippingPostalCode;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_shippingCity = null;
-    
+
     /*
      * @return String
      */
@@ -214,20 +216,20 @@ class ExternalCustomer
     {
         return $this->_shippingCity;
     }
-    
+
     /*
      * @param $_shippingCity
      */
     public function setShippingCity($shippingCity)
     {
         $this->_shippingCity = $shippingCity;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_shippingCountry = null;
-    
+
     /*
      * @return String
      */
@@ -235,20 +237,20 @@ class ExternalCustomer
     {
         return $this->_shippingCountry;
     }
-    
+
     /*
      * @param $ShippingCountry
      */
     public function setShippingCountry($shippingCountry)
     {
         $this->_shippingCountry = $shippingCountry;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_landLinePhoneNumber = null;
-    
+
     /*
      * @return String
      */
@@ -256,20 +258,20 @@ class ExternalCustomer
     {
         return $this->_landLinePhoneNumber;
     }
-    
+
     /*
      * @param $landLinePhoneNumber
      */
     public function setLandLinePhoneNumber($landLinePhoneNumber)
     {
         $this->_landLinePhoneNumber = $landLinePhoneNumber;
-    }    
+    }
 
     /*
      * @var String
      */
     private $_cellPhoneNumber = null;
-    
+
     /*
      * @return String
      */
@@ -277,12 +279,33 @@ class ExternalCustomer
     {
         return $this->_cellPhoneNumber;
     }
-    
+
     /*
      * @param $cellPhoneNumber
      */
     public function setCellPhoneNumber($cellPhoneNumber)
     {
         $this->_cellPhoneNumber = $cellPhoneNumber;
-    }    
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'additionalShippingAddress' => $this->_additionalShippingAddress,
+            'cellPhoneNumber' => $this->_cellPhoneNumber,
+            'civility' => $this->_civility,
+            'customerEmailAddress' => $this->_customerEmailAddress,
+            'customerFirstName' => $this->_customerFirstName,
+            'customerLastName' => $this->_customerLastName,
+            'landLinePhoneNumber' => $this->_landLinePhoneNumber,
+            'locality' => $this->_locality,
+            'shippingAddress' => $this->_shippingAddress,
+            'shippingAddressTitle' => $this->_shippingAddressTitle,
+            'shippingCity' => $this->_shippingCity,
+            'shippingCountry' => $this->_shippingCountry,
+            'shippingPostalCode' => $this->_shippingPostalCode,
+        ];
+    }
+
+
 }
