@@ -53,7 +53,6 @@ class GetOrderListResponse extends AbstractResponse
         $orderListXml = $this->dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult'];
         $this->checkErrors($orderListXml);
 
-        $this->orderList = new OrderList();
         $this->setOrderList($orderListXml);
     }
 
@@ -67,18 +66,20 @@ class GetOrderListResponse extends AbstractResponse
 
     private function setOrderList($orderListXml)
     {
-        $orderList = $orderListXml['OrderList'];
+        $this->orderList = new OrderList();
 
-        if (!isset($order['OrderList'])) {
+        if (!isset($orderListXml['OrderList'])) {
             return;
         }
 
-        $order = $orderList['Order'];
-        if (isset($order['OrderNumber'])) {
-            $order = [$order];
+        $orderList = $orderListXml['OrderList'];
+
+        $orders = $orderList['Order'];
+        if (isset($orders['OrderNumber'])) {
+            $orders = [$orders];
         }
 
-        foreach ($order as $order) {
+        foreach ($orders as $order) {
             if (!is_array($order)) {
                 continue;
             }
