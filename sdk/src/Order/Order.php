@@ -1,91 +1,197 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 13/10/2016
- * Time: 16:52
- */
 
 namespace Sdk\Order;
 
+use Sdk\Customer\Customer;
+use Sdk\Parcel\ParcelList;
+use Sdk\Seller\Address;
 
 class Order
 {
+    /**
+     * @var string
+     */
+    private $orderNumber;
+
+    /**
+     * @var Address
+     */
+    private $billingAddress = null;
+    /**
+     * @var Address
+     */
+    private $shippingAddress = null;
+    /**
+     * @var Corporation
+     */
+    private $corporation = null;
+
+    private $creationDate = null;
+    /**
+     * @var Customer
+     */
+    private $customer = null;
+    /**
+     * @var bool
+     */
+    private $hasClaims = false;
+    /**
+     * @var float
+     */
+    private $initialTotalAmount = 0.0;
+    /**
+     * @var float
+     */
+    private $initialTotalShippingChargesAmount = 0.0;
+    /**
+     * @var bool
+     */
+    private $isCLogistiqueOrder = false;
+
+    /**
+     * @var string
+     */
+    private $lastUpdatedDate = null;
+
+    /**
+     * @var string
+     */
+    private $modifiedDate = null;
+
+    /**
+     * @var OrderLineList
+     */
+    private $orderLineList = null;
+    /**
+     * @var string
+     */
+    private $shippingCode = null;
+    /**
+     * @var float
+     */
+    private $siteCommissionPromisedAmount = 0.0;
+    /**
+     * @var float
+     */
+    private $siteCommissionShippedAmount = 0.0;
+    /**
+     * @var float
+     */
+    private $siteCommissionValidatedAmount = 0.0;
+    /**
+     * @var OrderStatusEnum
+     */
+    private $status = OrderStatusEnum::None;
+    /**
+     * @var OrderStateEnum
+     */
+    private $orderState = null;
+    /**
+     * @var ValidationStatusEnum
+     */
+    private $validationStatus = ValidationStatusEnum::None;
+    /**
+     * @var float
+     */
+    private $shippedTotalAmount = 0.0;
+    /**
+     * @var float
+     */
+    private $shippedTotalShippingCharges = 0.0;
+    /**
+     * @var float
+     */
+    private $validatedTotalAmount = 0.0;
+    /**
+     * @var float
+     */
+    private $validatedTotalShippingCharges = 0.0;
+    /**
+     * @var int
+     */
+    private $visaCegid = 0;
+
+    /**
+     * @var bool
+     */
+    private $archiveParcelList = false;
+
+    /**
+     * @var ParcelList
+     */
+    private $parcelList = null;
+    /**
+     * @var string
+     */
+    private $modGesLog = null;
+    /**
+     * @var string PartnerOrderRef
+     */
+    private $partnerOrderRef = '';
+
+    private $voucherList = null;
+
+
+
     /**
      * Order constructor.
      * @param $orderNumber string
      */
     public function __construct($orderNumber)
     {
-        $this->_orderNumber = $orderNumber;
+        $this->orderNumber = $orderNumber;
     }
-
-    /**
-     * @var string
-     */
-    private $_orderNumber = null;
 
     /**
      * @return string
      */
     public function getOrderNumber()
     {
-        return $this->_orderNumber;
+        return $this->orderNumber;
     }
 
     /**
-     * @var \Sdk\Seller\Address
-     */
-    private $_billingAddress = null;
-
-    /**
-     * @return \Sdk\Seller\Address
+     * @return Address
      */
     public function getBillingAddress()
     {
-        return $this->_billingAddress;
+        return $this->billingAddress;
     }
 
     /**
-     * @param \Sdk\Seller\Address $billingAddress
+     * @var string
+     */
+    //TODO passer en vraie date
+    /**
+     * @param Address $billingAddress
      */
     public function setBillingAddress($billingAddress)
     {
-        $this->_billingAddress = $billingAddress;
+        $this->billingAddress = $billingAddress;
     }
 
     /**
-     * @var \Sdk\Seller\Address
-     */
-    private $_shippingAddress = null;
-
-    /**
-     * @return \Sdk\Seller\Address
+     * @return Address
      */
     public function getShippingAddress()
     {
-        return $this->_shippingAddress;
+        return $this->shippingAddress;
     }
 
     /**
-     * @param \Sdk\Seller\Address $shippingAddress
+     * @param Address $shippingAddress
      */
     public function setShippingAddress($shippingAddress)
     {
-        $this->_shippingAddress = $shippingAddress;
+        $this->shippingAddress = $shippingAddress;
     }
-
-    /**
-     * @var \Sdk\Order\Corporation
-     */
-    private $_corporation = null;
 
     /**
      * @return Corporation
      */
     public function getCorporation()
     {
-        return $this->_corporation;
+        return $this->corporation;
     }
 
     /**
@@ -93,21 +199,15 @@ class Order
      */
     public function setCorporation($corporation)
     {
-        $this->_corporation = $corporation;
+        $this->corporation = $corporation;
     }
-
-    /**
-     * @var string
-     */
-    //TODO convert to Date Object
-    private $_creationDate = null;
 
     /**
      * @return string
      */
     public function getCreationDate()
     {
-        return $this->_creationDate;
+        return $this->creationDate;
     }
 
     /**
@@ -115,41 +215,31 @@ class Order
      */
     public function setCreationDate($creationDate)
     {
-        $this->_creationDate = $creationDate;
+        $this->creationDate = $creationDate;
     }
 
     /**
-     * @var \Sdk\Customer\Customer
-     */
-    private $_customer = null;
-
-    /**
-     * @return \Sdk\Customer\Customer
+     * @return Customer
      */
     public function getCustomer()
     {
-        return $this->_customer;
+        return $this->customer;
     }
 
     /**
-     * @param \Sdk\Customer\Customer $customer
+     * @param Customer $customer
      */
     public function setCustomer($customer)
     {
-        $this->_customer = $customer;
+        $this->customer = $customer;
     }
-
-    /**
-     * @var bool
-     */
-    private $_hasClaims = false;
 
     /**
      * @return boolean
      */
     public function isHasClaims()
     {
-        return $this->_hasClaims;
+        return $this->hasClaims;
     }
 
     /**
@@ -157,20 +247,15 @@ class Order
      */
     public function setHasClaims($hasClaims)
     {
-        $this->_hasClaims = $hasClaims;
+        $this->hasClaims = $hasClaims;
     }
-
-    /**
-     * @var float
-     */
-    private $_initialTotalAmount = 0.0;
 
     /**
      * @return float
      */
     public function getInitialTotalAmount()
     {
-        return $this->_initialTotalAmount;
+        return $this->initialTotalAmount;
     }
 
     /**
@@ -178,20 +263,15 @@ class Order
      */
     public function setInitialTotalAmount($initialTotalAmount)
     {
-        $this->_initialTotalAmount = $initialTotalAmount;
+        $this->initialTotalAmount = $initialTotalAmount;
     }
-
-    /**
-     * @var float
-     */
-    private $_initialTotalShippingChargesAmount = 0.0;
 
     /**
      * @return float
      */
     public function getInitialTotalShippingChargesAmount()
     {
-        return $this->_initialTotalShippingChargesAmount;
+        return $this->initialTotalShippingChargesAmount;
     }
 
     /**
@@ -199,20 +279,15 @@ class Order
      */
     public function setInitialTotalShippingChargesAmount($initialTotalShippingChargesAmount)
     {
-        $this->_initialTotalShippingChargesAmount = $initialTotalShippingChargesAmount;
+        $this->initialTotalShippingChargesAmount = $initialTotalShippingChargesAmount;
     }
-
-    /**
-     * @var bool
-     */
-    private $_isCLogistiqueOrder = false;
 
     /**
      * @return boolean
      */
     public function isIsCLogistiqueOrder()
     {
-        return $this->_isCLogistiqueOrder;
+        return $this->isCLogistiqueOrder;
     }
 
     /**
@@ -220,21 +295,15 @@ class Order
      */
     public function setIsCLogistiqueOrder($isCLogistiqueOrder)
     {
-        $this->_isCLogistiqueOrder = $isCLogistiqueOrder;
+        $this->isCLogistiqueOrder = $isCLogistiqueOrder;
     }
-
-    /**
-     * @var string
-     */
-    //TODO passer en vraie date
-    private $_lastUpdatedDate = null;
 
     /**
      * @return string
      */
     public function getLastUpdatedDate()
     {
-        return $this->_lastUpdatedDate;
+        return $this->lastUpdatedDate;
     }
 
     /**
@@ -242,21 +311,15 @@ class Order
      */
     public function setLastUpdatedDate($lastUpdatedDate)
     {
-        $this->_lastUpdatedDate = $lastUpdatedDate;
+        $this->lastUpdatedDate = $lastUpdatedDate;
     }
-
-    /**
-     * @var string
-     */
-    //TODO passer en vraie date
-    private $_modifiedDate = null;
 
     /**
      * @return string
      */
     public function getModifiedDate()
     {
-        return $this->_modifiedDate;
+        return $this->modifiedDate;
     }
 
     /**
@@ -264,20 +327,15 @@ class Order
      */
     public function setModifiedDate($modifiedDate)
     {
-        $this->_modifiedDate = $modifiedDate;
+        $this->modifiedDate = $modifiedDate;
     }
-
-    /**
-     * @var \Sdk\Order\OrderLineList
-     */
-    private $_orderLineList = null;
 
     /**
      * @return OrderLineList
      */
     public function getOrderLineList()
     {
-        return $this->_orderLineList;
+        return $this->orderLineList;
     }
 
     /**
@@ -285,20 +343,15 @@ class Order
      */
     public function setOrderLineList($orderLineList)
     {
-        $this->_orderLineList = $orderLineList;
+        $this->orderLineList = $orderLineList;
     }
-
-    /**
-     * @var string
-     */
-    private $_shippingCode = null;
 
     /**
      * @return string
      */
     public function getShippingCode()
     {
-        return $this->_shippingCode;
+        return $this->shippingCode;
     }
 
     /**
@@ -306,22 +359,15 @@ class Order
      */
     public function setShippingCode($shippingCode)
     {
-        $this->_shippingCode = $shippingCode;
+        $this->shippingCode = $shippingCode;
     }
-
-    #region SiteCommission
-
-    /**
-     * @var float
-     */
-    private $_siteCommissionPromisedAmount = 0.0;
 
     /**
      * @return float
      */
     public function getSiteCommissionPromisedAmount()
     {
-        return $this->_siteCommissionPromisedAmount;
+        return $this->siteCommissionPromisedAmount;
     }
 
     /**
@@ -329,20 +375,15 @@ class Order
      */
     public function setSiteCommissionPromisedAmount($siteCommissionPromisedAmount)
     {
-        $this->_siteCommissionPromisedAmount = $siteCommissionPromisedAmount;
+        $this->siteCommissionPromisedAmount = $siteCommissionPromisedAmount;
     }
-
-    /**
-     * @var float
-     */
-    private $_siteCommissionShippedAmount = 0.0;
 
     /**
      * @return float
      */
     public function getSiteCommissionShippedAmount()
     {
-        return $this->_siteCommissionShippedAmount;
+        return $this->siteCommissionShippedAmount;
     }
 
     /**
@@ -350,20 +391,15 @@ class Order
      */
     public function setSiteCommissionShippedAmount($siteCommissionShippedAmount)
     {
-        $this->_siteCommissionShippedAmount = $siteCommissionShippedAmount;
+        $this->siteCommissionShippedAmount = $siteCommissionShippedAmount;
     }
-
-    /**
-     * @var float
-     */
-    private $_siteCommissionValidatedAmount = 0.0;
 
     /**
      * @return float
      */
     public function getSiteCommissionValidatedAmount()
     {
-        return $this->_siteCommissionValidatedAmount;
+        return $this->siteCommissionValidatedAmount;
     }
 
     /**
@@ -371,24 +407,15 @@ class Order
      */
     public function setSiteCommissionValidatedAmount($siteCommissionValidatedAmount)
     {
-        $this->_siteCommissionValidatedAmount = $siteCommissionValidatedAmount;
+        $this->siteCommissionValidatedAmount = $siteCommissionValidatedAmount;
     }
-
-    #endregion
-
-    #region Status
-
-    /**
-     * @var \Sdk\Order\OrderStatusEnum
-     */
-    private $_status = OrderStatusEnum::None;
 
     /**
      * @return OrderStatusEnum
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -396,20 +423,15 @@ class Order
      */
     public function setStatus($status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
-
-    /**
-     * @var \Sdk\Order\OrderStateEnum
-     */
-    private $_orderState = null;
 
     /**
      * @return string OrderStateEnum
      */
     public function getOrderState()
     {
-        return $this->_orderState;
+        return $this->orderState;
     }
 
     /**
@@ -417,20 +439,15 @@ class Order
      */
     public function setOrderState($orderState)
     {
-        $this->_orderState = $orderState;
+        $this->orderState = $orderState;
     }
-
-    /**
-     * @var \Sdk\Order\ValidationStatusEnum
-     */
-    private $_validationStatus = ValidationStatusEnum::None;
 
     /**
      * @return ValidationStatusEnum
      */
     public function getValidationStatus()
     {
-        return $this->_validationStatus;
+        return $this->validationStatus;
     }
 
     /**
@@ -438,24 +455,15 @@ class Order
      */
     public function setValidationStatus($validationStatus)
     {
-        $this->_validationStatus = $validationStatus;
+        $this->validationStatus = $validationStatus;
     }
-
-    #endregion Status
-
-    #region Amount and Shipping Charges
-
-    /**
-     * @var float
-     */
-    private $_shippedTotalAmount = 0.0;
 
     /**
      * @return float
      */
     public function getShippedTotalAmount()
     {
-        return $this->_shippedTotalAmount;
+        return $this->shippedTotalAmount;
     }
 
     /**
@@ -463,20 +471,15 @@ class Order
      */
     public function setShippedTotalAmount($shippedTotalAmount)
     {
-        $this->_shippedTotalAmount = $shippedTotalAmount;
+        $this->shippedTotalAmount = $shippedTotalAmount;
     }
-
-    /**
-     * @var float
-     */
-    private $_shippedTotalShippingCharges = 0.0;
 
     /**
      * @return float
      */
     public function getShippedTotalShippingCharges()
     {
-        return $this->_shippedTotalShippingCharges;
+        return $this->shippedTotalShippingCharges;
     }
 
     /**
@@ -484,20 +487,15 @@ class Order
      */
     public function setShippedTotalShippingCharges($shippedTotalShippingCharges)
     {
-        $this->_shippedTotalShippingCharges = $shippedTotalShippingCharges;
+        $this->shippedTotalShippingCharges = $shippedTotalShippingCharges;
     }
-
-    /**
-     * @var float
-     */
-    private $_validatedTotalAmount = 0.0;
 
     /**
      * @return float
      */
     public function getValidatedTotalAmount()
     {
-        return $this->_validatedTotalAmount;
+        return $this->validatedTotalAmount;
     }
 
     /**
@@ -505,20 +503,15 @@ class Order
      */
     public function setValidatedTotalAmount($validatedTotalAmount)
     {
-        $this->_validatedTotalAmount = $validatedTotalAmount;
+        $this->validatedTotalAmount = $validatedTotalAmount;
     }
-
-    /**
-     * @var float
-     */
-    private $_validatedTotalShippingCharges = 0.0;
 
     /**
      * @return float
      */
     public function getValidatedTotalShippingCharges()
     {
-        return $this->_validatedTotalShippingCharges;
+        return $this->validatedTotalShippingCharges;
     }
 
     /**
@@ -526,22 +519,15 @@ class Order
      */
     public function setValidatedTotalShippingCharges($validatedTotalShippingCharges)
     {
-        $this->_validatedTotalShippingCharges = $validatedTotalShippingCharges;
+        $this->validatedTotalShippingCharges = $validatedTotalShippingCharges;
     }
-
-    #endregion Amount and Shipping Charges
-
-    /**
-     * @var int
-     */
-    private $_visaCegid = 0;
 
     /**
      * @return int
      */
     public function getVisaCegid()
     {
-        return $this->_visaCegid;
+        return $this->visaCegid;
     }
 
     /**
@@ -549,22 +535,15 @@ class Order
      */
     public function setVisaCegid($visaCegid)
     {
-        $this->_visaCegid = $visaCegid;
+        $this->visaCegid = $visaCegid;
     }
-
-    #region ParcelList
-
-    /**
-     * @var bool
-     */
-    private $_archiveParcelList = false;
 
     /**
      * @return boolean
      */
     public function isArchiveParcelList()
     {
-        return $this->_archiveParcelList;
+        return $this->archiveParcelList;
     }
 
     /**
@@ -572,43 +551,31 @@ class Order
      */
     public function setArchiveParcelList($archiveParcelList)
     {
-        $this->_archiveParcelList = $archiveParcelList;
+        $this->archiveParcelList = $archiveParcelList;
     }
 
     /**
-     * @var \Sdk\Parcel\ParcelList
+     * @return ParcelList
      */
-    private $_parcelList = null;
+    public function getParcelList()
+    {
+        return $this->parcelList;
+    }
 
     /**
      * @param $parcelList
      */
     public function setParcelList($parcelList)
     {
-        $this->_parcelList = $parcelList;
+        $this->parcelList = $parcelList;
     }
-
-    /**
-     * @return \Sdk\Parcel\ParcelList
-     */
-    public function getParcelList()
-    {
-        return $this->_parcelList;
-    }
-
-    #endregion ParcelList
-
-    /**
-     * @var string
-     */
-    private $_modGesLog = null;
 
     /**
      * @return string
      */
     public function getModGesLog()
     {
-        return $this->_modGesLog;
+        return $this->modGesLog;
     }
 
     /**
@@ -616,20 +583,15 @@ class Order
      */
     public function setModGesLog($modGesLog)
     {
-        $this->_modGesLog = $modGesLog;
+        $this->modGesLog = $modGesLog;
     }
-
-    /**
-     * @var string PartnerOrderRef
-     */
-    private $_partnerOrderRef = "";
 
     /**
      * @return string
      */
     public function getPartnerOrderRef()
     {
-        return $this->_partnerOrderRef;
+        return $this->partnerOrderRef;
     }
 
     /**
@@ -637,27 +599,22 @@ class Order
      */
     public function setPartnerOrderRef($partnerOrderRef)
     {
-        $this->_partnerOrderRef = $partnerOrderRef;
+        $this->partnerOrderRef = $partnerOrderRef;
     }
-    
-    /*
-     * @var array
-     */
-    private $_voucherList = null;
-    
-    /*
+
+    /**
      * @return array
      */
     public function getVoucherList()
     {
-        return $this->_voucherList;
+        return $this->voucherList;
     }
-    
-    /*
+
+    /**
      * @param $voucherList \Sdk\Order\VoucherList
      */
     public function setVoucherList($voucherList)
     {
-        $this->_voucherList = $voucherList;
+        $this->voucherList = $voucherList;
     }
 }

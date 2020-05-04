@@ -1,339 +1,317 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 10/10/2016
- * Time: 09:45
- */
 
 namespace Sdk\Seller;
-
 
 use Sdk\Soap\Common\SoapTools;
 
 class Address
 {
 
-    private $_address1 = null;
+    private $address1 = null;
+    private $address2 = null;
+    private $apartmentNumber = null;
+    private $building = null;
+    private $city = null;
+    /**
+     * @var null
+     */
+    private $civility = null;
+    private $companyName = null;
+    private $country = null;
+    private $county = null;
+    private $firstName = null;
+    private $instructions = null;
+    private $lastName = null;
+    private $placeName = null;
+    private $relayId = null;
+    private $street = null;
+    private $zipCode = null;
 
     /**
-     * @return null
+     * @return string|null
      */
     public function getAddress1()
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
-     * @param null $address1
+     * @param string|null $address1
      */
     public function setAddress1($address1)
     {
         if (!SoapTools::isSoapValueNull($address1)) {
-            $this->_address1 = $address1;
+            $this->address1 = $address1;
         }
     }
 
-    private $_address2 = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getAddress2()
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
-     * @param null $address2
+     * @param string|null $address2
      */
     public function setAddress2($address2)
     {
         if (!SoapTools::isSoapValueNull($address2)) {
-            $this->_address2 = $address2;
+            $this->address2 = $address2;
         }
     }
 
-    private $_apartmentNumber = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getApartmentNumber()
     {
-        return $this->_apartmentNumber;
+        return $this->apartmentNumber;
     }
 
     /**
-     * @param null $apartmentNumber
+     * @param string|null $apartmentNumber
      */
     public function setApartmentNumber($apartmentNumber)
     {
         if (!SoapTools::isSoapValueNull($apartmentNumber)) {
-            $this->_apartmentNumber = $apartmentNumber;
+            $this->apartmentNumber = $apartmentNumber;
         }
     }
 
-    private $_building = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getBuilding()
     {
-        return $this->_building;
+        return $this->building;
     }
 
     /**
-     * @param null $building
+     * @param string|null $building
      */
     public function setBuilding($building)
     {
         if (!SoapTools::isSoapValueNull($building)) {
-            $this->_building = $building;
+            $this->building = $building;
         }
     }
 
-    private $_city = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
-     * @param null $city
+     * @param string|null $city
      */
     public function setCity($city)
     {
         if (!SoapTools::isSoapValueNull($city)) {
-            $this->_city = $city;
+            $this->city = $city;
         }
     }
 
     /**
-     * @var null
-     */
-    private $_civility = null;
-
-    /**
-     * @return null
+     * @return string|null
      */
     public function getCivility()
     {
-        return $this->_civility;
+        return $this->civility;
     }
 
     /**
-     * @param null $civility
+     * @param string|null $civility
      */
     public function setCivility($civility)
     {
         if (!SoapTools::isSoapValueNull($civility)) {
-            $this->_civility = $civility;
+            $this->civility = $civility;
         }
     }
 
-    private $_companyName = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getCompanyName()
     {
-        return $this->_companyName;
+        return $this->companyName;
     }
 
     /**
-     * @param null $companyName
+     * @param string|null $companyName
      */
     public function setCompanyName($companyName)
     {
         if (!SoapTools::isSoapValueNull($companyName)) {
-            $this->_companyName = $companyName;
+            $this->companyName = $companyName;
         }
     }
 
-    private $_country = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getCountry()
     {
-        return $this->_country;
+        return $this->country;
     }
 
     /**
-     * @param null $country
+     * @param string|null $country
      */
     public function setCountry($country)
     {
         if (!SoapTools::isSoapValueNull($country)) {
-            $this->_country = $country;
+            $this->country = $country;
         }
     }
 
-    private $_county = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getCounty()
     {
-        return $this->_county;
+        return $this->county;
     }
 
     /**
-     * @param null $county
+     * @param string|null $county
      */
     public function setCounty($county)
     {
         if (!SoapTools::isSoapValueNull($county)) {
-            $this->_county = $county;
+            $this->county = $county;
         }
     }
 
-    private $_firstName = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getFirstName()
     {
-        return $this->_firstName;
+        return $this->firstName;
     }
 
     /**
-     * @param null $firstName
+     * @param string|null $firstName
      */
     public function setFirstName($firstName)
     {
         if (!SoapTools::isSoapValueNull($firstName)) {
-            $this->_firstName = $firstName;
+            $this->firstName = $firstName;
         }
     }
 
-    private $_instructions = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getInstructions()
     {
-        return $this->_instructions;
+        return $this->instructions;
     }
 
     /**
-     * @param null $instructions
+     * @param string|null $instructions
      */
     public function setInstructions($instructions)
     {
         if (!SoapTools::isSoapValueNull($instructions)) {
-            $this->_instructions = $instructions;
+            $this->instructions = $instructions;
         }
     }
 
-    private $_lastName = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getLastName()
     {
-        return $this->_lastName;
+        return $this->lastName;
     }
 
     /**
-     * @param null $lastName
+     * @param string|null $lastName
      */
     public function setLastName($lastName)
     {
         if (!SoapTools::isSoapValueNull($lastName)) {
-            $this->_lastName = $lastName;
+            $this->lastName = $lastName;
         }
     }
 
-    private $_placeName = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getPlaceName()
     {
-        return $this->_placeName;
+        return $this->placeName;
     }
 
     /**
-     * @param null $placeName
+     * @param string|null $placeName
      */
     public function setPlaceName($placeName)
     {
         if (!SoapTools::isSoapValueNull($placeName)) {
-            $this->_placeName = $placeName;
+            $this->placeName = $placeName;
         }
     }
 
-    private $_relayId = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getRelayId()
     {
-        return $this->_relayId;
+        return $this->relayId;
     }
 
     /**
-     * @param null $relayId
+     * @param string|null $relayId
      */
     public function setRelayId($relayId)
     {
         if (!SoapTools::isSoapValueNull($relayId)) {
-            $this->_relayId = $relayId;
+            $this->relayId = $relayId;
         }
     }
 
-    private $_street = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getStreet()
     {
-        return $this->_street;
+        return $this->street;
     }
 
     /**
-     * @param null $street
+     * @param string|null $street
      */
     public function setStreet($street)
     {
         if (!SoapTools::isSoapValueNull($street)) {
-            $this->_street = $street;
+            $this->street = $street;
         }
     }
 
-    private $_zipCode = null;
-
     /**
-     * @return null
+     * @return string|null
      */
     public function getZipCode()
     {
-        return $this->_zipCode;
+        return $this->zipCode;
     }
 
     /**
-     * @param null $zipCode
+     * @param string|null $zipCode
      */
     public function setZipCode($zipCode)
     {
         if (!SoapTools::isSoapValueNull($zipCode)) {
-            $this->_zipCode = $zipCode;
+            $this->zipCode = $zipCode;
         }
     }
 }
