@@ -11,6 +11,8 @@ namespace Sdk\Order;
 
 use Sdk\ApiClient\CDSApiClient;
 use Sdk\ConfigTools\ConfigFileLoader;
+use Sdk\Exception\InvalidDataResponseException;
+use Sdk\Exception\ResponseErrorException;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
@@ -58,6 +60,8 @@ class OrderPoint
     /**
      * @param $orderFilter OrderFilter
      * @return GetOrderListResponse
+     * @throws InvalidDataResponseException
+     * @throws ResponseErrorException
      */
     public function getOrderList($orderFilter)
     {
