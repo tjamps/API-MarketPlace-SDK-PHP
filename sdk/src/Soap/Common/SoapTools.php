@@ -5,7 +5,7 @@ namespace Sdk\Soap\Common;
 class SoapTools
 {
     /**
-     * @param array $value
+     * @param array|string $value
      * @return bool
      */
     public static function isSoapValueNull($value)

@@ -1,217 +1,196 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 10/10/2016
- * Time: 15:36
- */
 
 namespace Sdk\Soap\Order;
 
-
 use Sdk\Customer\Customer;
+use Sdk\Exception\InvalidDataResponseException;
+use Sdk\Exception\ResponseErrorException;
 use Sdk\Order\Corporation;
 use Sdk\Order\Order;
 use Sdk\Order\OrderLine;
 use Sdk\Order\OrderLineList;
 use Sdk\Order\OrderList;
+use Sdk\Order\Refund\RefundInformation;
+use Sdk\Order\Voucher;
+use Sdk\Order\VoucherList;
 use Sdk\Parcel\Parcel;
 use Sdk\Parcel\ParcelItem;
-use Sdk\Parcel\ParcelItemList;
 use Sdk\Parcel\ParcelList;
 use Sdk\Parcel\Tracking;
 use Sdk\Parcel\TrackingList;
 use Sdk\Seller\Address;
 use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
+use Zend\Config\Reader\Xml;
 
 class GetOrderListResponse extends AbstractResponse
 {
     /**
      * @var array
      */
-    private $_dataResponse;
+    private $dataResponse;
 
     /**
-     * @var \Sdk\Order\OrderList
+     * @var OrderList
      */
-    private $_orderList = null;
-
-    /**
-     * @return \Sdk\Order\OrderList
-     */
-    public function getOrderList()
-    {
-        return $this->_orderList;
-    }
+    private $orderList = null;
 
     /**
      * GetOrderListResponse constructor.
      * @param $response
+     * @throws InvalidDataResponseException|ResponseErrorException
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
-        $this->_dataResponse = $reader->fromString($response);
+        $reader = new Xml();
+        $this->dataResponse = $reader->fromString($response);
 
-        if ($this->isOperationSuccess($this->_dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult']))
-        {
-            $this->_orderList = new OrderList();
+        $this->checkResponseDataValidity(
+            $this->dataResponse,
+            's:Body.GetOrderListResponse.GetOrderListResult'
+        );
 
-            /**
-             * Global informations
-             */
-            $this->_setGlobalInformations();
+        $orderListXml = $this->dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult'];
+        $this->checkErrors($orderListXml);
 
-            /**
-             * Order list
-             */
-            $this->_setOrderList();
-        }
-    }
-
-    private function _setGlobalInformations()
-    {
-        $objInfoResult = $this->_dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult'];
-        $this->tokenID = $objInfoResult['TokenId'];
-        $this->sellerLogin = $objInfoResult['SellerLogin'];
+        $this->orderList = new OrderList();
+        $this->setOrderList($orderListXml);
     }
 
     /**
-     * Parse the list of orders
+     * @return OrderList
      */
-    private function _setOrderList()
+    public function getOrderList()
     {
-        $objOrderResult = $this->_dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult']['OrderList'];
+        return $this->orderList;
+    }
 
-        $arrays = false;
-        if (isset($objOrderResult['Order'])) {
-            $orderResults = $objOrderResult['Order'];
-            if (isset($orderResults['OrderNumber'])){
-                $orderResults = array($orderResults);
-            }
-            foreach ($orderResults as $order) {
+    private function setOrderList($orderListXml)
+    {
+        $orderList = $orderListXml['OrderList'];
 
-                if (is_array($order)) {
-                    $orderObj = new Order($order['OrderNumber']);
-
-                    if ($order['ArchiveParcelList'] == 'true') {
-                        $orderObj->setArchiveParcelList(true);
-                    }
-
-                    $address = $this->_getAddress($order['BillingAddress']);
-                    $orderObj->setBillingAddress($address);
-
-                    if (!SoapTools::isSoapValueNull($order['Corporation'])) {
-                        $corporation = $this->_getCorporation($order['Corporation']);
-                        $orderObj->setCorporation($corporation);
-                    }
-
-                    $orderObj->setCreationDate($order['CreationDate']);
-
-                    $customer = $this->_getCustomer($order['Customer']);
-                    $orderObj->setCustomer($customer);
-
-                    if ($order['HasClaims'] == 'true') {
-                        $orderObj->setHasClaims(true);
-                    }
-
-                    $orderObj->setInitialTotalAmount(floatval($order['InitialTotalAmount']));
-                    $orderObj->setInitialTotalShippingChargesAmount(floatval($order['InitialTotalShippingChargesAmount']));
-
-                    /*
-                     * is clogistique order
-                     */
-                    if ($order['IsCLogistiqueOrder'] == 'true') {
-                        $orderObj->setIsCLogistiqueOrder(true);
-                    }
-
-                    $orderObj->setLastUpdatedDate($order['LastUpdatedDate']);
-                    $orderObj->setModifiedDate($order['ModifiedDate']);
-
-                    if (!SoapTools::isSoapValueNull($order['OrderLineList'])) {
-                        $orderLineList = $this->_getOrderLineList($order['OrderLineList']);
-                        $orderObj->setOrderLineList($orderLineList);
-                    }
-                    //TODO gérer offer
-
-                    $orderObj->setOrderState($order['OrderState']);
-
-                    /**
-                     * PartnerOrderRef
-                     */
-                    if(isset($order['PartnerOrderRef']) && !SoapTools::isSoapValueNull($order['PartnerOrderRef'])){
-                        $orderObj->setPartnerOrderRef($order['PartnerOrderRef']);
-                    }
-
-                    /*
-                     * mod ges log
-                     */
-                    if (isset($order['ModGesLog']) && !SoapTools::isSoapValueNull($order['ModGesLog'])) {
-                        $orderObj->setModGesLog($order['ModGesLog']);
-                    }
-
-                    $parcelList = $this->_getParcelList($order['ParcelList']);
-                    $orderObj->setParcelList($parcelList);
-
-                    if (isset($order['VoucherList']) && !SoapTools::isSoapValueNull($order['VoucherList'])) {
-                        $voucherList = $this->_getVoucherList($order['VoucherList']);
-                        $orderObj->setVoucherList($voucherList);
-                    }
-
-                    $orderObj->setShippedTotalAmount(floatval($order['ShippedTotalAmount']));
-
-                    $orderObj->setShippedTotalShippingCharges(floatval($order['ShippedTotalShippingCharges']));
-
-                    $address = $this->_getAddress($order['ShippingAddress']);
-                    $orderObj->setShippingAddress($address);
-                    $orderObj->setShippingCode($order['ShippingCode']);
-                    $orderObj->setSiteCommissionPromisedAmount(floatval($order['SiteCommissionPromisedAmount']));
-                    $orderObj->setSiteCommissionShippedAmount(floatval($order['SiteCommissionShippedAmount']));
-                    $orderObj->setSiteCommissionValidatedAmount(floatval($order['SiteCommissionValidatedAmount']));
-
-                    $orderObj->setStatus($order['Status']);
-
-                    $orderObj->setValidatedTotalAmount(floatval($order['ValidatedTotalAmount']));
-                    $orderObj->setValidatedTotalShippingCharges(floatval($order['ValidatedTotalShippingCharges']));
-
-                    $orderObj->setValidationStatus($order['ValidationStatus']);
-
-                    $orderObj->setVisaCegid(intval($order['VisaCegid']));
-
-                    $this->_orderList->addOrder($orderObj);
-                }
-            }
+        if (!isset($order['OrderList'])) {
+            return;
         }
 
+        $order = $orderList['Order'];
+        if (isset($order['OrderNumber'])) {
+            $order = [$order];
+        }
+
+        foreach ($order as $order) {
+            if (!is_array($order)) {
+                continue;
+            }
+
+            $orderObj = new Order($order['OrderNumber']);
+
+            if ($order['ArchiveParcelList'] === 'true') {
+                $orderObj->setArchiveParcelList(true);
+            }
+
+            $billingAddress = $this->getAddress($order['BillingAddress']);
+            $orderObj->setBillingAddress($billingAddress);
+
+            if (!SoapTools::isSoapValueNull($order['Corporation'])) {
+                $corporation = $this->getCorporation($order['Corporation']);
+                $orderObj->setCorporation($corporation);
+            }
+
+            $orderObj->setCreationDate($order['CreationDate']);
+
+            $customer = $this->getCustomer($order['Customer']);
+            $orderObj->setCustomer($customer);
+
+            if ($order['HasClaims'] === 'true') {
+                $orderObj->setHasClaims(true);
+            }
+
+            $orderObj->setInitialTotalAmount(floatval($order['InitialTotalAmount']));
+            $orderObj->setInitialTotalShippingChargesAmount(
+                floatval($order['InitialTotalShippingChargesAmount'])
+            );
+
+            if ($order['IsCLogistiqueOrder'] === 'true') {
+                $orderObj->setIsCLogistiqueOrder(true);
+            }
+
+            $orderObj->setLastUpdatedDate($order['LastUpdatedDate']);
+            $orderObj->setModifiedDate($order['ModifiedDate']);
+
+            if (!SoapTools::isSoapValueNull($order['OrderLineList'])) {
+                $orderLineList = $this->getOrderLineList($order['OrderLineList']);
+                $orderObj->setOrderLineList($orderLineList);
+            }
+
+            $orderObj->setOrderState($order['OrderState']);
+
+            if (isset($order['PartnerOrderRef']) && !SoapTools::isSoapValueNull($order['PartnerOrderRef'])) {
+                $orderObj->setPartnerOrderRef($order['PartnerOrderRef']);
+            }
+
+            if (isset($order['ModGesLog']) && !SoapTools::isSoapValueNull($order['ModGesLog'])) {
+                $orderObj->setModGesLog($order['ModGesLog']);
+            }
+
+            $parcelList = $this->getParcelList($order['ParcelList']);
+            $orderObj->setParcelList($parcelList);
+
+            if (isset($order['VoucherList']) && !SoapTools::isSoapValueNull($order['VoucherList'])) {
+                $voucherList = $this->getVoucherList($order['VoucherList']);
+                $orderObj->setVoucherList($voucherList);
+            }
+
+            $orderObj->setShippedTotalAmount(floatval($order['ShippedTotalAmount']));
+
+            $orderObj->setShippedTotalShippingCharges(floatval($order['ShippedTotalShippingCharges']));
+
+            $billingAddress = $this->getAddress($order['ShippingAddress']);
+            $orderObj->setShippingAddress($billingAddress);
+            $orderObj->setShippingCode($order['ShippingCode']);
+            $orderObj->setSiteCommissionPromisedAmount(floatval($order['SiteCommissionPromisedAmount']));
+            $orderObj->setSiteCommissionShippedAmount(floatval($order['SiteCommissionShippedAmount']));
+            $orderObj->setSiteCommissionValidatedAmount(floatval($order['SiteCommissionValidatedAmount']));
+
+            $orderObj->setStatus($order['Status']);
+
+            $orderObj->setValidatedTotalAmount(floatval($order['ValidatedTotalAmount']));
+            $orderObj->setValidatedTotalShippingCharges(floatval($order['ValidatedTotalShippingCharges']));
+
+            $orderObj->setValidationStatus($order['ValidationStatus']);
+
+            $orderObj->setVisaCegid(intval($order['VisaCegid']));
+
+            $this->orderList->addOrder($orderObj);
+        }
     }
 
     /**
      * Retrieve <BillingAddress> Balise
      *
-     * @param $objAddressResult
+     * @param array $addressData
      * @return Address
      */
-    private function _getAddress($objAddressResult)
+    private function getAddress($addressData)
     {
         $address = new Address();
 
-        $address->setAddress1($objAddressResult['Address1']);
-        $address->setAddress2($objAddressResult['Address2']);
-        $address->setApartmentNumber($objAddressResult['ApartmentNumber']);
-        $address->setBuilding($objAddressResult['Building']);
-        $address->setCity($objAddressResult['City']);
-        $address->setCivility($objAddressResult['Civility']);
-        $address->setCompanyName($objAddressResult['CompanyName']);
-        $address->setCountry($objAddressResult['Country']);
-        $address->setCounty($objAddressResult['County']);
-        $address->setFirstName($objAddressResult['FirstName']);
-        $address->setInstructions($objAddressResult['Instructions']);
-        $address->setLastName($objAddressResult['LastName']);
-        $address->setPlaceName($objAddressResult['PlaceName']);
-        $address->setRelayId($objAddressResult['RelayId']);
-        $address->setStreet($objAddressResult['Street']);
-        $address->setZipCode($objAddressResult['ZipCode']);
+        $address->setAddress1($addressData['Address1']);
+        $address->setAddress2($addressData['Address2']);
+        $address->setApartmentNumber($addressData['ApartmentNumber']);
+        $address->setBuilding($addressData['Building']);
+        $address->setCity($addressData['City']);
+        $address->setCivility($addressData['Civility']);
+        $address->setCompanyName($addressData['CompanyName']);
+        $address->setCountry($addressData['Country']);
+        $address->setCounty($addressData['County']);
+        $address->setFirstName($addressData['FirstName']);
+        $address->setInstructions($addressData['Instructions']);
+        $address->setLastName($addressData['LastName']);
+        $address->setPlaceName($addressData['PlaceName']);
+        $address->setRelayId($addressData['RelayId']);
+        $address->setStreet($addressData['Street']);
+        $address->setZipCode($addressData['ZipCode']);
 
         return $address;
     }
@@ -222,7 +201,7 @@ class GetOrderListResponse extends AbstractResponse
      * @param $objCorporation
      * @return Corporation
      */
-    private function _getCorporation($objCorporation)
+    private function getCorporation($objCorporation)
     {
         $corporation = new Corporation();
 
@@ -231,9 +210,10 @@ class GetOrderListResponse extends AbstractResponse
         $corporation->setCorporationId(intval($objCorporation['CorporationId']));
         $corporation->setCorporationName($objCorporation['CorporationName']);
 
-        if ($objCorporation['IsMarketPlaceActive'] == 'true') {
+        if ($objCorporation['IsMarketPlaceActive'] === 'true') {
             $corporation->setIsMarketPlaceActive(true);
         }
+
         return $corporation;
     }
 
@@ -243,7 +223,7 @@ class GetOrderListResponse extends AbstractResponse
      * @param $objCustomer
      * @return Customer
      */
-    private function _getCustomer($objCustomer)
+    private function getCustomer($objCustomer)
     {
         $customer = new Customer($objCustomer['CustomerId']);
         $customer->setCivility($objCustomer['Civility']);
@@ -261,49 +241,46 @@ class GetOrderListResponse extends AbstractResponse
     }
 
     /**
-     * @param $orderLineListOBJ
+     * @param $orderLineListOBJGlobal
      * @return OrderLineList
      */
-    private function _getOrderLineList($orderLineListOBJGlobal)
+    private function getOrderLineList($orderLineListOBJGlobal)
     {
         $orderLines = $orderLineListOBJGlobal['OrderLine'];
-        if (isset($orderLines['ProductId'])){
+        if (isset($orderLines['ProductId'])) {
             $orderLines = array($orderLines);
         }
 
         $orderLineList = new OrderLineList();
 
         foreach ($orderLines as $orderLineListOBJ) {
-
             $orderLine = new OrderLine($orderLineListOBJ['ProductId']);
 
             $orderLine->setAcceptationState($orderLineListOBJ['AcceptationState']);
             $orderLine->setCategoryCode($orderLineListOBJ['CategoryCode']);
 
-            /**
-             * Delivery Dates
-             */
             $orderLine->setDeliveryDateMax($orderLineListOBJ['DeliveryDateMax']);
             $orderLine->setDeliveryDateMin($orderLineListOBJ['DeliveryDateMin']);
 
-            if ($orderLineListOBJ['HasClaim'] == 'true') {
+            if ($orderLineListOBJ['HasClaim'] === 'true') {
                 $orderLine->setHasClaim(true);
             }
             $orderLine->setInitialPrice($orderLineListOBJ['InitialPrice']);
-            if ($orderLineListOBJ['IsCDAV'] == 'true') {
+            if ($orderLineListOBJ['IsCDAV'] === 'true') {
                 $orderLine->setCdav(true);
             }
-            if ($orderLineListOBJ['IsNegotiated'] == 'true') {
+            if ($orderLineListOBJ['IsNegotiated'] === 'true') {
                 $orderLine->setIsNegotiated(true);
             }
-            if ($orderLineListOBJ['IsProductEanGenerated'] == 'true') {
+            if ($orderLineListOBJ['IsProductEanGenerated'] === 'true') {
                 $orderLine->setProductEanGenerated(true);
             }
             $orderLine->setName($orderLineListOBJ['Name']);
-            //TODO add orderlinechildlist
 
             $orderLine->setProductCondition($orderLineListOBJ['ProductCondition']);
-            if (isset($orderLineListOBJ['ProductEan']) && !SoapTools::isSoapValueNull($orderLineListOBJ['ProductEan'])) {
+            if (isset($orderLineListOBJ['ProductEan'])
+                && !SoapTools::isSoapValueNull($orderLineListOBJ['ProductEan'])
+            ) {
                 $orderLine->setProductEan($orderLineListOBJ['ProductEan']);
             }
             $orderLine->setPurchasePrice(floatval($orderLineListOBJ['PurchasePrice']));
@@ -317,33 +294,74 @@ class GetOrderListResponse extends AbstractResponse
             $orderLine->setUnitAdditionalShippingCharges(floatval($orderLineListOBJ['UnitAdditionalShippingCharges']));
             $orderLine->setUnitShippingCharges(floatval($orderLineListOBJ['UnitShippingCharges']));
 
-            if (isset ($orderLineListOBJ['RefundShippingCharges']) && $orderLineListOBJ['RefundShippingCharges']== 'true') {
+            if (isset($orderLineListOBJ['RefundShippingCharges']) && $orderLineListOBJ['RefundShippingCharges'] === 'true') {
                 $orderLine->setRefundShippingCharges(true);
             }
             $orderLineList->addOrderLine($orderLine);
         }
+
         return $orderLineList;
     }
 
-    private function _getParcelList($parcelList)
+    private function getParcelList($parcelList)
     {
         $parcelListObj = new ParcelList();
 
-        foreach ($parcelList as $parcel) {
-            //echo "CustomerNum : " . $parcel['CustomerNum'] . "<br/>";
+        $list = isset($parcelList['Parcel']) ? $parcelList['Parcel'] : [];
 
+        if (empty($list)) {
+            return $parcelListObj;
+        }
+
+        /**
+         * Two formats are returned by the API:
+         *
+         * ```php
+         * array:1 [
+         *   "Parcel" => array:7 [
+         *     "CustomerNum" => "3956091430101",
+         *     ...
+         *   ]
+         * ]
+         * ```
+         * and
+         *
+         * ```php
+         * array:1 [
+         *   "Parcel" => array:2 [
+         *     0 => array:7 [
+         *       "CustomerNum" => "3953734760101",
+         *       ...
+         *     ]
+         *     1 => array:7 [
+         *       "CustomerNum" => "PT205400096JB";
+         *       ...
+         *     ]
+         *   ]
+         * ]
+         * ```
+         *
+         * We need to deal with theses inconsistencies.
+         * Thus, we check if the parcels list contains a "0" key.
+         * If it does not, then we are in the 1st format ; we just
+         * turn it into an array to handle it the same way the 2nd format is handled.
+         */
+        if (!array_key_exists(0, $list)) {
+            $list = [$list];
+        }
+
+        foreach ($list as $parcel) {
             $parcelObj = new Parcel();
             $parcelObj->setCustomerNum($parcel['CustomerNum']);
             $parcelObj->setExternalCarrierName($parcel['ExternalCarrierName']);
             $parcelObj->setExternalCarrierTrackingUrl($parcel['ExternalCarrierTrackingUrl']);
-            if ($parcel['IsCustomerReturn'] == 'true') {
+            if ($parcel['IsCustomerReturn'] === 'true') {
                 $parcelObj->setCustomerReturn(true);
             }
             $parcelObj->setParcelStatus($parcel['ParcelStatus']);
             $parcelObj->setRealCarrierCode($parcel['RealCarrierCode']);
 
             foreach ($parcel['ParcelItemList'] as $parcelItem) {
-
                 $parcelItemObj = new ParcelItem($parcelItem['Sku']);
                 $parcelItemObj->setQuantity(intval($parcelItem['Quantity']));
                 $parcelItemObj->setProductName($parcelItem['ProductName']);
@@ -353,29 +371,25 @@ class GetOrderListResponse extends AbstractResponse
 
             $trackingList = new TrackingList();
 
-            if( isset($parcel['TrackingList']) && !SoapTools::isSoapValueNull($parcel['TrackingList']) ){
-               /*
-                * @var \Sdk\Parcel\Tracking $tracking
-                */
-               foreach ( $parcel['TrackingList'] as $tracking ){
+            if (isset($parcel['TrackingList']) && !SoapTools::isSoapValueNull($parcel['TrackingList'])) {
+                foreach ($parcel['TrackingList'] as $tracking) {
                     $trackingObj = new Tracking($tracking['TrackingId']);
 
-                    if (isset($tracking['ParcelNum']) && !SoapTools::isSoapValueNull($tracking['ParcelNum']))
-                    {
+                    if (isset($tracking['ParcelNum']) && !SoapTools::isSoapValueNull($tracking['ParcelNum'])) {
                         $trackingObj->setParcelNum($tracking['ParcelNum']);
                     }
 
-                    if (isset($tracking['Justification']) && !SoapTools::isSoapValueNull($tracking['Justification']))
-                    {
+                    if (isset($tracking['Justification']) && !SoapTools::isSoapValueNull($tracking['Justification'])) {
                         $trackingObj->setJustification($tracking['Justification']);
                     }
 
-                    if (isset($tracking['InsertDate']) && !SoapTools::isSoapValueNull($tracking['InsertDate']))
-                    {
+                    if (isset($tracking['InsertDate']) && !SoapTools::isSoapValueNull($tracking['InsertDate'])) {
                         $trackingObj->setInsertDate($tracking['InsertDate']);
                     }
+
                     $trackingList->addTrackingToLit($trackingObj);
                 }
+
                 $parcelObj->setTrackingList($trackingList);
             }
 
@@ -385,35 +399,36 @@ class GetOrderListResponse extends AbstractResponse
         return $parcelListObj;
     }
 
-    /*
-     * @param \Sdk\Order\VoucherList
-     * create vouhcer list object
+    /**
+     * @param $voucherList
+     * @return VoucherList
      */
-    private function _getVoucherList($voucherList)
+    private function getVoucherList($voucherList)
     {
-        $voucherListObj = new \Sdk\Order\VoucherList();
+        $voucherListObj = new VoucherList();
 
-        /*
-         * \Sdk\Order\Voucher
-         */
         foreach ($voucherList as $voucher) {
-            $voucherObj = new \Sdk\Order\Voucher();
+            $voucherObj = new Voucher();
 
             if (isset($voucher['CreateDate']) && !SoapTools::isSoapValueNull($voucher['CreateDate'])) {
-               $voucherObj->setCreateDate($voucher['CreateDate']);
+                $voucherObj->setCreateDate($voucher['CreateDate']);
             }
 
             if (isset($voucher['Source']) && !SoapTools::isSoapValueNull($voucher['Source'])) {
                 $voucherObj->setSource($voucher['Source']);
             }
 
-            $refundInfomation = new \Sdk\Order\Refund\RefundInformation();
+            $refundInfomation = new RefundInformation();
             if (isset($voucher['RefundInformation']) && !SoapTools::isSoapValueNull($voucher['RefundInformation'])) {
-
-                if (isset($voucher['RefundInformation']['Amount']) && !SoapTools::isSoapValueNull($voucher['RefundInformation']['Amount'])) {
+                if (isset($voucher['RefundInformation']['Amount'])
+                    && !SoapTools::isSoapValueNull($voucher['RefundInformation']['Amount'])
+                ) {
                     $refundInfomation->setAmount($voucher['RefundInformation']['Amount']);
                 }
-                if (isset($voucher['RefundInformation']['MotiveId']) && !SoapTools::isSoapValueNull($voucher['RefundInformation']['MotiveId'])) {
+
+                if (isset($voucher['RefundInformation']['MotiveId'])
+                    && !SoapTools::isSoapValueNull($voucher['RefundInformation']['MotiveId'])
+                ) {
                     $refundInfomation->setMotiveId($voucher['RefundInformation']['MotiveId']);
                 }
             }
