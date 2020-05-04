@@ -74,6 +74,12 @@ class GetOrderListResponse extends AbstractResponse
 
         $orderList = $orderListXml['OrderList'];
 
+        // `OrderList` can be empty with no order is found,
+        // e.g. when filtering with an unknown partner reference
+        if (empty($orderList)) {
+            return;
+        }
+
         $orders = $orderList['Order'];
         if (isset($orders['OrderNumber'])) {
             $orders = [$orders];
