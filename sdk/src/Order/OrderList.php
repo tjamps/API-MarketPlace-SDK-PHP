@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 13/10/2016
- * Time: 16:53
- */
 
 namespace Sdk\Order;
-
 
 class OrderList
 {
@@ -23,13 +16,16 @@ class OrderList
     }
 
     /**
-     * @param $order \Sdk\Order\Order
+     * @param $order Order
      */
     public function addOrder($order)
     {
         array_push($this->_orderList, $order);
     }
 
+    /**
+     * @return Order[]
+     */
     public function getOrders()
     {
         return $this->_orderList;
@@ -45,7 +41,7 @@ class OrderList
             return null;
         }
 
-        /** @var \Sdk\Order\Order $order */
+        /** @var Order $order */
         foreach ($this->_orderList as $order) {
             if ($order->getOrderNumber() == $orderNumber) {
                 return $order;

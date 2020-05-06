@@ -1,19 +1,12 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 10/10/2016
- * Time: 15:30
- */
 
 namespace Sdk\Order;
 
-
 use Sdk\ApiClient\CDSApiClient;
-use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\Exception\InvalidDataResponseException;
 use Sdk\Exception\ResponseErrorException;
 use Sdk\HttpTools\CDSApiSoapRequest;
+use Sdk\Order\Refund\Request;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
 use Sdk\Soap\HeaderMessage\HeaderMessage;
@@ -33,7 +26,7 @@ use Sdk\Soap\Order\ValidateOrderListResponse;
 class OrderPoint
 {
     /**
-     * @param $order \Sdk\Order\OrderList
+     * @param $order OrderList
      * @return ValidateOrderListResponse
      */
     public function validateOrderList($order)
@@ -47,7 +40,7 @@ class OrderPoint
 
         $orderListSoap = new OrderListSoap($order);
         $orderListXML = $orderListSoap->serialize();
-        $validateOrderListXML = $validateOrderList->generateEnclosingBalise($headerXML . $orderListXML);
+        $validateOrderListXML = $validateOrderList->generateEnclosingBalise($headerXML.$orderListXML);
 
         $bodyXML = $body->generateXML($validateOrderListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
@@ -59,13 +52,17 @@ class OrderPoint
 
     /**
      * @param $orderFilter OrderFilter
+     * @param array $ignoredErrors
      * @return GetOrderListResponse
      * @throws InvalidDataResponseException
      * @throws ResponseErrorException
      */
-    public function getOrderList($orderFilter)
+    public function getOrderList($orderFilter, $ignoredErrors = [])
     {
-        $optionalsNamespaces = array('xmlns:cdis="http://www.cdiscount.com"', 'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"');
+        $optionalsNamespaces = array(
+            'xmlns:cdis="http://www.cdiscount.com"',
+            'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"',
+        );
 
         $envelope = new Envelope();
 
@@ -82,17 +79,17 @@ class OrderPoint
 
         $headerXML = $header->generateHeader();
         $orderfilterXML = $orderFilterSoap->generateEnclosingBaliseWithChildren();
-        $orderListXML = $getOrderList->generateEnclosingBalise($headerXML . $orderfilterXML);
+        $orderListXML = $getOrderList->generateEnclosingBalise($headerXML.$orderfilterXML);
         $bodyXML = $body->generateXML($orderListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('GetOrderList', $envelopeXML);
 
-        return new GetOrderListResponse($response);
+        return new GetOrderListResponse($response, $ignoredErrors);
     }
 
     /**
-     * @param $request \Sdk\Order\Refund\Request
+     * @param $request Request
      */
     public function CreateRefundVoucherAfterShipment($request)
     {
@@ -106,14 +103,16 @@ class OrderPoint
         $requestSoap = new RequestSoap($request);
         $requestXML = $requestSoap->generateXML();
 
-        $createRefundVoucherAfterShipmentXML = $createRefundVoucherAfterShipment->generateEnclosingBalise($headerXML . $requestXML);
+        $createRefundVoucherAfterShipmentXML = $createRefundVoucherAfterShipment->generateEnclosingBalise(
+            $headerXML.$requestXML
+        );
 
         $bodyXML = $body->generateXML($createRefundVoucherAfterShipmentXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
 
         $envelopeXML = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cdis=\"http://www.cdiscount.com\" xmlns:cdis1=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\"><soapenv:Body><CreateRefundVoucherAfterShipment>".$headerXML.
-        "<request>
+            "<request>
             <OrderNumber>1209041030XVM5M</OrderNumber>
             <SellerRefundRequestList>
                <SellerRefundRequest>
@@ -148,7 +147,7 @@ class OrderPoint
         $headerXml = $header->generateHeader();
         $manageParcelRequestXml = $manageParcel->generateManageParcelRequestXml($manageParcelRequest);
 
-        $manageParcelXml = $manageParcel->generateEnclosingBalise($headerXml . $manageParcelRequestXml);
+        $manageParcelXml = $manageParcel->generateEnclosingBalise($headerXml.$manageParcelRequestXml);
 
         $bodyXml = $body->generateXML($manageParcelXml);
 
@@ -175,7 +174,7 @@ class OrderPoint
         $headerXML = $header->generateHeader();
         $requestXML = $createRefundVoucher->generateCreateRefundVoucherRequestRequestXml($createRefundVoucherRequest);
 
-        $createRefundVoucherXML = $createRefundVoucher->generateEnclosingBalise($headerXML . $requestXML);
+        $createRefundVoucherXML = $createRefundVoucher->generateEnclosingBalise($headerXML.$requestXML);
 
         $bodyXML = $body->generateXML($createRefundVoucherXML);
 
@@ -193,6 +192,7 @@ class OrderPoint
         $apiURL = CDSApiClient::getInstance()->getApiUrl();
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
+
         return $request->call();
     }
 
