@@ -131,7 +131,7 @@ abstract class AbstractResponse
      * @param array $xml
      * @throws ResponseErrorException
      */
-    protected function checkErrors($xml)
+    protected function checkErrors($xml, $ignoredErrors)
     {
         if (isset($xml['ErrorMessage']) && !SoapTools::isSoapValueNull(
                 $xml['ErrorMessage']
@@ -191,6 +191,13 @@ abstract class AbstractResponse
                 $this->errorList[] = isset($error['a:Message']) ? $error['a:Message'] : 'Unknown error';
             }
             $this->hasError = true;
+        }
+
+
+        $allErrors = array_filter(array_merge([$this->errorMessage], $this->errorList));
+        $diff = array_diff($allErrors, $ignoredErrors);
+        if (empty($diff)) {
+            return;
         }
 
         if ($this->hasError) {

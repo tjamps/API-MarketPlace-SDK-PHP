@@ -25,6 +25,8 @@ use Zend\Config\Reader\Xml;
 
 class GetOrderListResponse extends AbstractResponse
 {
+    const OUTDATED_ORDER_MESSAGE = 'Vous ne pouvez obtenir les alias de clients dont la commande est expédiée depuis plus de 4 semaines';
+
     /**
      * @var array
      */
@@ -40,7 +42,7 @@ class GetOrderListResponse extends AbstractResponse
      * @param $response
      * @throws InvalidDataResponseException|ResponseErrorException
      */
-    public function __construct($response)
+    public function __construct($response, $ignoredErrors)
     {
         $reader = new Xml();
         $this->dataResponse = $reader->fromString($response);
@@ -50,8 +52,9 @@ class GetOrderListResponse extends AbstractResponse
             's:Body.GetOrderListResponse.GetOrderListResult'
         );
 
+
         $orderListXml = $this->dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult'];
-        $this->checkErrors($orderListXml);
+        $this->checkErrors($orderListXml, $ignoredErrors);
 
         $this->setOrderList($orderListXml);
     }
