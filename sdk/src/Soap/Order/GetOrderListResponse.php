@@ -96,8 +96,10 @@ class GetOrderListResponse extends AbstractResponse
                 $orderObj->setArchiveParcelList(true);
             }
 
-            $billingAddress = $this->getAddress($order['BillingAddress']);
-            $orderObj->setBillingAddress($billingAddress);
+            if (!SoapTools::isSoapValueNull($order['BillingAddress'])) {
+                $billingAddress = $this->getAddress($order['BillingAddress']);
+                $orderObj->setBillingAddress($billingAddress);
+            }
 
             if (!SoapTools::isSoapValueNull($order['Corporation'])) {
                 $corporation = $this->getCorporation($order['Corporation']);
@@ -152,8 +154,10 @@ class GetOrderListResponse extends AbstractResponse
 
             $orderObj->setShippedTotalShippingCharges(floatval($order['ShippedTotalShippingCharges']));
 
-            $billingAddress = $this->getAddress($order['ShippingAddress']);
-            $orderObj->setShippingAddress($billingAddress);
+            if (!SoapTools::isSoapValueNull($order['ShippingAddress'])) {
+                $shippingAddress = $this->getAddress($order['ShippingAddress']);
+                $orderObj->setShippingAddress($shippingAddress);
+            }
             $orderObj->setShippingCode($order['ShippingCode']);
             $orderObj->setSiteCommissionPromisedAmount(floatval($order['SiteCommissionPromisedAmount']));
             $orderObj->setSiteCommissionShippedAmount(floatval($order['SiteCommissionShippedAmount']));
