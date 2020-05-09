@@ -1,39 +1,141 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 13/10/2016
- * Time: 17:56
- */
 
 namespace Sdk\Order;
-
 
 use Sdk\Soap\Common\SoapTools;
 
 class OrderLine
 {
+    /**
+     * @var string|null;
+     */
+    private $acceptationState;
 
     /**
-     * OrderLine constructor.
-     * @param $productId
+     * @var string|null
+     */
+    private $categoryCode;
+
+    /**
+     * @var string|null
+     */
+    private $deliveryDateMax;
+
+    /**
+     * @var string|null
+     */
+    private $deliveryDateMin;
+
+    /**
+     * @var bool
+     */
+    private $hasClaim = false;
+
+    /**
+     * @var float
+     */
+    private $initialPrice = 0.0;
+
+    /**
+     * @var bool
+     */
+    private $isNegotiated = false;
+
+    /**
+     * @var string|null
+     */
+    private $name;
+
+    /**
+     * @var string
+     * @see ProductConditionEnum constants
+     */
+    private $productCondition;
+
+    /**
+     * @var string
+     */
+    private $productId;
+
+    /**
+     * @var float
+     */
+    private $purchasePrice = 0.0;
+    /**
+     * @var int
+     */
+    private $quantity = 0;
+
+    /**
+     * @var int
+     */
+    private $rowId = 0;
+
+    /**
+     * @var string
+     */
+    private $sellerProductId;
+
+    /**
+     * @var string|null
+     */
+    private $shippingDateMax;
+
+    /**
+     * @var string|null
+     */
+    private $shippingDateMin;
+
+    /**
+     * @var string
+     */
+    private $sku;
+    /**
+     * @var string
+     */
+    private $skuParent;
+    /**
+     * @var float
+     */
+    private $unitAdditionalShippingCharges = 0.0;
+    /**
+     * @var float
+     */
+    private $unitShippingCharges = 0.0;
+    /**
+     * @var bool
+     */
+    private $cdav = false;
+
+    /**
+     * @var string
+     */
+    private $productEan = '';
+
+    /**
+     * @var bool
+     */
+    private $productEanGenerated = false;
+
+    /**
+     * @var bool
+     */
+    private $refundShippingCharge = false;
+
+    /**
+     * @param string $productId
      */
     public function __construct($productId)
     {
-        $this->_productId = $productId;
+        $this->productId = $productId;
     }
-
-    /**
-     * @var string;
-     */
-    private $_acceptationState = null;
 
     /**
      * @return string
      */
     public function getAcceptationState()
     {
-        return $this->_acceptationState;
+        return $this->acceptationState;
     }
 
     /**
@@ -41,20 +143,15 @@ class OrderLine
      */
     public function setAcceptationState($acceptationState)
     {
-        $this->_acceptationState = $acceptationState;
+        $this->acceptationState = $acceptationState;
     }
-
-    /**
-     * @var string
-     */
-    private $_categoryCode = null;
 
     /**
      * @return string
      */
     public function getCategoryCode()
     {
-        return $this->_categoryCode;
+        return $this->categoryCode;
     }
 
     /**
@@ -62,23 +159,15 @@ class OrderLine
      */
     public function setCategoryCode($categoryCode)
     {
-        $this->_categoryCode = $categoryCode;
+        $this->categoryCode = $categoryCode;
     }
-
-    #region Delivery Dates
-
-    /**
-     * @var string
-     */
-    //TODO replace by date
-    private $_deliveryDateMax = null;
 
     /**
      * @return string
      */
     public function getDeliveryDateMax()
     {
-        return $this->_deliveryDateMax;
+        return $this->deliveryDateMax;
     }
 
     /**
@@ -86,21 +175,15 @@ class OrderLine
      */
     public function setDeliveryDateMax($deliveryDateMax)
     {
-        $this->_deliveryDateMax = $deliveryDateMax;
+        $this->deliveryDateMax = $deliveryDateMax;
     }
-
-    /**
-     * @var string
-     */
-    //replace by date
-    private $_deliveryDateMin = null;
 
     /**
      * @return string
      */
     public function getDeliveryDateMin()
     {
-        return $this->_deliveryDateMin;
+        return $this->deliveryDateMin;
     }
 
     /**
@@ -108,22 +191,15 @@ class OrderLine
      */
     public function setDeliveryDateMin($deliveryDateMin)
     {
-        $this->_deliveryDateMin = $deliveryDateMin;
+        $this->deliveryDateMin = $deliveryDateMin;
     }
-
-    #endregion Delivery dates
-
-    /**
-     * @var bool
-     */
-    private $_hasClaim = false;
 
     /**
      * @return boolean
      */
     public function isHasClaim()
     {
-        return $this->_hasClaim;
+        return $this->hasClaim;
     }
 
     /**
@@ -131,20 +207,15 @@ class OrderLine
      */
     public function setHasClaim($hasClaim)
     {
-        $this->_hasClaim = $hasClaim;
+        $this->hasClaim = $hasClaim;
     }
-
-    /**
-     * @var float
-     */
-    private $_initialPrice = 0.0;
 
     /**
      * @return float
      */
     public function getInitialPrice()
     {
-        return $this->_initialPrice;
+        return $this->initialPrice;
     }
 
     /**
@@ -153,21 +224,16 @@ class OrderLine
     public function setInitialPrice($initialPrice)
     {
         if (!SoapTools::isSoapValueNull($initialPrice)) {
-            $this->_initialPrice = $initialPrice;
+            $this->initialPrice = $initialPrice;
         }
     }
-
-    /**
-     * @var bool
-     */
-    private $_isNegotiated = false;
 
     /**
      * @return boolean
      */
     public function isIsNegotiated()
     {
-        return $this->_isNegotiated;
+        return $this->isNegotiated;
     }
 
     /**
@@ -175,20 +241,15 @@ class OrderLine
      */
     public function setIsNegotiated($isNegotiated)
     {
-        $this->_isNegotiated = $isNegotiated;
+        $this->isNegotiated = $isNegotiated;
     }
-
-    /**
-     * @var string
-     */
-    private $_name = null;
 
     /**
      * @return string
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -196,22 +257,15 @@ class OrderLine
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
-
-    //TODO add OrderLineChildList
-
-    /**
-     * @var \Sdk\Order\ProductConditionEnum
-     */
-    private $_productCondition = null;
 
     /**
      * @return string
      */
     public function getProductCondition()
     {
-        return $this->_productCondition;
+        return $this->productCondition;
     }
 
     /**
@@ -219,33 +273,23 @@ class OrderLine
      */
     public function setProductCondition($productCondition)
     {
-        $this->_productCondition = $productCondition;
+        $this->productCondition = $productCondition;
     }
-
-    /**
-     * @var string
-     */
-    private $_productId = null;
 
     /**
      * @return string
      */
     public function getProductId()
     {
-        return $this->_productId;
+        return $this->productId;
     }
-
-    /**
-     * @var float
-     */
-    private $_purchasePrice = 0.0;
 
     /**
      * @return float
      */
     public function getPurchasePrice()
     {
-        return $this->_purchasePrice;
+        return $this->purchasePrice;
     }
 
     /**
@@ -253,20 +297,15 @@ class OrderLine
      */
     public function setPurchasePrice($purchasePrice)
     {
-        $this->_purchasePrice = $purchasePrice;
+        $this->purchasePrice = $purchasePrice;
     }
-
-    /**
-     * @var int
-     */
-    private $_quantity = 0;
 
     /**
      * @return int
      */
     public function getQuantity()
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -274,17 +313,15 @@ class OrderLine
      */
     public function setQuantity($quantity)
     {
-        $this->_quantity = $quantity;
+        $this->quantity = $quantity;
     }
-
-    private $_rowId = 0;
 
     /**
      * @return int
      */
     public function getRowId()
     {
-        return $this->_rowId;
+        return $this->rowId;
     }
 
     /**
@@ -292,20 +329,15 @@ class OrderLine
      */
     public function setRowId($rowId)
     {
-        $this->_rowId = $rowId;
+        $this->rowId = $rowId;
     }
-
-    /**
-     * @var string
-     */
-    private $_sellerProductId = null;
 
     /**
      * @return string
      */
     public function getSellerProductId()
     {
-        return $this->_sellerProductId;
+        return $this->sellerProductId;
     }
 
     /**
@@ -313,21 +345,15 @@ class OrderLine
      */
     public function setSellerProductId($sellerProductId)
     {
-        $this->_sellerProductId = $sellerProductId;
+        $this->sellerProductId = $sellerProductId;
     }
-
-    /**
-     * @var string
-     */
-    //TODO date
-    private $_shippingDateMax = null;
 
     /**
      * @return string
      */
     public function getShippingDateMax()
     {
-        return $this->_shippingDateMax;
+        return $this->shippingDateMax;
     }
 
     /**
@@ -335,21 +361,15 @@ class OrderLine
      */
     public function setShippingDateMax($shippingDateMax)
     {
-        $this->_shippingDateMax = $shippingDateMax;
+        $this->shippingDateMax = $shippingDateMax;
     }
-
-    /**
-     * @var string
-     */
-    //TODO date
-    private $_shippingDateMin = null;
 
     /**
      * @return string
      */
     public function getShippingDateMin()
     {
-        return $this->_shippingDateMin;
+        return $this->shippingDateMin;
     }
 
     /**
@@ -357,22 +377,15 @@ class OrderLine
      */
     public function setShippingDateMin($shippingDateMin)
     {
-        $this->_shippingDateMin = $shippingDateMin;
+        $this->shippingDateMin = $shippingDateMin;
     }
-
-    #region SKU
-
-    /**
-     * @var string
-     */
-    private $_sku = null;
 
     /**
      * @return string
      */
     public function getSku()
     {
-        return $this->_sku;
+        return $this->sku;
     }
 
     /**
@@ -380,20 +393,15 @@ class OrderLine
      */
     public function setSku($sku)
     {
-        $this->_sku = $sku;
+        $this->sku = $sku;
     }
-
-    /**
-     * @var string
-     */
-    private $_skuParent = null;
 
     /**
      * @return string
      */
     public function getSkuParent()
     {
-        return $this->_skuParent;
+        return $this->skuParent;
     }
 
     /**
@@ -402,25 +410,16 @@ class OrderLine
     public function setSkuParent($skuParent)
     {
         if (!SoapTools::isSoapValueNull($skuParent)) {
-            $this->_skuParent = $skuParent;
+            $this->skuParent = $skuParent;
         }
     }
-
-    #endregion SKU
-
-    #region ShippingCharges
-
-    /**
-     * @var float
-     */
-    private $_unitAdditionalShippingCharges = 0.0;
 
     /**
      * @return float
      */
     public function getUnitAdditionalShippingCharges()
     {
-        return $this->_unitAdditionalShippingCharges;
+        return $this->unitAdditionalShippingCharges;
     }
 
     /**
@@ -428,20 +427,15 @@ class OrderLine
      */
     public function setUnitAdditionalShippingCharges($unitAdditionalShippingCharges)
     {
-        $this->_unitAdditionalShippingCharges = $unitAdditionalShippingCharges;
+        $this->unitAdditionalShippingCharges = $unitAdditionalShippingCharges;
     }
-
-    /**
-     * @var float
-     */
-    private $_unitShippingCharges = 0.0;
 
     /**
      * @return float
      */
     public function getUnitShippingCharges()
     {
-        return $this->_unitShippingCharges;
+        return $this->unitShippingCharges;
     }
 
     /**
@@ -449,22 +443,15 @@ class OrderLine
      */
     public function setUnitShippingCharges($unitShippingCharges)
     {
-        $this->_unitShippingCharges = $unitShippingCharges;
+        $this->unitShippingCharges = $unitShippingCharges;
     }
-
-    #endregion ShippingCharges
-
-    /**
-     * @var bool
-     */
-    private $_cdav = false;
 
     /**
      * @return boolean
      */
     public function isCdav()
     {
-        return $this->_cdav;
+        return $this->cdav;
     }
 
     /**
@@ -472,22 +459,15 @@ class OrderLine
      */
     public function setCdav($cdav)
     {
-        $this->_cdav = $cdav;
+        $this->cdav = $cdav;
     }
-
-    #region EAN
-
-    /**
-     * @var string
-     */
-    private $_productEan = "";
 
     /**
      * @return string
      */
     public function getProductEan()
     {
-        return $this->_productEan;
+        return $this->productEan;
     }
 
     /**
@@ -495,20 +475,15 @@ class OrderLine
      */
     public function setProductEan($productEan)
     {
-        $this->_productEan = $productEan;
+        $this->productEan = $productEan;
     }
-
-    /**
-     * @var bool
-     */
-    private $_productEanGenerated = false;
 
     /**
      * @return boolean
      */
     public function isProductEanGenerated()
     {
-        return $this->_productEanGenerated;
+        return $this->productEanGenerated;
     }
 
     /**
@@ -516,28 +491,22 @@ class OrderLine
      */
     public function setProductEanGenerated($productEanGenerated)
     {
-        $this->_productEanGenerated = $productEanGenerated;
+        $this->productEanGenerated = $productEanGenerated;
     }
-    #endregion EAN
-    
-    /*
-     * @var boolean
-     */
-    private $_refundShippingCharges = false;
-    
-    /*
+
+    /**
      * @return boolean
      */
     public function isRefundShippingChargesResult()
     {
-        return $this->_refundShippingCharges;
+        return $this->refundShippingCharge;
     }
-    
-    /*
+
+    /**
      * @param $refundShippingCharge
      */
-    public function setRefundShippingCharges($refundShippingCharge)
+    public function setRefundShippingCharge($refundShippingCharge)
     {
-        $this->_refundShippingCharges = $refundShippingCharge;
+        $this->refundShippingCharge = $refundShippingCharge;
     }
 }

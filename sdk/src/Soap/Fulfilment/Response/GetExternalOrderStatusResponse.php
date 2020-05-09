@@ -2,6 +2,8 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Sdk\Exception\InvalidDataResponseException;
+use Sdk\Exception\ResponseErrorException;
 use Sdk\Soap\Common\AbstractResponse;
 use Zend\Config\Reader\Xml;
 
@@ -17,6 +19,12 @@ class GetExternalOrderStatusResponse extends AbstractResponse
      */
     private $status = null;
 
+    /**
+     * GetExternalOrderStatusResponse constructor.
+     * @param $response
+     * @throws InvalidDataResponseException
+     * @throws ResponseErrorException
+     */
     public function __construct($response)
     {
         $reader = new Xml();

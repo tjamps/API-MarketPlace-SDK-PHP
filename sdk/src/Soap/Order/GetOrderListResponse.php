@@ -309,7 +309,7 @@ class GetOrderListResponse extends AbstractResponse
             $orderLine->setUnitShippingCharges(floatval($orderLineListOBJ['UnitShippingCharges']));
 
             if (isset($orderLineListOBJ['RefundShippingCharges']) && $orderLineListOBJ['RefundShippingCharges'] === 'true') {
-                $orderLine->setRefundShippingCharges(true);
+                $orderLine->setRefundShippingCharge(true);
             }
             $orderLineList->addOrderLine($orderLine);
         }
