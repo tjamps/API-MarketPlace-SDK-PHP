@@ -129,9 +129,10 @@ abstract class AbstractResponse
 
     /**
      * @param array $xml
+     * @param array $ignoredErrors
      * @throws ResponseErrorException
      */
-    protected function checkErrors($xml, $ignoredErrors)
+    protected function checkErrors($xml, $ignoredErrors = [])
     {
         if (isset($xml['ErrorMessage']) && !SoapTools::isSoapValueNull(
                 $xml['ErrorMessage']

@@ -1,43 +1,38 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 13/10/2016
- * Time: 18:12
- */
 
 namespace Sdk\Order;
 
-
 class OrderLineList
 {
-
     /**
-     * @var array \Sdk\Order\OrderLine
+     * @var OrderLine[]
      */
-    private $_orderLineList = array();
+    private $orderLineList;
+
+    public function __construct()
+    {
+        $this->orderLineList = [];
+    }
 
     /**
-     * @param $orderLine \Sdk\Order\OrderLine
+     * @param $orderLine OrderLine
      */
     public function addOrderLine($orderLine)
     {
-        array_push($this->_orderLineList, $orderLine);
+        $this->orderLineList[] = $orderLine;
     }
 
     /**
-     * @return array \Sdk\Order\OrderLine
+     * @return OrderLine[]
      */
     public function getOrderLines()
     {
-        return $this->_orderLineList;
+        return $this->orderLineList;
     }
 
     /**
-     * Get an order line by ID
-     *
-     * @param $productId
-     * @return null|OrderLine
+     * @param string $productId
+     * @return OrderLine|null
      */
     public function getOrderLineByProductId($productId)
     {
@@ -45,12 +40,12 @@ class OrderLineList
             return null;
         }
 
-        /** @var \Sdk\Order\OrderLine $orderLine */
-        foreach ($this->_orderLineList as $orderLine) {
-            if ($orderLine->getProductId() == $productId) {
+        foreach ($this->orderLineList as $orderLine) {
+            if ($orderLine->getProductId() === $productId) {
                 return $orderLine;
             }
         }
+
         return null;
     }
 }

@@ -1,34 +1,32 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 14/10/2016
- * Time: 13:35
- */
 
 namespace Sdk\Parcel;
-
 
 class ParcelItemList
 {
     /**
-     * @var array \Sdk\Parcel\ParcelItem
+     * @var ParcelItem[]
      */
-    private $_parcelItemList = array();
+    private $parcelItemList;
 
-    /**
-     * @param $parcelItem \Sdk\Parcel\ParcelItem
-     */
-    public function addParcelItem($parcelItem)
+    public function __construct()
     {
-        array_push($this->_parcelItemList, $parcelItem);
+        $this->parcelItemList = [];
     }
 
     /**
-     * @return array \Sdk\Parcel\Parcel
+     * @param $parcelItem ParcelItem
+     */
+    public function addParcelItem($parcelItem)
+    {
+        $this->parcelItemList[] = $parcelItem;
+    }
+
+    /**
+     * @return ParcelItem[]
      */
     public function getParcelItems()
     {
-        return $this->_parcelItemList;
+        return $this->parcelItemList;
     }
 }

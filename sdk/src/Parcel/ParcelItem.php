@@ -1,28 +1,39 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 14/10/2016
- * Time: 13:35
- */
 
 namespace Sdk\Parcel;
 
-
 class ParcelItem
 {
+    /**
+     * @var string
+     */
+    private $productName;
 
     /**
      * @var string
      */
-    private $_productName = null;
+    private $sku;
+
+    /**
+     * @var int
+     */
+    private $quantity;
+
+    /**
+     * @param string $sku
+     */
+    public function __construct($sku)
+    {
+        $this->sku = $sku;
+        $this->quantity = 0;
+    }
 
     /**
      * @return string
      */
     public function getProductName()
     {
-        return $this->_productName;
+        return $this->productName;
     }
 
     /**
@@ -30,33 +41,23 @@ class ParcelItem
      */
     public function setProductName($productName)
     {
-        $this->_productName = $productName;
+        $this->productName = $productName;
     }
-
-    /**
-     * @var string
-     */
-    private $_sku = null;
 
     /**
      * @return string
      */
     public function getSku()
     {
-        return $this->_sku;
+        return $this->sku;
     }
-
-    /**
-     * @var int
-     */
-    private $_quantity = 0;
 
     /**
      * @return int
      */
     public function getQuantity()
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -64,15 +65,6 @@ class ParcelItem
      */
     public function setQuantity($quantity)
     {
-        $this->_quantity = $quantity;
-    }
-
-    /**
-     * ParcelItem constructor.
-     * @param $sku
-     */
-    public function __construct($sku)
-    {
-        $this->_sku = $sku;
+        $this->quantity = $quantity;
     }
 }

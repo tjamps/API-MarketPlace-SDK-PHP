@@ -8,6 +8,8 @@ namespace Sdk\Fulfilment;
 
 
 use Sdk\ApiClient\CDSApiClient;
+use Sdk\Exception\InvalidDataResponseException;
+use Sdk\Exception\ResponseErrorException;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
@@ -77,10 +79,12 @@ class FulfilmentPoint
         return new SubmitOfferStateActionResponse($response);
     }
 
-    /*
-    * @param $orderStatusRequest \Sdk\Fulfilment\OrderStatusRequest
-    * @return GetExternalOrderStatusResponse
-    */
+    /**
+     * @param $orderStatusRequest
+     * @return GetExternalOrderStatusResponse
+     * @throws InvalidDataResponseException
+     * @throws ResponseErrorException
+     */
     public function GetExternalOrderStatus($orderStatusRequest)
     {
         $envelope = new Envelope();
