@@ -376,11 +376,21 @@ class GetOrderListResponse extends AbstractResponse
             $parcelObj->setRealCarrierCode($parcel['RealCarrierCode']);
 
             foreach ($parcel['ParcelItemList'] as $parcelItem) {
-                $parcelItemObj = new ParcelItem($parcelItem['Sku']);
-                $parcelItemObj->setQuantity(intval($parcelItem['Quantity']));
-                $parcelItemObj->setProductName($parcelItem['ProductName']);
+                if (isset($parcelItem[0]) && is_array($parcelItem[0])) {
+                    foreach ($parcelItem as $parcel) {
+                        $parcelItemObj = new ParcelItem($parcel['Sku']);
+                        $parcelItemObj->setQuantity(intval($parcel['Quantity']));
+                        $parcelItemObj->setProductName($parcel['ProductName']);
 
-                $parcelObj->getParcelItemList()->addParcelItem($parcelItemObj);
+                        $parcelObj->getParcelItemList()->addParcelItem($parcelItemObj);
+                    }
+                } else {
+                    $parcelItemObj = new ParcelItem($parcelItem['Sku']);
+                    $parcelItemObj->setQuantity(intval($parcelItem['Quantity']));
+                    $parcelItemObj->setProductName($parcelItem['ProductName']);
+
+                    $parcelObj->getParcelItemList()->addParcelItem($parcelItemObj);
+                }
             }
 
             $trackingList = new TrackingList();
