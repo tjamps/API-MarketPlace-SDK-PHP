@@ -19,6 +19,16 @@ class OrderClaim extends GenericQuestion
     private $_orderNumber = null;
 
     /**
+     * @var string
+     */
+    private $_claimType = null;
+
+    /**
+     * @var string
+     */
+    private $_discussionType = null;
+
+    /**
      * @return string
      */
     public function getOrderNumber()
@@ -37,11 +47,6 @@ class OrderClaim extends GenericQuestion
     }
 
     /**
-     * @var string
-     */
-    private $_claimType = null;
-
-    /**
      * @return string
      */
     public function getClaimType()
@@ -58,11 +63,6 @@ class OrderClaim extends GenericQuestion
             $this->_claimType = $claimType;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_discussionType = null;
 
     /**
      * @return string

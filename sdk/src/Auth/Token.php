@@ -83,30 +83,6 @@ class Token
         return self::$_instance;
     }
 
-    #endregion Singleton
-
-    #region Private methods
-
-    private function _generateNewToken()
-    {
-        $client = CDSApiClient::getInstance();
-        $request = new CDSApiRequest($client->getUsername(), $client->getPassword(), $client->getTokenUrl());
-
-        libxml_use_internal_errors(true);
-        $xmlResult = simplexml_load_string($request->execute());
-
-        //TODO gestion erreur token
-
-        if ($xmlResult !== false && isset($xmlResult[0]) && ctype_alnum((string) ($xmlResult[0]))) {
-            $this->_token = $xmlResult[0];
-
-            if ($this->_token != null && $this->_token) {
-                $this->_isValid = true;
-                $this->_initdate = new DateTime();
-            }
-        }
-    }
-
     #endregion Private methods
 
     #region Public methods
@@ -130,6 +106,30 @@ class Token
     public function isTokenValid()
     {
         return $this->_isValid;
+    }
+
+    #endregion Singleton
+
+    #region Private methods
+
+    private function _generateNewToken()
+    {
+        $client = CDSApiClient::getInstance();
+        $request = new CDSApiRequest($client->getUsername(), $client->getPassword(), $client->getTokenUrl());
+
+        libxml_use_internal_errors(true);
+        $xmlResult = simplexml_load_string($request->execute());
+
+        //TODO gestion erreur token
+
+        if ($xmlResult !== false && isset($xmlResult[0]) && ctype_alnum((string) ($xmlResult[0]))) {
+            $this->_token = $xmlResult[0];
+
+            if ($this->_token != null && $this->_token) {
+                $this->_isValid = true;
+                $this->_initdate = new DateTime();
+            }
+        }
     }
 
     #endregion Public methods

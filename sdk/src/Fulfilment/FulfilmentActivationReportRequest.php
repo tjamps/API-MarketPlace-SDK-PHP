@@ -14,38 +14,14 @@ class FulfilmentActivationReportRequest
     private $_BeginDate = null;
     
     /**
-     * @return string
-     */
-    public function getBeginDate()
-    {
-        return $this->_BeginDate;
-    }
-    
-    /**
      * @var string
      */
     private $_EndDate = null;
-    
-    /**
-     * @return string
-     */
-    public function getEndDate()
-    {
-        return $this->_EndDate;
-    }
 
      /**
      * @var array
      */
-    private $_DepositList = null;
-    
-    /**
-     * @return array
-     */
-    public function getDepositList()
-    {
-        return $this->_DepositList;
-    }   
+    private $_DepositList = null;   
     
     /*
      * FulfilmentActivationReportRequest constructor
@@ -58,5 +34,29 @@ class FulfilmentActivationReportRequest
         $this->_BeginDate = $BeginDate;
         $this->_EndDate = $EndDate;
         $this->_DepositList = $DepositList;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getBeginDate()
+    {
+        return $this->_BeginDate;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getEndDate()
+    {
+        return $this->_EndDate;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getDepositList()
+    {
+        return $this->_DepositList;
     }
 }

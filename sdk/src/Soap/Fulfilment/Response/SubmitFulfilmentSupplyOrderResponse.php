@@ -25,22 +25,6 @@ class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
     private $_submitFulfilmentSupplyOrderResult= null;
 
     /*
-     * @return \Sdk\Fulfilment\SubmitFulfilmentSupplyOrderResult
-     */
-    public function getSubmitFulfilmentSupplyOrderResult()
-    {
-        return $this->_submitFulfilmentSupplyOrderResult;
-    }
-
-    /*
-     * @param  $submitFulfilmentSupplyOrderResult
-     */
-     public function setSubmitFulfilmentSupplyOrderResult($submitFulfilmentSupplyOrderResult)
-    {
-        $this->_submitFulfilmentSupplyOrderResult=$submitFulfilmentSupplyOrderResult;
-    }
-
-    /*
      * SubmitFulfilmentSupplyOrderResponse constructor
      * @param $response
      */
@@ -64,6 +48,22 @@ class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
 		{
 			$this->generateFaultResult();
 		}
+    }
+
+    /*
+     * @return \Sdk\Fulfilment\SubmitFulfilmentSupplyOrderResult
+     */
+    public function getSubmitFulfilmentSupplyOrderResult()
+    {
+        return $this->_submitFulfilmentSupplyOrderResult;
+    }
+
+    /*
+     * @param  $submitFulfilmentSupplyOrderResult
+     */
+     public function setSubmitFulfilmentSupplyOrderResult($submitFulfilmentSupplyOrderResult)
+    {
+        $this->_submitFulfilmentSupplyOrderResult=$submitFulfilmentSupplyOrderResult;
     }
 
     /**

@@ -16,30 +16,6 @@ class SupplyOrderReportLine
     private $_errorList = [];
 
     /*
-     * @return array
-     */
-    public function getErrorList()
-    {
-        return $this->_errorList;
-    }
-
-    /**
-     * @param $error \Sdk\Fulfilment\Error
-     */
-    public function addToErrorList($error)
-    {
-        $this->_errorList[] = $error;
-    }
-
-    /*
-     * @return array
-     */
-    public function getReportList()
-    {
-        return $this->_reportList;
-    }
-
-    /*
      * @var int
      */
     private $_orderedQuantity = null;
@@ -78,6 +54,30 @@ class SupplyOrderReportLine
      * @var dateTime
      */
     private $_warehouseReceptionMinDate = null;
+
+    /*
+     * @return array
+     */
+    public function getErrorList()
+    {
+        return $this->_errorList;
+    }
+
+    /**
+     * @param $error \Sdk\Fulfilment\Error
+     */
+    public function addToErrorList($error)
+    {
+        $this->_errorList[] = $error;
+    }
+
+    /*
+     * @return array
+     */
+    public function getReportList()
+    {
+        return $this->_reportList;
+    }
 
      /*
      * @return array

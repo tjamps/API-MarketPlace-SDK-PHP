@@ -18,6 +18,31 @@ class SellerIndicator
     private $_computationDate = null;
 
     /**
+     * @var string
+     */
+    private $_description = null;
+
+    /**
+     * @var float
+     */
+    private $_threshold = 0.0;
+
+    /**
+     * @var string
+     */
+    private $_thresholdType = null;
+
+    /**
+     * @var float
+     */
+    private $_valueD30 = 0.0;
+
+    /**
+     * @var float
+     */
+    private $_valueD60 = 0.0;
+
+    /**
      * @return string
      */
     public function getComputationDate()
@@ -32,11 +57,6 @@ class SellerIndicator
     {
         $this->_computationDate = $computationDate;
     }
-
-    /**
-     * @var string
-     */
-    private $_description = null;
 
     /**
      * @return string
@@ -55,11 +75,6 @@ class SellerIndicator
     }
 
     /**
-     * @var float
-     */
-    private $_threshold = 0.0;
-
-    /**
      * @return float
      */
     public function getThreshold()
@@ -74,11 +89,6 @@ class SellerIndicator
     {
         $this->_threshold = $threshold;
     }
-
-    /**
-     * @var string
-     */
-    private $_thresholdType = null;
 
     /**
      * @return string
@@ -97,11 +107,6 @@ class SellerIndicator
     }
 
     /**
-     * @var float
-     */
-    private $_valueD30 = 0.0;
-
-    /**
      * @return float
      */
     public function getValueD30()
@@ -116,11 +121,6 @@ class SellerIndicator
     {
         $this->_valueD30 = $valueD30;
     }
-
-    /**
-     * @var float
-     */
-    private $_valueD60 = 0.0;
 
     /**
      * @return float

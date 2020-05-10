@@ -19,6 +19,26 @@ class ShippingInformation
     private $_additionalShippingCharges = null;
 
     /**
+     * @var int
+     */
+    private $_maxLeadTime = 0;
+
+    /**
+     * @var int
+     */
+    private $_minLeadTime = 0;
+
+    /**
+     * @var float
+     */
+    private $_shippingCharges = 0.0;
+
+    /**
+     * @var \Sdk\Delivey\DeliveryMode
+     */
+    private $_deliveryMode = null;
+
+    /**
      * @return string
      */
     public function getAdditionalShippingCharges()
@@ -35,11 +55,6 @@ class ShippingInformation
             $this->_additionalShippingCharges = $additionalShippingCharges;
         }
     }
-
-    /**
-     * @var int
-     */
-    private $_maxLeadTime = 0;
 
     /**
      * @return int
@@ -60,11 +75,6 @@ class ShippingInformation
     }
 
     /**
-     * @var int
-     */
-    private $_minLeadTime = 0;
-
-    /**
      * @return int
      */
     public function getMinLeadTime()
@@ -83,11 +93,6 @@ class ShippingInformation
     }
 
     /**
-     * @var float
-     */
-    private $_shippingCharges = 0.0;
-
-    /**
      * @return float
      */
     public function getShippingCharges()
@@ -104,11 +109,6 @@ class ShippingInformation
             $this->_shippingCharges = $shippingCharges;
         }
     }
-
-    /**
-     * @var \Sdk\Delivey\DeliveryMode
-     */
-    private $_deliveryMode = null;
 
     /**
      * @return DeliveryMode

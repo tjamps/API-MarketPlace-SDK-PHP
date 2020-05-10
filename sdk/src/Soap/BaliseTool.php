@@ -31,24 +31,6 @@ class BaliseTool
     }
 
     /**
-     * @return string
-     */
-    private function _generateOpeningBalise()
-    {
-        $inlines = [$this->_xmlns];
-
-        return $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, $inlines);
-    }
-
-    /**
-     * @return string
-     */
-    private function _generateClosingBalise()
-    {
-        return $this->_xmlUtil->generateCloseBalise($this->_tag);
-    }
-
-    /**
      * @param $child
      * @return string
      */
@@ -72,6 +54,24 @@ class BaliseTool
      * @return string
      */
     protected function _generateCloseBalise()
+    {
+        return $this->_xmlUtil->generateCloseBalise($this->_tag);
+    }
+
+    /**
+     * @return string
+     */
+    private function _generateOpeningBalise()
+    {
+        $inlines = [$this->_xmlns];
+
+        return $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, $inlines);
+    }
+
+    /**
+     * @return string
+     */
+    private function _generateClosingBalise()
     {
         return $this->_xmlUtil->generateCloseBalise($this->_tag);
     }

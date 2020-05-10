@@ -17,6 +17,46 @@ class Parcel
     private $_customerNum = null;
 
     /**
+     * @var string
+     */
+    private $_externalCarrierName = null;
+
+    /**
+     * @var string
+     */
+    private $_externalCarrierTrackingUrl = null;
+
+    /**
+     * @var bool
+     */
+    private $_customerReturn = false;
+
+    /**
+     * @var String
+     */
+    private $_parcelStatus = null;
+
+    /**
+     * @var string
+     */
+    private $_realCarrierCode = null;
+
+    /**
+     * @var ParcelItemList
+     */
+    private $_parcelItemList = null;
+    
+    /*
+     * @var array
+     */
+    private $_trackingList = null;
+
+    public function __construct()
+    {
+        $this->_parcelItemList = new ParcelItemList();
+    }
+
+    /**
      * @return string
      */
     public function getCustomerNum()
@@ -31,11 +71,6 @@ class Parcel
     {
         $this->_customerNum = $customerNum;
     }
-
-    /**
-     * @var string
-     */
-    private $_externalCarrierName = null;
 
     /**
      * @return string
@@ -54,11 +89,6 @@ class Parcel
     }
 
     /**
-     * @var string
-     */
-    private $_externalCarrierTrackingUrl = null;
-
-    /**
      * @return string
      */
     public function getExternalCarrierTrackingUrl()
@@ -73,11 +103,6 @@ class Parcel
     {
         $this->_externalCarrierTrackingUrl = $externalCarrierTrackingUrl;
     }
-
-    /**
-     * @var bool
-     */
-    private $_customerReturn = false;
 
     /**
      * @return boolean
@@ -96,11 +121,6 @@ class Parcel
     }
 
     /**
-     * @var String
-     */
-    private $_parcelStatus = null;
-
-    /**
      * @return String
      */
     public function getParcelStatus()
@@ -115,11 +135,6 @@ class Parcel
     {
         $this->_parcelStatus = $parcelStatus;
     }
-
-    /**
-     * @var string
-     */
-    private $_realCarrierCode = null;
 
     /**
      * @return string
@@ -138,27 +153,12 @@ class Parcel
     }
 
     /**
-     * @var ParcelItemList
-     */
-    private $_parcelItemList = null;
-
-    /**
      * @return ParcelItemList
      */
     public function getParcelItemList()
     {
         return $this->_parcelItemList;
     }
-
-    public function __construct()
-    {
-        $this->_parcelItemList = new ParcelItemList();
-    }
-    
-    /*
-     * @var array
-     */
-    private $_trackingList = null;
     
     /*
      * @return array of \Sdk\Parcel\Tracking

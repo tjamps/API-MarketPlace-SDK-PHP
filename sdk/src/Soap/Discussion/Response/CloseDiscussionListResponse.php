@@ -27,14 +27,6 @@ class CloseDiscussionListResponse extends AbstractResponse
     private $_closeDiscussionResultList = null;
 
     /**
-     * @return array
-     */
-    public function getCloseDiscussionResultList()
-    {
-        return $this->_closeDiscussionResultList;
-    }
-
-    /**
      * GetOrderQuestionListResponse constructor.
      * @param $response
      */
@@ -60,6 +52,14 @@ class CloseDiscussionListResponse extends AbstractResponse
                 $this->_generateCloseDiscussionResultList($this->_dataResponse['s:Body']['CloseDiscussionListResponse']['CloseDiscussionListResult']['CloseDiscussionResultList']);
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getCloseDiscussionResultList()
+    {
+        return $this->_closeDiscussionResultList;
     }
 
     /**

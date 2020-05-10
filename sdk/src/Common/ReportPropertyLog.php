@@ -19,17 +19,36 @@ class ReportPropertyLog
     private $_errorCode = 0;
 
     /**
+     * @var string
+     */
+    private $_logMessage = null;
+
+    /**
+     * @var string
+     */
+    private $_name = null;
+
+    /**
+     * @var string
+     */
+    private $_propertyError = null;
+
+    /**
+     * ReportPropertyLog constructor.
+     * @param $errorCode
+     */
+    public function __construct($errorCode)
+    {
+        $this->_errorCode = $errorCode;
+    }
+
+    /**
      * @return int
      */
     public function getErrorCode()
     {
         return $this->_errorCode;
     }
-
-    /**
-     * @var string
-     */
-    private $_logMessage = null;
 
     /**
      * @return string
@@ -50,11 +69,6 @@ class ReportPropertyLog
     }
 
     /**
-     * @var string
-     */
-    private $_name = null;
-
-    /**
      * @return string
      */
     public function getName()
@@ -73,11 +87,6 @@ class ReportPropertyLog
     }
 
     /**
-     * @var string
-     */
-    private $_propertyError = null;
-
-    /**
      * @return string
      */
     public function getPropertyError()
@@ -93,14 +102,5 @@ class ReportPropertyLog
         if (!SoapTools::isSoapValueNull($propertyError)) {
             $this->_propertyError = $propertyError;
         }
-    }
-
-    /**
-     * ReportPropertyLog constructor.
-     * @param $errorCode
-     */
-    public function __construct($errorCode)
-    {
-        $this->_errorCode = $errorCode;
     }
 }

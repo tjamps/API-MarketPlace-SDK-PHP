@@ -27,14 +27,6 @@ class GetOrderQuestionListResponse extends AbstractResponse
     private $_orderQuestionList = null;
 
     /**
-     * @return array
-     */
-    public function getOrderQuestionList()
-    {
-        return $this->_orderQuestionList;
-    }
-
-    /**
      * GetOrderQuestionListResponse constructor.
      * @param $response
      */
@@ -56,6 +48,14 @@ class GetOrderQuestionListResponse extends AbstractResponse
 
             $this->_generateOrderQuestionListFromXML($this->_dataResponse['s:Body']['GetOrderQuestionListResponse']['GetOrderQuestionListResult']['OrderQuestionList']);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrderQuestionList()
+    {
+        return $this->_orderQuestionList;
     }
 
     /**

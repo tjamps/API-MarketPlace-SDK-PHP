@@ -16,6 +16,11 @@ class ValidateOrderResult extends Order
     private $_validated = false;
 
     /**
+     * @var ValidateOrderLineResults
+     */
+    private $_validateOrderLineResults = null;
+
+    /**
      * @param $validated
      */
     public function setValidated($validated)
@@ -30,11 +35,6 @@ class ValidateOrderResult extends Order
     {
         return $this->_validated;
     }
-
-    /**
-     * @var ValidateOrderLineResults
-     */
-    private $_validateOrderLineResults = null;
 
     /**
      * @return ValidateOrderLineResults

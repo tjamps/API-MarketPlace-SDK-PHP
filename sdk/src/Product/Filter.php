@@ -17,19 +17,19 @@ class Filter
     private $_categoryCode = null;
 
     /**
-     * @return string
-     */
-    public function getCategoryCode()
-    {
-        return $this->_categoryCode;
-    }
-
-    /**
      * ProductFilter constructor.
      * @param $categoryCode
      */
     public function __construct($categoryCode)
     {
         $this->_categoryCode = $categoryCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryCode()
+    {
+        return $this->_categoryCode;
     }
 }

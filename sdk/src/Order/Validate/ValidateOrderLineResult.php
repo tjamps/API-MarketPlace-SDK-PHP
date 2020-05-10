@@ -14,6 +14,25 @@ class ValidateOrderLineResult
     private $_errors = [];
 
     /**
+     * @var bool
+     */
+    private $_updated = false;
+
+    /**
+     * @var string
+     */
+    private $_sellerProductId = null;
+
+    /**
+     * ValidateOrderLineResult constructor.
+     * @param $sellerProductId
+     */
+    public function __construct($sellerProductId)
+    {
+        $this->_sellerProductId = $sellerProductId;
+    }
+
+    /**
      * @return array
      */
     public function getErrors()
@@ -28,11 +47,6 @@ class ValidateOrderLineResult
     {
         $this->_errors[] = $error;
     }
-
-    /**
-     * @var bool
-     */
-    private $_updated = false;
 
     /**
      * @return boolean
@@ -51,24 +65,10 @@ class ValidateOrderLineResult
     }
 
     /**
-     * @var string
-     */
-    private $_sellerProductId = null;
-
-    /**
      * @return string
      */
     public function getSellerProductId()
     {
         return $this->_sellerProductId;
-    }
-
-    /**
-     * ValidateOrderLineResult constructor.
-     * @param $sellerProductId
-     */
-    public function __construct($sellerProductId)
-    {
-        $this->_sellerProductId = $sellerProductId;
     }
 }

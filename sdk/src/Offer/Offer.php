@@ -20,6 +20,141 @@ class Offer
     private $_bestShippingCharges = 0.0;
 
     /**
+     * @var string
+     */
+    private $_comments = null;
+
+    /**
+     * @var string
+     */
+    private $_creationDate = null;
+
+    /**
+     * @var float
+     */
+    private $_deaTax = 0.0;
+
+    /**
+     * @var string
+     */
+    private $_discountList = null;
+
+    /**
+     * @var float
+     */
+    private $_ecoTax = 0.0;
+
+    /**
+     * @var float
+     */
+    private $_integrationPrice = 0.0;
+
+    /**
+     * @var bool
+     */
+    private $_isCDAV = false;
+
+    /**
+     * @var string
+     */
+    private $_lastUpdateDate = null;
+
+    /**
+     * @var string
+     */
+    private $_logisticMode = null;
+
+    /**
+     * @var float
+     */
+    private $_minimumPriceForPriceAlignment = 0.0;
+
+    /**
+     * @var OfferBenchMark
+     */
+    private $_offerBenchMark = null;
+
+    /**
+     * @var array
+     */
+    private $_offerPoolList = null;
+
+    /**
+     * @var string
+     */
+    private $_offerState = null;
+
+    /**
+     * @var string
+     */
+    private $_parentProductId = null;
+
+    /**
+     * @var float
+     */
+    private $_price = 0.0;
+
+    /**
+     * @var string
+     */
+    private $_priceMustBeAligned = null;
+
+    /**
+     * @var string
+     */
+    private $_productCondition = null;
+
+    /**
+     * @var string
+     */
+    private $_productEan = null;
+
+    /**
+     * @var string
+     */
+    private $_productId = null;
+
+    /**
+     * @var string
+     */
+    private $_productPackagingUnit = null;
+
+    /**
+     * @var float
+     */
+    private $_productPackagingUnitPrice = 0.0;
+
+    /**
+     * @var float
+     */
+    private $_productPackagingValue = 0.0;
+
+    /**
+     * @var string
+     */
+    private $_sellerProductId = null;
+
+    /**
+     * @var array
+     */
+    private $_shippingInformationList = null;
+
+    /**
+     * @var int
+     */
+    private $_stock = 0;
+
+    /**
+     * @var string
+     */
+    private $_strikedPrice = null;
+
+    /**
+     * @var float
+     */
+    private $_vatRate = 0.0;
+
+    /**
      * @return float
      */
     public function getBestShippingCharges()
@@ -36,11 +171,6 @@ class Offer
             $this->_bestShippingCharges = $bestShippingCharges;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_comments = null;
 
     /**
      * @return string
@@ -61,11 +191,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_creationDate = null;
-
-    /**
      * @return string
      */
     public function getCreationDate()
@@ -82,11 +207,6 @@ class Offer
             $this->_creationDate = $creationDate;
         }
     }
-
-    /**
-     * @var float
-     */
-    private $_deaTax = 0.0;
 
     /**
      * @return float
@@ -107,11 +227,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_discountList = null;
-
-    /**
      * @return string
      */
     public function getDiscountList()
@@ -128,11 +243,6 @@ class Offer
             $this->_discountList = $discountList;
         }
     }
-
-    /**
-     * @var float
-     */
-    private $_ecoTax = 0.0;
 
     /**
      * @return float
@@ -153,11 +263,6 @@ class Offer
     }
 
     /**
-     * @var float
-     */
-    private $_integrationPrice = 0.0;
-
-    /**
      * @return float
      */
     public function getIntegrationPrice()
@@ -176,11 +281,6 @@ class Offer
     }
 
     /**
-     * @var bool
-     */
-    private $_isCDAV = false;
-
-    /**
      * @return boolean
      */
     public function isIsCDAV()
@@ -195,11 +295,6 @@ class Offer
     {
         $this->_isCDAV = $isCDAV;
     }
-
-    /**
-     * @var string
-     */
-    private $_lastUpdateDate = null;
 
     /**
      * @return string
@@ -220,11 +315,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_logisticMode = null;
-
-    /**
      * @return string
      */
     public function getLogisticMode()
@@ -241,11 +331,6 @@ class Offer
             $this->_logisticMode = $logisticMode;
         }
     }
-
-    /**
-     * @var float
-     */
-    private $_minimumPriceForPriceAlignment = 0.0;
 
     /**
      * @return float
@@ -266,11 +351,6 @@ class Offer
     }
 
     /**
-     * @var OfferBenchMark
-     */
-    private $_offerBenchMark = null;
-
-    /**
      * @return OfferBenchMark
      */
     public function getOfferBenchMark()
@@ -285,11 +365,6 @@ class Offer
     {
         $this->_offerBenchMark = $offerBenchMark;
     }
-
-    /**
-     * @var array
-     */
-    private $_offerPoolList = null;
 
     /**
      * @return array
@@ -311,11 +386,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_offerState = null;
-
-    /**
      * @return string
      */
     public function getOfferState()
@@ -332,11 +402,6 @@ class Offer
             $this->_offerState = $offerState;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_parentProductId = null;
 
     /**
      * @return string
@@ -357,11 +422,6 @@ class Offer
     }
 
     /**
-     * @var float
-     */
-    private $_price = 0.0;
-
-    /**
      * @return float
      */
     public function getPrice()
@@ -378,11 +438,6 @@ class Offer
             $this->_price = $price;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_priceMustBeAligned = null;
 
     /**
      * @return string
@@ -403,11 +458,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_productCondition = null;
-
-    /**
      * @return string
      */
     public function getProductCondition()
@@ -424,11 +474,6 @@ class Offer
             $this->_productCondition = $productCondition;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_productEan = null;
 
     /**
      * @return string
@@ -449,11 +494,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_productId = null;
-
-    /**
      * @return string
      */
     public function getProductId()
@@ -470,11 +510,6 @@ class Offer
             $this->_productId = $productId;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_productPackagingUnit = null;
 
     /**
      * @return string
@@ -495,11 +530,6 @@ class Offer
     }
 
     /**
-     * @var float
-     */
-    private $_productPackagingUnitPrice = 0.0;
-
-    /**
      * @return float
      */
     public function getProductPackagingUnitPrice()
@@ -516,11 +546,6 @@ class Offer
             $this->_productPackagingUnitPrice = $productPackagingUnitPrice;
         }
     }
-
-    /**
-     * @var float
-     */
-    private $_productPackagingValue = 0.0;
 
     /**
      * @return float
@@ -541,11 +566,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_sellerProductId = null;
-
-    /**
      * @return string
      */
     public function getSellerProductId()
@@ -562,11 +582,6 @@ class Offer
             $this->_sellerProductId = $sellerProductId;
         }
     }
-
-    /**
-     * @var array
-     */
-    private $_shippingInformationList = null;
 
     /**
      * @return array
@@ -588,11 +603,6 @@ class Offer
     }
 
     /**
-     * @var int
-     */
-    private $_stock = 0;
-
-    /**
      * @return int
      */
     public function getStock()
@@ -611,11 +621,6 @@ class Offer
     }
 
     /**
-     * @var string
-     */
-    private $_strikedPrice = null;
-
-    /**
      * @return string
      */
     public function getStrikedPrice()
@@ -632,11 +637,6 @@ class Offer
             $this->_strikedPrice = $strikedPrice;
         }
     }
-
-    /**
-     * @var float
-     */
-    private $_vatRate = 0.0;
 
     /**
      * @return float

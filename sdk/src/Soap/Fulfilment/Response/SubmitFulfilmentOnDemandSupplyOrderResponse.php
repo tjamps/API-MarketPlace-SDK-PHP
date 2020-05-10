@@ -25,22 +25,6 @@ class SubmitFulfilmentOnDemandSupplyOrderResponse extends AbstractResponse
     private $_submitFulfilmentOnDemandSupplyOrderResult= null;
 
     /*
-     * @return \Sdk\Fulfilment\SubmitFulfilmentOnDemandSupplyOrderResult
-     */
-    public function getSubmitFulfilmentOnDemandSupplyOrderResult()
-    {
-        return $this->_submitFulfilmentOnDemandSupplyOrderResult;
-    }
-
-    /*
-     * @param  $submitFulfilmentOnDemandSupplyOrderResult
-     */
-     public function setSubmitFulfilmentOnDemandSupplyOrderResult($submitFulfilmentOnDemandSupplyOrderResult)
-    {
-        $this->_submitFulfilmentOnDemandSupplyOrderResult=$submitFulfilmentOnDemandSupplyOrderResult;
-    }
-
-    /*
      * SubmitFulfilmentOnDemandSupplyOrderResponse constructor
      * @param $response
      */
@@ -56,6 +40,22 @@ class SubmitFulfilmentOnDemandSupplyOrderResponse extends AbstractResponse
             $this->_setGlobalInformations();
             $this->generateDepositIdResult();
         }
+    }
+
+    /*
+     * @return \Sdk\Fulfilment\SubmitFulfilmentOnDemandSupplyOrderResult
+     */
+    public function getSubmitFulfilmentOnDemandSupplyOrderResult()
+    {
+        return $this->_submitFulfilmentOnDemandSupplyOrderResult;
+    }
+
+    /*
+     * @param  $submitFulfilmentOnDemandSupplyOrderResult
+     */
+     public function setSubmitFulfilmentOnDemandSupplyOrderResult($submitFulfilmentOnDemandSupplyOrderResult)
+    {
+        $this->_submitFulfilmentOnDemandSupplyOrderResult=$submitFulfilmentOnDemandSupplyOrderResult;
     }
 
     /**

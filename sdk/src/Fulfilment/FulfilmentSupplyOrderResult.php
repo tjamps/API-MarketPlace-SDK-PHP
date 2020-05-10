@@ -25,6 +25,14 @@ class FulfilmentSupplyOrderResult extends CommonResult
      * @var array
      */
     private $_supplyOrderList = [];
+       
+    /*
+     * SubmitFulfilmentSupplyOrderResult constructor, initialize array erorList the commonResult
+     */
+    public function __construct() 
+    {
+        $this->_errorList = [];
+    }
 
     /*
     * return $_currentPageNumber
@@ -72,13 +80,5 @@ class FulfilmentSupplyOrderResult extends CommonResult
     public function addSupplyOrderToList($supplyOrder)
     {
         $this->_supplyOrderList[] = $supplyOrder;
-    }
-       
-    /*
-     * SubmitFulfilmentSupplyOrderResult constructor, initialize array erorList the commonResult
-     */
-    public function __construct() 
-    {
-        $this->_errorList = [];
     }
 }

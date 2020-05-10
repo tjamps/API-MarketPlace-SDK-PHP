@@ -20,6 +20,16 @@ class ProductStockListMessage
     private $_productStockList = null;
 
     /**
+     * @var enum
+     */
+    private $_status = null;
+
+    /**
+     * @var int
+     */
+    private $_totalProductCount = null;
+
+    /**
      * @return array
      */
     public function getProductStockList()
@@ -36,11 +46,6 @@ class ProductStockListMessage
     }
 
     /**
-     * @var enum
-     */
-    private $_status = null;
-
-    /**
      * @return Enum
      */
     public function getStatus()
@@ -55,11 +60,6 @@ class ProductStockListMessage
     {
         $this->_status = $status;
     }
-
-    /**
-     * @var int
-     */
-    private $_totalProductCount = null;
 
     /**
      * @return int

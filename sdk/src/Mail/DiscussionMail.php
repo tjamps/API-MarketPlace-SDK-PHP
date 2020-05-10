@@ -17,17 +17,31 @@ class DiscussionMail
     private $_discussionId = 0;
 
     /**
+     * @var string
+     */
+    private $_mailAddress = null;
+
+    /**
+     * @var string
+     */
+    private $_operationStatus = null;
+
+    /**
+     * DiscussionMail constructor.
+     * @param $discussionId
+     */
+    public function __construct($discussionId)
+    {
+        $this->_discussionId = $discussionId;
+    }
+
+    /**
      * @return int
      */
     public function getDiscussionId()
     {
         return $this->_discussionId;
     }
-
-    /**
-     * @var string
-     */
-    private $_mailAddress = null;
 
     /**
      * @return string
@@ -46,11 +60,6 @@ class DiscussionMail
     }
 
     /**
-     * @var string
-     */
-    private $_operationStatus = null;
-
-    /**
      * @return string
      */
     public function getOperationStatus()
@@ -64,14 +73,5 @@ class DiscussionMail
     public function setOperationStatus($operationStatus)
     {
         $this->_operationStatus = $operationStatus;
-    }
-
-    /**
-     * DiscussionMail constructor.
-     * @param $discussionId
-     */
-    public function __construct($discussionId)
-    {
-        $this->_discussionId = $discussionId;
     }
 }

@@ -28,22 +28,6 @@ class FulfilmentActivationReportRequestXmlResponse extends AbstractResponse
     private $_fulfilmentActivationReportListResult = null;
 
     /*
-     * @return
-     */
-    public function getFulfilmentActivationReportListResult()
-    {
-        return $this->_fulfilmentActivationReportListResult;
-    }
-
-    /*
-     * @param FulfilmentActivationReportListResult
-     */
-     public function setFulfilmentSupplyOrderReportListResult($fulfilmentActivationReportListResult)
-    {
-        $this->_fulfilmentActivationReportListResult=$fulfilmentActivationReportListResult;
-    }
-
-    /*
      * SubmitFulfilmentSupplyOrderResponse constructor
      * @param $response
      */
@@ -58,6 +42,22 @@ class FulfilmentActivationReportRequestXmlResponse extends AbstractResponse
             $this->generateResult();
         }
      }
+
+    /*
+     * @return
+     */
+    public function getFulfilmentActivationReportListResult()
+    {
+        return $this->_fulfilmentActivationReportListResult;
+    }
+
+    /*
+     * @param FulfilmentActivationReportListResult
+     */
+     public function setFulfilmentSupplyOrderReportListResult($fulfilmentActivationReportListResult)
+    {
+        $this->_fulfilmentActivationReportListResult=$fulfilmentActivationReportListResult;
+    }
 
      /**
      * Check if the response has an error message

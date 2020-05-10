@@ -27,14 +27,6 @@ class ManageParcelResponse extends AbstractResponse
     private $_parcelActionsResultList = null;
 
     /*
-     * @return array
-     */
-    public function getParcelActionResults()
-    {
-        return $this->_parcelActionsResultList;
-    }
-
-    /*
      * ManageParcelResponse constructor
      * @param $response
      */
@@ -51,6 +43,14 @@ class ManageParcelResponse extends AbstractResponse
             $this->_parcelActionsResultList = new ParcelActionResultList();
             $this->generateParcelActionResultList();
         }
+    }
+
+    /*
+     * @return array
+     */
+    public function getParcelActionResults()
+    {
+        return $this->_parcelActionsResultList;
     }
 
      /**

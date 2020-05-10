@@ -19,6 +19,45 @@ class GenericQuestion
     private $_closeDate = null;
 
     /**
+     * @var string
+     */
+    private $_creationDate = null;
+
+    /**
+     * @var string
+     */
+    private $_lastUpdatedDate = null;
+
+    /**
+     * @var array
+     */
+    private $_messageList = null;
+
+    /**
+     * @var string
+     */
+    private $_status = null;
+
+    /**
+     * @var string
+     */
+    private $_subject = null;
+
+    /**
+     * @var int
+     */
+    private $_id = 0;
+
+    /**
+     * OrderClaim constructor.
+     * @param $id
+     */
+    public function __construct($id)
+    {
+        $this->_id = $id;
+    }
+
+    /**
      * @return string
      */
     public function getCloseDate()
@@ -35,11 +74,6 @@ class GenericQuestion
             $this->_closeDate = $closeDate;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_creationDate = null;
 
     /**
      * @return string
@@ -60,11 +94,6 @@ class GenericQuestion
     }
 
     /**
-     * @var string
-     */
-    private $_lastUpdatedDate = null;
-
-    /**
      * @return string
      */
     public function getLastUpdatedDate()
@@ -81,11 +110,6 @@ class GenericQuestion
             $this->_lastUpdatedDate = $lastUpdatedDate;
         }
     }
-
-    /**
-     * @var array
-     */
-    private $_messageList = null;
 
     /**
      * @return array
@@ -109,11 +133,6 @@ class GenericQuestion
     }
 
     /**
-     * @var string
-     */
-    private $_status = null;
-
-    /**
      * @return string
      */
     public function getStatus()
@@ -130,11 +149,6 @@ class GenericQuestion
             $this->_status = $status;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_subject = null;
 
     /**
      * @return string
@@ -155,24 +169,10 @@ class GenericQuestion
     }
 
     /**
-     * @var int
-     */
-    private $_id = 0;
-
-    /**
      * @return int
      */
     public function getId()
     {
         return $this->_id;
-    }
-
-    /**
-     * OrderClaim constructor.
-     * @param $id
-     */
-    public function __construct($id)
-    {
-        $this->_id = $id;
     }
 }

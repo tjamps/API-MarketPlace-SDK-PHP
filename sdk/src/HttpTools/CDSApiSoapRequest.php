@@ -60,6 +60,15 @@ class CDSApiSoapRequest
     }
 
     /**
+     * @return string
+     */
+    public function call()
+    {
+        $response = $this->_client->send();
+        return $response->getBody();
+    }
+
+    /**
      * @param $data
      * @param $url
      */
@@ -78,15 +87,6 @@ class CDSApiSoapRequest
                 CURLOPT_TIMEOUT => 600
             ]
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function call()
-    {
-        $response = $this->_client->send();
-        return $response->getBody();
     }
 
 }

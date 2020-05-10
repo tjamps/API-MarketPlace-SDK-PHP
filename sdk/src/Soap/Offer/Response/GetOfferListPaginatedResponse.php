@@ -18,25 +18,9 @@ class GetOfferListPaginatedResponse extends GetOfferListGenericResponse
     private $_currentPageNumber = 0;
 
     /**
-     * @return int
-     */
-    public function getCurrentPageNumber()
-    {
-        return $this->_currentPageNumber;
-    }
-
-    /**
      * @var int
      */
     private $_numberOfPages = 0;
-
-    /**
-     * @return int
-     */
-    public function getNumberOfPages()
-    {
-        return $this->_numberOfPages;
-    }
 
     /**
      * GetOfferListPaginatedResponse constructor.
@@ -55,6 +39,22 @@ class GetOfferListPaginatedResponse extends GetOfferListGenericResponse
             /** Parse offer list */
             $this->_setOfferListFromXML($this->_dataResponse['s:Body']['GetOfferListPaginatedResponse']['GetOfferListPaginatedResult']['OfferList']);
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getCurrentPageNumber()
+    {
+        return $this->_currentPageNumber;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfPages()
+    {
+        return $this->_numberOfPages;
     }
 
     /**

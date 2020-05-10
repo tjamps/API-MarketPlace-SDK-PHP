@@ -19,6 +19,65 @@ class ProductIdentity
     private $_brandName = null;
 
     /**
+     * @var string
+     */
+    private $_EAN = null;
+
+    /**
+     * @var string
+     */
+    private $_name = null;
+
+    /**
+     * @var string \Sdk\Product\ProductTypeEnum
+     */
+    private $_productType = null;
+
+    /**
+     * @var string
+     */
+    private $_fatherProductId = null;
+
+    /**
+     * @var string
+     */
+    private $_categoryCode = null;
+    
+    /**
+     * @var string
+     */
+    private $_color = null;    
+    
+    /**
+     * @var string
+     */
+    private $_errorMessage = null;
+    
+    /**
+     * @var string
+     */
+    private $_hasError = null;
+    
+    /**
+     * @var string
+     */
+    private $_imageURL = null;
+    
+    /**
+     * @var string
+     */
+    private $_size = null;    
+
+    /**
+     * Product constructor.
+     * @param $EAN
+     */
+    public function __construct($EAN)
+    {
+        $this->_EAN = $EAN;
+    }
+
+    /**
      * @return string
      */
     public function getBrandName()
@@ -33,11 +92,6 @@ class ProductIdentity
     {
         $this->_brandName = $brandName;
     }
-
-    /**
-     * @var string
-     */
-    private $_EAN = null;
 
     /**
      * @return string
@@ -56,11 +110,6 @@ class ProductIdentity
     }
 
     /**
-     * @var string
-     */
-    private $_name = null;
-
-    /**
      * @return string
      */
     public function getName()
@@ -75,11 +124,6 @@ class ProductIdentity
     {
         $this->_name = $name;
     }
-
-    /**
-     * @var string \Sdk\Product\ProductTypeEnum
-     */
-    private $_productType = null;
 
     /**
      * @return string
@@ -98,11 +142,6 @@ class ProductIdentity
     }
 
     /**
-     * @var string
-     */
-    private $_fatherProductId = null;
-
-    /**
      * @return string
      */
     public function getFatherProductId()
@@ -119,11 +158,6 @@ class ProductIdentity
     }
 
     /**
-     * @var string
-     */
-    private $_categoryCode = null;
-
-    /**
      * @return string
      */
     public function getCategoryCode()
@@ -138,11 +172,6 @@ class ProductIdentity
     {
         $this->_categoryCode = $category;
     }
-    
-    /**
-     * @var string
-     */
-    private $_color = null;
 
     /**
      * @return string
@@ -158,12 +187,7 @@ class ProductIdentity
     public function setColor($color)
     {
         $this->_color = $color;
-    }    
-    
-    /**
-     * @var string
-     */
-    private $_errorMessage = null;
+    }
 
     /**
      * @return string
@@ -180,11 +204,6 @@ class ProductIdentity
     {
         $this->_errorMessage = $errorMessage;
     }
-    
-    /**
-     * @var string
-     */
-    private $_hasError = null;
 
     /**
      * @return string
@@ -201,11 +220,6 @@ class ProductIdentity
     {
         $this->_hasError = $hasError;
     }
-    
-    /**
-     * @var string
-     */
-    private $_imageURL = null;
 
     /**
      * @return string
@@ -222,11 +236,6 @@ class ProductIdentity
     {
         $this->_imageURL = $imageURL;
     }
-    
-    /**
-     * @var string
-     */
-    private $_size = null;
 
     /**
      * @return string
@@ -242,14 +251,5 @@ class ProductIdentity
     public function setSize($size)
     {
         $this->_size = $size;
-    }    
-
-    /**
-     * Product constructor.
-     * @param $EAN
-     */
-    public function __construct($EAN)
-    {
-        $this->_EAN = $EAN;
     }
 }

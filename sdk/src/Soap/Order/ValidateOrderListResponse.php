@@ -28,14 +28,6 @@ class ValidateOrderListResponse extends AbstractResponse
     private $_validateOrderResults = null;
 
     /**
-     * @return ValidateOrderResults
-     */
-    public function getValidateOrderResults()
-    {
-        return $this->_validateOrderResults;
-    }
-
-    /**
      * ValidateOrderListResponse constructor.
      * @param $response
      */
@@ -59,6 +51,14 @@ class ValidateOrderListResponse extends AbstractResponse
 
         }
 
+    }
+
+    /**
+     * @return ValidateOrderResults
+     */
+    public function getValidateOrderResults()
+    {
+        return $this->_validateOrderResults;
     }
 
     private function _setGlobalInformations()

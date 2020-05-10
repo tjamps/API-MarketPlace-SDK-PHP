@@ -53,50 +53,6 @@ class GetProductListResponse extends AbstractResponse
     }
 
     /**
-     * Set Token ID and Seller Login from XML response
-     */
-    private function _setGlobalInformations()
-    {
-        $objInfoResult = $this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult'];
-        $this->tokenID = $objInfoResult['TokenId'];
-        $this->sellerLogin = $objInfoResult['SellerLogin'];
-    }
-    /**
-     * Check if the XML response has an error message
-     *
-     * @return bool
-     */
-    private function _hasErrorMessage()
-    {
-        $objError = $this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult']['ErrorMessage'];
-
-        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
-
-            $this->hasError = true;
-            $this->errorMessage = $objError['_'];
-            return true;
-        }
-        return false;
-    }
-
-    private function _getProductList()
-    {
-        foreach ($this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult']['ProductList']['Product'] as $productXML) {
-
-            $product = new Product($productXML['SKU']);
-            $product->setBrandName($productXML['BrandName']);
-
-            if (isset($productXML['EANList']['a:string'])) {
-                $product->setEANList($productXML['EANList']['a:string']);
-            }
-            $product->setName($productXML['Name']);
-            $product->setProductType($productXML['ProductType']);
-
-            $this->_productList[] = $product;
-        }
-    }
-
-    /**
      * @return array \Sdk\Product\Product
      */
     public function getProductList()
@@ -159,5 +115,49 @@ class GetProductListResponse extends AbstractResponse
             }
         }
         return null;
+    }
+
+    /**
+     * Set Token ID and Seller Login from XML response
+     */
+    private function _setGlobalInformations()
+    {
+        $objInfoResult = $this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
+    }
+    /**
+     * Check if the XML response has an error message
+     *
+     * @return bool
+     */
+    private function _hasErrorMessage()
+    {
+        $objError = $this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult']['ErrorMessage'];
+
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
+
+            $this->hasError = true;
+            $this->errorMessage = $objError['_'];
+            return true;
+        }
+        return false;
+    }
+
+    private function _getProductList()
+    {
+        foreach ($this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult']['ProductList']['Product'] as $productXML) {
+
+            $product = new Product($productXML['SKU']);
+            $product->setBrandName($productXML['BrandName']);
+
+            if (isset($productXML['EANList']['a:string'])) {
+                $product->setEANList($productXML['EANList']['a:string']);
+            }
+            $product->setName($productXML['Name']);
+            $product->setProductType($productXML['ProductType']);
+
+            $this->_productList[] = $product;
+        }
     }
 }

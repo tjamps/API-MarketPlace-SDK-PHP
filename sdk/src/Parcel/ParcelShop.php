@@ -17,6 +17,116 @@ class ParcelShop
     private $_addressComplement = null;
 
     /**
+     * @var string
+     */
+    private $_city = null;
+
+    /**
+     * @var string
+     */
+    private $_closingDate = null;
+
+    /**
+     * @var string
+     */
+    private $_exceptionalClosingDate1 = null;
+
+    /**
+     * @var string
+     */
+    private $_exceptionalClosingDate2 = null;
+
+    /**
+     * @var string
+     */
+    private $_exceptionalClosingDate3 = null;
+
+    /**
+     * @var string
+     */
+    private $_exceptionalClosingDate4 = null;
+
+    /**
+     * @var string
+     */
+    private $_exceptionalClosingDate5 = null;
+
+    /**
+     * @var string
+     */
+    private $_fridayAfternoonClosingHour = null;
+
+    /**
+     * @var string
+     */
+    private $_fridayAfternoonOpeningHour = null;
+
+    /**
+     * @var string
+     */
+    private $_fridayMorningClosingHour = null;
+
+    /**
+     * @var string
+     */
+    private $_fridayMorningOpeningHour = null;
+
+    /**
+     * @var bool
+     */
+    private $_storeShipmentActive = false;
+
+    /**
+     * @var bool
+     */
+    private $_takeAwayDeliveryActive = false;
+
+    /**
+     * @var float
+     */
+    private $_latitude = 0.0;
+
+    /**
+     * @var float
+     */
+    private $_longitude = 0.0;
+
+    /**
+     * @var string
+     */
+    private $_locality = null;
+
+    /**
+     * @var string
+     */
+    private $_mondayAfternoonClosingHour = null;
+
+    /**
+     * @var string
+     */
+    private $_mondayAfternoonOpeningHour = null;
+
+    /**
+     * @var string
+     */
+    private $_mondayMorningClosingHour = null;
+
+    /**
+     * @var string
+     */
+    private $_mondayMorningOpeningHour = null;
+
+    /**
+     * @var string
+     */
+    private $_name = null;
+
+    /**
+     * @var string
+     */
+    private $_openingDate = null;
+
+    /**
      * @return string
      */
     public function getAddressComplement()
@@ -31,11 +141,6 @@ class ParcelShop
     {
         $this->_addressComplement = $addressComplement;
     }
-
-    /**
-     * @var string
-     */
-    private $_city = null;
 
     /**
      * @return string
@@ -54,11 +159,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_closingDate = null;
-
-    /**
      * @return string
      */
     public function getClosingDate()
@@ -73,11 +173,6 @@ class ParcelShop
     {
         $this->_closingDate = $closingDate;
     }
-
-    /**
-     * @var string
-     */
-    private $_exceptionalClosingDate1 = null;
 
     /**
      * @return string
@@ -96,11 +191,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_exceptionalClosingDate2 = null;
-
-    /**
      * @return string
      */
     public function getExceptionalClosingDate2()
@@ -115,11 +205,6 @@ class ParcelShop
     {
         $this->_exceptionalClosingDate2 = $exceptionalClosingDate2;
     }
-
-    /**
-     * @var string
-     */
-    private $_exceptionalClosingDate3 = null;
 
     /**
      * @return string
@@ -138,11 +223,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_exceptionalClosingDate4 = null;
-
-    /**
      * @return string
      */
     public function getExceptionalClosingDate4()
@@ -157,11 +237,6 @@ class ParcelShop
     {
         $this->_exceptionalClosingDate4 = $exceptionalClosingDate4;
     }
-
-    /**
-     * @var string
-     */
-    private $_exceptionalClosingDate5 = null;
 
     /**
      * @return string
@@ -180,11 +255,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_fridayAfternoonClosingHour = null;
-
-    /**
      * @return string
      */
     public function getFridayAfternoonClosingHour()
@@ -199,11 +269,6 @@ class ParcelShop
     {
         $this->_fridayAfternoonClosingHour = $fridayAfternoonClosingHour;
     }
-
-    /**
-     * @var string
-     */
-    private $_fridayAfternoonOpeningHour = null;
 
     /**
      * @return string
@@ -222,11 +287,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_fridayMorningClosingHour = null;
-
-    /**
      * @return string
      */
     public function getFridayMorningClosingHour()
@@ -241,11 +301,6 @@ class ParcelShop
     {
         $this->_fridayMorningClosingHour = $fridayMorningClosingHour;
     }
-
-    /**
-     * @var string
-     */
-    private $_fridayMorningOpeningHour = null;
 
     /**
      * @return string
@@ -264,11 +319,6 @@ class ParcelShop
     }
 
     /**
-     * @var bool
-     */
-    private $_storeShipmentActive = false;
-
-    /**
      * @return boolean
      */
     public function isStoreShipmentActive()
@@ -283,11 +333,6 @@ class ParcelShop
     {
         $this->_storeShipmentActive = $storeShipmentActive;
     }
-
-    /**
-     * @var bool
-     */
-    private $_takeAwayDeliveryActive = false;
 
     /**
      * @return boolean
@@ -306,11 +351,6 @@ class ParcelShop
     }
 
     /**
-     * @var float
-     */
-    private $_latitude = 0.0;
-
-    /**
      * @return float
      */
     public function getLatitude()
@@ -325,11 +365,6 @@ class ParcelShop
     {
         $this->_latitude = $latitude;
     }
-
-    /**
-     * @var float
-     */
-    private $_longitude = 0.0;
 
     /**
      * @return float
@@ -348,11 +383,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_locality = null;
-
-    /**
      * @return string
      */
     public function getLocality()
@@ -367,11 +397,6 @@ class ParcelShop
     {
         $this->_locality = $locality;
     }
-
-    /**
-     * @var string
-     */
-    private $_mondayAfternoonClosingHour = null;
 
     /**
      * @return string
@@ -390,11 +415,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_mondayAfternoonOpeningHour = null;
-
-    /**
      * @return string
      */
     public function getMondayAfternoonOpeningHour()
@@ -409,11 +429,6 @@ class ParcelShop
     {
         $this->_mondayAfternoonOpeningHour = $mondayAfternoonOpeningHour;
     }
-
-    /**
-     * @var string
-     */
-    private $_mondayMorningClosingHour = null;
 
     /**
      * @return string
@@ -432,11 +447,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_mondayMorningOpeningHour = null;
-
-    /**
      * @return string
      */
     public function getMondayMorningOpeningHour()
@@ -453,11 +463,6 @@ class ParcelShop
     }
 
     /**
-     * @var string
-     */
-    private $_name = null;
-
-    /**
      * @return string
      */
     public function getName()
@@ -472,11 +477,6 @@ class ParcelShop
     {
         $this->_name = $name;
     }
-
-    /**
-     * @var string
-     */
-    private $_openingDate = null;
 
     /**
      * @return string

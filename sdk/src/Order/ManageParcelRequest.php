@@ -14,17 +14,26 @@ class ManageParcelRequest
     private $_scopusId = null;
     
     /**
+     * @var array
+     */
+    private $_parcelActionsList = [];
+    
+    /*
+     * ManageParcelRequest constructor
+     * @param $scopusId
+     */
+    public function __construct($scopusId) 
+    {
+        $this->_scopusId = $scopusId;
+    }
+    
+    /**
      * @return string
      */
     public function getScopusId()
     {
         return $this->_scopusId;
     }
-    
-    /**
-     * @var array
-     */
-    private $_parcelActionsList = [];
     
     /**
      * @return array
@@ -40,14 +49,5 @@ class ManageParcelRequest
     public function addParcelActionsList($parcelInfos)
     {
         $this->_parcelActionsList[] = $parcelInfos;
-    }
-    
-    /*
-     * ManageParcelRequest constructor
-     * @param $scopusId
-     */
-    public function __construct($scopusId) 
-    {
-        $this->_scopusId = $scopusId;
     }
 }

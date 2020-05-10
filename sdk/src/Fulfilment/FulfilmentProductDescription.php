@@ -38,6 +38,25 @@ class FulfilmentProductDescription
      * @var string
      */
     private $_SellerProductReference = null;
+
+    /*
+     * FulfilmentProductDescription constructor
+     * @param $extSupplyOrderID string
+     * @param $productEan string
+     * @param $quantity int
+     * @param $sellerProductReference string
+     * @param $wareHouseReceptionMinDate Date
+     * @param $warehouse enum
+     */
+    public function __construct($extSupplyOrderID, $productEan, $quantity, $sellerProductReference, $wareHouseReceptionMinDate, $warehouse) 
+    {
+        $this->_productEan = $productEan;
+        $this->_warehouse = $warehouse;
+        $this->_quantity = $quantity;
+        $this->_extSupplyOrderID = $extSupplyOrderID;
+        $this->_wareHouseReceptionMinDate = $wareHouseReceptionMinDate;
+        $this->_sellerProductReference = $sellerProductReference;
+    }
     
     /*
      * @return string
@@ -93,24 +112,5 @@ class FulfilmentProductDescription
     public function setWarehouse($warehouseTypes)
     {
         $this->_warehouse = $warehouseTypes;
-    }
-
-    /*
-     * FulfilmentProductDescription constructor
-     * @param $extSupplyOrderID string
-     * @param $productEan string
-     * @param $quantity int
-     * @param $sellerProductReference string
-     * @param $wareHouseReceptionMinDate Date
-     * @param $warehouse enum
-     */
-    public function __construct($extSupplyOrderID, $productEan, $quantity, $sellerProductReference, $wareHouseReceptionMinDate, $warehouse) 
-    {
-        $this->_productEan = $productEan;
-        $this->_warehouse = $warehouse;
-        $this->_quantity = $quantity;
-        $this->_extSupplyOrderID = $extSupplyOrderID;
-        $this->_wareHouseReceptionMinDate = $wareHouseReceptionMinDate;
-        $this->_sellerProductReference = $sellerProductReference;
     }    
 }

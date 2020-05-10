@@ -26,14 +26,6 @@ class GetGlobalConfigurationResponse extends AbstractResponse
     private $_carrierList = null;
 
     /**
-     * @return array
-     */
-    public function getCarrierList()
-    {
-        return $this->_carrierList;
-    }
-
-    /**
      * GetGlobalConfigurationResponse constructor.
      * @param $response
      */
@@ -56,6 +48,14 @@ class GetGlobalConfigurationResponse extends AbstractResponse
 
             $this->_getCarrierListFromXML($this->_dataResponse['s:Body']['GetGlobalConfigurationResponse']['GetGlobalConfigurationResult']['CarrierList']);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getCarrierList()
+    {
+        return $this->_carrierList;
     }
 
     /**

@@ -25,22 +25,6 @@ class SubmitOfferStateActionResponse extends AbstractResponse
     private $_submitOfferStateActionResult= null;
 
     /*
-     * @return submitOfferStateActionResult
-     */
-    public function getSubmitOfferStateActionResult()
-    {
-        return $this->_submitOfferStateActionResult;
-    }
-
-    /*
-     * @param  $submitOfferStateActionResult \Sdk\Fulfilment\SubmitOfferStateActionResult
-     */
-     public function setSubmitOfferStateActionResult($submitOfferStateActionResult)
-    {
-        $this->_submitOfferStateActionResult=$submitOfferStateActionResult;
-    }
-
-    /*
      * SubmitOfferStateActionResponse constructor
      * @param $response
      */
@@ -60,6 +44,22 @@ class SubmitOfferStateActionResponse extends AbstractResponse
                 $this->generateResult();
             }
         }
+    }
+
+    /*
+     * @return submitOfferStateActionResult
+     */
+    public function getSubmitOfferStateActionResult()
+    {
+        return $this->_submitOfferStateActionResult;
+    }
+
+    /*
+     * @param  $submitOfferStateActionResult \Sdk\Fulfilment\SubmitOfferStateActionResult
+     */
+     public function setSubmitOfferStateActionResult($submitOfferStateActionResult)
+    {
+        $this->_submitOfferStateActionResult=$submitOfferStateActionResult;
     }
 
     /**

@@ -14,6 +14,27 @@ class FulfilmentOnDemandOrderLineFilter
     private $_orderReference = null;
     
     /**
+     * @var string
+     */
+    private $_productEan = null;
+    
+    /**
+     * @var string
+     */
+    private $_warehouse = null;
+
+    /*
+     * FulfilmentOnDemandOrderLineRequest constructor
+     * @param $orderReference, $productEan, $warehouse
+     */
+    public function __construct($orderReference,$productEan,$warehouse) 
+    {
+        $this->_orderReference = $orderReference;
+        $this->_productEan = $productEan;
+        $this->_warehouse = $warehouse;
+    }
+    
+    /**
      * @return string
      */
     public function getOrderReference()
@@ -30,11 +51,6 @@ class FulfilmentOnDemandOrderLineFilter
     }
     
     /**
-     * @var string
-     */
-    private $_productEan = null;
-    
-    /**
      * @return string
      */
     public function getProductEan()
@@ -49,11 +65,6 @@ class FulfilmentOnDemandOrderLineFilter
     {
         $this->_productEan = $productEan;
     }
-    
-    /**
-     * @var string
-     */
-    private $_warehouse = null;
 
     /**
      * @var string
@@ -68,17 +79,6 @@ class FulfilmentOnDemandOrderLineFilter
      */
     public function setWarehouse($warehouse)
     {
-        $this->_warehouse = $warehouse;
-    }
-
-    /*
-     * FulfilmentOnDemandOrderLineRequest constructor
-     * @param $orderReference, $productEan, $warehouse
-     */
-    public function __construct($orderReference,$productEan,$warehouse) 
-    {
-        $this->_orderReference = $orderReference;
-        $this->_productEan = $productEan;
         $this->_warehouse = $warehouse;
     }
 }

@@ -17,17 +17,31 @@ class Carrier
     private $_carrierId = 0;
 
     /**
+     * @var string
+     */
+    private $_defaultURL = null;
+
+    /**
+     * @var string
+     */
+    private $_name = null;
+
+    /**
+     * Carrier constructor.
+     * @param $carrierId int
+     */
+    public function __construct($carrierId)
+    {
+        $this->_carrierId = $carrierId;
+    }
+
+    /**
      * @return int
      */
     public function getCarrierId()
     {
         return $this->_carrierId;
     }
-
-    /**
-     * @var string
-     */
-    private $_defaultURL = null;
 
     /**
      * @return string
@@ -46,11 +60,6 @@ class Carrier
     }
 
     /**
-     * @var string
-     */
-    private $_name = null;
-
-    /**
      * @return string
      */
     public function getName()
@@ -64,14 +73,5 @@ class Carrier
     public function setName($name)
     {
         $this->_name = $name;
-    }
-
-    /**
-     * Carrier constructor.
-     * @param $carrierId int
-     */
-    public function __construct($carrierId)
-    {
-        $this->_carrierId = $carrierId;
     }
 }

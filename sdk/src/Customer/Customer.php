@@ -17,6 +17,65 @@ class Customer
     private $_civility = null;
 
     /**
+     * @var string
+     */
+    private $_customerId = null;
+
+    /**
+     * @var string
+     */
+    private $_email = null;
+
+    /**
+     * @var string
+     */
+    private $_encryptedEmail = null;
+
+    /**
+     * @var string
+     */
+    private $_firstName = null;
+
+    /**
+     * @var string
+     */
+    private $_lastName = null;
+
+    /**
+     * @var string
+     */
+    private $_mobilePhone = null;
+
+    /**
+     * @var string
+     */
+    private $_phone = null;
+
+    /**
+     * @var string
+     */
+    private $_shippingFirstName = null;
+
+    /**
+     * @var string
+     */
+    private $_shippingLastName = null;
+
+    /**
+     * @var string
+     */
+    private $_secondPhone = null;
+
+    /**
+     * Customer constructor.
+     * @param $customerId string
+     */
+    public function __construct($customerId)
+    {
+        $this->_customerId = $customerId;
+    }
+
+    /**
      * @return string
      */
     public function getCivility()
@@ -33,22 +92,12 @@ class Customer
     }
 
     /**
-     * @var string
-     */
-    private $_customerId = null;
-
-    /**
      * @return string
      */
     public function getCustomerId()
     {
         return $this->_customerId;
     }
-
-    /**
-     * @var string
-     */
-    private $_email = null;
 
     /**
      * @return string
@@ -67,11 +116,6 @@ class Customer
     }
 
     /**
-     * @var string
-     */
-    private $_encryptedEmail = null;
-
-    /**
      * @return string
      */
     public function getEncryptedEmail()
@@ -86,11 +130,6 @@ class Customer
     {
         $this->_encryptedEmail = $encryptedEmail;
     }
-
-    /**
-     * @var string
-     */
-    private $_firstName = null;
 
     /**
      * @return string
@@ -109,11 +148,6 @@ class Customer
     }
 
     /**
-     * @var string
-     */
-    private $_lastName = null;
-
-    /**
      * @return string
      */
     public function getLastName()
@@ -128,11 +162,6 @@ class Customer
     {
         $this->_lastName = $lastName;
     }
-
-    /**
-     * @var string
-     */
-    private $_mobilePhone = null;
 
     /**
      * @return string
@@ -151,11 +180,6 @@ class Customer
     }
 
     /**
-     * @var string
-     */
-    private $_phone = null;
-
-    /**
      * @return string
      */
     public function getPhone()
@@ -170,11 +194,6 @@ class Customer
     {
         $this->_phone = $phone;
     }
-
-    /**
-     * @var string
-     */
-    private $_shippingFirstName = null;
 
     /**
      * @return string
@@ -193,11 +212,6 @@ class Customer
     }
 
     /**
-     * @var string
-     */
-    private $_shippingLastName = null;
-
-    /**
      * @return string
      */
     public function getShippingLastName()
@@ -214,11 +228,6 @@ class Customer
     }
 
     /**
-     * @var string
-     */
-    private $_secondPhone = null;
-
-    /**
      * @return string
      */
     public function getSecondPhone()
@@ -232,14 +241,5 @@ class Customer
     public function setSecondPhone($secondPhone)
     {
         $this->_secondPhone = $secondPhone;
-    }
-
-    /**
-     * Customer constructor.
-     * @param $customerId string
-     */
-    public function __construct($customerId)
-    {
-        $this->_customerId = $customerId;
     }
 }

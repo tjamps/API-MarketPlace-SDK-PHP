@@ -17,6 +17,17 @@ class FulfilmentOrderLineRequest
      * @var string
      */
     private $_productEan = null;
+
+    /*
+     * FulfilmentOrderLineRequest constructor
+     * @param $OrderReference
+     * @param $ProductEan
+     */
+    public function __construct($orderReference, $productEan) 
+    {
+        $this->_orderReference = $orderReference;
+        $this->_productEan = $productEan;
+    }
     
     /*
      * @return string
@@ -32,16 +43,5 @@ class FulfilmentOrderLineRequest
     public function  getProductEan()
     {
         return $this->_productEan;
-    }
-
-    /*
-     * FulfilmentOrderLineRequest constructor
-     * @param $OrderReference
-     * @param $ProductEan
-     */
-    public function __construct($orderReference, $productEan) 
-    {
-        $this->_orderReference = $orderReference;
-        $this->_productEan = $productEan;
     } 
 }

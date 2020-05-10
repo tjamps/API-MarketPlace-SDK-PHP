@@ -20,6 +20,11 @@ class OfferQuestion extends GenericQuestion
     private $_productEAN = null;
 
     /**
+     * @var string
+     */
+    private $_productSellerReference = null;
+
+    /**
      * @return string
      */
     public function getProductEAN()
@@ -36,11 +41,6 @@ class OfferQuestion extends GenericQuestion
             $this->_productEAN = $productEAN;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_productSellerReference = null;
 
     /**
      * @return string

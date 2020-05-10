@@ -35,8 +35,6 @@ class FilterSoap
      */
     protected $_StringTAG = 'arr:string';
 
-    private $_xmlns = '';
-
     protected $_xmlUtil;
 
     /**
@@ -44,6 +42,8 @@ class FilterSoap
      * @var string
      */
     protected $_childrens = "";
+
+    private $_xmlns = '';
 
     private $_tag = null;
 
@@ -68,24 +68,6 @@ class FilterSoap
     {
         $this->_xmlUtil = new XmlUtils($prefix);
         $this->_tag = $tag;
-    }
-
-    /**
-     * @return string
-     */
-    private function _generateOpeningBalise()
-    {
-        $inlines = [$this->_xmlns];
-
-        return $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, $inlines);
-    }
-
-    /**
-     * @return string
-     */
-    private function _generateClosingBalise()
-    {
-        return $this->_xmlUtil->generateCloseBalise($this->_tag);
     }
 
     /**
@@ -137,5 +119,23 @@ class FilterSoap
     {
         $length = \strlen($needle);
         return (substr($haystack, 0, $length) === $needle);
+    }
+
+    /**
+     * @return string
+     */
+    private function _generateOpeningBalise()
+    {
+        $inlines = [$this->_xmlns];
+
+        return $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, $inlines);
+    }
+
+    /**
+     * @return string
+     */
+    private function _generateClosingBalise()
+    {
+        return $this->_xmlUtil->generateCloseBalise($this->_tag);
     }
 }

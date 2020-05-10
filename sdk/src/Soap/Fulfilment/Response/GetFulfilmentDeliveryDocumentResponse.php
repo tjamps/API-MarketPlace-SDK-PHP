@@ -25,22 +25,6 @@ class GetFulfilmentDeliveryDocumentResponse extends AbstractResponse
     private $_getFulfilmentDeliveryDocumentResult= null;
 
     /*
-     * @return getFulfilmentDeliveryDocumentResult
-     */
-    public function getFulfilmentDeliveryDocumentResult()
-    {
-        return $this->_getFulfilmentDeliveryDocumentResult;
-    }
-
-    /*
-     * @param  $getFulfilmentDeliveryDocumentResult \Sdk\Fulfilment\GetFulFilmentDeliveryDocumentResult
-     */
-     public function setGetFulfilmentDeliveryDocumentResult($getFulfilmentDeliveryDocumentResult)
-    {
-        $this->_getFulfilmentDeliveryDocumentResult=$getFulfilmentDeliveryDocumentResult;
-    }
-
-    /*
      * getFulfilmentDeliveryDocumentResponse constructor
      * @param $response
      */
@@ -60,6 +44,22 @@ class GetFulfilmentDeliveryDocumentResponse extends AbstractResponse
                 $this->generatePdfDocumentResult();
             }
         }
+    }
+
+    /*
+     * @return getFulfilmentDeliveryDocumentResult
+     */
+    public function getFulfilmentDeliveryDocumentResult()
+    {
+        return $this->_getFulfilmentDeliveryDocumentResult;
+    }
+
+    /*
+     * @param  $getFulfilmentDeliveryDocumentResult \Sdk\Fulfilment\GetFulFilmentDeliveryDocumentResult
+     */
+     public function setGetFulfilmentDeliveryDocumentResult($getFulfilmentDeliveryDocumentResult)
+    {
+        $this->_getFulfilmentDeliveryDocumentResult=$getFulfilmentDeliveryDocumentResult;
     }
 
     /**

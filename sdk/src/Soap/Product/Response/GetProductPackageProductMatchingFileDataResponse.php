@@ -28,25 +28,9 @@ class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
     private $_productMatchingList = null;
 
     /**
-     * @return array
-     */
-    public function getProductMatchingList()
-    {
-        return $this->_productMatchingList;
-    }
-
-    /**
      * @var int
      */
     private $_packageId = 0;
-
-    /**
-     * @return int
-     */
-    public function getPackageId()
-    {
-        return $this->_packageId;
-    }
 
     /**
      * GetProductPackageProductMatchingFileDataResponse constructor.
@@ -74,6 +58,22 @@ class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
             /** Parse product matching list from XML */
             $this->_getProductMatchingList($this->_dataResponse['s:Body']['GetProductPackageProductMatchingFileDataResponse']['GetProductPackageProductMatchingFileDataResult']);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getProductMatchingList()
+    {
+        return $this->_productMatchingList;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPackageId()
+    {
+        return $this->_packageId;
     }
 
     /**

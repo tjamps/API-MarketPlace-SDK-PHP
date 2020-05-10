@@ -18,17 +18,26 @@ class CloseDiscussionResult
     private $_discussionId = 0;
 
     /**
+     * @var string
+     */
+    private $_operationStatus = null;
+
+    /**
+     * CloseDiscussionResult constructor.
+     * @param $discussionID
+     */
+    public function __construct($discussionID)
+    {
+        $this->_discussionId = $discussionID;
+    }
+
+    /**
      * @return int
      */
     public function getDiscussionId()
     {
         return $this->_discussionId;
     }
-
-    /**
-     * @var string
-     */
-    private $_operationStatus = null;
 
     /**
      * @return string
@@ -44,14 +53,5 @@ class CloseDiscussionResult
     public function setOperationStatus($operationStatus)
     {
         $this->_operationStatus = $operationStatus;
-    }
-
-    /**
-     * CloseDiscussionResult constructor.
-     * @param $discussionID
-     */
-    public function __construct($discussionID)
-    {
-        $this->_discussionId = $discussionID;
     }
 }

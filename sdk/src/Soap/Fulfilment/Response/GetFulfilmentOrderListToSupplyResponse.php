@@ -24,14 +24,6 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
     private $_fulfilmentOrderListToSupplyResult;
 
     /*
-    * @return \Sdk\Fulfilment\FulfilmentOrderListToSupplyResult
-    */
-    public function getFulfilmentOrderListToSupplyResult()
-    {
-        return $this->_fulfilmentOrderListToSupplyResult;
-    }
-
-    /*
      * GetFulfilmentOrderListToSupplyResponse constructor
      * @param $response
      */
@@ -50,6 +42,14 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
                 $this->getFulfilmentOrderList();
             }
         }
+    }
+
+    /*
+    * @return \Sdk\Fulfilment\FulfilmentOrderListToSupplyResult
+    */
+    public function getFulfilmentOrderListToSupplyResult()
+    {
+        return $this->_fulfilmentOrderListToSupplyResult;
     }
 
     /**

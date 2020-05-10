@@ -41,6 +41,27 @@ class CreateRefundVoucherResponse extends AbstractResponse
      */
     private $_sellerRefundResult = null;
 
+    public function __construct($response)
+    {
+        $reader = new Xml();
+        $this->_dataResponse = $reader->fromString($response);
+        $this->errorList = [];
+
+        // Check For error message
+        if ($this->isOperationSuccess($this->_dataResponse['s:Body']['CreateRefundVoucherResponse']['CreateRefundVoucherResult']))
+        {
+            $this->_setGlobalInformations();
+            $this->_commercialGestureList = new CommercialGestureList();
+            $this->_sellerRefundResult = new SellerRefundResultList();
+            $this->_orderNumber = $this->_dataResponse['s:Body']['CreateRefundVoucherResponse']['CreateRefundVoucherResult']['OrderNumber'];
+
+            $createRefundVoucherResult = $this->_dataResponse['s:Body']['CreateRefundVoucherResponse']['CreateRefundVoucherResult'];
+
+            $this->generateCommercialGestureList($createRefundVoucherResult);
+            $this->generateSellerRefundList($createRefundVoucherResult);
+        }
+    }
+
     /*
      * @return string
      */
@@ -63,27 +84,6 @@ class CreateRefundVoucherResponse extends AbstractResponse
     public function getSellerRefunds()
     {
         return $this->_sellerRefundResult;
-    }
-
-    public function __construct($response)
-    {
-        $reader = new Xml();
-        $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = [];
-
-        // Check For error message
-        if ($this->isOperationSuccess($this->_dataResponse['s:Body']['CreateRefundVoucherResponse']['CreateRefundVoucherResult']))
-        {
-            $this->_setGlobalInformations();
-            $this->_commercialGestureList = new CommercialGestureList();
-            $this->_sellerRefundResult = new SellerRefundResultList();
-            $this->_orderNumber = $this->_dataResponse['s:Body']['CreateRefundVoucherResponse']['CreateRefundVoucherResult']['OrderNumber'];
-
-            $createRefundVoucherResult = $this->_dataResponse['s:Body']['CreateRefundVoucherResponse']['CreateRefundVoucherResult'];
-
-            $this->generateCommercialGestureList($createRefundVoucherResult);
-            $this->generateSellerRefundList($createRefundVoucherResult);
-        }
     }
 
     /**

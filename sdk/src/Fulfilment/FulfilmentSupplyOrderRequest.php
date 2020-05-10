@@ -15,6 +15,14 @@ class FulfilmentSupplyOrderRequest
     private $_productList = null;
     
     /*
+     * FulfilmentSupplyOrderRequest constructor
+     */
+    public function __construct() 
+    {
+        $this->_productList = [];
+    }
+    
+    /*
      * @return array
      */
     public function getProductList()
@@ -28,13 +36,5 @@ class FulfilmentSupplyOrderRequest
     public function addProductList($productList)
     {
         $this->_productList[] = $productList;
-    }
-    
-    /*
-     * FulfilmentSupplyOrderRequest constructor
-     */
-    public function __construct() 
-    {
-        $this->_productList = [];
     }
 }

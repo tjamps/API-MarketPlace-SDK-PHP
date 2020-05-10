@@ -14,6 +14,14 @@ class FulfilmentOnDemandSupplyOrderRequest
     private $_orderLineList = null;
     
     /*
+     * FulfilmentOnDemandSupplyOrderRequest constructor
+     */
+    public function __construct() 
+    {
+        $this->_orderLineList = [];
+    }
+    
+    /*
      * @return array
      */
     public function getOrderLineList()
@@ -27,13 +35,5 @@ class FulfilmentOnDemandSupplyOrderRequest
     public function addOrderLineList($orderLineList)
     {
         $this->_orderLineList[] = $orderLineList;
-    }
-    
-    /*
-     * FulfilmentOnDemandSupplyOrderRequest constructor
-     */
-    public function __construct() 
-    {
-        $this->_orderLineList = [];
     }
 }

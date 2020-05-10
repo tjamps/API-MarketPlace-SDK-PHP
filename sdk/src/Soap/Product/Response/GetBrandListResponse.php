@@ -26,14 +26,6 @@ class GetBrandListResponse extends AbstractResponse
     private $_brandList = null;
 
     /**
-     * @return array
-     */
-    public function getBrandList()
-    {
-        return $this->_brandList;
-    }
-
-    /**
      * GetAllowedCategoryTreeResponse constructor.
      * @param $response
      */
@@ -55,6 +47,14 @@ class GetBrandListResponse extends AbstractResponse
 
             $this->_generateBrandListFromXML($this->_dataResponse['s:Body']['GetBrandListResponse']['GetBrandListResult']['a:BrandList']);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getBrandList()
+    {
+        return $this->_brandList;
     }
 
     /**

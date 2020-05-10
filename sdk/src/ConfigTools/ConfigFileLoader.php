@@ -64,6 +64,14 @@ class ConfigFileLoader
         return self::$_instance;
     }
 
+    #endregion LoadConfigFile
+
+    #region public methods
+
+    public function getConfAttribute($attr) {
+        return $this->_fileData['api'][$attr];
+    }
+
     #endregion Singleton
 
     #region LoadConfigFile
@@ -81,14 +89,6 @@ class ConfigFileLoader
         $this->_apiMode = $configFile['api']['mode'];
 
         $this->_fileData = $reader->fromFile(__DIR__.'/../../../../config/'. $this->_apiMode . '.config.ini');
-    }
-
-    #endregion LoadConfigFile
-
-    #region public methods
-
-    public function getConfAttribute($attr) {
-        return $this->_fileData['api'][$attr];
     }
 
     #endregion public methods

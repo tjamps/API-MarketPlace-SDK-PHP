@@ -19,6 +19,16 @@ class Message
     private $_content = null;
 
     /**
+     * @var string
+     */
+    private $_sender = null;
+
+    /**
+     * @var string
+     */
+    private $_timestamp = null;
+
+    /**
      * @return string
      */
     public function getContent()
@@ -37,11 +47,6 @@ class Message
     }
 
     /**
-     * @var string
-     */
-    private $_sender = null;
-
-    /**
      * @return string
      */
     public function getSender()
@@ -58,11 +63,6 @@ class Message
             $this->_sender = $sender;
         }
     }
-
-    /**
-     * @var string
-     */
-    private $_timestamp = null;
 
     /**
      * @return string

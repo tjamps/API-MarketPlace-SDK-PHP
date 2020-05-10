@@ -19,23 +19,15 @@ use Sdk\Soap\Common\AbstractResponse;
 
 class GetOfferListGenericResponse extends AbstractResponse
 {
-    /**
-     * @var array
-     */
-    private $_offerList = null;
-
-    /**
-     * @return array
-     */
-    public function getOfferList()
-    {
-        return $this->_offerList;
-    }
 
     /**
      * @var array
      */
     protected $_dataResponse = null;
+    /**
+     * @var array
+     */
+    private $_offerList = null;
 
     /**
      * GetOfferListGenericResponse constructor.
@@ -46,6 +38,14 @@ class GetOfferListGenericResponse extends AbstractResponse
         $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->_offerList = [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getOfferList()
+    {
+        return $this->_offerList;
     }
 
     /**

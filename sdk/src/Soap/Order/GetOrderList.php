@@ -24,6 +24,14 @@ class GetOrderList
         $this->_xmlUtil = new XmlUtils('');
     }
 
+    public function generateEnclosingBalise($child)
+    {
+        $xml = $this->_generateOpeningBalise();
+        $xml .= $child;
+        $xml .= $this->_generateClosingBalise();
+        return $xml;
+    }
+
     private function _generateOpeningBalise()
     {
         $inlines = [$this->_xmlns];
@@ -34,14 +42,6 @@ class GetOrderList
     private function _generateClosingBalise()
     {
         return $this->_xmlUtil->generateCloseBalise($this->_tag);
-    }
-
-    public function generateEnclosingBalise($child)
-    {
-        $xml = $this->_generateOpeningBalise();
-        $xml .= $child;
-        $xml .= $this->_generateClosingBalise();
-        return $xml;
     }
 
 }

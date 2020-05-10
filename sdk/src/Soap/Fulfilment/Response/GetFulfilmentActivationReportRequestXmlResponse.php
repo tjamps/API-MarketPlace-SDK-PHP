@@ -28,22 +28,6 @@ class GetFulfilmentActivationReportRequestXmlResponse extends AbstractResponse
     private $_fulfilmentActivationReportListResult = null;
 
     /*
-     * @return fulfilmentActivationReportListResult
-     */
-    public function getFulfilmentActivationReportListResult()
-    {
-        return $this->_fulfilmentActivationReportListResult;
-    }
-
-    /*
-     * @param $fulfilmentActivationReportListResult \Sdk\Fulfilment\FulfilmentActivationReportListResult
-     */
-     public function setFulfilmentSupplyOrderReportListResult($fulfilmentActivationReportListResult)
-    {
-        $this->_fulfilmentActivationReportListResult=$fulfilmentActivationReportListResult;
-    }
-
-    /*
      * SubmitFulfilmentSupplyOrderResponse constructor
      * @param $response
      */
@@ -64,6 +48,22 @@ class GetFulfilmentActivationReportRequestXmlResponse extends AbstractResponse
             }
          }
      }
+
+    /*
+     * @return fulfilmentActivationReportListResult
+     */
+    public function getFulfilmentActivationReportListResult()
+    {
+        return $this->_fulfilmentActivationReportListResult;
+    }
+
+    /*
+     * @param $fulfilmentActivationReportListResult \Sdk\Fulfilment\FulfilmentActivationReportListResult
+     */
+     public function setFulfilmentSupplyOrderReportListResult($fulfilmentActivationReportListResult)
+    {
+        $this->_fulfilmentActivationReportListResult=$fulfilmentActivationReportListResult;
+    }
 
     /**
      * Set the token ID and the seller login from the response

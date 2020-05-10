@@ -26,14 +26,6 @@ class GetSellerInformationResponse extends AbstractResponse
     private $_seller;
 
     /**
-     * @return Seller
-     */
-    public function getSeller()
-    {
-        return $this->_seller;
-    }
-
-    /**
      * @var array|bool
      */
     private $_dataResponse;
@@ -44,25 +36,9 @@ class GetSellerInformationResponse extends AbstractResponse
     private $_offerPoolList = [];
 
     /**
-     * @return null
-     */
-    public function getOfferPoolList()
-    {
-        return $this->_offerPoolList;
-    }
-
-    /**
      * @var array
      */
     private $_deliveryModes = [];
-
-    /**
-     * @return null
-     */
-    public function getDeliveryModes()
-    {
-        return $this->_deliveryModes;
-    }
 
     /**
      * GetSellerInformationResponse constructor.
@@ -97,6 +73,30 @@ class GetSellerInformationResponse extends AbstractResponse
              */
             $this->_setOfferPoolList();
         }
+    }
+
+    /**
+     * @return Seller
+     */
+    public function getSeller()
+    {
+        return $this->_seller;
+    }
+
+    /**
+     * @return null
+     */
+    public function getOfferPoolList()
+    {
+        return $this->_offerPoolList;
+    }
+
+    /**
+     * @return null
+     */
+    public function getDeliveryModes()
+    {
+        return $this->_deliveryModes;
     }
 
     private function _setSellerInformations()

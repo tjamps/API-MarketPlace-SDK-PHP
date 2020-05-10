@@ -21,6 +21,66 @@ class ExternalCustomer implements JsonSerializable
     private $_civility = null;
 
     /*
+     * @var String
+     */
+    private $_customerFirstName = null;
+
+    /*
+     * @var String
+     */
+    private $_customerLastName = null;
+
+    /*
+     * @var String
+     */
+    private $_customerEmailAddress = null;
+
+    /*
+     * @var String
+     */
+    private $_shippingAddress = null;
+
+    /*
+     * @var String
+     */
+    private $_additionalShippingAddress = null;
+
+    /*
+     * @var String
+     */
+    private $_locality = null;
+
+    /*
+     * @var String
+     */
+    private $_shippingAddressTitle = null;
+
+    /*
+     * @var String
+     */
+    private $_shippingPostalCode = null;
+
+    /*
+     * @var String
+     */
+    private $_shippingCity = null;
+
+    /*
+     * @var String
+     */
+    private $_shippingCountry = null;
+
+    /*
+     * @var String
+     */
+    private $_landLinePhoneNumber = null;
+
+    /*
+     * @var String
+     */
+    private $_cellPhoneNumber = null;
+
+    /*
      * @return string
      */
     public function getCivility()
@@ -35,11 +95,6 @@ class ExternalCustomer implements JsonSerializable
     {
         $this->_civility = $civility;
     }
-
-    /*
-     * @var String
-     */
-    private $_customerFirstName = null;
 
     /*
      * @return string
@@ -58,11 +113,6 @@ class ExternalCustomer implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_customerLastName = null;
-
-    /*
      * @return String
      */
     public function getCustomerLastName()
@@ -77,11 +127,6 @@ class ExternalCustomer implements JsonSerializable
     {
         $this->_customerLastName = $customerLastName;
     }
-
-    /*
-     * @var String
-     */
-    private $_customerEmailAddress = null;
 
     /*
      * @return String
@@ -100,11 +145,6 @@ class ExternalCustomer implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_shippingAddress = null;
-
-    /*
      * @return String
      */
     public function getShippingAddress()
@@ -119,11 +159,6 @@ class ExternalCustomer implements JsonSerializable
     {
         $this->_shippingAddress = $shippingAddress;
     }
-
-    /*
-     * @var String
-     */
-    private $_additionalShippingAddress = null;
 
     /*
      * @return String
@@ -142,11 +177,6 @@ class ExternalCustomer implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_locality = null;
-
-    /*
      * @return String
      */
     public function getLocality()
@@ -161,11 +191,6 @@ class ExternalCustomer implements JsonSerializable
     {
         $this->_locality = $locality;
     }
-
-    /*
-     * @var String
-     */
-    private $_shippingAddressTitle = null;
 
     /*
      * @return String
@@ -184,11 +209,6 @@ class ExternalCustomer implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_shippingPostalCode = null;
-
-    /*
      * @return String
      */
     public function getShippingPostalCode()
@@ -203,11 +223,6 @@ class ExternalCustomer implements JsonSerializable
     {
         $this->_shippingPostalCode = $shippingPostalCode;
     }
-
-    /*
-     * @var String
-     */
-    private $_shippingCity = null;
 
     /*
      * @return String
@@ -226,11 +241,6 @@ class ExternalCustomer implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_shippingCountry = null;
-
-    /*
      * @return String
      */
     public function getShippingCountry()
@@ -247,11 +257,6 @@ class ExternalCustomer implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_landLinePhoneNumber = null;
-
-    /*
      * @return String
      */
     public function getLandLinePhoneNumber()
@@ -266,11 +271,6 @@ class ExternalCustomer implements JsonSerializable
     {
         $this->_landLinePhoneNumber = $landLinePhoneNumber;
     }
-
-    /*
-     * @var String
-     */
-    private $_cellPhoneNumber = null;
 
     /*
      * @return String

@@ -20,6 +20,16 @@ class OfferReportLog extends ReportLog
     private $_sellerProductId = null;
 
     /**
+     * @var string
+     */
+    private $_offerIntegrationStatus = null;
+
+    /**
+     * @var string
+     */
+    private $_productEan = null;
+
+    /**
      * @return string
      */
     public function getSellerProductId()
@@ -49,11 +59,6 @@ class OfferReportLog extends ReportLog
     }
 
     /**
-     * @var string
-     */
-    private $_offerIntegrationStatus = null;
-
-    /**
      * @return string
      */
     public function getOfferIntegrationStatus()
@@ -68,11 +73,6 @@ class OfferReportLog extends ReportLog
     {
         $this->_offerIntegrationStatus = $offerIntegrationStatus;
     }
-
-    /**
-     * @var string
-     */
-    private $_productEan = null;
 
     /**
      * @return string

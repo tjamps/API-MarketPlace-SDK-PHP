@@ -26,14 +26,6 @@ class GetParcelShopListResponse extends AbstractResponse
     private $_parcelShopList = null;
 
     /**
-     * @return array
-     */
-    public function getParcelShopList()
-    {
-        return $this->_parcelShopList;
-    }
-
-    /**
      * GetParcelShopListResponse constructor.
      * @param $response
      */
@@ -55,6 +47,14 @@ class GetParcelShopListResponse extends AbstractResponse
 
             $this->_generateParcelShopListFromXML($this->_dataResponse['s:Body']['GetParcelShopListResponse']['GetParcelShopListResult']['ParcelShopList']);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getParcelShopList()
+    {
+        return $this->_parcelShopList;
     }
 
     /**

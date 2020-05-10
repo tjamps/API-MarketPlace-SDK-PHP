@@ -17,6 +17,40 @@ class Product
     private $_brandName = null;
 
     /**
+     * @var string
+     */
+    private $_EANList = null;
+
+    /**
+     * @var string
+     */
+    private $_name = null;
+
+    /**
+     * @var string \Sdk\Product\ProductTypeEnum
+     */
+    private $_productType = null;
+
+    /**
+     * @var string
+     */
+    private $_SKU = null;
+
+    /**
+     * @var string
+     */
+    private $_sellerProductId = null;
+
+    /**
+     * Product constructor.
+     * @param $sku
+     */
+    public function __construct($sku)
+    {
+        $this->_SKU = $sku;
+    }
+
+    /**
      * @return string
      */
     public function getBrandName()
@@ -31,11 +65,6 @@ class Product
     {
         $this->_brandName = $brandName;
     }
-
-    /**
-     * @var string
-     */
-    private $_EANList = null;
 
     /**
      * @return string
@@ -54,11 +83,6 @@ class Product
     }
 
     /**
-     * @var string
-     */
-    private $_name = null;
-
-    /**
      * @return string
      */
     public function getName()
@@ -73,11 +97,6 @@ class Product
     {
         $this->_name = $name;
     }
-
-    /**
-     * @var string \Sdk\Product\ProductTypeEnum
-     */
-    private $_productType = null;
 
     /**
      * @return string
@@ -96,31 +115,12 @@ class Product
     }
 
     /**
-     * @var string
-     */
-    private $_SKU = null;
-
-    /**
      * @return string
      */
     public function getSKU()
     {
         return $this->_SKU;
     }
-
-    /**
-     * Product constructor.
-     * @param $sku
-     */
-    public function __construct($sku)
-    {
-        $this->_SKU = $sku;
-    }
-
-    /**
-     * @var string
-     */
-    private $_sellerProductId = null;
 
     /**
      * @return string
