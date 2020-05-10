@@ -35,7 +35,7 @@ class BaliseTool
      */
     private function _generateOpeningBalise()
     {
-        $inlines = array($this->_xmlns);
+        $inlines = [$this->_xmlns];
 
         return $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, $inlines);
     }

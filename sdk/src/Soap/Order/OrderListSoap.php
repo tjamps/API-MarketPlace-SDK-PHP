@@ -37,7 +37,7 @@ class OrderListSoap
      */
     public function serialize()
     {
-        $xml = $this->_xmlUtil->generateOpenBaliseWithInline('validateOrderListMessage', array('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"'));
+        $xml = $this->_xmlUtil->generateOpenBaliseWithInline('validateOrderListMessage', ['xmlns:i="http://www.w3.org/2001/XMLSchema-instance"']);
 
         $xml .= $this->_xmlUtil->generateOpenBalise($this->_tag);
 

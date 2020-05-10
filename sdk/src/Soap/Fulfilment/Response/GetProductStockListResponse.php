@@ -34,7 +34,7 @@ class GetProductStockListResponse extends AbstractResponse
     {
         $reader = new Xml();
         $this->dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         if (!isset($this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult'])) {
             throw new InvalidArgumentException(
@@ -52,7 +52,7 @@ class GetProductStockListResponse extends AbstractResponse
             && !$this->hasErrorMessage()
         ) {
             $this->setGlobalInformations();
-            $this->barCodeList = array();
+            $this->barCodeList = [];
             $this->generateProductStockList();
         }
     }
@@ -222,7 +222,7 @@ class GetProductStockListResponse extends AbstractResponse
     {
         $objError = $this->dataResponse['s:Body']['GetProductStockListResponse']['GetProductStockListResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

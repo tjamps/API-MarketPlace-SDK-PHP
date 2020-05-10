@@ -50,7 +50,7 @@ class GetDiscussionMailListResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_discussionMailList = array();
+            $this->_discussionMailList = [];
 
             $this->_generateDiscussionMailListFromXML($this->_dataResponse['s:Body']['GetDiscussionMailListResponse']['GetDiscussionMailListResult']['DiscussionMailList']);
         }
@@ -73,9 +73,9 @@ class GetDiscussionMailListResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetDiscussionMailListResponse']['GetDiscussionMailListResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -98,7 +98,7 @@ class GetDiscussionMailListResponse extends AbstractResponse
                 break;
             }
 
-            $discussionMail = new DiscussionMail(intval($discussionMailXML['DiscussionId']));
+            $discussionMail = new DiscussionMail((int) ($discussionMailXML['DiscussionId']));
             if (isset($discussionMailXML['OperationStatus']) && !SoapTools::isSoapValueNull($discussionMailXML['OperationStatus'])) {
                 $discussionMail->setOperationStatus($discussionMailXML['OperationStatus']);
             }
@@ -109,7 +109,7 @@ class GetDiscussionMailListResponse extends AbstractResponse
         }
 
         if (!$manyMessage) {
-            $discussionMail = new DiscussionMail(intval($discussionMailListXML['DiscussionMail']['DiscussionId']));
+            $discussionMail = new DiscussionMail((int) ($discussionMailListXML['DiscussionMail']['DiscussionId']));
             if (isset($discussionMailListXML['DiscussionMail']['OperationStatus']) && !SoapTools::isSoapValueNull($discussionMailListXML['DiscussionMail']['OperationStatus'])) {
                 $discussionMail->setOperationStatus($discussionMailListXML['DiscussionMail']['OperationStatus']);
             }

@@ -55,7 +55,7 @@ class ModelListResponse extends AbstractResponse
         $this->_tagXML = $tagXML;
         $this->_tagResultXML = $tagResultXML;
 
-        $this->_modelList = array();
+        $this->_modelList = [];
     }
 
     /**
@@ -77,7 +77,7 @@ class ModelListResponse extends AbstractResponse
 
         $objError = $this->_dataResponse['s:Body'][$this->_tagXML][$this->_tagResultXML]['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -91,7 +91,7 @@ class ModelListResponse extends AbstractResponse
      */
     protected function _addProductModel($productModelXML)
     {
-        $productModel = new ProductModel(intval($productModelXML['ModelId']));
+        $productModel = new ProductModel((int) ($productModelXML['ModelId']));
 
         $productModel->setCategoryCode($productModelXML['CategoryCode']);
         $productModel->setName($productModelXML['Name']);

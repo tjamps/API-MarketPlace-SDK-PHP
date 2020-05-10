@@ -69,7 +69,7 @@ class ProductModel
     /**
      * @var array
      */
-    private $_keyValueProperties = array();
+    private $_keyValueProperties = [];
 
     /**
      * @param $keyvalueObj
@@ -91,7 +91,7 @@ class ProductModel
 	/**
      * @var array
      */
-    private $_mandatoryModelProperties = array();
+    private $_mandatoryModelProperties = [];
 
     /**
      * @param $mandatoryModelProperty

@@ -102,6 +102,6 @@ class SupplyOrderRequest
      */
     public function __construct() 
     {
-        $this->_supplyOrderList = array();
+        $this->_supplyOrderList = [];
     }
 }

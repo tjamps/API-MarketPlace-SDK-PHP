@@ -53,7 +53,7 @@ class CreateExternalOrderResponse extends AbstractResponse
     {
         $objError = $this->_dataResponse['s:Body']['CreateExternalOrderResponse']['CreateExternalOrderResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

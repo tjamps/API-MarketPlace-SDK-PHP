@@ -17,6 +17,6 @@ class OrderQuestionFilter extends DiscussionFilter
      */
     public function __construct()
     {
-        $this->_statusList = array();
+        $this->_statusList = [];
     }
 }

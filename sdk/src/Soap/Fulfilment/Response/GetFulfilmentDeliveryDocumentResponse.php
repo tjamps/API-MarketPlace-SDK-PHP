@@ -47,7 +47,7 @@ class GetFulfilmentDeliveryDocumentResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentDeliveryDocumentResponse']['GetFulfilmentDeliveryDocumentResult']))
@@ -80,7 +80,7 @@ class GetFulfilmentDeliveryDocumentResponse extends AbstractResponse
 
             $this->_getFulfilmentDeliveryDocumentResult = new GetFulfilmentDeliveryDocumentResult();
              //errorMessage and errorList
-            if (isset($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']) && strlen($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']))
+            if (isset($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']) && \strlen($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']))
             {
                 $this->_getFulfilmentDeliveryDocumentResult->setErrorMessage($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']);
                 $this->_getFulfilmentDeliveryDocumentResult->addErrorToList($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']);

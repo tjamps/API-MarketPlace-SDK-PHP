@@ -39,7 +39,7 @@ class ExternalOrder implements JsonSerializable
     /**
      * @var array ExternalOrderLine
      */
-    private $_externalOrderLine = array();
+    private $_externalOrderLine = [];
 
     /**
      * @return array ExternalOrderLine

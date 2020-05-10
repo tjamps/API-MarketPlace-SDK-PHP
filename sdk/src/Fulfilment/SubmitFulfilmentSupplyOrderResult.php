@@ -22,7 +22,7 @@ class SubmitFulfilmentSupplyOrderResult extends CommonResult
      */
     public function __construct() 
     {
-        $this->_errorList = array();
+        $this->_errorList = [];
     }
 
     /*

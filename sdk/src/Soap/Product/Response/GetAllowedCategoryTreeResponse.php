@@ -57,7 +57,7 @@ class GetAllowedCategoryTreeResponse extends GetGenericCategoryTreeResponse
     {
         $objError = $this->_dataResponse['s:Body']['GetAllowedCategoryTreeResponse']['GetAllowedCategoryTreeResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

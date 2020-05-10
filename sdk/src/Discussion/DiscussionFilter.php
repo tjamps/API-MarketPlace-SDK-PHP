@@ -44,7 +44,7 @@ class DiscussionFilter extends Filter
     public function addOrderNumber($orderNumber)
     {
         if ($this->_orderNumberList == null) {
-            $this->_orderNumberList = array();
+            $this->_orderNumberList = [];
         }
         array_push($this->_orderNumberList, $orderNumber);
     }

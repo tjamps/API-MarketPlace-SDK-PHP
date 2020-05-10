@@ -37,7 +37,7 @@ class Request
     /**
      * @var array
      */
-    private $_sellerRefundRequestList = array();
+    private $_sellerRefundRequestList = [];
 
     /**
      * @param $sellerRefundRequest \Sdk\Order\Refund\SellerRefundRequest

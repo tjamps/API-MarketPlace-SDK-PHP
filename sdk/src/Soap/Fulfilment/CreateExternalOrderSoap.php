@@ -164,7 +164,7 @@ class CreateExternalOrderSoap extends BaliseTool
      */
     public function generateFulfillmentProductRequestXml($request)
     {
-        $inlines = array($this->_xmlns_array,$this->_xmlns_cdis2);
+        $inlines = [$this->_xmlns_array,$this->_xmlns_cdis2];
         /*
          * Balise Open request
          */
@@ -205,7 +205,7 @@ class CreateExternalOrderSoap extends BaliseTool
 
             //Balise Open OrderLineList
             $xml .= $this->_xmlUtil->generateOpenBalise($this->_orderLineListTag);
-                if(count($request->getExternalOrder()->getExternalOrderLine()) > 1)
+                if(\count($request->getExternalOrder()->getExternalOrderLine()) > 1)
                 {
                     foreach($request->getExternalOrder()->getExternalOrderLine() as $orderLine)
                     {

@@ -68,7 +68,7 @@ class GetGenericCategoryTreeResponse extends AbstractResponse
             $categoryTreeObj->setEanOptional(true);
         }
 
-        if (is_array($categoryTree['ChildrenCategoryList']) && isset($categoryTree['ChildrenCategoryList']['CategoryTree'])) {
+        if (\is_array($categoryTree['ChildrenCategoryList']) && isset($categoryTree['ChildrenCategoryList']['CategoryTree'])) {
 
             if (isset($categoryTree['ChildrenCategoryList']['CategoryTree']['AllowOfferIntegration'])) {
                 $child = $this->_setChildrenCategoryList($categoryTree['ChildrenCategoryList']['CategoryTree']);

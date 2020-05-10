@@ -24,7 +24,7 @@ class ManageParcelRequest
     /**
      * @var array
      */
-    private $_parcelActionsList = array();
+    private $_parcelActionsList = [];
     
     /**
      * @return array

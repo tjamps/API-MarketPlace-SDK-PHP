@@ -44,7 +44,7 @@ class GetOfferListGenericResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->_offerList = array();
+        $this->_offerList = [];
     }
 
     /**
@@ -75,7 +75,7 @@ class GetOfferListGenericResponse extends AbstractResponse
             if (isset($offerXML['OfferBenchMark']['BestOfferPrice'])) {
 
                 $offerBenchMark = new OfferBenchMark();
-                $offerBenchMark->setBestOfferPrice(floatval($offerXML['OfferBenchMark']['BestOfferPrice']));
+                $offerBenchMark->setBestOfferPrice((float) ($offerXML['OfferBenchMark']['BestOfferPrice']));
 
                 if (isset($offerXML['OfferBenchMark']['ProductCondition'])) {
                     $offerBenchMark->setProductCondition($offerXML['OfferBenchMark']['ProductCondition']);
@@ -84,7 +84,7 @@ class GetOfferListGenericResponse extends AbstractResponse
                     $offerBenchMark->setProductState($offerXML['OfferBenchMark']['ProductState']);
                 }
                 if (isset($offerXML['OfferBenchMark']['ShippingCharges'])) {
-                    $offerBenchMark->setShippingCharges(floatval($offerXML['OfferBenchMark']['ShippingCharges']));
+                    $offerBenchMark->setShippingCharges((float) ($offerXML['OfferBenchMark']['ShippingCharges']));
                 }
                 $offer->setOfferBenchMark($offerBenchMark);
             }

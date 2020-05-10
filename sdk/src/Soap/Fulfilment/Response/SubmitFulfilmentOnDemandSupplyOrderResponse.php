@@ -47,7 +47,7 @@ class SubmitFulfilmentOnDemandSupplyOrderResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         $this->operationSuccess = $this->isOperationSuccess($this->_dataResponse['s:Body']['SubmitFulfilmentOnDemandSupplyOrderResponse']['SubmitFulfilmentOnDemandSupplyOrderResult']);
         if ($this->operationSuccess)
@@ -73,7 +73,7 @@ class SubmitFulfilmentOnDemandSupplyOrderResponse extends AbstractResponse
 
             $this->_submitFulfilmentOnDemandSupplyOrderResult = new SubmitFulfilmentOnDemandSupplyOrderResult();
              //errorMessage and errorList
-            if (isset($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']) && strlen($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']))
+            if (isset($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']) && \strlen($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']))
             {
                 $this->_submitFulfilmentOnDemandSupplyOrderResult->setErrorMessage($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']);
                 $this->_submitFulfilmentOnDemandSupplyOrderResult->addErrorToList($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']);

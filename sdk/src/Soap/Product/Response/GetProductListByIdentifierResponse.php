@@ -41,7 +41,7 @@ class GetProductListByIdentifierResponse extends AbstractResponse
             /**
              * Product List
              */
-            $this->_productList = array();
+            $this->_productList = [];
 
             $this->_getProductList();
         }
@@ -66,7 +66,7 @@ class GetProductListByIdentifierResponse extends AbstractResponse
     {
         $objError = $this->_dataResponse['s:Body']['GetProductListByIdentifierResponse']['GetProductListByIdentifierResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -127,7 +127,7 @@ class GetProductListByIdentifierResponse extends AbstractResponse
                     $product->setProductType($productXML['a:ProductType']);
                 }
 
-                if(isset($productXML['a:Color']) && !SoapTools::isSoapValueNull($productXML['a:Color']) && !is_array($productXML['a:Color']))
+                if(isset($productXML['a:Color']) && !SoapTools::isSoapValueNull($productXML['a:Color']) && !\is_array($productXML['a:Color']))
                 {
                     $product->setColor($productXML['a:Color']);
                 }
@@ -136,7 +136,7 @@ class GetProductListByIdentifierResponse extends AbstractResponse
                     $product->setColor('-');
                 }
 
-                if(isset($productXML['a:Size']) && !SoapTools::isSoapValueNull($productXML['a:Size']) && !is_array($productXML['a:Size']))
+                if(isset($productXML['a:Size']) && !SoapTools::isSoapValueNull($productXML['a:Size']) && !\is_array($productXML['a:Size']))
                 {
                     $product->setSize($productXML['a:Size']);
                 }

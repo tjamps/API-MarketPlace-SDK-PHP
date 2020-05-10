@@ -45,7 +45,7 @@ class GetProductListResponse extends AbstractResponse
             /**
              * Product List
              */
-            $this->_productList = array();
+            $this->_productList = [];
 
             $this->_getProductList();
         }
@@ -69,7 +69,7 @@ class GetProductListResponse extends AbstractResponse
     {
         $objError = $this->_dataResponse['s:Body']['GetProductListResponse']['GetProductListResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -111,7 +111,7 @@ class GetProductListResponse extends AbstractResponse
      */
     public function getProductsByName($name)
     {
-        $newList = array();
+        $newList = [];
 
         /** @var \Sdk\Product\Product $product */
         foreach ($this->_productList as $product) {
@@ -131,7 +131,7 @@ class GetProductListResponse extends AbstractResponse
      */
     public function getProductsByBrand($brand)
     {
-        $newList = array();
+        $newList = [];
 
         /** @var \Sdk\Product\Product $product */
         foreach ($this->_productList as $product) {

@@ -47,7 +47,7 @@ class SubmitOfferStateActionResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['SubmitOfferStateActionResponse']['SubmitOfferStateActionResult']))
@@ -77,7 +77,7 @@ class SubmitOfferStateActionResponse extends AbstractResponse
 
         $this->_submitOfferStateActionResult = new SubmitOfferStateActionResult();
          //errorMessage and errorList
-            if (isset($submitOfferStateActionResultXml['ErrorMessage']['_']) && strlen($submitOfferStateActionResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitOfferStateActionResultXml['ErrorMessage']))
+            if (isset($submitOfferStateActionResultXml['ErrorMessage']['_']) && \strlen($submitOfferStateActionResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitOfferStateActionResultXml['ErrorMessage']))
             {
                 $this->_submitOfferStateActionResult->setErrorMessage($submitOfferStateActionResultXml['ErrorMessage']['_']);
                 $this->_submitOfferStateActionResult->addErrorToList($submitOfferStateActionResultXml['ErrorMessage']['_']);

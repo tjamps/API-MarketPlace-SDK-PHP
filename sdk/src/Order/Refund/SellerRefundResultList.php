@@ -14,7 +14,7 @@ class SellerRefundResultList
     /*
      *@var array 
      */
-    private $_sellerRefundResultList = array();
+    private $_sellerRefundResultList = [];
     
     /*
      * @return array

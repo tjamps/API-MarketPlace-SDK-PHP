@@ -51,7 +51,7 @@ class Request extends BaliseTool
      */
     public function generateDiscussionIds($discussionIds)
     {
-        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_RequestTAG, array('xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"'));
+        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_RequestTAG, ['xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"']);
         $xml .= $this->_xmlUtil->generateOpenBalise($this->_DiscussionIdsTAG);
         foreach ($discussionIds as $long) {
             $xml .= $this->_xmlUtil->generateBalise($this->_LongTAG, $long);
@@ -67,7 +67,7 @@ class Request extends BaliseTool
      */
     public function generateScopusIds($orderIds)
     {
-        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_RequestTAG, array('xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"'));
+        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_RequestTAG, ['xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"']);
         foreach ($orderIds as $long) {
             $xml .= $this->_xmlUtil->generateBalise($this->_ScopusIdTAG, $long);
         }

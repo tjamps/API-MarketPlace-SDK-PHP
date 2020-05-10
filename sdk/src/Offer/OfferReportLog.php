@@ -43,7 +43,7 @@ class OfferReportLog extends ReportLog
     public function addOfferReportPropertyLog($offerReportPropertyLog)
     {
         if ($this->_propertyList == null) {
-            $this->_propertyList = array();
+            $this->_propertyList = [];
         }
         array_push($this->_propertyList, $offerReportPropertyLog);
     }

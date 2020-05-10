@@ -20,7 +20,7 @@ class KeyValueProperty
     /**
      * @var array|null
      */
-    private $_values = array();
+    private $_values = [];
 
     /**
      * KeyValueProperty constructor.

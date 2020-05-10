@@ -12,7 +12,7 @@ class OrderList
 
     public function __construct()
     {
-        $this->_orderList = array();
+        $this->_orderList = [];
     }
 
     /**

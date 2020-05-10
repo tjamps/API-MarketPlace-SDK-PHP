@@ -39,7 +39,7 @@ class GetSellerInformationResponse extends AbstractResponse
     /**
      * @var array
      */
-    private $_offerPoolList = array();
+    private $_offerPoolList = [];
 
     /**
      * @return null
@@ -52,7 +52,7 @@ class GetSellerInformationResponse extends AbstractResponse
     /**
      * @var array
      */
-    private $_deliveryModes = array();
+    private $_deliveryModes = [];
 
     /**
      * @return null
@@ -154,7 +154,7 @@ class GetSellerInformationResponse extends AbstractResponse
         if (isset($objInfoResult['OfferPool'])) {
             foreach ($objInfoResult['OfferPool'] as $offer) {
 
-                if (is_array($offer)) {
+                if (\is_array($offer)) {
                     $arrays = true;
                     array_push($this->_offerPoolList, new OfferPool($offer['Id'], $offer['Description']));
                 }
@@ -184,7 +184,7 @@ class GetSellerInformationResponse extends AbstractResponse
     {
         $objError = $this->_dataResponse['s:Body']['GetSellerInformationResponse']['GetSellerInformationResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

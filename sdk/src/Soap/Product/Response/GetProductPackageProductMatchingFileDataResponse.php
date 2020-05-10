@@ -68,7 +68,7 @@ class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
             /**
              * Product List
              */
-            $this->_productMatchingList = array();
+            $this->_productMatchingList = [];
 
             /** Parse product matching list from XML */
             $this->_getProductMatchingList($this->_dataResponse['s:Body']['GetProductPackageProductMatchingFileDataResponse']['GetProductPackageProductMatchingFileDataResult']);
@@ -83,7 +83,7 @@ class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
         $objInfoResult = $this->_dataResponse['s:Body']['GetProductPackageProductMatchingFileDataResponse']['GetProductPackageProductMatchingFileDataResult'];
         $this->tokenID = $objInfoResult['TokenId'];
         $this->sellerLogin = $objInfoResult['SellerLogin'];
-        $this->_packageId = intval($objInfoResult['PackageId']);
+        $this->_packageId = (int) ($objInfoResult['PackageId']);
     }
     /**
      * Check if the XML response has an error message
@@ -94,7 +94,7 @@ class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
     {
         $objError = $this->_dataResponse['s:Body']['GetProductPackageProductMatchingFileDataResponse']['GetProductPackageProductMatchingFileDataResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

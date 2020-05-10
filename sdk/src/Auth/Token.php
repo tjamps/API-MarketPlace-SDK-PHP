@@ -73,8 +73,8 @@ class Token
      */
     public static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new Token();
+        if (null === self::$_instance) {
+            self::$_instance = new self();
         }
         return self::$_instance;
     }
@@ -93,7 +93,7 @@ class Token
 
         //TODO gestion erreur token
 
-        if ($xmlResult !== false && isset($xmlResult[0]) && ctype_alnum(strval($xmlResult[0]))) {
+        if ($xmlResult !== false && isset($xmlResult[0]) && ctype_alnum((string) ($xmlResult[0]))) {
             $this->_token = $xmlResult[0];
 
             if ($this->_token != null && $this->_token) {

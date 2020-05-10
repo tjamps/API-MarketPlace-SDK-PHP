@@ -36,11 +36,11 @@ class DiscussionPoint
     public function getOrderClaimList($claimFilter)
     {
         //$optionalsNamespaces = array('xmlns:cdis="http://www.cdiscount.com"', 'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"');
-        $optionalsNamespaces = array(
+        $optionalsNamespaces = [
         		'xmlns:cdis="http://www.cdiscount.com"',
         		'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"',
         		'xmlns:i="http://www.w3.org/2001/XMLSchema-instance"',
-        );
+        ];
 
         $getOrderClaimList = new GetOrderClaimList();
         $claimFilterSoap = new ClaimFilterSoap($optionalsNamespaces);

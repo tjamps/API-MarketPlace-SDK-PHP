@@ -11,7 +11,7 @@ namespace Sdk\Order\Validate;
 
 class ValidateOrderResults
 {
-    private $_validateOrderResults = array();
+    private $_validateOrderResults = [];
 
     /**
      * @param $validateOrderResult \Sdk\Order\Validate\ValidateOrderResult

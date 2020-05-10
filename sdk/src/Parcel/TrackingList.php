@@ -13,7 +13,7 @@ class TrackingList
     /*
      * @var array
      */
-    private $_trackingList = array();
+    private $_trackingList = [];
 
     /*
      * @return array

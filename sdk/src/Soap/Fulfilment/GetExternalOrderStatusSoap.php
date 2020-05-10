@@ -51,7 +51,7 @@ class GetExternalOrderStatusSoap extends BaliseTool
      */
     public function generateOrderStatusRequestXml($request)
     {
-        $inlines = array($this->_xmlns_cdis2);
+        $inlines = [$this->_xmlns_cdis2];
 
         /*
          * Opening Tag Request

@@ -51,7 +51,7 @@ class CloseDiscussionListResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_closeDiscussionResultList = array();
+            $this->_closeDiscussionResultList = [];
 
             if (isset($this->_dataResponse['s:Body']['CloseDiscussionListResponse']['CloseDiscussionListResult']['CloseDiscussionResultList']) &&
                 !SoapTools::isSoapValueNull($this->_dataResponse['s:Body']['CloseDiscussionListResponse']['CloseDiscussionListResult']['CloseDiscussionResultList'])
@@ -78,9 +78,9 @@ class CloseDiscussionListResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['CloseDiscussionListResponse']['CloseDiscussionListResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -94,7 +94,7 @@ class CloseDiscussionListResponse extends AbstractResponse
     {
         foreach ($closeDiscussionResultListXML['CloseDiscussionResult'] as $closeDiscussionXML) {
 
-            $closeDiscussionResult = new CloseDiscussionResult(intval($closeDiscussionXML['DiscussionId']));
+            $closeDiscussionResult = new CloseDiscussionResult((int) ($closeDiscussionXML['DiscussionId']));
             $closeDiscussionResult->setOperationStatus($closeDiscussionXML['OperationStatus']);
         }
     }

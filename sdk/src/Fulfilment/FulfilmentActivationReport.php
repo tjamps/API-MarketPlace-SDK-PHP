@@ -16,7 +16,7 @@ class FulfilmentActivationReport
     /*
      * @var array
      */
-    private $_fulfilmentActivationReportDetails = array();
+    private $_fulfilmentActivationReportDetails = [];
 
     /*
      * @var int

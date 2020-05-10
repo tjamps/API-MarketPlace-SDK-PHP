@@ -59,10 +59,10 @@ class OrderPoint
      */
     public function getOrderList($orderFilter, $ignoredErrors = [])
     {
-        $optionalsNamespaces = array(
+        $optionalsNamespaces = [
             'xmlns:cdis="http://www.cdiscount.com"',
             'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"',
-        );
+        ];
 
         $envelope = new Envelope();
 

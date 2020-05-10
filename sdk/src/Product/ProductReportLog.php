@@ -43,7 +43,7 @@ class ProductReportLog extends ReportLog
     public function addProductReportPropertyLog($productReportPropertyLog)
     {
         if ($this->_propertyList == null) {
-            $this->_propertyList = array();
+            $this->_propertyList = [];
         }
         array_push($this->_propertyList, $productReportPropertyLog);
     }

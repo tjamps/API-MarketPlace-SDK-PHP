@@ -38,7 +38,7 @@ class HeaderMessage
 
     public function generateHeader()
     {
-        $inlines = array($this->_xmlnsa, $this->_xmlnsi);
+        $inlines = [$this->_xmlnsa, $this->_xmlnsi];
 
         $context = new Context($this->_headerChildrenPrefix);
         $localization = new Localization($this->_headerChildrenPrefix);

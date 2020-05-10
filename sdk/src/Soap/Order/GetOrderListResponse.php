@@ -89,7 +89,7 @@ class GetOrderListResponse extends AbstractResponse
         }
 
         foreach ($orders as $order) {
-            if (!is_array($order)) {
+            if (!\is_array($order)) {
                 continue;
             }
 
@@ -118,9 +118,9 @@ class GetOrderListResponse extends AbstractResponse
                 $orderObj->setHasClaims(true);
             }
 
-            $orderObj->setInitialTotalAmount(floatval($order['InitialTotalAmount']));
+            $orderObj->setInitialTotalAmount((float) ($order['InitialTotalAmount']));
             $orderObj->setInitialTotalShippingChargesAmount(
-                floatval($order['InitialTotalShippingChargesAmount'])
+                (float) ($order['InitialTotalShippingChargesAmount'])
             );
 
             if ($order['IsCLogistiqueOrder'] === 'true') {
@@ -153,27 +153,27 @@ class GetOrderListResponse extends AbstractResponse
                 $orderObj->setVoucherList($voucherList);
             }
 
-            $orderObj->setShippedTotalAmount(floatval($order['ShippedTotalAmount']));
+            $orderObj->setShippedTotalAmount((float) ($order['ShippedTotalAmount']));
 
-            $orderObj->setShippedTotalShippingCharges(floatval($order['ShippedTotalShippingCharges']));
+            $orderObj->setShippedTotalShippingCharges((float) ($order['ShippedTotalShippingCharges']));
 
             if (!SoapTools::isSoapValueNull($order['ShippingAddress'])) {
                 $shippingAddress = $this->getAddress($order['ShippingAddress']);
                 $orderObj->setShippingAddress($shippingAddress);
             }
             $orderObj->setShippingCode($order['ShippingCode']);
-            $orderObj->setSiteCommissionPromisedAmount(floatval($order['SiteCommissionPromisedAmount']));
-            $orderObj->setSiteCommissionShippedAmount(floatval($order['SiteCommissionShippedAmount']));
-            $orderObj->setSiteCommissionValidatedAmount(floatval($order['SiteCommissionValidatedAmount']));
+            $orderObj->setSiteCommissionPromisedAmount((float) ($order['SiteCommissionPromisedAmount']));
+            $orderObj->setSiteCommissionShippedAmount((float) ($order['SiteCommissionShippedAmount']));
+            $orderObj->setSiteCommissionValidatedAmount((float) ($order['SiteCommissionValidatedAmount']));
 
             $orderObj->setStatus($order['Status']);
 
-            $orderObj->setValidatedTotalAmount(floatval($order['ValidatedTotalAmount']));
-            $orderObj->setValidatedTotalShippingCharges(floatval($order['ValidatedTotalShippingCharges']));
+            $orderObj->setValidatedTotalAmount((float) ($order['ValidatedTotalAmount']));
+            $orderObj->setValidatedTotalShippingCharges((float) ($order['ValidatedTotalShippingCharges']));
 
             $orderObj->setValidationStatus($order['ValidationStatus']);
 
-            $orderObj->setVisaCegid(intval($order['VisaCegid']));
+            $orderObj->setVisaCegid((int) ($order['VisaCegid']));
 
             $this->orderList->addOrder($orderObj);
         }
@@ -219,9 +219,9 @@ class GetOrderListResponse extends AbstractResponse
     {
         $corporation = new Corporation();
 
-        $corporation->setBusinessUnitId(intval($objCorporation['BusinessUnitId']));
+        $corporation->setBusinessUnitId((int) ($objCorporation['BusinessUnitId']));
         $corporation->setCorporationCode($objCorporation['CorporationCode']);
-        $corporation->setCorporationId(intval($objCorporation['CorporationId']));
+        $corporation->setCorporationId((int) ($objCorporation['CorporationId']));
         $corporation->setCorporationName($objCorporation['CorporationName']);
 
         if ($objCorporation['IsMarketPlaceActive'] === 'true') {
@@ -262,7 +262,7 @@ class GetOrderListResponse extends AbstractResponse
     {
         $orderLines = $orderLineListOBJGlobal['OrderLine'];
         if (isset($orderLines['ProductId'])) {
-            $orderLines = array($orderLines);
+            $orderLines = [$orderLines];
         }
 
         $orderLineList = new OrderLineList();
@@ -297,16 +297,16 @@ class GetOrderListResponse extends AbstractResponse
             ) {
                 $orderLine->setProductEan($orderLineListOBJ['ProductEan']);
             }
-            $orderLine->setPurchasePrice(floatval($orderLineListOBJ['PurchasePrice']));
-            $orderLine->setQuantity(intval($orderLineListOBJ['Quantity']));
-            $orderLine->setRowId(intval($orderLineListOBJ['RowId']));
+            $orderLine->setPurchasePrice((float) ($orderLineListOBJ['PurchasePrice']));
+            $orderLine->setQuantity((int) ($orderLineListOBJ['Quantity']));
+            $orderLine->setRowId((int) ($orderLineListOBJ['RowId']));
             $orderLine->setSellerProductId($orderLineListOBJ['SellerProductId']);
             $orderLine->setShippingDateMax($orderLineListOBJ['ShippingDateMax']);
             $orderLine->setShippingDateMin($orderLineListOBJ['ShippingDateMin']);
             $orderLine->setSku($orderLineListOBJ['Sku']);
             $orderLine->setSkuParent($orderLineListOBJ['SkuParent']);
-            $orderLine->setUnitAdditionalShippingCharges(floatval($orderLineListOBJ['UnitAdditionalShippingCharges']));
-            $orderLine->setUnitShippingCharges(floatval($orderLineListOBJ['UnitShippingCharges']));
+            $orderLine->setUnitAdditionalShippingCharges((float) ($orderLineListOBJ['UnitAdditionalShippingCharges']));
+            $orderLine->setUnitShippingCharges((float) ($orderLineListOBJ['UnitShippingCharges']));
 
             if (isset($orderLineListOBJ['RefundShippingCharges']) && $orderLineListOBJ['RefundShippingCharges'] === 'true') {
                 $orderLine->setRefundShippingCharge(true);
@@ -360,7 +360,7 @@ class GetOrderListResponse extends AbstractResponse
          * If it does not, then we are in the 1st format ; we just
          * turn it into an array to handle it the same way the 2nd format is handled.
          */
-        if (!array_key_exists(0, $list)) {
+        if (!\array_key_exists(0, $list)) {
             $list = [$list];
         }
 
@@ -376,17 +376,17 @@ class GetOrderListResponse extends AbstractResponse
             $parcelObj->setRealCarrierCode($parcel['RealCarrierCode']);
 
             foreach ($parcel['ParcelItemList'] as $parcelItem) {
-                if (isset($parcelItem[0]) && is_array($parcelItem[0])) {
+                if (isset($parcelItem[0]) && \is_array($parcelItem[0])) {
                     foreach ($parcelItem as $parcel) {
                         $parcelItemObj = new ParcelItem($parcel['Sku']);
-                        $parcelItemObj->setQuantity(intval($parcel['Quantity']));
+                        $parcelItemObj->setQuantity((int) ($parcel['Quantity']));
                         $parcelItemObj->setProductName($parcel['ProductName']);
 
                         $parcelObj->getParcelItemList()->addParcelItem($parcelItemObj);
                     }
                 } else {
                     $parcelItemObj = new ParcelItem($parcelItem['Sku']);
-                    $parcelItemObj->setQuantity(intval($parcelItem['Quantity']));
+                    $parcelItemObj->setQuantity((int) ($parcelItem['Quantity']));
                     $parcelItemObj->setProductName($parcelItem['ProductName']);
 
                     $parcelObj->getParcelItemList()->addParcelItem($parcelItemObj);

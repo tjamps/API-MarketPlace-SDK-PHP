@@ -35,7 +35,7 @@ class FulfilmentSupplyOrderRequest
      */
     public function __construct() 
     {
-        $this->_productList = array();
+        $this->_productList = [];
     }
 }
 

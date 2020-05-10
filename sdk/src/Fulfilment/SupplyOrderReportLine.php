@@ -12,7 +12,7 @@ class SupplyOrderReportLine
     /*
      * @array
      */
-    private $_errorList = array();
+    private $_errorList = [];
 
     /*
      * @return array

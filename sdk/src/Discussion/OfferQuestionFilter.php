@@ -30,7 +30,7 @@ class OfferQuestionFilter extends DiscussionFilter
     public function addProductEan($productEan)
     {
         if ($this->_productEanList == null) {
-            $this->_productEanList = array();
+            $this->_productEanList = [];
         }
         array_push($this->_productEanList, $productEan);
     }
@@ -40,7 +40,7 @@ class OfferQuestionFilter extends DiscussionFilter
      */
     public function __construct()
     {
-        $this->_statusList = array();
+        $this->_statusList = [];
 
     }
 
@@ -63,7 +63,7 @@ class OfferQuestionFilter extends DiscussionFilter
     public function addProductSellerReference($productSellerReference)
     {
         if ($this->_productSellerReferenceList == null) {
-            $this->_productSellerReferenceList = array();
+            $this->_productSellerReferenceList = [];
         }
         array_push($this->_productSellerReferenceList, $productSellerReference);
     }

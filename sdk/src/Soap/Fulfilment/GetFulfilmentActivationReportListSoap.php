@@ -57,7 +57,7 @@ class GetFulfilmentActivationReportListSoap extends BaliseTool
     public function generateFulfilmentActivationReportRequestXml($request)
     {
         $namespace = 'cdis:';
-        $inlines = array($this->_xmlns_arr);
+        $inlines = [$this->_xmlns_arr];
         /*
          * @param $namespace
          */        

@@ -124,7 +124,7 @@ class OrderFilterSoap extends FilterSoap
          * OrderreferenceList
          */
         $orderReferenceList = $child->getOrderReferenceList();
-        if ( isset($orderReferenceList) && count($orderReferenceList) > 0 ) {
+        if ( isset($orderReferenceList) && \count($orderReferenceList) > 0 ) {
             $orderReferenceListBalise = $this->_xmlUtil->generateOpenBalise($this->_orderReferenceListTAG);
         
             $orderRefs = "";

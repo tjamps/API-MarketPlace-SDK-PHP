@@ -35,7 +35,7 @@ class GetProductPackageSubmissionResult extends BaliseTool
      */
     public function generatePackageFilterXML($packageId)
     {
-        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_productPackageFilterTAG, array('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"'));
+        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_productPackageFilterTAG, ['xmlns:i="http://www.w3.org/2001/XMLSchema-instance"']);
 
         $xml .= $this->_xmlUtil->generateBalise($this->_PackageIDTAG, $packageId);
 

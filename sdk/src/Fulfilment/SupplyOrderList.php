@@ -11,7 +11,7 @@ class SupplyOrderList
     /*
      * @var array
      */
-    private $_supplyOrderList = array();
+    private $_supplyOrderList = [];
     
     /*
      * return array

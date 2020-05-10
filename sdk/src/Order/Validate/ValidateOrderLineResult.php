@@ -11,7 +11,7 @@ namespace Sdk\Order\Validate;
 
 class ValidateOrderLineResult
 {
-    private $_errors = array();
+    private $_errors = [];
 
     /**
      * @return array

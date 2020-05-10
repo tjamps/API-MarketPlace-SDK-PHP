@@ -78,7 +78,7 @@ class GetOfferListPaginatedResponse extends GetOfferListGenericResponse
     {
         $objError = $this->_dataResponse['s:Body']['GetOfferListPaginatedResponse']['GetOfferListPaginatedResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

@@ -43,7 +43,7 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentSupplyOrderResponse']['GetFulfilmentSupplyOrderResult']))
         {
@@ -77,7 +77,7 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
         $this->_fulfilmentSupplyOrderResult = new FulfilmentSupplyOrderResult();
 
          //errorMessage and errorList
-        if (isset($fulfilmentSupplyOrderResult['ErrorMessage']['_']) && strlen($fulfilmentSupplyOrderResult['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($fulfilmentSupplyOrderResult['ErrorMessage']))
+        if (isset($fulfilmentSupplyOrderResult['ErrorMessage']['_']) && \strlen($fulfilmentSupplyOrderResult['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($fulfilmentSupplyOrderResult['ErrorMessage']))
         {
             $this->_fulfilmentSupplyOrderResult->setErrorMessage($fulfilmentSupplyOrderResult['ErrorMessage']['_']);
             $this->_fulfilmentSupplyOrderResult->addErrorToList($fulfilmentSupplyOrderResult['ErrorMessage']['_']);
@@ -105,7 +105,7 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
 
             if(isset($fulfilmentSupplyOrders['SupplyOrderNumber']))
             {
-                $fulfilmentSupplyOrders = array($fulfilmentSupplyOrders);
+                $fulfilmentSupplyOrders = [$fulfilmentSupplyOrders];
             }
         }
 
@@ -141,9 +141,9 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
                     {
                         $orderReferences = $fulfilmentSupplyOrder['OrderReferenceList']['a:string'];
 
-                        if (sizeof($orderReferences) == 1)
+                        if (count($orderReferences) == 1)
                         {
-                            $orderReferences = array($orderReferences);
+                            $orderReferences = [$orderReferences];
                         }
                     }
 

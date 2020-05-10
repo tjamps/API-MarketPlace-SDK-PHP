@@ -46,20 +46,20 @@ class CDSApiRequest
     private function _setHttpHeader($username, $password)
     {
         $authentication = base64_encode($username . ':' . $password);
-        $this->_httpHeader = array('Authorization: Basic ' . $authentication);
+        $this->_httpHeader = ['Authorization: Basic ' . $authentication];
     }
 
     private function _setAdapaterOptions($username, $password)
     {
-        $this->_adapter->setOptions(array(
-            'curloptions' => array(
+        $this->_adapter->setOptions([
+            'curloptions' => [
                 CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
                 CURLOPT_USERPWD => "$username:$password",
                 CURLOPT_RETURNTRANSFER => TRUE,
                 CURLOPT_SSL_VERIFYPEER => FALSE,
                 CURLOPT_SSL_VERIFYHOST => FALSE,
-            )
-        ));
+            ]
+        ]);
     }
 
     /**
