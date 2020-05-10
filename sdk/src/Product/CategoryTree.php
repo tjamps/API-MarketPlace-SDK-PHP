@@ -20,6 +20,31 @@ class CategoryTree
     private $_allowOfferIntegration = false;
 
     /**
+     * @var bool
+     */
+    private $_allowProductIntegration = false;
+
+    /**
+     * @var string
+     */
+    private $_code = null;
+
+    /**
+     * @var string
+     */
+    private $_name = null;
+
+    /**
+     * @var boolean
+     */
+    private $_eanOptional = false;
+
+    /**
+     * @var array \Sdk\Product\CategoryTree
+     */
+    private $_childrenCategoryList = [];
+
+    /**
      * @return boolean
      */
     public function isAllowOfferIntegration()
@@ -36,11 +61,6 @@ class CategoryTree
     }
 
     /**
-     * @var bool
-     */
-    private $_allowProductIntegration = false;
-
-    /**
      * @return boolean
      */
     public function isAllowProductIntegration()
@@ -55,11 +75,6 @@ class CategoryTree
     {
         $this->_allowProductIntegration = $allowProductIntegration;
     }
-
-    /**
-     * @var string
-     */
-    private $_code = null;
 
     /**
      * @return string
@@ -80,11 +95,6 @@ class CategoryTree
     }
 
     /**
-     * @var string
-     */
-    private $_name = null;
-
-    /**
      * @return string
      */
     public function getName()
@@ -103,11 +113,6 @@ class CategoryTree
     }
 
     /**
-     * @var boolean
-     */
-    private $_eanOptional = false;
-
-    /**
      * @return boolean
      */
     public function isEanOptional()
@@ -122,11 +127,6 @@ class CategoryTree
     {
         $this->_eanOptional = $eanOptional;
     }
-
-    /**
-     * @var array \Sdk\Product\CategoryTree
-     */
-    private $_childrenCategoryList = [];
 
     /**
      * @return array

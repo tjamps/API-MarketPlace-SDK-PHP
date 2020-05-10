@@ -43,29 +43,6 @@ class CDSApiRequest
     private $_httpHeader = "";
 
     /**
-     * @param $username
-     * @param $password
-     */
-    private function _setHttpHeader($username, $password)
-    {
-        $authentication = base64_encode($username . ':' . $password);
-        $this->_httpHeader = ['Authorization: Basic ' . $authentication];
-    }
-
-    private function _setAdapaterOptions($username, $password)
-    {
-        $this->_adapter->setOptions([
-            'curloptions' => [
-                CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-                CURLOPT_USERPWD => "$username:$password",
-                CURLOPT_RETURNTRANSFER => TRUE,
-                CURLOPT_SSL_VERIFYPEER => FALSE,
-                CURLOPT_SSL_VERIFYHOST => FALSE,
-            ]
-        ]);
-    }
-
-    /**
      * CDSApiRequest constructor.
      * @param $username
      * @param $password
@@ -93,5 +70,28 @@ class CDSApiRequest
     {
         $response = $this->_client->send($this->_request);
         return $response->getBody();
+    }
+
+    /**
+     * @param $username
+     * @param $password
+     */
+    private function _setHttpHeader($username, $password)
+    {
+        $authentication = base64_encode($username . ':' . $password);
+        $this->_httpHeader = ['Authorization: Basic ' . $authentication];
+    }
+
+    private function _setAdapaterOptions($username, $password)
+    {
+        $this->_adapter->setOptions([
+            'curloptions' => [
+                CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+                CURLOPT_USERPWD => "$username:$password",
+                CURLOPT_RETURNTRANSFER => TRUE,
+                CURLOPT_SSL_VERIFYPEER => FALSE,
+                CURLOPT_SSL_VERIFYHOST => FALSE,
+            ]
+        ]);
     }
 }

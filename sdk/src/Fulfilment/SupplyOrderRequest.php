@@ -17,6 +17,14 @@ class SupplyOrderRequest
     private $_beginModificationDate = null;
     private $_endModificationDate = null;
     
+    /*
+     * SupplyOrderRequest constructor
+     */
+    public function __construct() 
+    {
+        $this->_supplyOrderList = [];
+    }
+    
     /**
      * @return array
      */
@@ -95,13 +103,5 @@ class SupplyOrderRequest
     public function setEndModificationDate($endModificationDate)
     {
         $this->_endModificationDate = $endModificationDate;
-    }
-    
-    /*
-     * SupplyOrderRequest constructor
-     */
-    public function __construct() 
-    {
-        $this->_supplyOrderList = [];
     }
 }

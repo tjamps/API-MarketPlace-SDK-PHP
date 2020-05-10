@@ -19,19 +19,6 @@ class ModelListResponse extends AbstractResponse
 {
 
     /**
-     * @var array
-     */
-    private $_modelList = null;
-
-    /**
-     * @return array
-     */
-    public function getModelList()
-    {
-        return $this->_modelList;
-    }
-
-    /**
      * @var null
      */
     protected $_dataResponse = null;
@@ -47,6 +34,11 @@ class ModelListResponse extends AbstractResponse
     protected $_tagResultXML = null;
 
     /**
+     * @var array
+     */
+    private $_modelList = null;
+
+    /**
      * ModelListResponse constructor.
      * @param $tagXML
      * @param $tagResultXML
@@ -57,6 +49,14 @@ class ModelListResponse extends AbstractResponse
         $this->_tagResultXML = $tagResultXML;
 
         $this->_modelList = [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getModelList()
+    {
+        return $this->_modelList;
     }
 
     protected function _setGlobalInformations()

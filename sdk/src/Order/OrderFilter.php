@@ -15,6 +15,28 @@ class OrderFilter extends Filter
 {
     private $_fetchOrderLines = false;
 
+    private $_states = [];
+    
+    /*
+     * @var boolean
+     */
+    private $_fetchParcels = false;
+    
+    /*
+     * @var string
+     */
+    private $_orderType = OrderTypeEnum::None;
+    
+    /*
+     * @var string
+     */
+    private $_partnerOrderRef = null;
+
+    /*
+     * @var array
+     */
+    private $_orderReferenceList = [];
+
     /**
      * @return boolean
      */
@@ -30,8 +52,6 @@ class OrderFilter extends Filter
     {
         $this->_fetchOrderLines = $fetchOrderLines;
     }
-
-    private $_states = [];
 
     /**
      * @return array
@@ -50,11 +70,6 @@ class OrderFilter extends Filter
     }
     
     /*
-     * @var boolean
-     */
-    private $_fetchParcels = false;
-    
-    /*
      * @return boolean
      */
     public function isFetchParcels()
@@ -69,11 +84,6 @@ class OrderFilter extends Filter
     {
         $this->_fetchParcels = $fetchParcel;
     }
-    
-    /*
-     * @var string
-     */
-    private $_orderType = OrderTypeEnum::None;
     
     /*
      * @return string
@@ -92,11 +102,6 @@ class OrderFilter extends Filter
     }
     
     /*
-     * @var string
-     */
-    private $_partnerOrderRef = null;
-    
-    /*
      * @return string
      */
     public function getPartnerOrderRef()
@@ -111,11 +116,6 @@ class OrderFilter extends Filter
     {
         $this->_partnerOrderRef = $partnerOrderRef;
     }
-
-    /*
-     * @var array
-     */
-    private $_orderReferenceList = [];
     
     /*
      * @return array

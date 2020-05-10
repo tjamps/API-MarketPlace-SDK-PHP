@@ -19,6 +19,17 @@ class OfferStateActionRequest
      * @var enum
      */
     private $_action = null;
+    
+    /*
+     * OfferStateActionRequest constructor
+     * @param $sellerProductId string
+     * @param $action enum
+     */
+    public function __construct($sellerProductId, $action) 
+    {
+        $this->_sellerProductId = $sellerProductId;
+        $this->_action = $action;
+    }
 
     /*
      * @return string
@@ -50,16 +61,5 @@ class OfferStateActionRequest
     public function setAction($offerStateActionType)
     {
         $this->_action = $offerStateActionType;
-    }
-    
-    /*
-     * OfferStateActionRequest constructor
-     * @param $sellerProductId string
-     * @param $action enum
-     */
-    public function __construct($sellerProductId, $action) 
-    {
-        $this->_sellerProductId = $sellerProductId;
-        $this->_action = $action;
     }
 }

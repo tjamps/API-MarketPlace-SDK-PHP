@@ -51,6 +51,51 @@ class CDSApiClient
         'preprod' => 'https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc',
     ];
 
+    /**
+     * @var \Sdk\Order\OrderPoint
+     */
+    private $_orderPoint = null;
+
+    /**
+     * @var \Sdk\Offer\OfferPoint
+     */
+    private $_offerPoint = null;
+
+    /**
+     * @var \Sdk\Product\ProductPoint
+     */
+    private $_productPoint = null;
+
+    /**
+     * @var \Sdk\Fulfilment\FulfilmentPoint
+     */
+    private $_fulfilmentPoint = null;
+
+    /**
+     * @var DiscussionPoint
+     */
+    private $_discussionPoint = null;
+
+    /**
+     * @var \Sdk\Relays\RelaysPoint
+     */
+    private $_relaysPoint = null;
+
+    /**
+     * @var MailPoint
+     */
+    private $_mailPoint = null;
+
+
+    private static $instance;
+
+    public function __construct($username, $password, $prod = false)
+    {
+        $this->username = $username;
+        $this->password = $password;
+        $this->prod = $prod;
+    }
+
 
     /**
      * @return SellerPoint
@@ -64,11 +109,6 @@ class CDSApiClient
     }
 
     /**
-     * @var \Sdk\Order\OrderPoint
-     */
-    private $_orderPoint = null;
-
-    /**
      * @return OrderPoint
      */
     public function getOrderPoint()
@@ -78,11 +118,6 @@ class CDSApiClient
         }
         return $this->_orderPoint;
     }
-
-    /**
-     * @var \Sdk\Offer\OfferPoint
-     */
-    private $_offerPoint = null;
 
     /**
      * @return OfferPoint
@@ -96,11 +131,6 @@ class CDSApiClient
     }
 
     /**
-     * @var \Sdk\Product\ProductPoint
-     */
-    private $_productPoint = null;
-
-    /**
      * @return ProductPoint
      */
     public function getProductPoint()
@@ -110,11 +140,6 @@ class CDSApiClient
         }
         return $this->_productPoint;
     }
-
-    /**
-     * @var \Sdk\Fulfilment\FulfilmentPoint
-     */
-    private $_fulfilmentPoint = null;
 
     /**
      * @return FulfilmentPoint
@@ -128,11 +153,6 @@ class CDSApiClient
     }
 
     /**
-     * @var DiscussionPoint
-     */
-    private $_discussionPoint = null;
-
-    /**
      * @return DiscussionPoint
      */
     public function getDiscussionPoint()
@@ -142,11 +162,6 @@ class CDSApiClient
         }
         return $this->_discussionPoint;
     }
-
-    /**
-     * @var \Sdk\Relays\RelaysPoint
-     */
-    private $_relaysPoint = null;
 
     /**
      * @return RelaysPoint
@@ -160,11 +175,6 @@ class CDSApiClient
     }
 
     /**
-     * @var MailPoint
-     */
-    private $_mailPoint = null;
-
-    /**
      * @return MailPoint
      */
     public function getMailPoint()
@@ -174,16 +184,6 @@ class CDSApiClient
         }
         return $this->_mailPoint;
     }
-
-    public function __construct($username, $password, $prod = false)
-    {
-        $this->username = $username;
-        $this->password = $password;
-        $this->prod = $prod;
-    }
-
-
-    private static $instance;
 
     public static function getInstance($username = '', $password = '', $prod = false)
     {

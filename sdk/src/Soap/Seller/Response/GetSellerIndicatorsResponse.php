@@ -27,14 +27,6 @@ class GetSellerIndicatorsResponse extends AbstractResponse
     private $_sellerIndicators = null;
 
     /**
-     * @return array
-     */
-    public function getSellerIndicators()
-    {
-        return $this->_sellerIndicators;
-    }
-
-    /**
      * GetSellerIndicatorsResponse constructor.
      * @param $response
      */
@@ -56,6 +48,14 @@ class GetSellerIndicatorsResponse extends AbstractResponse
 
             $this->_generateSellerIndicatorsListFromXML($this->_dataResponse['s:Body']['GetSellerIndicatorsResponse']['GetSellerIndicatorsResult']['SellerIndicators']);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getSellerIndicators()
+    {
+        return $this->_sellerIndicators;
     }
 
     /**

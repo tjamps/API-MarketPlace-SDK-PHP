@@ -14,6 +14,14 @@ class SubmitFulfilmentActivationRequest
     private $_productActivationList = null;
     
     /*
+     * SubmitFulfilmentActivationRequest constructor
+     */
+    public function __construct() 
+    {
+        $this->_productActivationList = [];
+    }
+    
+    /*
      * @return array
      */
     public function getProductActivationList()
@@ -27,13 +35,5 @@ class SubmitFulfilmentActivationRequest
     public function addProductActivationData($productActivation)
     {
         $this->_productActivationList[] = $productActivation;
-    }
-    
-    /*
-     * SubmitFulfilmentActivationRequest constructor
-     */
-    public function __construct() 
-    {
-        $this->_productActivationList = [];
     }
 }

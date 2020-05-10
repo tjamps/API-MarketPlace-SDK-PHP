@@ -49,6 +49,14 @@ class GetProductListByIdentifierResponse extends AbstractResponse
     }
 
     /**
+     * @return array \Sdk\Product\Product
+     */
+    public function getProductList()
+    {
+        return $this->_productList;
+    }
+
+    /**
      * Set Token ID and Seller Login from XML response
      */
     private function _setGlobalInformations()
@@ -149,13 +157,5 @@ class GetProductListByIdentifierResponse extends AbstractResponse
 
             $this->_productList[] = $product;
         }
-    }
-
-    /**
-     * @return array \Sdk\Product\Product
-     */
-    public function getProductList()
-    {
-        return $this->_productList;
     }
 }

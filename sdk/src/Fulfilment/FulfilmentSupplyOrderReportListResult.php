@@ -26,6 +26,14 @@ class FulfilmentSupplyOrderReportListResult extends CommonResult
     private $_reportList = [];
     
     /*
+     * FulfilmentSupplyOrderReportListResult constructor
+     */
+    public function __construct() 
+    {
+         $this->_errorList = [];
+    }
+    
+    /*
      * @return int
      */
     public function getCurrentPageNumber()
@@ -72,13 +80,5 @@ class FulfilmentSupplyOrderReportListResult extends CommonResult
     public function addReportList($supplyOrderReport)
     {
         $this->_reportList[] = $supplyOrderReport;
-    }
-    
-    /*
-     * FulfilmentSupplyOrderReportListResult constructor
-     */
-    public function __construct() 
-    {
-         $this->_errorList = [];
     } 
 }

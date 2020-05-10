@@ -14,17 +14,25 @@ class FulfilmentProductRequest
     private $_fulfilmentReferencement = null;
 
     /**
+     * @var array
+     */
+    private $_barCodeList = null;
+
+     /**
+     * FulfillmentProductRequest constructor
+     */
+    public function __construct() 
+    {
+        $this->_barCodeList = [];
+    }
+
+    /**
      * @return string
      */
     public function getFulfilmentReferencement()
     {
         return $this->_fulfilmentReferencement;
     }
-
-    /**
-     * @var array
-     */
-    private $_barCodeList = null;
 
     /**
      * @return array
@@ -43,14 +51,6 @@ class FulfilmentProductRequest
 		{
 			$this->_barCodeList[] = $string;
 		}
-    }
-
-     /**
-     * FulfillmentProductRequest constructor
-     */
-    public function __construct() 
-    {
-        $this->_barCodeList = [];
     }
 
     /**

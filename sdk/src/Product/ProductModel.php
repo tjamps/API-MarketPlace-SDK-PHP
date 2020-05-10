@@ -17,6 +17,40 @@ class ProductModel
     private $_categoryCode = null;
 
     /**
+     * @var string
+     */
+    private $_name = null;
+
+    /**
+     * @var int
+     */
+    private $_modelId = 0;
+
+    /**
+     * @var array
+     */
+    private $_keyValueProperties = [];
+	
+	/**
+     * @var array
+     */
+    private $_mandatoryModelProperties = [];
+
+    /**
+     * @var string
+     */
+    private $_productXmlStructure = null;
+
+    /**
+     * ProductModel constructor.
+     * @param $modelD
+     */
+    public function __construct($modelD)
+    {
+        $this->_modelId = $modelD;
+    }
+
+    /**
      * @return string
      */
     public function getCategoryCode()
@@ -31,11 +65,6 @@ class ProductModel
     {
         $this->_categoryCode = $categoryCode;
     }
-
-    /**
-     * @var string
-     */
-    private $_name = null;
 
     /**
      * @return string
@@ -54,22 +83,12 @@ class ProductModel
     }
 
     /**
-     * @var int
-     */
-    private $_modelId = 0;
-
-    /**
      * @return int
      */
     public function getModelId()
     {
         return $this->_modelId;
     }
-
-    /**
-     * @var array
-     */
-    private $_keyValueProperties = [];
 
     /**
      * @param $keyvalueObj
@@ -87,11 +106,6 @@ class ProductModel
     {
         return $this->_keyValueProperties;
     }
-	
-	/**
-     * @var array
-     */
-    private $_mandatoryModelProperties = [];
 
     /**
      * @param $mandatoryModelProperty
@@ -111,11 +125,6 @@ class ProductModel
     }
 
     /**
-     * @var string
-     */
-    private $_productXmlStructure = null;
-
-    /**
      * @return string
      */
     public function getProductXmlStructure()
@@ -129,14 +138,5 @@ class ProductModel
     public function setProductXmlStructure($productXmlStructure)
     {
         $this->_productXmlStructure = $productXmlStructure;
-    }
-
-    /**
-     * ProductModel constructor.
-     * @param $modelD
-     */
-    public function __construct($modelD)
-    {
-        $this->_modelId = $modelD;
     }
 }

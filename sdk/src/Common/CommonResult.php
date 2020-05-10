@@ -16,6 +16,16 @@ abstract class CommonResult
     protected $_errorMessage;
 
     /**
+     * @var bool
+     */
+    protected $_operationSuccess;
+
+    /**
+     * @var array
+     */
+    protected $_errorList;
+
+    /**
      * @return string
      */
     public function getErrorMessage()
@@ -32,11 +42,6 @@ abstract class CommonResult
     }
 
     /**
-     * @var bool
-     */
-    protected $_operationSuccess;
-
-    /**
      * @return mixed
      */
     public function isOperationSuccess()
@@ -51,11 +56,6 @@ abstract class CommonResult
     {
         $this->_operationSuccess = $operationSuccess;
     }
-
-    /**
-     * @var array
-     */
-    protected $_errorList;
 
     /**
      * @return array

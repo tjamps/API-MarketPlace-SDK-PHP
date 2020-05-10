@@ -14,17 +14,65 @@ class FulfilmentOrderLine
     private $_orderReference = null;
     
     /**
+     * @var string
+     */
+    private $_productEan = null;
+
+    /**
+     * @var string
+     */
+    private $_productName = null;
+
+    /**
+     * @var string
+     */
+    private $_sellerProductReference = null;
+
+    /**
+     * @var string
+     */
+    private $_orderDate = null;
+
+    /**
+     * @var int
+     */
+    private $_quantity = null;
+
+    /**
+     * @var string
+     */
+    private $_latestWarehouseDeliveryDate = null;
+
+    /**
+     * @var string
+     */
+    private $_expectedCustomerDeliveryMin = null;
+
+    /**
+     * @var string
+     */
+    private $_expectedCustomerDeliveryMax = null;
+
+    /**
+     * @var string
+     */
+    private $_warehouse = null;
+
+    /*
+     * FulfilmentOrderLine constructor
+     * @param 
+     */
+    public function __construct() 
+    {
+    }
+    
+    /**
      * @return string
      */
     public function getOrderReference()
     {
         return $this->_orderReference;
     }
-    
-    /**
-     * @var string
-     */
-    private $_productEan = null;
     
     /**
      * @return string
@@ -37,11 +85,6 @@ class FulfilmentOrderLine
     /**
      * @var string
      */
-    private $_productName = null;
-
-    /**
-     * @var string
-     */
      public function getProductName()
     {
         return $this->_productName;
@@ -50,20 +93,10 @@ class FulfilmentOrderLine
     /**
      * @var string
      */
-    private $_sellerProductReference = null;
-
-    /**
-     * @var string
-     */
      public function getSellerProductReference()
     {
         return $this->_sellerProductReference;
     }
-
-    /**
-     * @var string
-     */
-    private $_orderDate = null;
 
     /**
      * @var string
@@ -77,20 +110,10 @@ class FulfilmentOrderLine
     /**
      * @var int
      */
-    private $_quantity = null;
-
-    /**
-     * @var int
-     */
      public function getQuantity()
     {
         return $this->_quantity;
     }
-
-    /**
-     * @var string
-     */
-    private $_latestWarehouseDeliveryDate = null;
 
     /**
      * @var string
@@ -103,11 +126,6 @@ class FulfilmentOrderLine
     /**
      * @var string
      */
-    private $_expectedCustomerDeliveryMin = null;
-
-    /**
-     * @var string
-     */
      public function getExpectedCustomerDeliveryMin()
     {
         return $this->_expectedCustomerDeliveryMin;
@@ -116,20 +134,10 @@ class FulfilmentOrderLine
     /**
      * @var string
      */
-    private $_expectedCustomerDeliveryMax = null;
-
-    /**
-     * @var string
-     */
      public function getExpectedCustomerDeliveryMax()
     {
         return $this->_expectedCustomerDeliveryMax;
     }
-
-    /**
-     * @var string
-     */
-    private $_warehouse = null;
 
     /**
      * @var string
@@ -217,13 +225,5 @@ class FulfilmentOrderLine
      public function setQuantity($quantity)
      {
         $this->_quantity = $quantity;
-     }
-
-    /*
-     * FulfilmentOrderLine constructor
-     * @param 
-     */
-    public function __construct() 
-    {
-    }    
+     }    
 }

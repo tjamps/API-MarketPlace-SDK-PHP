@@ -15,7 +15,42 @@ class ExternalOrderLine
     /*
      * @var String
      */
-    private $_productEan = null;
+    private $_productEan = null;   
+    
+    /*
+     * @var String
+     */
+    private $_productReference = null;    
+
+    /*
+     * @var Int
+     */
+    private $_quantity = null;    
+
+    /*
+     * @var Long
+     */
+    private $_offerId = null;    
+
+    /*
+     * @var Byte
+     */
+    private $_productConditionId = null;    
+
+    /*
+     * @var Byte
+     */
+    private $_productState = null;    
+
+    /*
+     * @var String
+     */
+    private $_productId = null;    
+
+    /*
+     * @var String
+     */
+    private $_variantId = null;
     
     /*
      * @return string
@@ -31,12 +66,7 @@ class ExternalOrderLine
     public function setProductEan($productEan)
     {
         $this->_productEan = $productEan;
-    }   
-    
-    /*
-     * @var String
-     */
-    private $_productReference = null;
+    }
     
     /*
      * @return string
@@ -52,12 +82,7 @@ class ExternalOrderLine
     public function setProductReference($productReference)
     {
         $this->_productReference = $productReference;
-    }    
-
-    /*
-     * @var Int
-     */
-    private $_quantity = null;
+    }
     
     /*
      * @return Int
@@ -73,12 +98,7 @@ class ExternalOrderLine
     public function setQuantity($quantity)
     {
         $this->_quantity = $quantity;
-    }    
-
-    /*
-     * @var Long
-     */
-    private $_offerId = null;
+    }
     
     /*
      * @return Long
@@ -94,12 +114,7 @@ class ExternalOrderLine
     public function setOfferId($offerId)
     {
         $this->_offerId = $offerId;
-    }    
-
-    /*
-     * @var Byte
-     */
-    private $_productConditionId = null;
+    }
     
     /*
      * @return Byte
@@ -115,12 +130,7 @@ class ExternalOrderLine
     public function setProductConditionId($productConditionId)
     {
         $this->_productConditionId = $productConditionId;
-    }    
-
-    /*
-     * @var Byte
-     */
-    private $_productState = null;
+    }
     
     /*
      * @return Byte
@@ -136,12 +146,7 @@ class ExternalOrderLine
     public function setProductState($productState)
     {
         $this->_productState = $productState;
-    }    
-
-    /*
-     * @var String
-     */
-    private $_productId = null;
+    }
     
     /*
      * @return String
@@ -157,12 +162,7 @@ class ExternalOrderLine
     public function setProductId($productId)
     {
         $this->_productId = $productId;
-    }    
-
-    /*
-     * @var String
-     */
-    private $_variantId = null;
+    }
     
     /*
      * @return String

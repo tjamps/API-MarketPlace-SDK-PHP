@@ -13,6 +13,11 @@ use Sdk\Order\OrderLine;
 
 class ValidateOrderLine extends OrderLine
 {
+    
+    /*
+     * @var enum
+     */
+    private $_typeOfReturn = AskingForReturnType::AskingForReturn;
 
     public function __construct($sellerProductId, $acceptationState, $productCondition)
     {
@@ -21,11 +26,6 @@ class ValidateOrderLine extends OrderLine
         parent::setAcceptationState($acceptationState);
         parent::__construct(0);
     }
-    
-    /*
-     * @var enum
-     */
-    private $_typeOfReturn = AskingForReturnType::AskingForReturn;
     
     /*
      * @return enum

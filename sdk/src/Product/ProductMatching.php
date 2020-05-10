@@ -17,6 +17,26 @@ class ProductMatching extends Product
     private $_comment = null;
 
     /**
+     * @var string
+     */
+    private $_ean = null;
+
+    /**
+     * @var string
+     */
+    private $_size = null;
+
+    /**
+     * @var string
+     */
+    private $_color = null;
+
+    /**
+     * @var string
+     */
+    private $_matchingStatus = null;
+
+    /**
      * @return string
      */
     public function getComment()
@@ -31,11 +51,6 @@ class ProductMatching extends Product
     {
         $this->_comment = $comment;
     }
-
-    /**
-     * @var string
-     */
-    private $_ean = null;
 
     /**
      * @return string
@@ -54,11 +69,6 @@ class ProductMatching extends Product
     }
 
     /**
-     * @var string
-     */
-    private $_size = null;
-
-    /**
      * @return string
      */
     public function getSize()
@@ -75,11 +85,6 @@ class ProductMatching extends Product
     }
 
     /**
-     * @var string
-     */
-    private $_color = null;
-
-    /**
      * @return string
      */
     public function getColor()
@@ -94,11 +99,6 @@ class ProductMatching extends Product
     {
         $this->_color = $color;
     }
-
-    /**
-     * @var string
-     */
-    private $_matchingStatus = null;
 
     /**
      * @return string

@@ -26,20 +26,20 @@ class ParcelInfos
     private $_manageParcel = null;
     
     /*
-     * @return string
-     */
-    public function getParcelNumber()
-    {
-        return $this->_parcelNumber;
-    }
-    
-    /*
      * parcelInfos constructor
      * @param $parcelNumber
      */
     public function __construct($parcelNumber) 
     {
         $this->_parcelNumber = $parcelNumber;
+    }
+    
+    /*
+     * @return string
+     */
+    public function getParcelNumber()
+    {
+        return $this->_parcelNumber;
     }
     
     /*

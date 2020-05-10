@@ -17,38 +17,14 @@ class RefundOrderLine
     private $_ean = null;
 
     /**
-     * @return string
-     */
-    public function getEan()
-    {
-        return $this->_ean;
-    }
-
-    /**
      * @var string
      */
     private $_sellerProductId = null;
 
     /**
-     * @return string
-     */
-    public function getSellerProductId()
-    {
-        return $this->_sellerProductId;
-    }
-
-    /**
      * @var bool
      */
     private $_refundShippingCharges = false;
-
-    /**
-     * @return boolean
-     */
-    public function isRefundShippingCharges()
-    {
-        return $this->_refundShippingCharges;
-    }
 
     /**
      * RefundOrderLine constructor.
@@ -62,5 +38,29 @@ class RefundOrderLine
         $this->_ean = $ean;
         $this->_sellerProductId = $sellerProductId;
         $this->_refundShippingCharges = $refundShippingCharges;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEan()
+    {
+        return $this->_ean;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSellerProductId()
+    {
+        return $this->_sellerProductId;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isRefundShippingCharges()
+    {
+        return $this->_refundShippingCharges;
     }
 }

@@ -17,6 +17,21 @@ class OfferBenchMark
     private $_bestOfferPrice = 0.0;
 
     /**
+     * @var string
+     */
+    private $_productCondition = null;
+
+    /**
+     * @var string
+     */
+    private $_productState = null;
+
+    /**
+     * @var float
+     */
+    private $_shippingCharges = 0.0;
+
+    /**
      * @return float
      */
     public function getBestOfferPrice()
@@ -31,11 +46,6 @@ class OfferBenchMark
     {
         $this->_bestOfferPrice = $bestOfferPrice;
     }
-
-    /**
-     * @var string
-     */
-    private $_productCondition = null;
 
     /**
      * @return string
@@ -54,11 +64,6 @@ class OfferBenchMark
     }
 
     /**
-     * @var string
-     */
-    private $_productState = null;
-
-    /**
      * @return string
      */
     public function getProductState()
@@ -73,11 +78,6 @@ class OfferBenchMark
     {
         $this->_productState = $productState;
     }
-
-    /**
-     * @var float
-     */
-    private $_shippingCharges = 0.0;
 
     /**
      * @return float

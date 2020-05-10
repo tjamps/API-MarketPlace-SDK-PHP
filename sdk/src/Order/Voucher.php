@@ -21,6 +21,16 @@ class Voucher
     private $_createDate = null;
     
     /*
+     * @var \Sdk\Order\Refund\RefundInformation
+     */
+    private $_refundInformation = null;
+    
+    /*
+     * @var \Sdk\Order\VoucherSourceActorEnum
+     */
+    private $_source = null;
+    
+    /*
      * @return DateTime
      */
     public function getCreateDate()
@@ -37,11 +47,6 @@ class Voucher
     }
     
     /*
-     * @var \Sdk\Order\Refund\RefundInformation
-     */
-    private $_refundInformation = null;
-    
-    /*
      * @return \Sdk\Order\Refund\RefundInformation
      */
     public function getRefundInformation()
@@ -56,11 +61,6 @@ class Voucher
     {
         $this->_refundInformation = $refundInformation;
     }
-    
-    /*
-     * @var \Sdk\Order\VoucherSourceActorEnum
-     */
-    private $_source = null;
     
     /*
      * @return \Sdk\Order\VoucherSourceActorEnum

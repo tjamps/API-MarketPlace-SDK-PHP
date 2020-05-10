@@ -18,6 +18,11 @@ class DiscussionFilter extends Filter
     protected $_statusList = null;
 
     /**
+     * @var array
+     */
+    private $_orderNumberList = null;
+
+    /**
      * @param $status
      */
     public function addStatus($status)
@@ -32,11 +37,6 @@ class DiscussionFilter extends Filter
     {
         return $this->_statusList;
     }
-
-    /**
-     * @var array
-     */
-    private $_orderNumberList = null;
 
     /**
      * @param $orderNumber

@@ -32,6 +32,22 @@ class SupplyOrderReportRequest
      * @var int
      */
     private $_pageSize = null;
+    /*
+     * SupplyOrderReportRequest constructor
+     * @param $beginCreationDate
+     * @param $depositIdList
+     * @param $endCreationDate
+     * @param $pageNumber
+     * @param $pageSize
+     */
+    public function __construct($beginCreationDate, $depositIdList, $endCreationDate, $pageNumber, $pageSize) 
+    {
+        $this->_beginCreationDate = $beginCreationDate;
+        $this->_depositIdList = $depositIdList;
+        $this->_endCreationDate = $endCreationDate;
+        $this->_pageNumber = $pageNumber;
+        $this->_pageSize = $pageSize;
+    }
     
     /*
      * @return string
@@ -79,21 +95,5 @@ class SupplyOrderReportRequest
     public function getPageSize()
     {
         return $this->_pageSize;
-    }
-    /*
-     * SupplyOrderReportRequest constructor
-     * @param $beginCreationDate
-     * @param $depositIdList
-     * @param $endCreationDate
-     * @param $pageNumber
-     * @param $pageSize
-     */
-    public function __construct($beginCreationDate, $depositIdList, $endCreationDate, $pageNumber, $pageSize) 
-    {
-        $this->_beginCreationDate = $beginCreationDate;
-        $this->_depositIdList = $depositIdList;
-        $this->_endCreationDate = $endCreationDate;
-        $this->_pageNumber = $pageNumber;
-        $this->_pageSize = $pageSize;
     } 
 }

@@ -27,14 +27,6 @@ class GetDiscussionMailListResponse extends AbstractResponse
     private $_discussionMailList = null;
 
     /**
-     * @return array
-     */
-    public function getDiscussionMailList()
-    {
-        return $this->_discussionMailList;
-    }
-
-    /**
      * GetDiscussionMailListResponse constructor.
      * @param $response
      */
@@ -55,6 +47,14 @@ class GetDiscussionMailListResponse extends AbstractResponse
 
             $this->_generateDiscussionMailListFromXML($this->_dataResponse['s:Body']['GetDiscussionMailListResponse']['GetDiscussionMailListResult']['DiscussionMailList']);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getDiscussionMailList()
+    {
+        return $this->_discussionMailList;
     }
 
     /**

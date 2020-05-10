@@ -19,6 +19,16 @@ class ValidateOrder extends Order
     private $_carrierName = null;
 
     /**
+     * @var string
+     */
+    private $_trackingNumber = null;
+
+    /**
+     * @var string
+     */
+    private $_trackingUrl = null;
+
+    /**
      * @return string
      */
     public function getCarrierName()
@@ -35,11 +45,6 @@ class ValidateOrder extends Order
     }
 
     /**
-     * @var string
-     */
-    private $_trackingNumber = null;
-
-    /**
      * @return string
      */
     public function getTrackingNumber()
@@ -54,11 +59,6 @@ class ValidateOrder extends Order
     {
         $this->_trackingNumber = $trackingNumber;
     }
-
-    /**
-     * @var string
-     */
-    private $_trackingUrl = null;
 
     /**
      * @return string

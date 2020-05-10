@@ -18,6 +18,26 @@ class Corporation
     private $_businessUnitId = 0;
 
     /**
+     * @var string
+     */
+    private $_corporationCode = null;
+
+    /**
+     * @var int
+     */
+    private $_corporationId = 0;
+
+    /**
+     * @var string
+     */
+    private $_corporationName = null;
+
+    /**
+     * @var bool
+     */
+    private $_isMarketPlaceActive = false;
+
+    /**
      * @return int
      */
     public function getBusinessUnitId()
@@ -32,11 +52,6 @@ class Corporation
     {
         $this->_businessUnitId = $businessUnitId;
     }
-
-    /**
-     * @var string
-     */
-    private $_corporationCode = null;
 
     /**
      * @return string
@@ -55,11 +70,6 @@ class Corporation
     }
 
     /**
-     * @var int
-     */
-    private $_corporationId = 0;
-
-    /**
      * @return int
      */
     public function getCorporationId()
@@ -76,11 +86,6 @@ class Corporation
     }
 
     /**
-     * @var string
-     */
-    private $_corporationName = null;
-
-    /**
      * @return string
      */
     public function getCorporationName()
@@ -95,11 +100,6 @@ class Corporation
     {
         $this->_corporationName = $corporationName;
     }
-
-    /**
-     * @var bool
-     */
-    private $_isMarketPlaceActive = false;
 
     /**
      * @return boolean

@@ -21,6 +21,61 @@ class ExternalOrder implements JsonSerializable
     private $_externalCustomer = null;
 
     /**
+     * @var array ExternalOrderLine
+     */
+    private $_externalOrderLine = [];
+
+    /*
+     * @var Int
+     */
+    private $_customerOrderNumber = null;
+
+    /*
+     * @var String
+     */
+    private $_corporation = null;
+
+    /*
+     * @var String
+     */
+    private $_comments = null;
+
+    /*
+     * @var string
+     */
+    private $_orderDate = null;
+
+    /*
+     * @var String
+     */
+    private $_shippingMode = null;
+
+    /*
+     * @var Long
+     */
+    private $_sellerId = null;
+
+    /*
+     * @var String
+     */
+    private $_shippingCode = null;
+
+    /*
+     * @var String
+     */
+    private $_siteConfigurationId = null;
+
+    /*
+     * @var String
+     */
+    private $_sellerEmail = null;
+
+    /*
+     * @var String
+     */
+    private $_siteId = null;
+
+    /**
      * @return ExternalCustomer
      */
     public function getExternalCustomer()
@@ -35,11 +90,6 @@ class ExternalOrder implements JsonSerializable
     {
         $this->_externalCustomer = $externalCustomer;
     }
-
-    /**
-     * @var array ExternalOrderLine
-     */
-    private $_externalOrderLine = [];
 
     /**
      * @return array ExternalOrderLine
@@ -70,11 +120,6 @@ class ExternalOrder implements JsonSerializable
     }
 
     /*
-     * @var Int
-     */
-    private $_customerOrderNumber = null;
-
-    /*
      * @return Int
      */
     public function getCustomerOrderNumber()
@@ -89,11 +134,6 @@ class ExternalOrder implements JsonSerializable
     {
         $this->_customerOrderNumber = $customerOrderNumber;
     }
-
-    /*
-     * @var String
-     */
-    private $_corporation = null;
 
     /*
      * @return String
@@ -112,11 +152,6 @@ class ExternalOrder implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_comments = null;
-
-    /*
      * @return String
      */
     public function getComments()
@@ -131,11 +166,6 @@ class ExternalOrder implements JsonSerializable
     {
         $this->_comments = $comments;
     }
-
-    /*
-     * @var string
-     */
-    private $_orderDate = null;
 
     /*
      * @return string
@@ -154,11 +184,6 @@ class ExternalOrder implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_shippingMode = null;
-
-    /*
      * @return String
      */
     public function getShippingMode()
@@ -173,11 +198,6 @@ class ExternalOrder implements JsonSerializable
     {
         $this->_shippingMode = $shippingMode;
     }
-
-    /*
-     * @var Long
-     */
-    private $_sellerId = null;
 
     /*
      * @return String
@@ -196,11 +216,6 @@ class ExternalOrder implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_shippingCode = null;
-
-    /*
      * @return String
      */
     public function getShippingCode()
@@ -215,11 +230,6 @@ class ExternalOrder implements JsonSerializable
     {
         $this->_shippingCode = $shippingCode;
     }
-
-    /*
-     * @var String
-     */
-    private $_siteConfigurationId = null;
 
     /*
      * @return String
@@ -238,11 +248,6 @@ class ExternalOrder implements JsonSerializable
     }
 
     /*
-     * @var String
-     */
-    private $_sellerEmail = null;
-
-    /*
      * @return String
      */
     public function getSellerEmail()
@@ -257,11 +262,6 @@ class ExternalOrder implements JsonSerializable
     {
         $this->_sellerEmail = $sellerEmail;
     }
-
-    /*
-     * @var String
-     */
-    private $_siteId = null;
 
     /*
      * @return String

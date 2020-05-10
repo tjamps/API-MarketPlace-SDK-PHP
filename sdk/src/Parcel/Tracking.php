@@ -16,12 +16,19 @@ class Tracking
     private $_trackingId;
     
     /*
-     * @return int
+     * @var string
      */
-    public function getTrackingId()
-    {
-        return $this->_trackingId;
-    }
+    private $_parcelNum = null;
+    
+    /*
+     * @var string
+     */
+    private $_justification = null;
+    
+    /*
+     * @var date string format
+     */
+    private $_insertDate= null;
     
     /*
      * Tracking constructor
@@ -33,9 +40,12 @@ class Tracking
     }
     
     /*
-     * @var string
+     * @return int
      */
-    private $_parcelNum = null;
+    public function getTrackingId()
+    {
+        return $this->_trackingId;
+    }
     
     /*
      * @return string
@@ -54,11 +64,6 @@ class Tracking
     }
     
     /*
-     * @var string
-     */
-    private $_justification = null;
-    
-    /*
      * @return string
      */
     public function getJustification()
@@ -73,11 +78,6 @@ class Tracking
     {
         $this->_justification = $justification;
     }
-    
-    /*
-     * @var date string format
-     */
-    private $_insertDate= null;
     
     /*
      * @return string date

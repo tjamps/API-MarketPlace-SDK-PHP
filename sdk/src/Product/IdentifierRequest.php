@@ -16,7 +16,9 @@ class IdentifierRequest
     /*
      * @var string
      */
-    private $_identifierType = null;
+    private $_identifierType = null;    
+
+    private $_valueList = [];
     
     /*
      * @return string
@@ -32,9 +34,7 @@ class IdentifierRequest
     public function setIdentifierType($identifierType)
     {
         $this->_identifierType = $identifierType;
-    }    
-
-    private $_valueList = [];
+    }
 
     /**
      * @return array

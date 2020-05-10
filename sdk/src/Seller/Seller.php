@@ -14,6 +14,27 @@ class Seller
     private $_email = null;
 
     /**
+     * @var
+     */
+    private $_isAvailable = null;
+
+    private $_login = null;
+
+    private $_mobileNumber = null;
+
+    private $_phoneNumber = null;
+
+    private $_sellerAddress = null;
+
+    private $_shopName = null;
+
+    private $_shopUrl = null;
+
+    private $_siretNumber = null;
+
+    private $_state = null;
+
+    /**
      * @return string
      */
     public function getEmail()
@@ -28,11 +49,6 @@ class Seller
     {
         $this->_email = $email;
     }
-
-    /**
-     * @var
-     */
-    private $_isAvailable = null;
 
     /**
      * @return mixed
@@ -50,8 +66,6 @@ class Seller
         $this->_isAvailable = $isAvailable;
     }
 
-    private $_login = null;
-
     /**
      * @return mixed
      */
@@ -67,8 +81,6 @@ class Seller
     {
         $this->_login = $login;
     }
-
-    private $_mobileNumber = null;
 
     /**
      * @return mixed
@@ -86,8 +98,6 @@ class Seller
         $this->_mobileNumber = $mobileNumber;
     }
 
-    private $_phoneNumber = null;
-
     /**
      * @return mixed
      */
@@ -103,8 +113,6 @@ class Seller
     {
         $this->_phoneNumber = $phoneNumber;
     }
-
-    private $_sellerAddress = null;
 
     /**
      * @return Address
@@ -122,8 +130,6 @@ class Seller
         $this->_sellerAddress = $sellerAdress;
     }
 
-    private $_shopName = null;
-
     /**
      * @return null
      */
@@ -139,8 +145,6 @@ class Seller
     {
         $this->_shopName = $shopName;
     }
-
-    private $_shopUrl = null;
 
     /**
      * @return null
@@ -158,8 +162,6 @@ class Seller
         $this->_shopUrl = $shopUrl;
     }
 
-    private $_siretNumber = null;
-
     /**
      * @return null
      */
@@ -175,8 +177,6 @@ class Seller
     {
         $this->_siretNumber = $siretNumber;
     }
-
-    private $_state = null;
 
     /**
      * @return null

@@ -12,6 +12,12 @@ class Filter
 {
     private $_beginCreationDate = null;
     /**
+     * @var null
+     */
+    private $_beginModificationDate = null;
+    private $_endCreationDate = null;
+    private $_endModificationDate = null;
+    /**
      * @return null $beginCreationDate
      */
     public function getBeginCreationDate()
@@ -26,10 +32,6 @@ class Filter
         $this->_beginCreationDate = $beginCreationDate;
     }
     /**
-     * @var null
-     */
-    private $_beginModificationDate = null;
-    /**
      * @return null
      */
     public function getBeginModificationDate()
@@ -43,7 +45,6 @@ class Filter
     {
         $this->_beginModificationDate = $beginModificationDate;
     }
-    private $_endCreationDate = null;
     /**
      * @return null
      */
@@ -58,7 +59,6 @@ class Filter
     {
         $this->_endCreationDate = $endCreationDate;
     }
-    private $_endModificationDate = null;
     /**
      * @return null
      */

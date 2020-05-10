@@ -12,6 +12,15 @@ class FulfilmentDeliveryDocumentRequest
      * @var int
      */
     private $_depositId = null;
+
+    /*
+     * FulfilmentDeliveryDocumentRequest constructor
+     * @param $depositId int
+     */
+    public function __construct($depositId) 
+    {
+        $this->_depositId = $depositId;
+    }
     
     /**
      * @return int
@@ -25,15 +34,6 @@ class FulfilmentDeliveryDocumentRequest
      * @param $depositId
      */
     public function setDepositId($depositId)
-    {
-        $this->_depositId = $depositId;
-    }
-
-    /*
-     * FulfilmentDeliveryDocumentRequest constructor
-     * @param $depositId int
-     */
-    public function __construct($depositId) 
     {
         $this->_depositId = $depositId;
     }

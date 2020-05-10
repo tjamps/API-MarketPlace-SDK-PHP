@@ -17,6 +17,14 @@ class ClaimFilter extends DiscussionFilter
     private $_onlyMessageFromCDSCustomerService = false;
 
     /**
+     * ClaimFilter constructor.
+     */
+    public function __construct()
+    {
+        $this->_statusList = [];
+    }
+
+    /**
      * @param boolean $onlyMessageFromCDSCustomerService
      */
     public function setOnlyMessageFromCDSCustomerService($onlyMessageFromCDSCustomerService)
@@ -30,13 +38,5 @@ class ClaimFilter extends DiscussionFilter
     public function isOnlyMessageFromCDSCustomerService()
     {
         return $this->_onlyMessageFromCDSCustomerService;
-    }
-
-    /**
-     * ClaimFilter constructor.
-     */
-    public function __construct()
-    {
-        $this->_statusList = [];
     }
 }

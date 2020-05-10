@@ -16,7 +16,12 @@ class OrderStatusRequest
     /*
      * @var String
      */
-    private $_corporation = null;
+    private $_corporation = null;   
+    
+    /*
+     * @var String
+     */
+    private $_customerOrderNumber = null;
     
     /*
      * @return string
@@ -32,12 +37,7 @@ class OrderStatusRequest
     public function setCorporation($corporation)
     {
         $this->_corporation = $corporation;
-    }   
-    
-    /*
-     * @var String
-     */
-    private $_customerOrderNumber = null;
+    }
     
     /*
      * @return string

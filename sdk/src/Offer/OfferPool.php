@@ -17,25 +17,9 @@ class OfferPool
     private $_description = null;
 
     /**
-     * @return null
-     */
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-
-    /**
      * @var string
      */
     private $_id = null;
-
-    /**
-     * @return null
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
 
     /**
      * OfferPool constructor.
@@ -48,5 +32,21 @@ class OfferPool
         if (!SoapTools::isSoapValueNull($description)) {
             $this->_description = $description;
         }
+    }
+
+    /**
+     * @return null
+     */
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+
+    /**
+     * @return null
+     */
+    public function getId()
+    {
+        return $this->_id;
     }
 }

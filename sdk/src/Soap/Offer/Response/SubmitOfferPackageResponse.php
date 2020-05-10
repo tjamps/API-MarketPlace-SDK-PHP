@@ -27,38 +27,14 @@ class SubmitOfferPackageResponse extends AbstractResponse
     private $_packageId = 0;
 
     /**
-     * @return int
-     */
-    public function getPackageId()
-    {
-        return $this->_packageId;
-    }
-
-    /**
      * @var string
      */
     private $_packageIntegrationStatus = null;
 
     /**
-     * @return string
-     */
-    public function getPackageIntegrationStatus()
-    {
-        return $this->_packageIntegrationStatus;
-    }
-
-    /**
      * @var array
      */
     private $_productLogList = null;
-
-    /**
-     * @return array
-     */
-    public function getProductLogList()
-    {
-        return $this->_productLogList;
-    }
 
     /**
      * SubmitOfferPackageResponse constructor.
@@ -82,6 +58,30 @@ class SubmitOfferPackageResponse extends AbstractResponse
 
             $this->_setImportInformationsFromXML($this->_dataResponse['s:Body']['SubmitOfferPackageResponse']['SubmitOfferPackageResult']);
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getPackageId()
+    {
+        return $this->_packageId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackageIntegrationStatus()
+    {
+        return $this->_packageIntegrationStatus;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProductLogList()
+    {
+        return $this->_productLogList;
     }
 
     /**

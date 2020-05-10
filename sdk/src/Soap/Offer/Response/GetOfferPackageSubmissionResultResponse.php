@@ -28,25 +28,9 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
     private $_packageId = 0;
 
     /**
-     * @return int
-     */
-    public function getPackageId()
-    {
-        return $this->_packageId;
-    }
-
-    /**
      * @var string
      */
     private $_packageIntegrationStatus = null;
-
-    /**
-     * @return string
-     */
-    public function getPackageIntegrationStatus()
-    {
-        return $this->_packageIntegrationStatus;
-    }
 
     /**
      * @var array
@@ -54,25 +38,9 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
     private $_offerLogList = null;
 
     /**
-     * @return array
-     */
-    public function getOfferLogList()
-    {
-        return $this->_offerLogList;
-    }
-
-    /**
      * @var bool
      */
     private $_packageImportHasErrors = false;
-
-    /**
-     * @return boolean
-     */
-    public function isPackageImportHasErrors()
-    {
-        return $this->_packageImportHasErrors;
-    }
 
     /**
      * SubmitProductPackageResponse constructor.
@@ -98,6 +66,38 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
                 $this->_setImportInformationsFromXML($this->_dataResponse['s:Body']['GetOfferPackageSubmissionResultResponse']['GetOfferPackageSubmissionResultResult']['OfferLogList']);
             }
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getPackageId()
+    {
+        return $this->_packageId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackageIntegrationStatus()
+    {
+        return $this->_packageIntegrationStatus;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOfferLogList()
+    {
+        return $this->_offerLogList;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPackageImportHasErrors()
+    {
+        return $this->_packageImportHasErrors;
     }
 
     /**

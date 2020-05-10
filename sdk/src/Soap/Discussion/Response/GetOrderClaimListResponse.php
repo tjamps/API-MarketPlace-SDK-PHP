@@ -29,14 +29,6 @@ class GetOrderClaimListResponse extends AbstractResponse
     private $_orderClaimList = null;
 
     /**
-     * @return array
-     */
-    public function getOrderClaimList()
-    {
-        return $this->_orderClaimList;
-    }
-
-    /**
      * GetOrderClaimListResponse constructor.
      * @param $response
      */
@@ -59,6 +51,14 @@ class GetOrderClaimListResponse extends AbstractResponse
                 $this->_generateOrderClaimListFromXML($this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult']['OrderClaimList']);
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrderClaimList()
+    {
+        return $this->_orderClaimList;
     }
 
     /**

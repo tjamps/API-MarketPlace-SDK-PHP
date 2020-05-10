@@ -29,22 +29,6 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
     private $_fulfilmentSupplyOrderReportListResult= null;
 
     /*
-     * @return \Sdk\Fulfilment\FulfilmentSupplyOrderReportListResult
-     */
-    public function getFulfilmentSupplyOrderReportListResult()
-    {
-        return $this->_fulfilmentSupplyOrderReportListResult;
-    }
-
-    /*
-     * @param $fulfilmentSupplyOrderReportListResult
-     */
-     public function setFulfilmentSupplyOrderReportListResult($fulfilmentSupplyOrderReportListResult)
-    {
-        $this->_fulfilmentSupplyOrderReportListResult=$fulfilmentSupplyOrderReportListResult;
-    }
-
-    /*
      * SubmitFulfilmentSupplyOrderResponse constructor
      * @param $response
      */
@@ -64,6 +48,22 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
                 $this->generateGetFulfilmentSupplyOrderReportListResult();
             }
         }
+    }
+
+    /*
+     * @return \Sdk\Fulfilment\FulfilmentSupplyOrderReportListResult
+     */
+    public function getFulfilmentSupplyOrderReportListResult()
+    {
+        return $this->_fulfilmentSupplyOrderReportListResult;
+    }
+
+    /*
+     * @param $fulfilmentSupplyOrderReportListResult
+     */
+     public function setFulfilmentSupplyOrderReportListResult($fulfilmentSupplyOrderReportListResult)
+    {
+        $this->_fulfilmentSupplyOrderReportListResult=$fulfilmentSupplyOrderReportListResult;
     }
 
     /**

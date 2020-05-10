@@ -18,12 +18,9 @@ class Request
     private $_orderNumber = null;
 
     /**
-     * @return string
+     * @var array
      */
-    public function getOrderNumber()
-    {
-        return $this->_orderNumber;
-    }
+    private $_sellerRefundRequestList = [];
 
     /**
      * Request constructor.
@@ -35,9 +32,12 @@ class Request
     }
 
     /**
-     * @var array
+     * @return string
      */
-    private $_sellerRefundRequestList = [];
+    public function getOrderNumber()
+    {
+        return $this->_orderNumber;
+    }
 
     /**
      * @param $sellerRefundRequest \Sdk\Order\Refund\SellerRefundRequest

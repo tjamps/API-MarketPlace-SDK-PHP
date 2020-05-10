@@ -21,19 +21,6 @@ class SubmitFulfilmentActivationResponse extends AbstractResponse
 
     private $_submitFulfilmentActivationResult= null;
 
-    public function getSubmitFulfilmentActivationResult()
-    {
-        return $this->_submitFulfilmentActivationResult;
-    }
-
-    /*
-     * @param  $submitFulfilmentActivationResult \Sdk\Fulfilment\SubmitFulfilmentActivationResult
-     */
-     public function setSubmitFulfilmentActivationResult($submitFulfilmentActivationResult)
-    {
-        $this->_submitFulfilmentActivationResult=$submitFulfilmentActivationResult;
-    }
-
     /*
      * SubmitFulfilmentSupplyOrderResponse constructor
      * @param $response
@@ -56,14 +43,17 @@ class SubmitFulfilmentActivationResponse extends AbstractResponse
         }
     }
 
-    /**
-     * Set the token ID and the seller login from the response
-     */
-    private function _setGlobalInformations()
+    public function getSubmitFulfilmentActivationResult()
     {
-        $objInfoResult = $this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult'];
-        $this->tokenID = $objInfoResult['TokenId'];
-        $this->sellerLogin = $objInfoResult['SellerLogin'];
+        return $this->_submitFulfilmentActivationResult;
+    }
+
+    /*
+     * @param  $submitFulfilmentActivationResult \Sdk\Fulfilment\SubmitFulfilmentActivationResult
+     */
+     public function setSubmitFulfilmentActivationResult($submitFulfilmentActivationResult)
+    {
+        $this->_submitFulfilmentActivationResult=$submitFulfilmentActivationResult;
     }
 
     public function generateDepositIdResult()
@@ -89,6 +79,16 @@ class SubmitFulfilmentActivationResponse extends AbstractResponse
         {
             $this->_submitFulfilmentActivationResult->setDepositId($submitFulfilmentActivationResultXml['DepositId']);
         }
+    }
+
+    /**
+     * Set the token ID and the seller login from the response
+     */
+    private function _setGlobalInformations()
+    {
+        $objInfoResult = $this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult'];
+        $this->tokenID = $objInfoResult['TokenId'];
+        $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
 }

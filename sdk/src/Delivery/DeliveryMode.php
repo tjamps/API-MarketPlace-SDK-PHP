@@ -17,6 +17,11 @@ class DeliveryMode
     protected $_code = null;
 
     /**
+     * @var string
+     */
+    protected $_name = null;
+
+    /**
      * @return string
      */
     public function getCode()
@@ -31,11 +36,6 @@ class DeliveryMode
     {
         $this->_code = $code;
     }
-
-    /**
-     * @var string
-     */
-    protected $_name = null;
 
     /**
      * @return string

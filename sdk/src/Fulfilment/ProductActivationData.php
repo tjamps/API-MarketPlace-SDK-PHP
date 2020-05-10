@@ -11,7 +11,37 @@ class ProductActivationData
     /*
      * @var string
      */
-    private $_productEAN = null;
+    private $_productEAN = null;   
+    
+    /*
+     * @var string
+     */
+    private $_sellerProductReference = null;
+    
+    /*
+     * @var enum
+     */
+    private $_action = null;
+
+    /*
+     * @var int
+     */
+    private $_length = null;
+
+    /*
+     * @var int
+     */
+    private $_width = null;
+
+    /*
+     * @var int
+     */
+    private $_height = null;
+
+    /*
+     * @var int
+     */
+    private $_weight = null;
     
     /*
      * @return string
@@ -27,12 +57,7 @@ class ProductActivationData
     public function setProductEAN($productEAN)
     {
         $this->_productEAN=$productEAN;
-    }   
-    
-    /*
-     * @var string
-     */
-    private $_sellerProductReference = null;
+    }
     
     /*
      * @return string
@@ -51,11 +76,6 @@ class ProductActivationData
     }
     
     /*
-     * @var enum
-     */
-    private $_action = null;
-    
-    /*
      * @return enum
      */
     public function getAction()
@@ -70,11 +90,6 @@ class ProductActivationData
     {
         $this->_action=$action;
     }
-
-    /*
-     * @var int
-     */
-    private $_length = null;
     
     public function getLength()
     {
@@ -88,11 +103,6 @@ class ProductActivationData
     {
         $this->_length=$length;
     }
-
-    /*
-     * @var int
-     */
-    private $_width = null;
     
      /*
      * @return int
@@ -109,11 +119,6 @@ class ProductActivationData
     {
         $this->_width=$width;
     }
-
-    /*
-     * @var int
-     */
-    private $_height = null;
     
      /*
      * @return int
@@ -130,11 +135,6 @@ class ProductActivationData
     {
         $this->_height = $height;
     }
-
-    /*
-     * @var int
-     */
-    private $_weight = null;
     
      /*
      * @return int

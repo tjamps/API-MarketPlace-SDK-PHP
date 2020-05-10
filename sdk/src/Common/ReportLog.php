@@ -13,10 +13,25 @@ use Sdk\Soap\Common\SoapTools;
 
 class ReportLog
 {
+
+    /**
+     * @var array
+     */
+    protected $_propertyList = null;
     /**
      * @var string
      */
     private $_logDate = null;
+
+    /**
+     * @var string
+     */
+    private $_SKU = null;
+
+    /**
+     * @var bool
+     */
+    private $_validated = false;
 
     /**
      * @return string
@@ -37,11 +52,6 @@ class ReportLog
     }
 
     /**
-     * @var string
-     */
-    private $_SKU = null;
-
-    /**
      * @return string
      */
     public function getSKU()
@@ -60,11 +70,6 @@ class ReportLog
     }
 
     /**
-     * @var bool
-     */
-    private $_validated = false;
-
-    /**
      * @return boolean
      */
     public function isValidated()
@@ -79,11 +84,6 @@ class ReportLog
     {
         $this->_validated = $validated;
     }
-
-    /**
-     * @var array
-     */
-    protected $_propertyList = null;
 
     /**
      * @return array

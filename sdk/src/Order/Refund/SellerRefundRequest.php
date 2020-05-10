@@ -17,6 +17,25 @@ class SellerRefundRequest
     private $_mode = null;
 
     /**
+     * @var string
+     */
+    private $_motive = null;
+
+    /**
+     * @var RefundOrderLine
+     */
+    private $_refundOrderLine = null;
+
+    /**
+     * SellerRefundRequest constructor.
+     * @param $refundOrderLine
+     */
+    public function __construct($refundOrderLine)
+    {
+        $this->_refundOrderLine = $refundOrderLine;
+    }
+
+    /**
      * @return string
      */
     public function getMode()
@@ -31,11 +50,6 @@ class SellerRefundRequest
     {
         $this->_mode = $mode;
     }
-
-    /**
-     * @var string
-     */
-    private $_motive = null;
 
     /**
      * @return string
@@ -54,25 +68,11 @@ class SellerRefundRequest
     }
 
     /**
-     * @var RefundOrderLine
-     */
-    private $_refundOrderLine = null;
-
-    /**
      * @return RefundOrderLine
      */
     public function getRefundOrderLine()
     {
         return $this->_refundOrderLine;
-    }
-
-    /**
-     * SellerRefundRequest constructor.
-     * @param $refundOrderLine
-     */
-    public function __construct($refundOrderLine)
-    {
-        $this->_refundOrderLine = $refundOrderLine;
     }
 
 }

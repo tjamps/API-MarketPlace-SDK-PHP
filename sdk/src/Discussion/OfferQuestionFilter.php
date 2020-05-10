@@ -17,6 +17,20 @@ class OfferQuestionFilter extends DiscussionFilter
     private $_productEanList = null;
 
     /**
+     * @var array
+     */
+    private $_productSellerReferenceList = null;
+
+    /**
+     * OfferQuestionFilter constructor.
+     */
+    public function __construct()
+    {
+        $this->_statusList = [];
+
+    }
+
+    /**
      * @return array
      */
     public function getProductEanList()
@@ -34,20 +48,6 @@ class OfferQuestionFilter extends DiscussionFilter
         }
         $this->_productEanList[] = $productEan;
     }
-
-    /**
-     * OfferQuestionFilter constructor.
-     */
-    public function __construct()
-    {
-        $this->_statusList = [];
-
-    }
-
-    /**
-     * @var array
-     */
-    private $_productSellerReferenceList = null;
 
     /**
      * @return array

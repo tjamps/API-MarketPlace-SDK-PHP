@@ -30,14 +30,6 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
     private $_fulfilmentSupplyOrderResult= null;
 
     /*
-    * @return \Sdk\Fulfilment\FulfilmentSupplyOrderResult
-    */
-    public function getFulfilmentSupplyOrderResult()
-    {
-        return $this->_fulfilmentSupplyOrderResult;
-    }
-
-    /*
      * GetFulfilmentSupplyOrderResponse constructor
      * @param $response
      */
@@ -57,6 +49,14 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
                 $this->generateFulfilementSupplyOrderList();
             }
         }
+    }
+
+    /*
+    * @return \Sdk\Fulfilment\FulfilmentSupplyOrderResult
+    */
+    public function getFulfilmentSupplyOrderResult()
+    {
+        return $this->_fulfilmentSupplyOrderResult;
     }
 
     /**
@@ -143,7 +143,7 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
                     {
                         $orderReferences = $fulfilmentSupplyOrder['OrderReferenceList']['a:string'];
 
-                        if (count($orderReferences) === 1)
+                        if (\count($orderReferences) === 1)
                         {
                             $orderReferences = [$orderReferences];
                         }
