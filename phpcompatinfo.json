@@ -1,0 +1,13 @@
+{
+  "source-providers": [
+    {
+      "in": "sdk/"
+    }
+  ],
+  "plugins": [
+  ],
+  "analysers": [
+  ],
+  "services": [
+  ]
+}
