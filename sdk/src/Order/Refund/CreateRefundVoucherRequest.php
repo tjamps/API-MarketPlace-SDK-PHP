@@ -36,8 +36,8 @@ class CreateRefundVoucherRequest
     public function __construct($orderNumber) 
     {
         $this->_orderNumber = $orderNumber;
-        $this->_sellerRefundList = array();
-        $this->_commercialGestureList = array();
+        $this->_sellerRefundList = [];
+        $this->_commercialGestureList = [];
     }
     
     /*

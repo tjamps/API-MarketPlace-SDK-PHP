@@ -48,7 +48,7 @@ class GenerateDiscussionMailGuidResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_discussionMailList = array();
+            $this->_discussionMailList = [];
 
             //$this->_generateDiscussionMailListFromXML($this->_dataResponse['s:Body']['GetDiscussionMailListResponse']['GetDiscussionMailListResult']['DiscussionMailList']);
         }
@@ -71,9 +71,9 @@ class GenerateDiscussionMailGuidResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GenerateDiscussionMailGuidResponse']['GenerateDiscussionMailGuidResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -88,7 +88,7 @@ class GenerateDiscussionMailGuidResponse extends AbstractResponse
      */
     private function _generateDiscussionMailGuidFromXML($discussionMailListXML)
     {
-        $discussionMail = new DiscussionMail(intval($discussionMailListXML['DiscussionMail']['DiscussionId']));
+        $discussionMail = new DiscussionMail((int) ($discussionMailListXML['DiscussionMail']['DiscussionId']));
         if (isset($discussionMailListXML['DiscussionMail']['OperationStatus']) && !SoapTools::isSoapValueNull($discussionMailListXML['DiscussionMail']['OperationStatus'])) {
             $discussionMail->setOperationStatus($discussionMailListXML['DiscussionMail']['OperationStatus']);
         }

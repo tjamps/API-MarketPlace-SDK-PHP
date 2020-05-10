@@ -126,7 +126,7 @@ class CategoryTree
     /**
      * @var array \Sdk\Product\CategoryTree
      */
-    private $_childrenCategoryList = array();
+    private $_childrenCategoryList = [];
 
     /**
      * @return array

@@ -68,7 +68,7 @@ class SubmitProductPackageResponse extends AbstractResponse
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
 
-        $this->_productLogList = array();
+        $this->_productLogList = [];
 
         // Check For error message
         if (!$this->_hasErrorMessage()) {
@@ -99,9 +99,9 @@ class SubmitProductPackageResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['SubmitProductPackageResponse']['SubmitProductPackageResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

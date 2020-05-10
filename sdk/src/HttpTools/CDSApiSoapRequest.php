@@ -49,10 +49,10 @@ class CDSApiSoapRequest
         $this->_client = new Client($apiURL);
         $this->_client->setMethod('post');
         $this->_client->setRawBody($data);
-        $this->_client->setHeaders(array(
+        $this->_client->setHeaders([
             'Content-Type: text/xml;charset=UTF-8',
             'SOAPAction: http://www.cdiscount.com/IMarketplaceAPIService/' . $method . '',
-        ));
+        ]);
 
         $this->_adapter = new Curl();
         $this->_setAdapaterOptions($data, $apiURL);
@@ -65,8 +65,8 @@ class CDSApiSoapRequest
      */
     private function _setAdapaterOptions($data, $url)
     {
-        $this->_adapter->setOptions(array(
-            'curloptions' => array(
+        $this->_adapter->setOptions([
+            'curloptions' => [
                 CURLOPT_URL => $url,
                 CURLOPT_VERBOSE => false,
                 CURLOPT_HEADER => true,
@@ -76,8 +76,8 @@ class CDSApiSoapRequest
                 CURLOPT_RETURNTRANSFER => TRUE,
                 CURLOPT_POSTFIELDS => $data,
                 CURLOPT_TIMEOUT => 600
-            )
-        ));
+            ]
+        ]);
     }
 
     /**

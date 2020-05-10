@@ -305,7 +305,7 @@ class Offer
     public function addOfferPool($offerPool)
     {
         if ($this->_offerPoolList == null) {
-            $this->_offerPoolList = array();
+            $this->_offerPoolList = [];
         }
         array_push($this->_offerPoolList, $offerPool);
     }
@@ -582,7 +582,7 @@ class Offer
     public function addShippingInformation($shippingInformation)
     {
         if ($this->_shippingInformationList == null) {
-            $this->_shippingInformationList = array();
+            $this->_shippingInformationList = [];
         }
         array_push($this->_shippingInformationList, $shippingInformation);
     }

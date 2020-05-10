@@ -14,7 +14,7 @@ class FulfilmentOrderLineListToSupplyMessage
     /**
      * @var array \Sdk\Fulfilment\FulfilmentOrderLine
      */
-    private $_orderLineList = array();
+    private $_orderLineList = [];
     
     /**
      * @param $orderLine \Sdk\Fulfilment\FulfilmentOrderLine

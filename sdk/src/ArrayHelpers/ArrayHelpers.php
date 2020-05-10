@@ -15,16 +15,16 @@ class ArrayHelpers
      */
     public static function has($array, $key)
     {
-        if (empty($array) || is_null($key)) {
+        if (empty($array) || null === $key) {
             return false;
         }
 
-        if (array_key_exists($key, $array)) {
+        if (\array_key_exists($key, $array)) {
             return true;
         }
 
         foreach (explode('.', $key) as $segment) {
-            if (!is_array($array) || !array_key_exists($segment, $array)) {
+            if (!\is_array($array) || !\array_key_exists($segment, $array)) {
                 return false;
             }
 

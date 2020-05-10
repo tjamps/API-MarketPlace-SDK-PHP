@@ -31,7 +31,7 @@ class Message
      */
     public function setContent($content)
     {
-        if (!SoapTools::isSoapValueNull($content) && !is_array($content)) {
+        if (!SoapTools::isSoapValueNull($content) && !\is_array($content)) {
             $this->_content = $content;
         }
     }

@@ -16,7 +16,7 @@ class SupplyOrderReport
     /*
      * @var array
      */
-    private $_reportLineList = array();
+    private $_reportLineList = [];
 
      /*
      * @return array

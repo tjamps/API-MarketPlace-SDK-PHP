@@ -34,7 +34,7 @@ class OfferPoint
      */
     public function getOfferList($productList, $offerPoolId)
     {
-        $optionalsNamespaces = array('xmlns:cdis="http://www.cdiscount.com"', 'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"');
+        $optionalsNamespaces = ['xmlns:cdis="http://www.cdiscount.com"', 'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"'];
 
         $envelope = new Envelope();
 

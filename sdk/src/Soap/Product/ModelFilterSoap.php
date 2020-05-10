@@ -40,10 +40,10 @@ class ModelFilterSoap extends BaliseTool
      */
     public function serialize()
     {
-        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, array($this->_xmlns));
+        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, [$this->_xmlns]);
 
         // CategoryCodeLst
-        $xml .= $this->_xmlUtil->generateOpenBaliseWithInline($this->_CategoryCodeListTAG, array('xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays"'));
+        $xml .= $this->_xmlUtil->generateOpenBaliseWithInline($this->_CategoryCodeListTAG, ['xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays"']);
 
         // Category Code
         $xml .= $this->_xmlUtil->generateBalise($this->_CategoryCodeTAG, $this->_modelFilter->getCategoryCode());

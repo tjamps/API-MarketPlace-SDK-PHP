@@ -41,7 +41,7 @@ class ManageParcelResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check For error message
         if ($this->isOperationSuccess($this->_dataResponse['s:Body']['ManageParcelResponse']['ManageParcelResult']))
@@ -65,7 +65,7 @@ class ManageParcelResponse extends AbstractResponse
             $this->operationSuccess = $objError;
         }
 
-        if(isset($objError) && $objError == false &&  isset($objErrorParcel) && is_array($objErrorParcel) && count($objErrorParcel) > 0 ){
+        if(isset($objError) && $objError == false &&  isset($objErrorParcel) && \is_array($objErrorParcel) && \count($objErrorParcel) > 0 ){
             return true;
         }
 
@@ -101,7 +101,7 @@ class ManageParcelResponse extends AbstractResponse
 
             $parcelActionResult = new ParcelActionResult();
             //errorMessage and errorList
-            if (isset($parcelActionResultXml['ErrorMessage']['_']) && strlen($parcelActionResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($parcelActionResultXml['ErrorMessage']))
+            if (isset($parcelActionResultXml['ErrorMessage']['_']) && \strlen($parcelActionResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($parcelActionResultXml['ErrorMessage']))
             {
                 $parcelActionResult->setErrorMessage($parcelActionResultXml['ErrorMessage']['_']);
                 $parcelActionResult->addErrorToList($parcelActionResultXml['ErrorMessage']['_']);

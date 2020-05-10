@@ -1,0 +1,13 @@
+<?php
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__.'/sdk')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony:risky' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'yoda_style' => false,
+    ])
+    ->setFinder($finder)
+;

@@ -83,7 +83,7 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
 
-        $this->_offerLogList = array();
+        $this->_offerLogList = [];
 
         // Check For error message
         if (!$this->_hasErrorMessage()) {
@@ -118,9 +118,9 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetOfferPackageSubmissionResultResponse']['GetOfferPackageSubmissionResultResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

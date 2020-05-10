@@ -43,7 +43,7 @@ class ValidateOrderListResponse extends AbstractResponse
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
 
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check for error messages
         if ($this->isOperationSuccess($this->_dataResponse['s:Body']['ValidateOrderListResponse']['ValidateOrderListResult'])) {

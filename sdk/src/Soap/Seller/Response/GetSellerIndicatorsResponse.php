@@ -51,7 +51,7 @@ class GetSellerIndicatorsResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_sellerIndicators = array();
+            $this->_sellerIndicators = [];
 
             $this->_generateSellerIndicatorsListFromXML($this->_dataResponse['s:Body']['GetSellerIndicatorsResponse']['GetSellerIndicatorsResult']['SellerIndicators']);
         }
@@ -74,9 +74,9 @@ class GetSellerIndicatorsResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetSellerIndicatorsResponse']['GetSellerIndicatorsResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -103,16 +103,16 @@ class GetSellerIndicatorsResponse extends AbstractResponse
                     $sellerIndicator->setDescription($sellerIndicatorXML['Description']);
                 }
                 if (isset($sellerIndicatorXML['Threshold']) && !SoapTools::isSoapValueNull($sellerIndicatorXML['Threshold'])) {
-                    $sellerIndicator->setThreshold(floatval($sellerIndicatorXML['Threshold']));
+                    $sellerIndicator->setThreshold((float) ($sellerIndicatorXML['Threshold']));
                 }
                 if (isset($sellerIndicatorXML['ThresholdType']) && !SoapTools::isSoapValueNull($sellerIndicatorXML['ThresholdType'])) {
                     $sellerIndicator->setThresholdType($sellerIndicatorXML['ThresholdType']);
                 }
                 if (isset($sellerIndicatorXML['ValueD30']) && !SoapTools::isSoapValueNull($sellerIndicatorXML['ValueD30'])) {
-                    $sellerIndicator->setValueD30(floatval($sellerIndicatorXML['ValueD30']));
+                    $sellerIndicator->setValueD30((float) ($sellerIndicatorXML['ValueD30']));
                 }
                 if (isset($sellerIndicatorXML['ValueD60']) && !SoapTools::isSoapValueNull($sellerIndicatorXML['ValueD60'])) {
-                    $sellerIndicator->setValueD60(floatval($sellerIndicatorXML['ValueD60']));
+                    $sellerIndicator->setValueD60((float) ($sellerIndicatorXML['ValueD60']));
                 }
 
                 array_push($this->_sellerIndicators, $sellerIndicator);

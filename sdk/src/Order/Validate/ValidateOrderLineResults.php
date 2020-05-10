@@ -14,7 +14,7 @@ class ValidateOrderLineResults
     /**
      * @var array \Sdk\Order\Validate\ValidateOrderLineResult
      */
-    private $_validateOrderLineResults = array();
+    private $_validateOrderLineResults = [];
 
     /**
      * @return array

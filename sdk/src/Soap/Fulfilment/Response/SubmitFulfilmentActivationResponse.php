@@ -41,7 +41,7 @@ class SubmitFulfilmentActivationResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['SubmitFulfilmentActivationResponse']['SubmitFulfilmentActivationResult']))
@@ -71,7 +71,7 @@ class SubmitFulfilmentActivationResponse extends AbstractResponse
 
         $this->_submitFulfilmentActivationResult = new SubmitFulfilmentActivationResult();
 
-        if (isset($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) && strlen($submitFulfilmentActivationResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentActivationResultXml['ErrorMessage']))
+        if (isset($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) && \strlen($submitFulfilmentActivationResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentActivationResultXml['ErrorMessage']))
         {
             $this->_submitFulfilmentActivationResult->setErrorMessage($submitFulfilmentActivationResultXml['ErrorMessage']['_']);
             $this->_submitFulfilmentActivationResult->addErrorToList($submitFulfilmentActivationResultXml['ErrorMessage']['_']);

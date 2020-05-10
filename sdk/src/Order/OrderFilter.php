@@ -31,7 +31,7 @@ class OrderFilter extends Filter
         $this->_fetchOrderLines = $fetchOrderLines;
     }
 
-    private $_states = array();
+    private $_states = [];
 
     /**
      * @return array
@@ -115,7 +115,7 @@ class OrderFilter extends Filter
     /*
      * @var array
      */
-    private $_orderReferenceList = array();
+    private $_orderReferenceList = [];
     
     /*
      * @return array

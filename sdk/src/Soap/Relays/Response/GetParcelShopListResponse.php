@@ -49,7 +49,7 @@ class GetParcelShopListResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_parcelShopList = array();
+            $this->_parcelShopList = [];
 
             $this->_generateParcelShopListFromXML($this->_dataResponse['s:Body']['GetParcelShopListResponse']['GetParcelShopListResult']['ParcelShopList']);
         }
@@ -72,9 +72,9 @@ class GetParcelShopListResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetParcelShopListResponse']['GetParcelShopListResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

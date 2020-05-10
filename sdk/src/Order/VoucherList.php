@@ -24,7 +24,7 @@ class VoucherList
      */
     public function __construct() 
     {
-        $this->_voucherList = array();
+        $this->_voucherList = [];
     }
     
     /*

@@ -39,7 +39,7 @@ class Envelope
      */
     public function generateXML($child)
     {
-        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, array($this->_xmlns));
+        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, [$this->_xmlns]);
         $xml .= $child;
         $xml .= $this->_xmlUtil->generateCloseBalise($this->_tag);
 

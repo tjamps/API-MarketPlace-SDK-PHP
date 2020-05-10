@@ -35,7 +35,7 @@ class CloseDiscussionList extends BaliseTool
      */
     public function generateCloseDiscussionRequestXML($discussionIds)
     {
-        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_closeDiscussionRequestTAG, array('xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"'));
+        $xml = $this->_xmlUtil->generateOpenBaliseWithInline($this->_closeDiscussionRequestTAG, ['xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"']);
 
         foreach ($discussionIds as $discussionId) {
             $xml .= $this->_xmlUtil->generateBalise($this->_DiscussionIdTAG, $discussionId);

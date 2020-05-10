@@ -20,7 +20,7 @@ class ParcelActionResultList
      */
     public function __construct() 
     {
-        $this->_parcelActionResultList = array();
+        $this->_parcelActionResultList = [];
     }
     
     /*

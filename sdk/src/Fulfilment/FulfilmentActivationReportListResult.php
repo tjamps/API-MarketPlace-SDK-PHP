@@ -13,7 +13,7 @@ class FulfilmentActivationReportListResult extends CommonResult
     /*
      * @var array
      */
-    private $_fulfilmentActivationReport = array();
+    private $_fulfilmentActivationReport = [];
     
      /*
      * @return array

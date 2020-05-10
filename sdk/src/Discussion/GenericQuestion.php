@@ -101,7 +101,7 @@ class GenericQuestion
     public function addMessageToList($message)
     {
         if ($this->_messageList == null) {
-            $this->_messageList = array();
+            $this->_messageList = [];
         }
         if ($message != null) {
             array_push($this->_messageList, $message);

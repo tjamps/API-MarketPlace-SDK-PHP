@@ -47,7 +47,7 @@ class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         if(isset($this->_dataResponse['s:Body']['SubmitFulfilmentSupplyOrderResponse']['SubmitFulfilmentSupplyOrderResult']))
         {
@@ -90,7 +90,7 @@ class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
 
             $this->_submitFulfilmentSupplyOrderResult = new SubmitFulfilmentSupplyOrderResult();
              //errorMessage and errorList
-            if (isset($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) && strlen($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentSupplyOrderResultXml['ErrorMessage']))
+            if (isset($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) && \strlen($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($submitFulfilmentSupplyOrderResultXml['ErrorMessage']))
             {
                 $this->_submitFulfilmentSupplyOrderResult->setErrorMessage($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
                 $this->_submitFulfilmentSupplyOrderResult->addErrorToList($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);

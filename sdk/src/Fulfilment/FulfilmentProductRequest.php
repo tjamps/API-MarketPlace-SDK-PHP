@@ -50,7 +50,7 @@ class FulfilmentProductRequest
      */
     public function __construct() 
     {
-        $this->_barCodeList = array();
+        $this->_barCodeList = [];
     }
 
     /**

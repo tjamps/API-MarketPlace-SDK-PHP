@@ -50,7 +50,7 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentSupplyOrderReportListResponse']['GetFulfilmentSupplyOrderReportListResult']))
@@ -82,7 +82,7 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
             $this->_fulfilmentSupplyOrderReportListResult = new FulfilmentSupplyOrderReportListResult();
 
              //errorMessage and errorList
-            if (isset($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']) && strlen($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']))
+            if (isset($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']) && \strlen($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']))
             {
                 $this->_fulfilmentSupplyOrderReportListResult->setErrorMessage($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']);
                 $this->_fulfilmentSupplyOrderReportListResult->addErrorToList($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']);
@@ -114,7 +114,7 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
 
                     if(isset($supplyOrderReports['DepositId']))
                     {
-                        $supplyOrderReports = array($supplyOrderReports);
+                        $supplyOrderReports = [$supplyOrderReports];
                     }
                 }
                 if(isset($supplyOrderReports))
@@ -130,7 +130,7 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
 
                             if(isset($reportLines['SupplyOrderNumber']))
                             {
-                                $reportLines = array($reportLines);
+                                $reportLines = [$reportLines];
                             }
                         }
 
@@ -146,7 +146,7 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
 
                                     if(isset($errorDetails['a:Key']))
                                     {
-                                        $errorDetails = array($errorDetails);
+                                        $errorDetails = [$errorDetails];
                                     }
                                 }
 

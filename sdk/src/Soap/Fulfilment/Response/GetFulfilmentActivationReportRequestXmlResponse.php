@@ -50,7 +50,7 @@ class GetFulfilmentActivationReportRequestXmlResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']))
@@ -90,7 +90,7 @@ class GetFulfilmentActivationReportRequestXmlResponse extends AbstractResponse
 
             if(isset($fulfilmentActivationReports['DepositId']))
             {
-                $fulfilmentActivationReports = array($fulfilmentActivationReports);
+                $fulfilmentActivationReports = [$fulfilmentActivationReports];
             }
         }
 
@@ -147,7 +147,7 @@ class GetFulfilmentActivationReportRequestXmlResponse extends AbstractResponse
 
                     if(isset($FulfilmentActivationReportDetailsList['ProductEan']))
                     {
-                        $FulfilmentActivationReportDetailsList = array($FulfilmentActivationReportDetailsList);
+                        $FulfilmentActivationReportDetailsList = [$FulfilmentActivationReportDetailsList];
                     }
                 }
 

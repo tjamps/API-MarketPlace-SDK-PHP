@@ -52,7 +52,7 @@ class GetOrderClaimListResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_orderClaimList = array();
+            $this->_orderClaimList = [];
 
             if (!SoapTools::isSoapValueNull($this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult']['OrderClaimList'])) {
                 $this->_generateOrderClaimListFromXML($this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult']['OrderClaimList']);

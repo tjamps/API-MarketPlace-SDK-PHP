@@ -37,6 +37,6 @@ class ClaimFilter extends DiscussionFilter
      */
     public function __construct()
     {
-        $this->_statusList = array();
+        $this->_statusList = [];
     }
 }

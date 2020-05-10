@@ -41,7 +41,7 @@ class IdentifierRequestSoap extends BaliseTool
 
         // CarrierName
         $xml .= $this->_xmlUtil->generateBalise('IdentifierType', $this->_identifierRequest->getIdentifierType());
-        $xml .= $this->_xmlUtil->generateOpenBaliseWithInline('ValueList', array('xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"'));
+        $xml .= $this->_xmlUtil->generateOpenBaliseWithInline('ValueList', ['xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"']);
         foreach ($this->_identifierRequest->getValueList() as $value) {
             $xml .= $this->_xmlUtil->generateBalise('arr:string', $value);
         }

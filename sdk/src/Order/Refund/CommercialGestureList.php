@@ -16,7 +16,7 @@ class CommercialGestureList
     /*
      * @var array
      */
-    private $_commercialGestureList = array();
+    private $_commercialGestureList = [];
     
     /*
      * @return array

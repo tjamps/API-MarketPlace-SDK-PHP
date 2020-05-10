@@ -51,7 +51,7 @@ class GetOfferQuestionListResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_offerQuestionList = array();
+            $this->_offerQuestionList = [];
 
             if(isset($this->_dataResponse['s:Body']['GetOfferQuestionListResponse']['GetOfferQuestionListResult']['OfferQuestionList'])
             && isset($this->_dataResponse['s:Body']['GetOfferQuestionListResponse']['GetOfferQuestionListResult']['OfferQuestionList']['OfferQuestion'])) {
@@ -77,9 +77,9 @@ class GetOfferQuestionListResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetOfferQuestionListResponse']['GetOfferQuestionListResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

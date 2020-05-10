@@ -93,7 +93,7 @@ abstract class AbstractResponse
     {
         $objError = $xml['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
         }
@@ -174,8 +174,8 @@ abstract class AbstractResponse
          * exists in the array ; if not, then we are in the second format, which we turn into an array.
          */
 
-        if (isset($xml['ErrorList']['Error']) && is_array($xml['ErrorList']['Error'])) {
-            if (!array_key_exists(0, $xml['ErrorList']['Error'])) {
+        if (isset($xml['ErrorList']['Error']) && \is_array($xml['ErrorList']['Error'])) {
+            if (!\array_key_exists(0, $xml['ErrorList']['Error'])) {
                 $xml['ErrorList']['Error'] = [$xml['ErrorList']['Error']];
             }
 
@@ -183,8 +183,8 @@ abstract class AbstractResponse
                 $this->errorList[] = isset($error['Message']) ? $error['Message'] : 'Unknown error';
             }
             $this->hasError = true;
-        } elseif (isset($xml['a:ErrorList']['a:Error']) && is_array($xml['a:ErrorList']['a:Error'])) {
-            if (!array_key_exists(0, $xml['a:ErrorList']['a:Error'])) {
+        } elseif (isset($xml['a:ErrorList']['a:Error']) && \is_array($xml['a:ErrorList']['a:Error'])) {
+            if (!\array_key_exists(0, $xml['a:ErrorList']['a:Error'])) {
                 $xml['a:ErrorList']['a:Error'] = [$xml['a:ErrorList']['a:Error']];
             }
 

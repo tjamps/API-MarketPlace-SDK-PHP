@@ -41,7 +41,7 @@ class GetGlobalConfigurationResponse extends AbstractResponse
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
 
-        $this->_carrierList = array();
+        $this->_carrierList = [];
 
         /** Check For error message */
         if (!$this->_hasErrorMessage()) {
@@ -51,7 +51,7 @@ class GetGlobalConfigurationResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_carrierList = array();
+            $this->_carrierList = [];
 
             $this->_getCarrierListFromXML($this->_dataResponse['s:Body']['GetGlobalConfigurationResponse']['GetGlobalConfigurationResult']['CarrierList']);
         }
@@ -74,9 +74,9 @@ class GetGlobalConfigurationResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetGlobalConfigurationResponse']['GetGlobalConfigurationResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

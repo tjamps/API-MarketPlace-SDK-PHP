@@ -34,6 +34,6 @@ class SubmitFulfilmentActivationRequest
      */
     public function __construct() 
     {
-        $this->_productActivationList = array();
+        $this->_productActivationList = [];
     }
 }

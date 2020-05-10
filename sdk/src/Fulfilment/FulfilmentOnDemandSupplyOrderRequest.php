@@ -34,7 +34,7 @@ class FulfilmentOnDemandSupplyOrderRequest
      */
     public function __construct() 
     {
-        $this->_orderLineList = array();
+        $this->_orderLineList = [];
     }
 }
 

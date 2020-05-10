@@ -34,7 +34,7 @@ class IdentifierRequest
         $this->_identifierType = $identifierType;
     }    
 
-    private $_valueList = array();
+    private $_valueList = [];
 
     /**
      * @return array

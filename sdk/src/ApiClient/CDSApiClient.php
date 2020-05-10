@@ -188,7 +188,7 @@ class CDSApiClient
     public static function getInstance($username = '', $password = '', $prod = false)
     {
         if (self::$instance === null) {
-            self::$instance = new CDSApiClient($username, $password, $prod);
+            self::$instance = new self($username, $password, $prod);
         }
 
         return self::$instance;

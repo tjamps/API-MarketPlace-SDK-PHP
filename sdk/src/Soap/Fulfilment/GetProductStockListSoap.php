@@ -48,7 +48,7 @@ class GetProductStockListSoap extends BaliseTool
      */
     public function generateFulfilmentProductRequestXml($request)
     {
-        $inlines = array($this->_xmlns_array, $this->_xmlns_cdis3);
+        $inlines = [$this->_xmlns_array, $this->_xmlns_cdis3];
 
         /*
          * Opening Tag fulfilmentProductRequest

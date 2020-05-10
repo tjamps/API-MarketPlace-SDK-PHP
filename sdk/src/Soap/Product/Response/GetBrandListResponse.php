@@ -50,7 +50,7 @@ class GetBrandListResponse extends AbstractResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_brandList = array();
+            $this->_brandList = [];
 
             $this->_generateBrandListFromXML($this->_dataResponse['s:Body']['GetBrandListResponse']['GetBrandListResult']['a:BrandList']);
         }
@@ -73,9 +73,9 @@ class GetBrandListResponse extends AbstractResponse
     private function _hasErrorMessage()
     {
         $objError = $this->_dataResponse['s:Body']['GetBrandListResponse']['GetBrandListResult']['ErrorMessage'];
-        $this->errorList = array();
+        $this->errorList = [];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];

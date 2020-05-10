@@ -68,7 +68,7 @@ class CreateRefundVoucherResponse extends AbstractResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
-        $this->errorList = array();
+        $this->errorList = [];
 
         // Check For error message
         if ($this->isOperationSuccess($this->_dataResponse['s:Body']['CreateRefundVoucherResponse']['CreateRefundVoucherResult']))
@@ -99,8 +99,8 @@ class CreateRefundVoucherResponse extends AbstractResponse
             $this->operationSuccess = $objError;
         }
 
-        if(isset($objError) && $objError == false &&  ((isset($objErrorCogesture) && is_array($objErrorCogesture) && count($objErrorCogesture) > 0 )
-                || (isset($objErrorSellerRefund) && is_array($objErrorSellerRefund) && count($objErrorSellerRefund) > 0))){
+        if(isset($objError) && $objError == false &&  ((isset($objErrorCogesture) && \is_array($objErrorCogesture) && \count($objErrorCogesture) > 0 )
+                || (isset($objErrorSellerRefund) && \is_array($objErrorSellerRefund) && \count($objErrorSellerRefund) > 0))){
             return true;
         }
 
@@ -130,7 +130,7 @@ class CreateRefundVoucherResponse extends AbstractResponse
         foreach ($createRefundVoucherResult['CommercialGestureList'] as $refundInformationMessageXML) {
             $refundInformationMessage = new RefundInformationMessage();
             //errormessage
-            if (isset($refundInformationMessageXML['ErrorMessage']['_']) && strlen($refundInformationMessageXML['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($refundInformationMessageXML['ErrorMessage'])) {
+            if (isset($refundInformationMessageXML['ErrorMessage']['_']) && \strlen($refundInformationMessageXML['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($refundInformationMessageXML['ErrorMessage'])) {
                 $refundInformationMessage->setErrorMessage($refundInformationMessageXML['ErrorMessage']['_']);
                 $refundInformationMessage->addErrorToList($refundInformationMessageXML['ErrorMessage']['_']);
                 array_push($this->errorList, $refundInformationMessageXML['ErrorMessage']['_']);
@@ -166,7 +166,7 @@ class CreateRefundVoucherResponse extends AbstractResponse
 
             $sellerRefundResult = new SellerRefundResult();
             //error message
-            if (isset($sellerRefundResultXML['ErrorMessage']['_']) && strlen($sellerRefundResultXML['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($sellerRefundResultXML['ErrorMessage'])) {
+            if (isset($sellerRefundResultXML['ErrorMessage']['_']) && \strlen($sellerRefundResultXML['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($sellerRefundResultXML['ErrorMessage'])) {
                 $sellerRefundResult->setErrorMessage($sellerRefundResultXML['ErrorMessage']['_']);
                 $sellerRefundResult->addErrorToList($sellerRefundResultXML['ErrorMessage']['_']);
                 array_push($this->errorList, $sellerRefundResultXML['ErrorMessage']['_']);

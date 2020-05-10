@@ -38,7 +38,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
     {
        $reader = new \Zend\Config\Reader\Xml();
        $this->_dataResponse = $reader->fromString($response);
-       $this->errorList = array();
+       $this->errorList = [];
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult']))
         {
             // Check For error message
@@ -70,7 +70,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
     {
         $objError = $this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult']['ErrorMessage'];
 
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+        if (isset($objError['_']) && \strlen($objError['_']) > 0) {
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
@@ -90,7 +90,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
         $this->_fulfilmentOrderListToSupplyResult = new FulfilmentOrderListToSupplyResult();
 
 	     //errorMessage and errorList
-        if (isset($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']) && strlen($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($GetFulfilmentOrderListToSupplyResult['ErrorMessage']))
+        if (isset($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']) && \strlen($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($GetFulfilmentOrderListToSupplyResult['ErrorMessage']))
         {
             $this->_fulfilmentOrderListToSupplyResult->setErrorMessage($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
             $this->_fulfilmentOrderListToSupplyResult->addErrorToList($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
@@ -109,7 +109,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
 
             if(isset($orderLines['OrderReference']))
             {
-                $orderLines = array($orderLines);
+                $orderLines = [$orderLines];
             }
         }
         if(isset($orderLines))
@@ -124,7 +124,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
                 $fulfilmentOrderLine = new FulfilmentOrderLine();
 
                 //errorMessage and errorList
-                if (isset($orderLine['ErrorMessage']['_']) && strlen($orderLine['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($orderLine['ErrorMessage']))
+                if (isset($orderLine['ErrorMessage']['_']) && \strlen($orderLine['ErrorMessage']['_']) > 0 && !SoapTools::isSoapValueNull($orderLine['ErrorMessage']))
                 {
                     $fulfilmentOrderLine->setErrorMessage($orderLine['ErrorMessage']['_']);
                     $fulfilmentOrderLine->addErrorToList($orderLine['ErrorMessage']['_']);
