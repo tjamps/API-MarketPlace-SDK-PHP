@@ -45,7 +45,7 @@ class OfferReportLog extends ReportLog
         if ($this->_propertyList == null) {
             $this->_propertyList = [];
         }
-        array_push($this->_propertyList, $offerReportPropertyLog);
+        $this->_propertyList[] = $offerReportPropertyLog;
     }
 
     /**

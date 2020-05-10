@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Seller\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Seller\SellerIndicator;
 use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
@@ -40,7 +41,7 @@ class GetSellerIndicatorsResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         /** Check for error message */
@@ -80,7 +81,7 @@ class GetSellerIndicatorsResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -115,7 +116,7 @@ class GetSellerIndicatorsResponse extends AbstractResponse
                     $sellerIndicator->setValueD60((float) ($sellerIndicatorXML['ValueD60']));
                 }
 
-                array_push($this->_sellerIndicators, $sellerIndicator);
+                $this->_sellerIndicators[] = $sellerIndicator;
             }
 
         }

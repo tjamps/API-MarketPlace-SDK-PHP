@@ -28,7 +28,7 @@ class TrackingList
      */
     public function addTrackingToLit($tracking)
     {
-        array_push($this->_trackingList, $tracking);
+        $this->_trackingList[] = $tracking;
     }
     
 }

@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Product\ProductReportLog;
 use Sdk\Product\ProductReportPropertyLog;
 use Sdk\Soap\Common\AbstractResponse;
@@ -80,7 +81,7 @@ class GetProductPackageSubmissionResultResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         $this->_productLogList = [];
@@ -126,7 +127,7 @@ class GetProductPackageSubmissionResultResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -173,7 +174,7 @@ class GetProductPackageSubmissionResultResponse extends AbstractResponse
                 $productReportLog->setValidated(true);
             }
 
-            array_push($this->_productLogList, $productReportLog);
+            $this->_productLogList[] = $productReportLog;
         }
     }
 

@@ -6,6 +6,7 @@
 
 namespace Sdk\Soap\Fulfilment;
 
+use Sdk\Fulfilment\FulfilmentOrderLineRequest;
 use Sdk\Soap\BaliseTool;
 
 class SubmitFulfilmentOnDemandSupplyOrderSoap extends BaliseTool
@@ -69,7 +70,7 @@ class SubmitFulfilmentOnDemandSupplyOrderSoap extends BaliseTool
         {
             $xml .= $this->_xmlUtil->generateOpenBalise($this->_orderLineListTAG);
             
-            /** @var \Sdk\Fulfilment\FulfilmentOrderLineRequest $fulfilmentOrderLineRequest */
+            /** @var FulfilmentOrderLineRequest $fulfilmentOrderLineRequest */
             foreach($request->getOrderLineList() as $fulfilmentOrderLineRequest)
             {
                 //Opening tag  fulfilmentOrderLineRequest
@@ -101,4 +102,3 @@ class SubmitFulfilmentOnDemandSupplyOrderSoap extends BaliseTool
         return $xml;
     }
 }
-

@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Discussion\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Discussion\Message;
 use Sdk\Discussion\OfferQuestion;
 use Sdk\Soap\Common\AbstractResponse;
@@ -40,7 +41,7 @@ class GetOfferQuestionListResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
@@ -83,7 +84,7 @@ class GetOfferQuestionListResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -143,7 +144,7 @@ class GetOfferQuestionListResponse extends AbstractResponse
                 $offerQuestion->addMessageToList($message);
             }
 
-            array_push($this->_offerQuestionList, $offerQuestion);
+            $this->_offerQuestionList[] = $offerQuestion;
         }
     }
 }

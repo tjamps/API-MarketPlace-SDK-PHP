@@ -21,7 +21,7 @@ class BaliseTool
     protected $_xmlns = '';
 
     /**
-     * @var \Sdk\Soap\XmlUtils
+     * @var XmlUtils
      */
     protected $_xmlUtil;
 

@@ -266,7 +266,7 @@ class Offer
     }
 
     /**
-     * @var \Sdk\Offer\OfferBenchMark
+     * @var OfferBenchMark
      */
     private $_offerBenchMark = null;
 
@@ -279,7 +279,7 @@ class Offer
     }
 
     /**
-     * @param \Sdk\Offer\OfferBenchMark $offerBenchMark
+     * @param OfferBenchMark $offerBenchMark
      */
     public function setOfferBenchMark($offerBenchMark)
     {
@@ -307,7 +307,7 @@ class Offer
         if ($this->_offerPoolList == null) {
             $this->_offerPoolList = [];
         }
-        array_push($this->_offerPoolList, $offerPool);
+        $this->_offerPoolList[] = $offerPool;
     }
 
     /**
@@ -584,7 +584,7 @@ class Offer
         if ($this->_shippingInformationList == null) {
             $this->_shippingInformationList = [];
         }
-        array_push($this->_shippingInformationList, $shippingInformation);
+        $this->_shippingInformationList[] = $shippingInformation;
     }
 
     /**

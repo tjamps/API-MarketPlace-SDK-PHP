@@ -8,13 +8,13 @@
 
 namespace Sdk\Soap\Product\Response;
 
-
+use Zend\Config\Reader\Xml;
 class GetAllAllowedCategoryTreeResponse extends GetGenericCategoryTreeResponse
 {
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message

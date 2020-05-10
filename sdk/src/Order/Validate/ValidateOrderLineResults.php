@@ -29,7 +29,7 @@ class ValidateOrderLineResults
      */
     public function addValidateOrderLineResult($orderLineResult)
     {
-       array_push($this->_validateOrderLineResults, $orderLineResult);
+       $this->_validateOrderLineResults[] = $orderLineResult;
     }
 
 }

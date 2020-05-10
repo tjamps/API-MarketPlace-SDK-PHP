@@ -27,7 +27,7 @@ class FulfilmentSupplyOrderRequest
      */
     public function addProductList($productList)
     {
-        array_push($this->_productList, $productList);
+        $this->_productList[] = $productList;
     }
     
     /*
@@ -38,5 +38,3 @@ class FulfilmentSupplyOrderRequest
         $this->_productList = [];
     }
 }
-
-

@@ -6,6 +6,8 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
+use htmlentities;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use \Sdk\Fulfilment\FulfilmentSupplyOrderReportListResult;
@@ -48,7 +50,7 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -86,7 +88,7 @@ class FulfilmentSupplyOrderReportListResponse extends AbstractResponse
             {
                 $this->_fulfilmentSupplyOrderReportListResult->setErrorMessage($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']);
                 $this->_fulfilmentSupplyOrderReportListResult->addErrorToList($fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']);
-                array_push($this->errorList, $fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_']);
+                $this->errorList[] = $fulfilmentSupplyOrderReportListResultXml['ErrorMessage']['_'];
             }
             //operation success
             if (isset($fulfilmentSupplyOrderReportListResultXml['OperationSuccess']['_']) && $fulfilmentSupplyOrderReportListResultXml['OperationSuccess']['_'] == 'true')

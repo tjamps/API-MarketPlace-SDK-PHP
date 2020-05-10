@@ -32,7 +32,7 @@ class ValidateOrderResult extends Order
     }
 
     /**
-     * @var \Sdk\Order\Validate\ValidateOrderLineResults
+     * @var ValidateOrderLineResults
      */
     private $_validateOrderLineResults = null;
 

@@ -15,6 +15,11 @@ use Sdk\Soap\XmlUtils;
 class Security
 {
 
+    public $_globalPrefix;
+    /**
+     * @var XmlUtils|mixed
+     */
+    public $_xmlUtil;
     private $_tag = 'Security';
 
     private $_domainRightsList;

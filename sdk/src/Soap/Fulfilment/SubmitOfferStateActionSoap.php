@@ -72,4 +72,3 @@ class SubmitOfferStateActionSoap extends BaliseTool
         return $xml;
     }
 }
-

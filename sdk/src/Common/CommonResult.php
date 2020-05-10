@@ -70,6 +70,6 @@ abstract class CommonResult
      */
     public function addErrorToList($errorMessage)
     {
-        array_push($this->_errorList, $errorMessage);
+        $this->_errorList[] = $errorMessage;
     }
 }

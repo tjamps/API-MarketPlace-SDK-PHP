@@ -128,12 +128,12 @@ class CDSApiClient
     }
 
     /**
-     * @var \Sdk\Discussion\DiscussionPoint
+     * @var DiscussionPoint
      */
     private $_discussionPoint = null;
 
     /**
-     * @return \Sdk\Discussion\DiscussionPoint
+     * @return DiscussionPoint
      */
     public function getDiscussionPoint()
     {
@@ -203,8 +203,7 @@ class CDSApiClient
      */
     public function init()
     {
-        $token = Token::getInstance()->getToken();
-        return $token;
+        return Token::getInstance()->getToken();
     }
 
     /**

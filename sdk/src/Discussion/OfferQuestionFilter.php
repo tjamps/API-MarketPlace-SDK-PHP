@@ -32,7 +32,7 @@ class OfferQuestionFilter extends DiscussionFilter
         if ($this->_productEanList == null) {
             $this->_productEanList = [];
         }
-        array_push($this->_productEanList, $productEan);
+        $this->_productEanList[] = $productEan;
     }
 
     /**
@@ -65,6 +65,6 @@ class OfferQuestionFilter extends DiscussionFilter
         if ($this->_productSellerReferenceList == null) {
             $this->_productSellerReferenceList = [];
         }
-        array_push($this->_productSellerReferenceList, $productSellerReference);
+        $this->_productSellerReferenceList[] = $productSellerReference;
     }
 }

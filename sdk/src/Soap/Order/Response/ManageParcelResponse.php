@@ -7,6 +7,7 @@
  */
 namespace Sdk\Soap\Order\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Order\ParcelActionResult;
 use \Sdk\Order\ParcelActionResultList;
@@ -39,7 +40,7 @@ class ManageParcelResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -65,7 +66,7 @@ class ManageParcelResponse extends AbstractResponse
             $this->operationSuccess = $objError;
         }
 
-        if(isset($objError) && $objError == false &&  isset($objErrorParcel) && \is_array($objErrorParcel) && \count($objErrorParcel) > 0 ){
+        if(isset($objError) && !$objError &&  isset($objErrorParcel) && \is_array($objErrorParcel) && \count($objErrorParcel) > 0 ){
             return true;
         }
 
@@ -105,7 +106,7 @@ class ManageParcelResponse extends AbstractResponse
             {
                 $parcelActionResult->setErrorMessage($parcelActionResultXml['ErrorMessage']['_']);
                 $parcelActionResult->addErrorToList($parcelActionResultXml['ErrorMessage']['_']);
-                array_push($this->errorList, $parcelActionResultXml['ErrorMessage']['_']);
+                $this->errorList[] = $parcelActionResultXml['ErrorMessage']['_'];
             }
             //operation success
             if (isset($parcelActionResultXml['OperationSuccess']['_']) && $parcelActionResultXml['OperationSuccess']['_'] == 'true')

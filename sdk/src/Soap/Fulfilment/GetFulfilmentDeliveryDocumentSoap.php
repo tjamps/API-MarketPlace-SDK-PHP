@@ -59,4 +59,3 @@ class GetFulfilmentDeliveryDocumentSoap extends BaliseTool
         return $xml;
     }
 }
-

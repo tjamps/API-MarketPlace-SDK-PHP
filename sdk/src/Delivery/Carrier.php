@@ -6,7 +6,7 @@
  * Time: 12:15
  */
 
-namespace Sdk\Delivey;
+namespace Sdk\Delivery;
 
 
 class Carrier

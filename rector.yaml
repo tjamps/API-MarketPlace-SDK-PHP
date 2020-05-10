@@ -1,0 +1,10 @@
+parameters:
+  sets:
+    - code-quality
+    - performance
+    - psr4
+    - php72
+  php_version_features: '7.2.0'
+  paths:
+    - 'sdk'
+  auto_import_names: true

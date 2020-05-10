@@ -115,4 +115,3 @@ class GetFulfilmentActivationReportListSoap extends BaliseTool
         return $xml;
     }
 }
-

@@ -60,5 +60,3 @@ class FulfilmentActivationReportRequest
         $this->_DepositList = $DepositList;
     }
 }
-
-

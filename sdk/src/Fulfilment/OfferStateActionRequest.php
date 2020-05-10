@@ -63,5 +63,3 @@ class OfferStateActionRequest
         $this->_action = $action;
     }
 }
-
-

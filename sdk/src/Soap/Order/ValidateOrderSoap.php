@@ -14,6 +14,10 @@ use Sdk\Soap\XmlUtils;
 class ValidateOrderSoap
 {
 
+    /**
+     * @var XmlUtils|mixed
+     */
+    public $_xmlUtil;
     private $_tag = 'ValidateOrder';
 
     /**

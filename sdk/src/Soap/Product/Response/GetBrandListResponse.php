@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 
 class GetBrandListResponse extends AbstractResponse
@@ -39,7 +40,7 @@ class GetBrandListResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
@@ -79,7 +80,7 @@ class GetBrandListResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -88,7 +89,7 @@ class GetBrandListResponse extends AbstractResponse
     private function _generateBrandListFromXML($brandList)
     {
         foreach ($brandList['Brand'] as $brand) {
-            array_push($this->_brandList, $brand['BrandName']);
+            $this->_brandList[] = $brand['BrandName'];
         }
     }
 }

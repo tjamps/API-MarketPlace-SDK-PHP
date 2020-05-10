@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Product\Product;
 use Sdk\Soap\Common\AbstractResponse;
 
@@ -31,7 +32,7 @@ class GetProductListResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
@@ -91,7 +92,7 @@ class GetProductListResponse extends AbstractResponse
             $product->setName($productXML['Name']);
             $product->setProductType($productXML['ProductType']);
 
-            array_push($this->_productList, $product);
+            $this->_productList[] = $product;
         }
     }
 
@@ -116,7 +117,7 @@ class GetProductListResponse extends AbstractResponse
         /** @var \Sdk\Product\Product $product */
         foreach ($this->_productList as $product) {
             if ($product->getName() == $name) {
-                array_push($newList, $product);
+                $newList[] = $product;
             }
         }
 
@@ -136,7 +137,7 @@ class GetProductListResponse extends AbstractResponse
         /** @var \Sdk\Product\Product $product */
         foreach ($this->_productList as $product) {
             if ($product->getBrandName() == $brand) {
-                array_push($newList, $product);
+                $newList[] = $product;
             }
         }
 

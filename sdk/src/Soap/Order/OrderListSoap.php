@@ -9,15 +9,21 @@
 namespace Sdk\Soap\Order;
 
 
+use Sdk\Order\OrderList;
+use Sdk\Order\Validate\ValidateOrder;
 use Sdk\Soap\XmlUtils;
 
 class OrderListSoap
 {
 
+    /**
+     * @var XmlUtils|mixed
+     */
+    public $_xmlUtil;
     private $_tag = 'OrderList';
 
     /**
-     * @var \Sdk\Order\OrderList
+     * @var OrderList
      */
     private $_orderList = null;
 
@@ -41,7 +47,7 @@ class OrderListSoap
 
         $xml .= $this->_xmlUtil->generateOpenBalise($this->_tag);
 
-        /** @var \Sdk\Order\Validate\ValidateOrder $validateOrder */
+        /** @var ValidateOrder $validateOrder */
         foreach ($this->_orderList->getOrders() as $validateOrder) {
 
             $validateOrderSoap = new ValidateOrderSoap($validateOrder);

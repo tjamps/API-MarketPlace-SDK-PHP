@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product\Response;
 
 
+use var_dump;
 use Sdk\Product\KeyValueProperty;
 use Sdk\Product\ProductModel;
 use Sdk\Soap\Common\AbstractResponse;
@@ -58,9 +59,6 @@ class ModelListResponse extends AbstractResponse
         $this->_modelList = [];
     }
 
-    /**
-     *
-     */
     protected function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body'][$this->_tagXML][$this->_tagResultXML];
@@ -117,6 +115,6 @@ class ModelListResponse extends AbstractResponse
             }
         }
 
-        array_push($this->_modelList, $productModel);
+        $this->_modelList[] = $productModel;
     }
 }

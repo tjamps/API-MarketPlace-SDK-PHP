@@ -15,6 +15,10 @@ class Body
 {
 
     /**
+     * @var XmlUtils|mixed
+     */
+    public $_xmlUtil;
+    /**
      * @var string
      */
     private $_tag = 'Body';

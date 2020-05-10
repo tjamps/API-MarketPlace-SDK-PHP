@@ -61,7 +61,7 @@ class CreateRefundVoucherRequest
      */
     public function addSellerRefundRequestToList($sellerRefundRequest)
     {
-        array_push($this->_sellerRefundList, $sellerRefundRequest);
+        $this->_sellerRefundList[] = $sellerRefundRequest;
     }
     
     /*
@@ -77,6 +77,6 @@ class CreateRefundVoucherRequest
      */
     public function addRefundInformationToList($refundInformation)
     {
-        array_push($this->_commercialGestureList, $refundInformation);
+        $this->_commercialGestureList[] = $refundInformation;
     }
 }

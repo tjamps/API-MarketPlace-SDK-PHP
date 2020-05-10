@@ -71,7 +71,7 @@ class FulfilmentSupplyOrderResult extends CommonResult
      */
     public function addSupplyOrderToList($supplyOrder)
     {
-        array_push($this->_supplyOrderList, $supplyOrder);
+        $this->_supplyOrderList[] = $supplyOrder;
     }
        
     /*

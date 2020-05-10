@@ -8,6 +8,7 @@
 
 namespace Sdk\Soap\Product;
 
+use Sdk\Product\IdentifierRequest;
 use Sdk\Soap\BaliseTool;
 
 /**
@@ -16,7 +17,7 @@ use Sdk\Soap\BaliseTool;
 class IdentifierRequestSoap extends BaliseTool
 {
     /**
-     * @var \Sdk\Product\IdentifierRequest
+     * @var IdentifierRequest
      */
     private $_identifierRequest = null;
 

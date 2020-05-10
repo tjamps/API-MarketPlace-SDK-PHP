@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product;
 
 
+use Sdk\Product\ProductFilter;
 use Sdk\Soap\BaliseTool;
 
 class ProductFilterSoap extends BaliseTool
@@ -16,7 +17,7 @@ class ProductFilterSoap extends BaliseTool
     private $_CategoryCodeTAG = 'CategoryCode';
 
     /**
-     * @var \Sdk\Product\ProductFilter
+     * @var ProductFilter
      */
     private $_productFilter = null;
 

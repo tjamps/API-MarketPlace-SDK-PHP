@@ -18,6 +18,7 @@ use Sdk\Soap\XmlUtils;
 class Context
 {
 
+    public $_globalPrefix;
     private $_catalogID;
 
     private $_customerPoolID;
@@ -50,9 +51,7 @@ class Context
         $siteID = $this->_xmlUtil->generateBalise($this->_siteIDTAG, $this->_siteID);
         $closeContext = $this->_xmlUtil->generateCloseBalise($this->_contextTAG);
 
-        $contextObj = $openContext . $catalog . $customerPoolID . $siteID . $closeContext;
-
-        return $contextObj;
+        return $openContext . $catalog . $customerPoolID . $siteID . $closeContext;
     }
 
 

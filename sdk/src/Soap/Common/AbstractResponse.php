@@ -2,6 +2,11 @@
 
 namespace Sdk\Soap\Common;
 
+use sprintf;
+use implode;
+use array_filter;
+use array_merge;
+use array_diff;
 use Sdk\ArrayHelpers\ArrayHelpers;
 use Sdk\Exception\InvalidDataResponseException;
 use Sdk\Exception\ResponseErrorException;
@@ -97,11 +102,7 @@ abstract class AbstractResponse
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
         }
-        if (isset($xml['OperationSuccess']['_']) && $xml['OperationSuccess']['_'] === 'true') {
-            return true;
-        }
-
-        return false;
+        return isset($xml['OperationSuccess']['_']) && $xml['OperationSuccess']['_'] === 'true';
     }
 
     /**

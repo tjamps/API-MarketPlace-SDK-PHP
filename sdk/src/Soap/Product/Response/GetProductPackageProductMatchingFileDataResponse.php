@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Product\Product;
 use Sdk\Product\ProductMatching;
 use Sdk\Soap\Common\AbstractResponse;
@@ -54,7 +55,7 @@ class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
@@ -134,7 +135,7 @@ class GetProductPackageProductMatchingFileDataResponse extends AbstractResponse
                 if (isset($productXML['MatchingStatus']) && !SoapTools::isSoapValueNull($productXML['MatchingStatus'])) {
                     $product->setMatchingStatus($productXML['MatchingStatus']);
                 }
-                array_push($this->_productMatchingList, $product);
+                $this->_productMatchingList[] = $product;
             }
         }
     }

@@ -88,8 +88,7 @@ class OfferFilter extends BaliseTool
             /** Page number **/
             $xml .= $this->_xmlUtil->generateBalise($this->PageNumberTAG, $this->_offerFilter->getPageNumber());
         }
-        $xml .= $this->_xmlUtil->generateCloseBalise($this->offerFilterTAG);
-        return $xml;
+        return $xml . $this->_xmlUtil->generateCloseBalise($this->offerFilterTAG);
     }
 
     /**

@@ -54,7 +54,7 @@ class SellerRefundRequest
     }
 
     /**
-     * @var \Sdk\Order\Refund\RefundOrderLine
+     * @var RefundOrderLine
      */
     private $_refundOrderLine = null;
 

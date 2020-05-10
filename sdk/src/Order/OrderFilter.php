@@ -46,7 +46,7 @@ class OrderFilter extends Filter
      */
     public function addState($state)
     {
-        array_push($this->_states, $state);
+        $this->_states[] = $state;
     }
     
     /*
@@ -130,6 +130,6 @@ class OrderFilter extends Filter
      */
     public function addOrderReferenceToList($orderReference)
     {
-        array_push($this->_orderReferenceList, $orderReference);
+        $this->_orderReferenceList[] = $orderReference;
     }
 }

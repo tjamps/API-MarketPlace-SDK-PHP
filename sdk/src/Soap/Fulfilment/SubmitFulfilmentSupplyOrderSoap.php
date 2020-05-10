@@ -6,6 +6,7 @@
 
 namespace Sdk\Soap\Fulfilment;
 
+use Sdk\Fulfilment\FulfilmentProductDescription;
 use Sdk\Soap\BaliseTool;
 
 class SubmitFulfilmentSupplyOrderSoap extends BaliseTool
@@ -90,7 +91,7 @@ class SubmitFulfilmentSupplyOrderSoap extends BaliseTool
             * Opening tag ProductList
             */
             $xml .= $this->_xmlUtil->generateOpenBalise($this->_productListTAG);
-            /** @var \Sdk\Fulfilment\FulfilmentProductDescription $fulfilmentProductDescription */
+            /** @var FulfilmentProductDescription $fulfilmentProductDescription */
             foreach($request->getProductList() as $fulfilmentProductDescription)
             {
                 $xml .= $this->_xmlUtil->generateOpenBalise($this->_fulfilmentProductDescriptionTAG);
@@ -147,4 +148,3 @@ class SubmitFulfilmentSupplyOrderSoap extends BaliseTool
         return $xml;
     }
 }
-

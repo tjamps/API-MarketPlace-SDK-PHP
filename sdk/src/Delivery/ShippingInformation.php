@@ -6,7 +6,7 @@
  * Time: 15:22
  */
 
-namespace Sdk\Delivey;
+namespace Sdk\Delivery;
 
 
 use Sdk\Soap\Common\SoapTools;

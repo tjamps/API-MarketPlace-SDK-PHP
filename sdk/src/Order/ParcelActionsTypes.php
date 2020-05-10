@@ -12,4 +12,3 @@ abstract class ParcelActionsTypes
     const AskingForInvestigation = 'AskingForInvestigation';
     const AskingForDeliveryCertification = 'AskingForDeliveryCertification';
 }
-

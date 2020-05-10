@@ -91,7 +91,7 @@ class ProductPoint
     }
 
     /**
-     * @return \Sdk\Soap\Product\Response\GetAllowedCategoryTreeResponse
+     * @return GetAllowedCategoryTreeResponse
      */
     public function getAllowedCategoryTree()
     {

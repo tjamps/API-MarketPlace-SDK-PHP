@@ -48,9 +48,7 @@ class DiscussionPoint
         $envelopeXML = $this->_buildGenericListXML($getOrderClaimList, $claimFilterSoap, $claimFilter, $optionalsNamespaces);
 
         $response = $this->_sendRequest('GetOrderClaimList', $envelopeXML);
-
-        $getOrderClaimListResponse = new GetOrderClaimListResponse($response);
-        return $getOrderClaimListResponse;
+        return new GetOrderClaimListResponse($response);
     }
 
     /**
@@ -66,9 +64,7 @@ class DiscussionPoint
         $envelopeXML = $this->_buildGenericListXML($getOrderQuestionList, $orderQuestionFilterSoap, $orderQuestionFilter);
 
         $response = $this->_sendRequest('GetOrderQuestionList', $envelopeXML);
-
-        $getOrderQuestionListResponse = new GetOrderQuestionListResponse($response);
-        return $getOrderQuestionListResponse;
+        return new GetOrderQuestionListResponse($response);
     }
 
     /**
@@ -84,9 +80,7 @@ class DiscussionPoint
         $envelopeXML = $this->_buildGenericListXML($getOfferQuestionList, $offerQuestionFilterSoap, $orderQuestionFilter);
 
         $response = $this->_sendRequest('GetOfferQuestionList', $envelopeXML);
-
-        $getOfferQuestionListResponse = new GetOfferQuestionListResponse($response);
-        return $getOfferQuestionListResponse;
+        return new GetOfferQuestionListResponse($response);
     }
 
     /**
@@ -108,9 +102,7 @@ class DiscussionPoint
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('CloseDiscussionList', $envelopeXML);
-
-        $closeDiscussionListResponse = new CloseDiscussionListResponse($response);
-        return $closeDiscussionListResponse;
+        return new CloseDiscussionListResponse($response);
     }
 
     /**
@@ -148,9 +140,8 @@ class DiscussionPoint
         $orderClaimXML = $questionList->generateEnclosingBalise($headerXML . $orderfilterXML);
 
         $bodyXML = $body->generateXML($orderClaimXML);
-        $envelopeXML = $envelope->generateXML($bodyXML);
 
-        return $envelopeXML;
+        return $envelope->generateXML($bodyXML);
     }
 
     /**
@@ -165,9 +156,8 @@ class DiscussionPoint
         $apiURL = CDSApiClient::getInstance()->getApiUrl();
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
 
-        return $response;
+        return $request->call();
     }
 
 

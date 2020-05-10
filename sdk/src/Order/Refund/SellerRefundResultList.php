@@ -29,6 +29,6 @@ class SellerRefundResultList
      */
     public function addSellerRefundResultToList($sellerRefundResult)
     {
-        array_push($this->_sellerRefundResultList, $sellerRefundResult);
+        $this->_sellerRefundResultList[] = $sellerRefundResult;
     }
 }

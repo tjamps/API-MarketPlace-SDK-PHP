@@ -55,9 +55,7 @@ class OfferPoint
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('GetOfferList', $envelopeXML);
-
-        $getOfferListResponse = new GetOfferListResponse($response);
-        return $getOfferListResponse;
+        return new GetOfferListResponse($response);
     }
 
     /**
@@ -85,9 +83,7 @@ class OfferPoint
 
         $response = $this->_sendRequest('GetOfferListPaginated', $envelopeXML);
 
-        $getOfferListPaginatedResponse = new GetOfferListPaginatedResponse($response);
-
-        return $getOfferListPaginatedResponse;
+        return new GetOfferListPaginatedResponse($response);
     }
 
     /**
@@ -109,9 +105,7 @@ class OfferPoint
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('SubmitOfferPackage', $envelopeXML);
-
-        $submitProductPackageResponse = new SubmitOfferPackageResponse($response);
-        return $submitProductPackageResponse;
+        return new SubmitOfferPackageResponse($response);
     }
 
     /**
@@ -133,9 +127,7 @@ class OfferPoint
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('GetOfferPackageSubmissionResult', $envelopeXML);
-
-        $getOfferPackageSubmissionResultResponse = new GetOfferPackageSubmissionResultResponse($response);
-        return $getOfferPackageSubmissionResultResponse;
+        return new GetOfferPackageSubmissionResultResponse($response);
     }
 
     /**
@@ -150,8 +142,7 @@ class OfferPoint
         $apiURL = CDSApiClient::getInstance()->getApiUrl();
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
 
-        return $response;
+        return $request->call();
     }
 }

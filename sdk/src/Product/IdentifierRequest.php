@@ -49,6 +49,6 @@ class IdentifierRequest
      */
     public function addValue($value)
     {
-        array_push($this->_valueList, $value);
+        $this->_valueList[] = $value;
     }
 }

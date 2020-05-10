@@ -38,5 +38,3 @@ class FulfilmentDeliveryDocumentRequest
         $this->_depositId = $depositId;
     }
 }
-
-

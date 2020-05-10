@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Mail\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Mail\DiscussionMail;
 use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
@@ -39,7 +40,7 @@ class GetDiscussionMailListResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         /** Check For error message */
@@ -79,7 +80,7 @@ class GetDiscussionMailListResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -105,7 +106,7 @@ class GetDiscussionMailListResponse extends AbstractResponse
             if (isset($discussionMailXML['MailAddress']) && !SoapTools::isSoapValueNull($discussionMailXML['MailAddress'])) {
                 $discussionMail->setMailAddress($discussionMailXML['MailAddress']);
             }
-            array_push($this->_discussionMailList, $discussionMail);
+            $this->_discussionMailList[] = $discussionMail;
         }
 
         if (!$manyMessage) {
@@ -116,7 +117,7 @@ class GetDiscussionMailListResponse extends AbstractResponse
             if (isset($discussionMailListXML['DiscussionMail']['MailAddress']) && !SoapTools::isSoapValueNull($discussionMailListXML['DiscussionMail']['MailAddress'])) {
                 $discussionMail->setMailAddress($discussionMailListXML['DiscussionMail']['MailAddress']);
             }
-            array_push($this->_discussionMailList, $discussionMail);
+            $this->_discussionMailList[] = $discussionMail;
         }
     }
 }

@@ -44,9 +44,7 @@ class MailPoint
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('GetDiscussionMailList', $envelopeXML);
-
-        $getDiscussionMailListResponse = new GetDiscussionMailListResponse($response);
-        return $getDiscussionMailListResponse;
+        return new GetDiscussionMailListResponse($response);
     }
 
     /**
@@ -69,9 +67,7 @@ class MailPoint
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('GenerateDiscussionMailGuid', $envelopeXML);
-
-        $generateDiscussionMailGuidResponse = new GenerateDiscussionMailGuidResponse($response);
-        return $generateDiscussionMailGuidResponse;
+        return new GenerateDiscussionMailGuidResponse($response);
     }
 
     /**
@@ -86,8 +82,7 @@ class MailPoint
         $apiURL = CDSApiClient::getInstance()->getApiUrl();
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
 
-        return $response;
+        return $request->call();
     }
 }

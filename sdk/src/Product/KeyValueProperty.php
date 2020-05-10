@@ -43,7 +43,7 @@ class KeyValueProperty
      * @param $value string
      */
     public function addValue($value) {
-        array_push($this->_values, $value);
+        $this->_values[] = $value;
     }
 
     /**

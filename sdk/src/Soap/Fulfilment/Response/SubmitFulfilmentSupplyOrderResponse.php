@@ -6,6 +6,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use Sdk\Fulfilment\SubmitFulfilmentSupplyOrderResult;
@@ -45,7 +46,7 @@ class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -94,7 +95,7 @@ class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
             {
                 $this->_submitFulfilmentSupplyOrderResult->setErrorMessage($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
                 $this->_submitFulfilmentSupplyOrderResult->addErrorToList($submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
-                array_push($this->errorList, $submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_']);
+                $this->errorList[] = $submitFulfilmentSupplyOrderResultXml['ErrorMessage']['_'];
             }
             //operation success
             if (isset($submitFulfilmentSupplyOrderResultXml['OperationSuccess']['_']) && $submitFulfilmentSupplyOrderResultXml['OperationSuccess']['_'] == 'true')
@@ -121,7 +122,7 @@ class SubmitFulfilmentSupplyOrderResponse extends AbstractResponse
              //errorMessage and errorList
 			$this->_submitFulfilmentSupplyOrderResult->setErrorMessage($submitFulfilmentSupplyOrderResultXml);
 			$this->_submitFulfilmentSupplyOrderResult->addErrorToList($submitFulfilmentSupplyOrderResultXml);
-			array_push($this->errorList, $submitFulfilmentSupplyOrderResultXml);
+			$this->errorList[] = $submitFulfilmentSupplyOrderResultXml;
 
             //operation success
             $this->_submitFulfilmentSupplyOrderResult->setOperationSuccess(false);

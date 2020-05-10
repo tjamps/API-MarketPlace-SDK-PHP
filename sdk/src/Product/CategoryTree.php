@@ -141,6 +141,6 @@ class CategoryTree
      */
     public function addChild($child)
     {
-        array_push($this->_childrenCategoryList, $child);
+        $this->_childrenCategoryList[] = $child;
     }
 }

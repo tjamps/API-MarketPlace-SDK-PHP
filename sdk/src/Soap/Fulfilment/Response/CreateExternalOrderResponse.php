@@ -7,6 +7,7 @@
  */
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Fulfilment\ProductStockList;
 use \Sdk\Fulfilment\ProductStockListMessage;
@@ -25,7 +26,7 @@ class CreateExternalOrderResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         // Check For Operation Success
         if ($this->isOperationSuccess($this->_dataResponse['s:Body']['CreateExternalOrderResponse']['CreateExternalOrderResult']))
