@@ -41,7 +41,7 @@ class FulfilmentProductRequest
     {
 		if($string != null && !empty($string))
 		{
-			array_push($this->_barCodeList, $string);
+			$this->_barCodeList[] = $string;
 		}
     }
 

@@ -8,6 +8,8 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
+use count;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 
@@ -41,7 +43,7 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -81,7 +83,7 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
         {
             $this->_fulfilmentSupplyOrderResult->setErrorMessage($fulfilmentSupplyOrderResult['ErrorMessage']['_']);
             $this->_fulfilmentSupplyOrderResult->addErrorToList($fulfilmentSupplyOrderResult['ErrorMessage']['_']);
-            array_push($this->errorList, $fulfilmentSupplyOrderResult['ErrorMessage']['_']);
+            $this->errorList[] = $fulfilmentSupplyOrderResult['ErrorMessage']['_'];
         }
         //operation success
         if (isset($fulfilmentSupplyOrderResult['OperationSuccess']['_']) && $fulfilmentSupplyOrderResult['OperationSuccess']['_'] == 'true')
@@ -141,7 +143,7 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
                     {
                         $orderReferences = $fulfilmentSupplyOrder['OrderReferenceList']['a:string'];
 
-                        if (count($orderReferences) == 1)
+                        if (count($orderReferences) === 1)
                         {
                             $orderReferences = [$orderReferences];
                         }
@@ -203,4 +205,3 @@ class GetFulfilmentSupplyOrderResponse extends AbstractResponse
     }
 
 }
-

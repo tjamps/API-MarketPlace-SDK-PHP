@@ -71,7 +71,6 @@ class Request extends BaliseTool
         foreach ($orderIds as $long) {
             $xml .= $this->_xmlUtil->generateBalise($this->_ScopusIdTAG, $long);
         }
-        $xml .= $this->_xmlUtil->generateCloseBalise($this->_RequestTAG);
-        return $xml;
+        return $xml . $this->_xmlUtil->generateCloseBalise($this->_RequestTAG);
     }
 }

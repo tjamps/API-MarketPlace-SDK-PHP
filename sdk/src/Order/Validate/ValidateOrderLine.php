@@ -8,6 +8,7 @@
 
 namespace Sdk\Order\Validate;
 
+use Sdk\Order\AskingForReturnType;
 use Sdk\Order\OrderLine;
 
 class ValidateOrderLine extends OrderLine
@@ -24,7 +25,7 @@ class ValidateOrderLine extends OrderLine
     /*
      * @var enum
      */
-    private $_typeOfReturn = \Sdk\Order\AskingForReturnType::AskingForReturn;
+    private $_typeOfReturn = AskingForReturnType::AskingForReturn;
     
     /*
      * @return enum

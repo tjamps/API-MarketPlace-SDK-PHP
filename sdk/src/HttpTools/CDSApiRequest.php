@@ -9,7 +9,10 @@
 
 namespace Sdk\HttpTools;
 
-
+use Zend\Http\Client\Adapter\Curl;
+use Zend\Http\Client;
+use Zend\Http\Request;
+use base64_encode;
 /**
  * Request in order to get a Token
  *
@@ -20,17 +23,17 @@ class CDSApiRequest
 {
 
     /**
-     * @var \Zend\Http\Client\Adapter\Curl
+     * @var Curl
      */
     private $_adapter = null;
 
     /**
-     * @var \Zend\Http\Client
+     * @var Client
      */
     private $_client = null;
 
     /**
-     * @var \Zend\Http\Request
+     * @var Request
      */
     private $_request = null;
 
@@ -72,12 +75,12 @@ class CDSApiRequest
     {
         //$this->_setHttpHeader($username, $password);
 
-        $this->_request = new \Zend\Http\Request();
+        $this->_request = new Request();
         $this->_request->setUri($urltoken);
         $this->_request->setMethod('GET');
 
-        $this->_client = new \Zend\Http\Client();
-        $this->_adapter = new \Zend\Http\Client\Adapter\Curl();
+        $this->_client = new Client();
+        $this->_adapter = new Curl();
         $this->_client->setAdapter($this->_adapter);
 
         $this->_setAdapaterOptions($username, $password);

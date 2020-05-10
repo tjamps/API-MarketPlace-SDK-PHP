@@ -5,7 +5,7 @@
  * Time: 15:53
  */
 
-namespace Sdk\Core\Common;
+namespace Sdk\Common;
 
 /**
  * Class ErrorMessage

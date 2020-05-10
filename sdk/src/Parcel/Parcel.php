@@ -138,7 +138,7 @@ class Parcel
     }
 
     /**
-     * @var \Sdk\Parcel\ParcelItemList
+     * @var ParcelItemList
      */
     private $_parcelItemList = null;
 

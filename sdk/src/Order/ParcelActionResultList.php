@@ -36,6 +36,6 @@ class ParcelActionResultList
      */
     public function addParcelActionResultToArray($parcelActionResult)
     {
-        array_push($this->_parcelActionResultList, $parcelActionResult);
+        $this->_parcelActionResultList[] = $parcelActionResult;
     }
 }

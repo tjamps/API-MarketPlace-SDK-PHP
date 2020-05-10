@@ -8,6 +8,7 @@ namespace Sdk\Fulfilment;
 
 class FulfilmentProductDescription
 {
+    public $_sellerProductReference;
     /*
      * @var string
      */

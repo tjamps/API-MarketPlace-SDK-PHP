@@ -7,6 +7,7 @@
  */
 namespace Sdk\Soap\Fulfilment;
 
+use array_values;
 use Sdk\Soap\BaliseTool;
 
 class CreateExternalOrderSoap extends BaliseTool

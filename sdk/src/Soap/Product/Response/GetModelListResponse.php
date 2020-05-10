@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Product\ProductModel;
 use Sdk\Soap\Common\AbstractResponse;
 
@@ -23,7 +24,7 @@ class GetModelListResponse extends ModelListResponse
     {
         parent::__construct('GetModelListResponse', 'GetModelListResult');
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($dataResponse);
 
         // Check For error message

@@ -31,6 +31,6 @@ class CommercialGestureList
      */
     public function addRefundInformationMessageToList($refundInformationMessage)
     {
-        array_push($this->_commercialGestureList, $refundInformationMessage);
+        $this->_commercialGestureList[] = $refundInformationMessage;
     }
 }

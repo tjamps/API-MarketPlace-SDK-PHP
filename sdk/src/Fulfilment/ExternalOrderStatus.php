@@ -16,4 +16,4 @@ class ExternalOrderStatus
     const Ok = 'Ok';
     const Pending = 'Pending';
     const KO = 'KO';
-}    
+}

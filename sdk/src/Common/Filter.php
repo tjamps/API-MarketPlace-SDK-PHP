@@ -8,32 +8,27 @@
 
 namespace Sdk\Common;
 
-
 class Filter
 {
     private $_beginCreationDate = null;
-
     /**
-     * @return 'AAAA-MM-DDTHH:MM:SS' $beginCreationDate
+     * @return null $beginCreationDate
      */
     public function getBeginCreationDate()
     {
         return $this->_beginCreationDate;
     }
-
     /**
-     * @param 'AAAA-MM-DDTHH:MM:SS' $beginCreationDate
+     * @param $beginCreationDate
      */
     public function setBeginCreationDate($beginCreationDate)
     {
         $this->_beginCreationDate = $beginCreationDate;
     }
-
     /**
      * @var null
      */
     private $_beginModificationDate = null;
-
     /**
      * @return null
      */
@@ -41,7 +36,6 @@ class Filter
     {
         return $this->_beginModificationDate;
     }
-
     /**
      * @param null $beginModificationDate
      */
@@ -49,9 +43,7 @@ class Filter
     {
         $this->_beginModificationDate = $beginModificationDate;
     }
-
     private $_endCreationDate = null;
-
     /**
      * @return null
      */
@@ -59,7 +51,6 @@ class Filter
     {
         return $this->_endCreationDate;
     }
-
     /**
      * @param null $endCreationDate
      */
@@ -67,9 +58,7 @@ class Filter
     {
         $this->_endCreationDate = $endCreationDate;
     }
-
     private $_endModificationDate = null;
-
     /**
      * @return null
      */
@@ -77,7 +66,6 @@ class Filter
     {
         return $this->_endModificationDate;
     }
-
     /**
      * @param null $endModificationDate
      */

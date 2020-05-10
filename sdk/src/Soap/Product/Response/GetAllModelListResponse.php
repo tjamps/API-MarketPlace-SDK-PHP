@@ -8,14 +8,14 @@
 
 namespace Sdk\Soap\Product\Response;
 
-
+use Zend\Config\Reader\Xml;
 class GetAllModelListResponse extends ModelListResponse
 {
     public function __construct($dataResponse)
     {
         parent::__construct('GetAllModelListResponse', 'GetAllModelListResult');
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($dataResponse);
 
         // Check For error message

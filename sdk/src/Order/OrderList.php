@@ -20,7 +20,7 @@ class OrderList
      */
     public function addOrder($order)
     {
-        array_push($this->_orderList, $order);
+        $this->_orderList[] = $order;
     }
 
     /**

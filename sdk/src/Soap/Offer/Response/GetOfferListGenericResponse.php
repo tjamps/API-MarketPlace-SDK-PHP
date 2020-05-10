@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Offer\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Delivey\DeliveryMode;
 use Sdk\Delivey\ShippingInformation;
 use Sdk\Offer\Offer;
@@ -42,7 +43,7 @@ class GetOfferListGenericResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->_offerList = [];
     }
@@ -130,7 +131,7 @@ class GetOfferListGenericResponse extends AbstractResponse
             $offer->setStrikedPrice($offerXML['StrikedPrice']);
             $offer->setVatRate($offerXML['VatRate']);
 
-            array_push($this->_offerList, $offer);
+            $this->_offerList[] = $offer;
         }
     }
 }

@@ -71,7 +71,7 @@ class FulfilmentSupplyOrderReportListResult extends CommonResult
      */
     public function addReportList($supplyOrderReport)
     {
-        array_push($this->_reportList, $supplyOrderReport);
+        $this->_reportList[] = $supplyOrderReport;
     }
     
     /*

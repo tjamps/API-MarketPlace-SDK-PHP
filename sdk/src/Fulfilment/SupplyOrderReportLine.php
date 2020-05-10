@@ -9,6 +9,7 @@ namespace Sdk\Fulfilment;
 class SupplyOrderReportLine
 {
         
+    public $_reportList;
     /*
      * @array
      */
@@ -27,7 +28,7 @@ class SupplyOrderReportLine
      */
     public function addToErrorList($error)
     {
-        array_push($this->_errorList, $error);
+        $this->_errorList[] = $error;
     }
 
     /*

@@ -7,6 +7,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Fulfilment\FulfilmentOrderListToSupplyResult;
 use \Sdk\Fulfilment\FulfilmentOrderLine;
@@ -36,7 +37,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-       $reader = new \Zend\Config\Reader\Xml();
+       $reader = new Xml();
        $this->_dataResponse = $reader->fromString($response);
        $this->errorList = [];
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentOrderListToSupplyResponse']['GetFulfilmentOrderListToSupplyResult']))
@@ -94,7 +95,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
         {
             $this->_fulfilmentOrderListToSupplyResult->setErrorMessage($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
             $this->_fulfilmentOrderListToSupplyResult->addErrorToList($GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
-            array_push($this->errorList, $GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_']);
+            $this->errorList[] = $GetFulfilmentOrderListToSupplyResult['ErrorMessage']['_'];
         }
 
         //operation success
@@ -128,7 +129,7 @@ class GetFulfilmentOrderListToSupplyResponse extends AbstractResponse
                 {
                     $fulfilmentOrderLine->setErrorMessage($orderLine['ErrorMessage']['_']);
                     $fulfilmentOrderLine->addErrorToList($orderLine['ErrorMessage']['_']);
-					array_push($this->errorList, $orderLine['ErrorMessage']['_']);
+					$this->errorList[] = $orderLine['ErrorMessage']['_'];
                 }
 				//operation success
 				if (isset($orderLine['OperationSuccess']['_']) && $orderLine['OperationSuccess']['_'] == 'true')

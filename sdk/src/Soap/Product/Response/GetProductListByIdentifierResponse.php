@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Product\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Product\ProductIdentity;
 use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
@@ -31,7 +32,7 @@ class GetProductListByIdentifierResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
@@ -146,7 +147,7 @@ class GetProductListByIdentifierResponse extends AbstractResponse
                 }
             }
 
-            array_push($this->_productList, $product);
+            $this->_productList[] = $product;
         }
     }
 

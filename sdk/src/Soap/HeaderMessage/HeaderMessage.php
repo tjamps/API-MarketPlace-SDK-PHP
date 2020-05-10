@@ -50,9 +50,7 @@ class HeaderMessage
         $headerBaliseOpen = $this->_xmlUtil->generateOpenBaliseWithInline($this->_headerTAG, $inlines);
         $headerBaliseClose = $this->_xmlUtil->generateCloseBalise($this->_headerTAG);
 
-        $headerMessage = $headerBaliseOpen . $context->generateXML() . $localization->generateXML() . $security->generateXML() . $version . $headerBaliseClose;
-
-        return $headerMessage;
+        return $headerBaliseOpen . $context->generateXML() . $localization->generateXML() . $security->generateXML() . $version . $headerBaliseClose;
 
         /*
 

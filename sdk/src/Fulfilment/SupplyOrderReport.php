@@ -47,6 +47,6 @@ class SupplyOrderReport
      */
     public function addReportLineList($reportLineList)
     {
-        array_push($this->_reportLineList, $reportLineList);
+        $this->_reportLineList[] = $reportLineList;
     }
 }

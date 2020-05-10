@@ -54,7 +54,7 @@ class SupplyOrderReportRequest
      */
     public function addDepositIdList($depositIdList)
     {
-        array_push($this->_depositIdList, $depositIdList);
+        $this->_depositIdList[] = $depositIdList;
     }
 
      /*

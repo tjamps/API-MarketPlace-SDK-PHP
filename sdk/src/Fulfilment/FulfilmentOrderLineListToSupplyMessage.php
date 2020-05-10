@@ -6,7 +6,7 @@
  * Time: 18:12
  */
 
-namespace Sdk\Order;
+namespace Sdk\Fulfilment;
 
 
 class FulfilmentOrderLineListToSupplyMessage
@@ -15,13 +15,13 @@ class FulfilmentOrderLineListToSupplyMessage
      * @var array \Sdk\Fulfilment\FulfilmentOrderLine
      */
     private $_orderLineList = [];
-    
+
     /**
      * @param $orderLine \Sdk\Fulfilment\FulfilmentOrderLine
      */
     public function addOrderLine($orderLine)
     {
-        array_push($this->_orderLineList, $orderLine);
+        $this->_orderLineList[] = $orderLine;
     }
 
     /**

@@ -13,9 +13,10 @@ use SoapClient;
 
 class SoapClientDebug extends SoapClient
 {
-    public function __doRequest($request, $location, $action, $version, $one_way = 0) {
+    public function __doRequest($request, $location, $action, $version, $one_way = 0)
+    {
         // Add code to inspect/dissect/debug/adjust the XML given in $request here
-        $doc = new DomDocument('1.0');
+        $doc = new DOMDocument('1.0');
         $doc->preserveWhiteSpace = false;
         $doc->formatOutput = true;
         $doc->loadXML($request);

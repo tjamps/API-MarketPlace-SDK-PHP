@@ -113,4 +113,3 @@ class ManageParcelSoap extends BaliseTool
         return $xml;
     }
 }
-

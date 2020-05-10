@@ -12,4 +12,3 @@ class WarehouseTypes
     const AMD = 'AMD';
     const SMD = 'SMD';
 }
-

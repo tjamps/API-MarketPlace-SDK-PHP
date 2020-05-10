@@ -39,7 +39,7 @@ class ManageParcelRequest
      */
     public function addParcelActionsList($parcelInfos)
     {
-        array_push($this->_parcelActionsList, $parcelInfos);
+        $this->_parcelActionsList[] = $parcelInfos;
     }
     
     /*
@@ -51,5 +51,3 @@ class ManageParcelRequest
         $this->_scopusId = $scopusId;
     }
 }
-
-

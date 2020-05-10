@@ -9,10 +9,15 @@
 namespace Sdk\Soap\Mail\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 
 class GenerateDiscussionMailGuidResponse extends AbstractResponse
 {
+    /**
+     * @var mixed[]|mixed
+     */
+    public $_discussionMailList;
     /**
      * @var array|null
      */
@@ -37,7 +42,7 @@ class GenerateDiscussionMailGuidResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         /** Check For error message */
@@ -77,7 +82,7 @@ class GenerateDiscussionMailGuidResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -95,6 +100,6 @@ class GenerateDiscussionMailGuidResponse extends AbstractResponse
         if (isset($discussionMailListXML['DiscussionMail']['MailAddress']) && !SoapTools::isSoapValueNull($discussionMailListXML['DiscussionMail']['MailAddress'])) {
             $discussionMail->setMailAddress($discussionMailListXML['DiscussionMail']['MailAddress']);
         }
-        array_push($this->_discussionMailList, $discussionMail);
+        $this->_discussionMailList[] = $discussionMail;
     }
 }

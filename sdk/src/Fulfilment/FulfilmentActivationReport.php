@@ -83,7 +83,7 @@ class FulfilmentActivationReport
      */
     public function addFulfilmentActivationReportDetails($fulfilmentActivationReportDetails)
     {
-        array_push($this->_fulfilmentActivationReportDetails, $fulfilmentActivationReportDetails);
+        $this->_fulfilmentActivationReportDetails[] = $fulfilmentActivationReportDetails;
     }
 
     /*

@@ -7,6 +7,7 @@
 
 namespace Sdk\Soap\Order\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Delivey\Carrier;
 use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
@@ -38,7 +39,7 @@ class GetGlobalConfigurationResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         $this->_carrierList = [];
@@ -80,7 +81,7 @@ class GetGlobalConfigurationResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -103,7 +104,7 @@ class GetGlobalConfigurationResponse extends AbstractResponse
                     $carrier->setName($carrierXML['Name']);
                 }
 
-                array_push($this->_carrierList, $carrier);
+                $this->_carrierList[] = $carrier;
             }
         }
     }

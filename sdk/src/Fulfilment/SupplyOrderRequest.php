@@ -30,7 +30,7 @@ class SupplyOrderRequest
      */
     public function addSupplyOrder($supplyOrder)
     {
-        array_push($this->_supplyOrderList, $supplyOrder);
+        $this->_supplyOrderList[] = $supplyOrder;
     }
 
     /**

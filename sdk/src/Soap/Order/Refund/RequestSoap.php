@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Order\Refund;
 
 
+use Sdk\Order\Refund\Request;
 use Sdk\Soap\BaliseTool;
 
 class RequestSoap extends BaliseTool
@@ -19,7 +20,7 @@ class RequestSoap extends BaliseTool
     private $_SellerRefundRequestTAG = 'SellerRefundRequest';
 
     /**
-     * @var null|\Sdk\Order\Refund\Request
+     * @var null|Request
      */
     private $_request = null;
 

@@ -104,7 +104,7 @@ class GenericQuestion
             $this->_messageList = [];
         }
         if ($message != null) {
-            array_push($this->_messageList, $message);
+            $this->_messageList[] = $message;
         }
     }
 

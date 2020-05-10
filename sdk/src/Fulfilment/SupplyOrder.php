@@ -215,7 +215,7 @@
      */
     public function addOrderReferenceToToArray($_orderReference)
     {
-        array_push($this->_orderReferenceList, $_orderReference);
+        $this->_orderReferenceList[] = $_orderReference;
     }
 
     /*
@@ -257,4 +257,4 @@
     {
         $this->_orderedQuantity = $orderedQuantity;
     }
- } 
+ }

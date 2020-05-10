@@ -6,6 +6,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use Sdk\Fulfilment\SubmitOfferStateActionResult;
@@ -45,7 +46,7 @@ class SubmitOfferStateActionResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -81,7 +82,7 @@ class SubmitOfferStateActionResponse extends AbstractResponse
             {
                 $this->_submitOfferStateActionResult->setErrorMessage($submitOfferStateActionResultXml['ErrorMessage']['_']);
                 $this->_submitOfferStateActionResult->addErrorToList($submitOfferStateActionResultXml['ErrorMessage']['_']);
-                array_push($this->errorList, $submitOfferStateActionResultXml['ErrorMessage']['_']);
+                $this->errorList[] = $submitOfferStateActionResultXml['ErrorMessage']['_'];
             }
             //operation success
             if (isset($submitOfferStateActionResultXml['OperationSuccess']['_']) && $submitOfferStateActionResultXml['OperationSuccess']['_'] == 'true')

@@ -77,7 +77,7 @@ class ProductModel
      */
     public function addKeyValueProperty($keyvalueObj)
     {
-        array_push($this->_keyValueProperties, $keyvalueObj);
+        $this->_keyValueProperties[] = $keyvalueObj;
     }
 
     /**
@@ -99,7 +99,7 @@ class ProductModel
      */
     public function addMandatoryModelProperty($mandatoryModelProperty)
     {
-        array_push($this->_mandatoryModelProperties, $mandatoryModelProperty);
+        $this->_mandatoryModelProperties[] = $mandatoryModelProperty;
     }
 
     /**

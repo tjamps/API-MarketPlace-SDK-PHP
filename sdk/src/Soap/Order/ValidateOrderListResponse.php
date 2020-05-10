@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Order;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Order\Validate\ValidateOrderLineResult;
 use Sdk\Order\Validate\ValidateOrderLineResults;
 use Sdk\Order\Validate\ValidateOrderResult;
@@ -40,7 +41,7 @@ class ValidateOrderListResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         $this->errorList = [];
@@ -60,9 +61,6 @@ class ValidateOrderListResponse extends AbstractResponse
 
     }
 
-    /**
-     *
-     */
     private function _setGlobalInformations()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['ValidateOrderListResponse']['ValidateOrderListResult'];

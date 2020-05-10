@@ -8,6 +8,8 @@
 
 namespace Sdk\ConfigTools;
 
+use Zend\Validator\NotEmpty;
+use Zend\Config\Reader\Ini;
 use Zend\Config\Exception\InvalidArgumentException;
 
 class ConfigFileLoader
@@ -32,7 +34,7 @@ class ConfigFileLoader
 
 
     /**
-     * @var \Zend\Validator\NotEmpty for string
+     * @var NotEmpty for string
      */
     private $_zendValidator = null;
 
@@ -42,7 +44,7 @@ class ConfigFileLoader
 
     private function __construct() {
 
-        $this->_zendValidator = new \Zend\Validator\NotEmpty();
+        $this->_zendValidator = new NotEmpty();
         $this->_loadConfFile();
     }
 
@@ -71,7 +73,7 @@ class ConfigFileLoader
      */
     private function _loadConfFile() {
 
-        $reader = new \Zend\Config\Reader\Ini();
+        $reader = new Ini();
 
         $configFile = $reader->fromFile(__DIR__.'/../../../../config/config.ini');
 

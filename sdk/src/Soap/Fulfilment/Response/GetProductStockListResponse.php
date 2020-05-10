@@ -2,6 +2,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use sprintf;
 use InvalidArgumentException;
 use Sdk\Fulfilment\ProductStock;
 use Sdk\Soap\Common\AbstractResponse;

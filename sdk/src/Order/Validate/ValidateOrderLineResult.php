@@ -26,7 +26,7 @@ class ValidateOrderLineResult
      */
     public function addError($error)
     {
-        array_push($this->_errors, $error);
+        $this->_errors[] = $error;
     }
 
     /**

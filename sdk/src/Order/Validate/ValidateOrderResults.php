@@ -18,7 +18,7 @@ class ValidateOrderResults
      */
     public function addValidateOrderResult($validateOrderResult)
     {
-        array_push($this->_validateOrderResults, $validateOrderResult);
+        $this->_validateOrderResults[] = $validateOrderResult;
     }
 
     /**

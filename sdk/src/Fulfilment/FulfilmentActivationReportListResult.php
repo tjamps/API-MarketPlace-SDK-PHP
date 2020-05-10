@@ -28,7 +28,7 @@ class FulfilmentActivationReportListResult extends CommonResult
      */
     public function addFulfilmentActivationReport($fulfilmentActivationReport)
     {
-        array_push($this->_fulfilmentActivationReport, $fulfilmentActivationReport);
+        $this->_fulfilmentActivationReport[] = $fulfilmentActivationReport;
     }
     
 }

@@ -40,6 +40,6 @@ class VoucherList
      */
     public function addVoucherToList($voucher)
     {
-        array_push($this->_voucherList, $voucher);
+        $this->_voucherList[] = $voucher;
     }
 }

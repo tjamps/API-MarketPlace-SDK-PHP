@@ -7,6 +7,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use \Sdk\Fulfilment\FulfilmentActivationReportListResult;
@@ -48,18 +49,14 @@ class FulfilmentActivationReportRequestXmlResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
         // Check For error message
-        if(isset($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']))
-        {
-            if ($this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']))
-                {
-                    $this->_setGlobalInformations();
-                    $this->generateResult();
-                }
-         }
+        if (isset($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']) && $this->isOperationSuccess($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult'])) {
+            $this->_setGlobalInformations();
+            $this->generateResult();
+        }
      }
 
      /**
@@ -74,7 +71,7 @@ class FulfilmentActivationReportRequestXmlResponse extends AbstractResponse
             $this->operationSuccess = $objError;
         }
 
-        if(isset($objError) && $objError == false ){
+        if(isset($objError) && !$objError ){
             return true;
         }
 

@@ -6,6 +6,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use Sdk\Fulfilment\SubmitFulfilmentActivationResult;
@@ -39,7 +40,7 @@ class SubmitFulfilmentActivationResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -75,7 +76,7 @@ class SubmitFulfilmentActivationResponse extends AbstractResponse
         {
             $this->_submitFulfilmentActivationResult->setErrorMessage($submitFulfilmentActivationResultXml['ErrorMessage']['_']);
             $this->_submitFulfilmentActivationResult->addErrorToList($submitFulfilmentActivationResultXml['ErrorMessage']['_']);
-            array_push($this->errorList, $submitFulfilmentActivationResultXml['ErrorMessage']['_']);
+            $this->errorList[] = $submitFulfilmentActivationResultXml['ErrorMessage']['_'];
         }
         //operation success
         if (isset($submitFulfilmentActivationResultXml['OperationSuccess']['_']) && $submitFulfilmentActivationResultXml['OperationSuccess']['_'] == 'true')

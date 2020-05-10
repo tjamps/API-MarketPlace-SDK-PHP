@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Order;
 
 
+use Sdk\Order\OrderTypeEnum;
 use Sdk\Order\OrderFilter;
 use Sdk\Soap\Discussion\FilterSoap;
 use Sdk\Soap\XmlUtils;
@@ -154,7 +155,7 @@ class OrderFilterSoap extends FilterSoap
         /*
          * order type
          */
-        if ($child->getOrderType() != \Sdk\Order\OrderTypeEnum::None) {
+        if ($child->getOrderType() != OrderTypeEnum::None) {
             $this->_childrens .= $this->_xmlUtil->generateBalise($this->_orderTypeTAG, $child->getOrderType());
         }
         

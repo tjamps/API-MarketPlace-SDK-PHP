@@ -14,6 +14,11 @@ use Sdk\Soap\XmlUtils;
 class Localization
 {
 
+    public $_globalPrefix;
+    /**
+     * @var XmlUtils|mixed
+     */
+    public $_xmlUtil;
     private $_country;
 
     private $_currency;

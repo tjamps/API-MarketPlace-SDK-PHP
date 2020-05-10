@@ -9,13 +9,14 @@
 namespace Sdk\Soap\Order;
 
 
+use Sdk\Order\OrderLineList;
 use Sdk\Soap\BaliseTool;
 
 class OrderLineListSoap extends BaliseTool
 {
 
     /**
-     * @var \Sdk\Order\OrderLineList
+     * @var OrderLineList
      */
     private $_validateOrderLines = null;
 
@@ -42,9 +43,7 @@ class OrderLineListSoap extends BaliseTool
 
         }
 
-        $xml .= $this->_generateCloseBalise();
-
-        return $xml;
+        return $xml . $this->_generateCloseBalise();
     }
 
 

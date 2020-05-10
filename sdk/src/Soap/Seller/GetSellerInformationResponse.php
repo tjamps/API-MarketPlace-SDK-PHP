@@ -9,6 +9,8 @@
 namespace Sdk\Soap\Seller;
 
 
+use Exception;
+use Zend\Config\Reader\Xml;
 use Sdk\Delivey\DeliveryModeInformation;
 use Sdk\Offer\OfferPool;
 use Sdk\Seller\Seller;
@@ -65,11 +67,11 @@ class GetSellerInformationResponse extends AbstractResponse
     /**
      * GetSellerInformationResponse constructor.
      * @param $response
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check for error messages
@@ -97,12 +99,9 @@ class GetSellerInformationResponse extends AbstractResponse
         }
     }
 
-    /**
-     *
-     */
     private function _setSellerInformations()
     {
-        $objSellerResult = $this->_dataResponse['s:Body']['GetSellerInformationResponse']['GetSellerInformationResult']{'Seller'};
+        $objSellerResult = $this->_dataResponse['s:Body']['GetSellerInformationResponse']['GetSellerInformationResult']['Seller'];
         $this->_seller->setEmail($objSellerResult['Email']);
         $this->_seller->setIsAvailable($objSellerResult['IsAvailable']);
         $this->_seller->setLogin($objSellerResult['Login']);
@@ -143,9 +142,6 @@ class GetSellerInformationResponse extends AbstractResponse
         $this->sellerLogin = $objInfoResult['SellerLogin'];
     }
 
-    /**
-     *
-     */
     private function _setOfferPoolList()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetSellerInformationResponse']['GetSellerInformationResult']['OfferPoolList'];
@@ -156,24 +152,21 @@ class GetSellerInformationResponse extends AbstractResponse
 
                 if (\is_array($offer)) {
                     $arrays = true;
-                    array_push($this->_offerPoolList, new OfferPool($offer['Id'], $offer['Description']));
+                    $this->_offerPoolList[] = new OfferPool($offer['Id'], $offer['Description']);
                 }
             }
             if (!$arrays) {
-                array_push($this->_offerPoolList, new OfferPool($objInfoResult['OfferPool']['Id'], $objInfoResult['OfferPool']['Description']));
+                $this->_offerPoolList[] = new OfferPool($objInfoResult['OfferPool']['Id'], $objInfoResult['OfferPool']['Description']);
             }
         }
     }
 
-    /**
-     *
-     */
     private function _setDeliveryModes()
     {
         $objInfoResult = $this->_dataResponse['s:Body']['GetSellerInformationResponse']['GetSellerInformationResult']['DeliveryModes'];
 
         foreach ($objInfoResult['DeliveryModeInformation'] as $delModeInfo) {
-            array_push($this->_deliveryModes, new DeliveryModeInformation($delModeInfo['Code'], $delModeInfo['Name']));
+            $this->_deliveryModes[] = new DeliveryModeInformation($delModeInfo['Code'], $delModeInfo['Name']);
         }
     }
 

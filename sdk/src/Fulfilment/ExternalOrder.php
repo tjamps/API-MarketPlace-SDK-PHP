@@ -54,7 +54,7 @@ class ExternalOrder implements JsonSerializable
      */
     public function setExternalOrderLine($externalOrderLine)
     {
-        array_push($this->_externalOrderLine, $externalOrderLine);
+        $this->_externalOrderLine[] = $externalOrderLine;
     }
 
     /**

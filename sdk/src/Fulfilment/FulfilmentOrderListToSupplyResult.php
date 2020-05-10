@@ -28,7 +28,7 @@ class FulfilmentOrderListToSupplyResult extends CommonResult
      */
     public function addFulfilmentOrderLine($fulfilmentOrderLine)
     {
-        array_push($this->_fulfilmentOrderLineList, $fulfilmentOrderLine);
+        $this->_fulfilmentOrderLineList[] = $fulfilmentOrderLine;
     }
        
     /*

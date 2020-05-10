@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Discussion;
 
 
+use substr;
 use Sdk\Soap\XmlUtils;
 
 class FilterSoap

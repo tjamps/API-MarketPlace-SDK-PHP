@@ -107,7 +107,7 @@ class Seller
     private $_sellerAddress = null;
 
     /**
-     * @return \Sdk\Seller\Address
+     * @return Address
      */
     public function getSellerAddress()
     {

@@ -44,7 +44,7 @@ class Request
      */
     public function addSellerRefundRequest($sellerRefundRequest)
     {
-        array_push($this->_sellerRefundRequestList, $sellerRefundRequest);
+        $this->_sellerRefundRequestList[] = $sellerRefundRequest;
     }
 
     /**

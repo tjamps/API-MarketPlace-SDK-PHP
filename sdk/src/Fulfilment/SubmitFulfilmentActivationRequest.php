@@ -26,7 +26,7 @@ class SubmitFulfilmentActivationRequest
      */
     public function addProductActivationData($productActivation)
     {
-        array_push($this->_productActivationList, $productActivation);
+        $this->_productActivationList[] = $productActivation;
     }
     
     /*

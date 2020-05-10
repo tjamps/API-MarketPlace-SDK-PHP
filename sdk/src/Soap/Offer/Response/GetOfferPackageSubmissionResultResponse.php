@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Offer\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Offer\OfferReportLog;
 use Sdk\Offer\OfferReportPropertyLog;
 use Sdk\Soap\Common\AbstractResponse;
@@ -80,7 +81,7 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         $this->_offerLogList = [];
@@ -124,7 +125,7 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
@@ -183,7 +184,7 @@ class GetOfferPackageSubmissionResultResponse extends AbstractResponse
                 $offerReportLog->setValidated(true);
             }
 
-            array_push($this->_offerLogList, $offerReportLog);
+            $this->_offerLogList[] = $offerReportLog;
         }
     }
 }

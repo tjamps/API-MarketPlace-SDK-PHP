@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Discussion\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Discussion\Message;
 use Sdk\Discussion\OrderClaim;
 use Sdk\Soap\Common\AbstractResponse;
@@ -42,7 +43,7 @@ class GetOrderClaimListResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
@@ -122,7 +123,7 @@ class GetOrderClaimListResponse extends AbstractResponse
                 $message->setTimestamp($orderClaimXML['Messages']['Message']['Timestamp']);
                 $orderClaim->addMessageToList($message);
             }
-            array_push($this->_orderClaimList, $orderClaim);
+            $this->_orderClaimList[] = $orderClaim;
         }
     }
 

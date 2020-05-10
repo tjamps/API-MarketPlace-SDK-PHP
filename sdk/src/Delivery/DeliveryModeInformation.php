@@ -6,7 +6,7 @@
  * Time: 13:57
  */
 
-namespace Sdk\Delivey;
+namespace Sdk\Delivery;
 
 
 class DeliveryModeInformation extends DeliveryMode

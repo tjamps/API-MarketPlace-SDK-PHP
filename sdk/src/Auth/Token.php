@@ -8,10 +8,14 @@
 
 namespace Sdk\Auth;
 
+use DateTime;
+use libxml_use_internal_errors;
+use simplexml_load_string;
+use ctype_alnum;
 use Sdk\ApiClient\CDSApiClient;
 use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiRequest;
-use Zend\Db\Sql\Ddl\Column\Datetime;
+//use Zend\Db\Sql\Ddl\Column\Datetime;
 
 /**
  * Class Token
@@ -33,7 +37,7 @@ class Token
     private $_isValid = false;
 
     /**
-     * @var \DateTime date and time of the token request
+     * @var DateTime date and time of the token request
      */
     private $_initdate = null;
 
@@ -98,7 +102,7 @@ class Token
 
             if ($this->_token != null && $this->_token) {
                 $this->_isValid = true;
-                $this->_initdate = new Datetime();
+                $this->_initdate = new DateTime();
             }
         }
     }

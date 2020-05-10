@@ -22,7 +22,7 @@ class DiscussionFilter extends Filter
      */
     public function addStatus($status)
     {
-        array_push($this->_statusList, $status);
+        $this->_statusList[] = $status;
     }
 
     /**
@@ -46,7 +46,7 @@ class DiscussionFilter extends Filter
         if ($this->_orderNumberList == null) {
             $this->_orderNumberList = [];
         }
-        array_push($this->_orderNumberList, $orderNumber);
+        $this->_orderNumberList[] = $orderNumber;
     }
 
     /**

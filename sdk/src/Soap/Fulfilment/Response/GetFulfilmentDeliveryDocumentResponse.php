@@ -6,6 +6,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use Sdk\Fulfilment\GetFulfilmentDeliveryDocumentResult;
@@ -45,7 +46,7 @@ class GetFulfilmentDeliveryDocumentResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -84,7 +85,7 @@ class GetFulfilmentDeliveryDocumentResponse extends AbstractResponse
             {
                 $this->_getFulfilmentDeliveryDocumentResult->setErrorMessage($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']);
                 $this->_getFulfilmentDeliveryDocumentResult->addErrorToList($getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']);
-                array_push($this->errorList, $getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_']);
+                $this->errorList[] = $getFulfilmentDeliveryDocumentResultXml['ErrorMessage']['_'];
             }
             //operation success
             if (isset($getFulfilmentDeliveryDocumentResultXml['OperationSuccess']['_']) && $getFulfilmentDeliveryDocumentResultXml['OperationSuccess']['_'] == 'true')

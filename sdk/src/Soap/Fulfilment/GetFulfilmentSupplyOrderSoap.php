@@ -124,4 +124,3 @@ class GetFulfilmentSupplyOrderSoap extends BaliseTool
         return $xml;
     }
 }
-

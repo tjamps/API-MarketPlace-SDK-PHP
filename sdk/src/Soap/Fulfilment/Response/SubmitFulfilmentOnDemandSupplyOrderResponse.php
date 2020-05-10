@@ -6,6 +6,7 @@
 
 namespace Sdk\Soap\Fulfilment\Response;
 
+use Zend\Config\Reader\Xml;
 use Sdk\Soap\Common\AbstractResponse;
 use \Sdk\Soap\Common\SoapTools;
 use Sdk\Fulfilment\SubmitFulfilmentOnDemandSupplyOrderResult;
@@ -45,7 +46,7 @@ class SubmitFulfilmentOnDemandSupplyOrderResponse extends AbstractResponse
      */
     public function __construct($response)
     {
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->errorList = [];
 
@@ -77,7 +78,7 @@ class SubmitFulfilmentOnDemandSupplyOrderResponse extends AbstractResponse
             {
                 $this->_submitFulfilmentOnDemandSupplyOrderResult->setErrorMessage($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']);
                 $this->_submitFulfilmentOnDemandSupplyOrderResult->addErrorToList($submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']);
-                array_push($this->errorList, $submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_']);
+                $this->errorList[] = $submitFulfilmentOnDemandSupplyOrderResultXml['ErrorMessage']['_'];
             }
             //operation success
             if (isset($submitFulfilmentOnDemandSupplyOrderResultXml['OperationSuccess']['_']) && $submitFulfilmentOnDemandSupplyOrderResultXml['OperationSuccess']['_'] == 'true')

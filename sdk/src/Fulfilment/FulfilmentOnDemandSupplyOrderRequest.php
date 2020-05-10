@@ -26,7 +26,7 @@ class FulfilmentOnDemandSupplyOrderRequest
      */
     public function addOrderLineList($orderLineList)
     {
-        array_push($this->_orderLineList, $orderLineList);
+        $this->_orderLineList[] = $orderLineList;
     }
     
     /*
@@ -37,5 +37,3 @@ class FulfilmentOnDemandSupplyOrderRequest
         $this->_orderLineList = [];
     }
 }
-
-

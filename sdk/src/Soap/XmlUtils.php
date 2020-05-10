@@ -50,10 +50,9 @@ class XmlUtils
      */
     public function generateBalise($tag, $value)
     {
-        $balise = $this->_xmlOpenPrefix . $this->_globalPrefix . $tag . $this->_xmlClosePrefix .
+        return $this->_xmlOpenPrefix . $this->_globalPrefix . $tag . $this->_xmlClosePrefix .
             $value .
             $this->_xmlOpenEndPrefix . $this->_globalPrefix . $tag . $this->_xmlClosePrefix;
-        return $balise;
     }
 
     /**

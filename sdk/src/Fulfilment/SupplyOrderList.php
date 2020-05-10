@@ -26,6 +26,6 @@ class SupplyOrderList
      */
     public function addSupplyOrderListToArray($supplyOrderList)
     {
-        array_push($this->_supplyOrderList, $supplyOrderList);
+        $this->_supplyOrderList[] = $supplyOrderList;
     }
 }

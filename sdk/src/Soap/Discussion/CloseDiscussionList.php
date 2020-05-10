@@ -41,8 +41,6 @@ class CloseDiscussionList extends BaliseTool
             $xml .= $this->_xmlUtil->generateBalise($this->_DiscussionIdTAG, $discussionId);
         }
 
-        $xml .= $this->_xmlUtil->generateCloseBalise($this->_closeDiscussionRequestTAG);
-
-        return $xml;
+        return $xml . $this->_xmlUtil->generateCloseBalise($this->_closeDiscussionRequestTAG);
     }
 }

@@ -9,6 +9,7 @@
 namespace Sdk\Soap\Discussion\Response;
 
 
+use Zend\Config\Reader\Xml;
 use Sdk\Discussion\CloseDiscussionResult;
 use Sdk\Soap\Common\AbstractResponse;
 use Sdk\Soap\Common\SoapTools;
@@ -40,7 +41,7 @@ class CloseDiscussionListResponse extends AbstractResponse
     public function __construct($response)
     {
 
-        $reader = new \Zend\Config\Reader\Xml();
+        $reader = new Xml();
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
@@ -84,7 +85,7 @@ class CloseDiscussionListResponse extends AbstractResponse
 
             $this->hasError = true;
             $this->errorMessage = $objError['_'];
-            array_push($this->errorList, $this->errorMessage);
+            $this->errorList[] = $this->errorMessage;
             return true;
         }
         return false;
