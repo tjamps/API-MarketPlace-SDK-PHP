@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by CDiscount
- * Created by CDiscount
- * Date: 14/10/2016
- * Time: 13:29
- */
 
 namespace Sdk\Parcel;
 
+use JsonSerializable;
 
-class Parcel
+class Parcel implements JsonSerializable
 {
     /**
      * @var string
@@ -45,7 +40,7 @@ class Parcel
      * @var ParcelItemList
      */
     private $_parcelItemList = null;
-    
+
     /*
      * @var array
      */
@@ -159,7 +154,7 @@ class Parcel
     {
         return $this->_parcelItemList;
     }
-    
+
     /*
      * @return array of \Sdk\Parcel\Tracking
      */
@@ -167,12 +162,25 @@ class Parcel
     {
         return $this->_trackingList;
     }
-    
+
     /*
      * @var $trackingList \Sdk\Parcel\TrackingList
      */
     public function setTrackingList($trackingList)
     {
         $this->_trackingList = $trackingList;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'customerNum' => $this->_customerNum,
+            'externalCarrierName' => $this->_externalCarrierName,
+            'externalCarrierTrackingUrl' => $this->_externalCarrierTrackingUrl,
+            'customerReturn' => $this->_customerReturn,
+            'parcelStatus' => $this->_parcelStatus,
+            'realCarrierCode' => $this->_realCarrierCode,
+            'parcelItemList' => $this->_parcelItemList,
+        ];
     }
 }
