@@ -2,7 +2,9 @@
 
 namespace Sdk\Parcel;
 
-class ParcelItemList
+use JsonSerializable;
+
+class ParcelItemList implements JsonSerializable
 {
     /**
      * @var ParcelItem[]
@@ -28,5 +30,12 @@ class ParcelItemList
     public function getParcelItems()
     {
         return $this->parcelItemList;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'parcelItemList' => $this->parcelItemList,
+        ];
     }
 }

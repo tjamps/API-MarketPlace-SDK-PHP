@@ -2,7 +2,9 @@
 
 namespace Sdk\Parcel;
 
-class ParcelItem
+use JsonSerializable;
+
+class ParcelItem implements JsonSerializable
 {
     /**
      * @var string
@@ -66,5 +68,14 @@ class ParcelItem
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'productName' => $this->productName,
+            'sku' => $this->sku,
+            'quantity' => $this->quantity,
+        ];
     }
 }

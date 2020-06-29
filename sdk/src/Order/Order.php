@@ -2,11 +2,12 @@
 
 namespace Sdk\Order;
 
+use JsonSerializable;
 use Sdk\Customer\Customer;
 use Sdk\Parcel\ParcelList;
 use Sdk\Seller\Address;
 
-class Order
+class Order implements JsonSerializable
 {
     /**
      * @var string
@@ -616,5 +617,15 @@ class Order
     public function setVoucherList($voucherList)
     {
         $this->voucherList = $voucherList;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'orderNumber' => $this->orderNumber,
+            'status' => $this->status,
+            'orderState' => $this->orderState,
+            'parcelList' => $this->parcelList,
+        ];
     }
 }
