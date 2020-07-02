@@ -48,13 +48,16 @@ abstract class AbstractResponse
      */
     public function getErrorMessage()
     {
-        $message = $this->errorMessage;
+        $errors = [];
+        $errors[] = $this->errorMessage;
 
         if (!empty($this->errorList)) {
-            $message = sprintf('%s - %s', $message, implode(' - ', $this->errorList));
+            $errors = array_merge($errors, $this->errorList);
         }
 
-        return $message;
+        $errors = array_unique($errors);
+
+        return implode(' - ', $errors);
     }
 
 
